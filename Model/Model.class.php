@@ -112,8 +112,8 @@ namespace Model {
 		private function getSchema() {
 			$schema = array();
 			$sql = sprintf(/** @lang text */ "SELECT `COLUMNS`.`COLUMN_NAME` AS `column`, `COLUMN_DEFAULT` AS `default`, `IS_NULLABLE` AS `null`, `DATA_TYPE`, `EXTRA` AS `extra`, `REFERENCED_TABLE_NAME` AS `table_reference`, `REFERENCED_COLUMN_NAME` AS `column_reference`, (SELECT GROUP_CONCAT(`COLUMN_NAME` SEPARATOR ',') FROM `INFORMATION_SCHEMA`.`COLUMNS` `c` WHERE `c`.`TABLE_SCHEMA` LIKE '%s' AND `TABLE_NAME` = `REFERENCED_TABLE_NAME`) AS `trc` FROM `INFORMATION_SCHEMA`.`COLUMNS` LEFT OUTER JOIN `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` ON `KEY_COLUMN_USAGE`.`TABLE_SCHEMA` = `COLUMNS`.`TABLE_SCHEMA` AND `KEY_COLUMN_USAGE`.`TABLE_NAME` = `COLUMNS`.`TABLE_NAME` AND `KEY_COLUMN_USAGE`.`COLUMN_NAME` = `COLUMNS`.`COLUMN_NAME` WHERE `COLUMNS`.`TABLE_SCHEMA` LIKE '%s' AND `COLUMNS`.`TABLE_NAME` LIKE '%s'", _DB_NAME_, _DB_NAME_, $this->tableName);
-			try {
-				$stmt = $this->db->query($sql);
+			$stmt = $this->db->query($sql);
+			if($stmt) {
 				while($sel_row = $stmt->fetch_assoc()) {
 					$colArr = $sel_row;
 					$colArr['trc'] = explode(',', $colArr['trc']);
@@ -147,9 +147,6 @@ namespace Model {
 					$schema[$sel_row['column']] = $colArr;
 				}
 				$stmt->free_result();
-			}
-			catch(\mysqli_sql_exception $e) {
-				die($e->getMessage());
 			}
 			$this->schema = $schema;
 			return $this;
@@ -187,7 +184,7 @@ namespace Model {
 		 * @return $this
 		 */
 		public function groupBy($group_by) {
-			$this->group_by = $group_by;
+			$this->group_by = (!empty($group_by))?' GROUP BY ' . $group_by:'';
 			return $this;
 		}
 
@@ -224,7 +221,7 @@ namespace Model {
 			$data[] = &$param_type;
 			$cols = array();
 			//Store the values for the columns
-			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val)) {
+			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && array_key_exists($key, $this->schema)) {
 				$cols[] = $key;
 				if($this->$key == '0xNULL') $this->$key = null;
 				$data[] = &$this->$key;
@@ -344,21 +341,19 @@ namespace Model {
 			$ret = array();
 			try {
 				$stmt = $this->db->prepare($sql);
-				if(count($data) > 0) call_user_func_array(array($stmt, 'bind_param'), $data);
-				$stmt->execute();
-				$meta = $stmt->result_metadata();
-				$params = array();
-				while($field = $meta->fetch_field()) $params[] = &$row[$field->name];
-				call_user_func_array(array($stmt, 'bind_result'), $params);
+				if($stmt) {
+					if(count($data) > 0) call_user_func_array(array($stmt, 'bind_param'), $data);
+					$stmt->execute();
+					$meta = $stmt->result_metadata();
+					$params = array();
+					while($field = $meta->fetch_field()) $params[] = &$row[$field->name];
+					call_user_func_array(array($stmt, 'bind_result'), $params);
 
-				while($stmt->fetch()) {
-					$c = new Model($this->tableName, $this->schema);
-					/** @var array $row */
-					foreach($row as $key => $val) {
-						if($ignore_password && $key == 'password') continue;
-						if(array_key_exists($key, $this->schema)) $c->$key = $val;
-						else {
-							//If the key matches a table name, then return a Model
+					while($stmt->fetch()) {
+						$c = new Model($this->tableName, $this->schema);
+						/** @var array $row */
+						foreach($row as $key => $val) {
+							if($ignore_password && $key == 'password') continue;
 							preg_match('/(.+?)(?=\_)\_(.*)/', $key, $matches);
 							if(count($matches)) {
 								$table = $matches[1];
@@ -368,11 +363,13 @@ namespace Model {
 								}
 								$c->$table->$matches[2] = $val;
 							}
+							else $c->$key = $val;
 						}
+						$ret[] = $c;
 					}
-					$ret[] = $c;
+					$stmt->free_result();
 				}
-				$stmt->free_result();
+				else die('Error preparing sql -> ' . $sql . ' | ' . print_r($data, true));
 			}
 			catch(\Exception $e) {
 				error_log($e->getMessage());
@@ -419,18 +416,16 @@ namespace Model {
 					while($stmt->fetch()) {
 						/** @var array $row */
 						foreach($row as $key => $val) {
-							if(array_key_exists($key, $this->schema)) $this->$key = $val;
-							else {
-								preg_match('/(.+?)(?=\_)\_(.*)/', $key, $matches);
-								if(count($matches)) {
-									$table = $matches[1];
-									if(!property_exists($this, $table)) {
-										$nc = new Model($table);
-										$this->$table = $nc;
-									}
-									$this->$table->$matches[2] = $val;
+							preg_match('/(.+?)(?=\_)\_(.*)/', $key, $matches);
+							if(count($matches)) {
+								$table = $matches[1];
+								if(!property_exists($this, $table)) {
+									$nc = new Model($table);
+									$this->$table = $nc;
 								}
+								$this->$table->$matches[2] = $val;
 							}
+							else $this->$key = $val;
 						}
 					}
 					$stmt->free_result();

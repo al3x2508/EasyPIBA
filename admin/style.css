@@ -1,0 +1,34 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-size: 14px;
+}
+.main-header>.navbar {
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 0;
+}
+.user-menu .nav-link {
+	font-size: 13px;
+	padding: 15px;
+}
+@media (min-width: 768px) {
+	.navbar-nav > li > a {
+		padding: 15px;
+	}
+}
+.user-menu>.dropdown-toggle:after {
+	display: none;
+}

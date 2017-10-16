@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{LANGUAGE}">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>{title}</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+		<meta name="description" content="{description}" />
+		<meta property="og:title" content="{title}" />
+		<meta property="og:description" content="{description}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="{url}" />
+		<meta property="og:image" content="{ogimage}" />
+		{FBAPPID}
+		{GOOGLE_ANALYTICS}
+	</head>
+	<body>
+		<div class="container">
+			<div class="header clearfix">
+				<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<a class="navbar-brand" href="#">{APP_NAME}</a>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav mr-auto">
+							{menu}
+						</ul>
+						<div class="nav navbar-nav navbar-right">
+							{menu_right}
+						</div>
+					</div>
+				</nav>
+			</div>
+			<div class="row">
+				<div class="col-12 bd-content">
+					{content}
+				</div>
+			</div>
+		</div>
+		{MAIN_JAVASCRIPTS}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+	</body>
+</html>
