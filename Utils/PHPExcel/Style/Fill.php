@@ -108,28 +108,6 @@ class PHPExcel_Style_Fill extends PHPExcel_Style_Supervisor implements PHPExcel_
     }
 
     /**
-     * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
-     *
-     * @return PHPExcel_Style_Fill
-     */
-    public function getSharedComponent()
-    {
-        return $this->parent->getSharedComponent()->getFill();
-    }
-
-    /**
-     * Build style array from subcomponents
-     *
-     * @param array $array
-     * @return array
-     */
-    public function getStyleArray($array)
-    {
-        return array('fill' => $array);
-    }
-
-    /**
      * Apply styles from array
      *
      * <code>
@@ -180,63 +158,14 @@ class PHPExcel_Style_Fill extends PHPExcel_Style_Supervisor implements PHPExcel_
     }
 
     /**
-     * Get Fill Type
+     * Build style array from subcomponents
      *
-     * @return string
+     * @param array $array
+     * @return array
      */
-    public function getFillType()
+    public function getStyleArray($array)
     {
-        if ($this->isSupervisor) {
-            return $this->getSharedComponent()->getFillType();
-        }
-        return $this->fillType;
-    }
-
-    /**
-     * Set Fill Type
-     *
-     * @param string $pValue    PHPExcel_Style_Fill fill type
-     * @return PHPExcel_Style_Fill
-     */
-    public function setFillType($pValue = PHPExcel_Style_Fill::FILL_NONE)
-    {
-        if ($this->isSupervisor) {
-            $styleArray = $this->getStyleArray(array('type' => $pValue));
-            $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
-        } else {
-            $this->fillType = $pValue;
-        }
-        return $this;
-    }
-
-    /**
-     * Get Rotation
-     *
-     * @return double
-     */
-    public function getRotation()
-    {
-        if ($this->isSupervisor) {
-            return $this->getSharedComponent()->getRotation();
-        }
-        return $this->rotation;
-    }
-
-    /**
-     * Set Rotation
-     *
-     * @param double $pValue
-     * @return PHPExcel_Style_Fill
-     */
-    public function setRotation($pValue = 0)
-    {
-        if ($this->isSupervisor) {
-            $styleArray = $this->getStyleArray(array('rotation' => $pValue));
-            $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
-        } else {
-            $this->rotation = $pValue;
-        }
-        return $this;
+        return array('fill' => $array);
     }
 
     /**
@@ -318,5 +247,76 @@ class PHPExcel_Style_Fill extends PHPExcel_Style_Supervisor implements PHPExcel_
             $this->getEndColor()->getHashCode() .
             __CLASS__
         );
+    }
+
+    /**
+     * Get the shared style component for the currently active cell in currently active sheet.
+     * Only used for style supervisor
+     *
+     * @return PHPExcel_Style_Fill
+     */
+    public function getSharedComponent()
+    {
+        return $this->parent->getSharedComponent()->getFill();
+    }
+
+    /**
+     * Get Fill Type
+     *
+     * @return string
+     */
+    public function getFillType()
+    {
+        if ($this->isSupervisor) {
+            return $this->getSharedComponent()->getFillType();
+        }
+        return $this->fillType;
+    }
+
+    /**
+     * Set Fill Type
+     *
+     * @param string $pValue    PHPExcel_Style_Fill fill type
+     * @return PHPExcel_Style_Fill
+     */
+    public function setFillType($pValue = PHPExcel_Style_Fill::FILL_NONE)
+    {
+        if ($this->isSupervisor) {
+            $styleArray = $this->getStyleArray(array('type' => $pValue));
+            $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
+        } else {
+            $this->fillType = $pValue;
+        }
+        return $this;
+    }
+
+    /**
+     * Get Rotation
+     *
+     * @return double
+     */
+    public function getRotation()
+    {
+        if ($this->isSupervisor) {
+            return $this->getSharedComponent()->getRotation();
+        }
+        return $this->rotation;
+    }
+
+    /**
+     * Set Rotation
+     *
+     * @param double $pValue
+     * @return PHPExcel_Style_Fill
+     */
+    public function setRotation($pValue = 0)
+    {
+        if ($this->isSupervisor) {
+            $styleArray = $this->getStyleArray(array('rotation' => $pValue));
+            $this->getActiveSheet()->getStyle($this->getSelectedCells())->applyFromArray($styleArray);
+        } else {
+            $this->rotation = $pValue;
+        }
+        return $this;
     }
 }

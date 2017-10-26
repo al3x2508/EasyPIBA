@@ -180,19 +180,23 @@ class PHPExcel_Writer_Excel2007_ContentTypes extends PHPExcel_Writer_Excel2007_W
     }
 
     /**
-     * Get image mime type
+     * Write Override content type
      *
-     * @param     string    $pFile    Filename
-     * @return     string    Mime Type
+     * @param     PHPExcel_Shared_XMLWriter     $objWriter         XML Writer
+     * @param     string                         $pPartname         Part name
+     * @param     string                         $pContentType     Content type
      * @throws     PHPExcel_Writer_Exception
      */
-    private function getImageMimeType($pFile = '')
+    private function writeOverrideContentType(PHPExcel_Shared_XMLWriter $objWriter = null, $pPartname = '', $pContentType = '')
     {
-        if (PHPExcel_Shared_File::file_exists($pFile)) {
-            $image = getimagesize($pFile);
-            return image_type_to_mime_type($image[2]);
+        if ($pPartname != '' && $pContentType != '') {
+            // Write content type
+            $objWriter->startElement('Override');
+            $objWriter->writeAttribute('PartName', $pPartname);
+            $objWriter->writeAttribute('ContentType', $pContentType);
+            $objWriter->endElement();
         } else {
-            throw new PHPExcel_Writer_Exception("File $pFile does not exist");
+            throw new PHPExcel_Writer_Exception("Invalid parameters passed.");
         }
     }
 
@@ -218,23 +222,19 @@ class PHPExcel_Writer_Excel2007_ContentTypes extends PHPExcel_Writer_Excel2007_W
     }
 
     /**
-     * Write Override content type
+     * Get image mime type
      *
-     * @param     PHPExcel_Shared_XMLWriter     $objWriter         XML Writer
-     * @param     string                         $pPartname         Part name
-     * @param     string                         $pContentType     Content type
+     * @param     string    $pFile    Filename
+     * @return     string    Mime Type
      * @throws     PHPExcel_Writer_Exception
      */
-    private function writeOverrideContentType(PHPExcel_Shared_XMLWriter $objWriter = null, $pPartname = '', $pContentType = '')
+    private function getImageMimeType($pFile = '')
     {
-        if ($pPartname != '' && $pContentType != '') {
-            // Write content type
-            $objWriter->startElement('Override');
-            $objWriter->writeAttribute('PartName', $pPartname);
-            $objWriter->writeAttribute('ContentType', $pContentType);
-            $objWriter->endElement();
+        if (PHPExcel_Shared_File::file_exists($pFile)) {
+            $image = getimagesize($pFile);
+            return image_type_to_mime_type($image[2]);
         } else {
-            throw new PHPExcel_Writer_Exception("Invalid parameters passed.");
+            throw new PHPExcel_Writer_Exception("File $pFile does not exist");
         }
     }
 }

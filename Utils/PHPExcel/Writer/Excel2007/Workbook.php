@@ -119,36 +119,6 @@ class PHPExcel_Writer_Excel2007_Workbook extends PHPExcel_Writer_Excel2007_Write
     }
 
     /**
-     * Write BookViews
-     *
-     * @param     PHPExcel_Shared_XMLWriter     $objWriter         XML Writer
-     * @param     PHPExcel                    $pPHPExcel
-     * @throws     PHPExcel_Writer_Exception
-     */
-    private function writeBookViews(PHPExcel_Shared_XMLWriter $objWriter = null, PHPExcel $pPHPExcel = null)
-    {
-        // bookViews
-        $objWriter->startElement('bookViews');
-
-        // workbookView
-        $objWriter->startElement('workbookView');
-
-        $objWriter->writeAttribute('activeTab', $pPHPExcel->getActiveSheetIndex());
-        $objWriter->writeAttribute('autoFilterDateGrouping', '1');
-        $objWriter->writeAttribute('firstSheet', '0');
-        $objWriter->writeAttribute('minimized', '0');
-        $objWriter->writeAttribute('showHorizontalScroll', '1');
-        $objWriter->writeAttribute('showSheetTabs', '1');
-        $objWriter->writeAttribute('showVerticalScroll', '1');
-        $objWriter->writeAttribute('tabRatio', '600');
-        $objWriter->writeAttribute('visibility', 'visible');
-
-        $objWriter->endElement();
-
-        $objWriter->endElement();
-    }
-
-    /**
      * Write WorkbookProtection
      *
      * @param     PHPExcel_Shared_XMLWriter     $objWriter         XML Writer
@@ -176,24 +146,31 @@ class PHPExcel_Writer_Excel2007_Workbook extends PHPExcel_Writer_Excel2007_Write
     }
 
     /**
-     * Write calcPr
+     * Write BookViews
      *
-     * @param     PHPExcel_Shared_XMLWriter    $objWriter        XML Writer
-     * @param    boolean                        $recalcRequired    Indicate whether formulas should be recalculated before writing
+     * @param     PHPExcel_Shared_XMLWriter     $objWriter         XML Writer
+     * @param     PHPExcel                    $pPHPExcel
      * @throws     PHPExcel_Writer_Exception
      */
-    private function writeCalcPr(PHPExcel_Shared_XMLWriter $objWriter = null, $recalcRequired = true)
+    private function writeBookViews(PHPExcel_Shared_XMLWriter $objWriter = null, PHPExcel $pPHPExcel = null)
     {
-        $objWriter->startElement('calcPr');
+        // bookViews
+        $objWriter->startElement('bookViews');
 
-        //    Set the calcid to a higher value than Excel itself will use, otherwise Excel will always recalc
-        //  If MS Excel does do a recalc, then users opening a file in MS Excel will be prompted to save on exit
-        //     because the file has changed
-        $objWriter->writeAttribute('calcId', '999999');
-        $objWriter->writeAttribute('calcMode', 'auto');
-        //    fullCalcOnLoad isn't needed if we've recalculating for the save
-        $objWriter->writeAttribute('calcCompleted', ($recalcRequired) ? 1 : 0);
-        $objWriter->writeAttribute('fullCalcOnLoad', ($recalcRequired) ? 0 : 1);
+        // workbookView
+        $objWriter->startElement('workbookView');
+
+        $objWriter->writeAttribute('activeTab', $pPHPExcel->getActiveSheetIndex());
+        $objWriter->writeAttribute('autoFilterDateGrouping', '1');
+        $objWriter->writeAttribute('firstSheet', '0');
+        $objWriter->writeAttribute('minimized', '0');
+        $objWriter->writeAttribute('showHorizontalScroll', '1');
+        $objWriter->writeAttribute('showSheetTabs', '1');
+        $objWriter->writeAttribute('showVerticalScroll', '1');
+        $objWriter->writeAttribute('tabRatio', '600');
+        $objWriter->writeAttribute('visibility', 'visible');
+
+        $objWriter->endElement();
 
         $objWriter->endElement();
     }
@@ -444,5 +421,28 @@ class PHPExcel_Writer_Excel2007_Workbook extends PHPExcel_Writer_Excel2007_Write
 
             $objWriter->endElement();
         }
+    }
+
+    /**
+     * Write calcPr
+     *
+     * @param     PHPExcel_Shared_XMLWriter    $objWriter        XML Writer
+     * @param    boolean                        $recalcRequired    Indicate whether formulas should be recalculated before writing
+     * @throws     PHPExcel_Writer_Exception
+     */
+    private function writeCalcPr(PHPExcel_Shared_XMLWriter $objWriter = null, $recalcRequired = true)
+    {
+        $objWriter->startElement('calcPr');
+
+        //    Set the calcid to a higher value than Excel itself will use, otherwise Excel will always recalc
+        //  If MS Excel does do a recalc, then users opening a file in MS Excel will be prompted to save on exit
+        //     because the file has changed
+        $objWriter->writeAttribute('calcId', '999999');
+        $objWriter->writeAttribute('calcMode', 'auto');
+        //    fullCalcOnLoad isn't needed if we've recalculating for the save
+        $objWriter->writeAttribute('calcCompleted', ($recalcRequired) ? 1 : 0);
+        $objWriter->writeAttribute('fullCalcOnLoad', ($recalcRequired) ? 0 : 1);
+
+        $objWriter->endElement();
     }
 }

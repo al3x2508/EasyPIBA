@@ -1,0 +1,16 @@
+{
+  "enter_email": "You must enter your email",
+  "save": "Save",
+  "invalid": "Invalid",
+  "firstname": "firstname",
+  "lastname": "lastname",
+  "email": "email",
+  "password": "password",
+  "confirmPassword": "confirm password",
+  "country": "country",
+  "minchars": "must be at least %i characters",
+  "confirm_delete": "Are you sure you want to delete?",
+  "buttonAdd": "Add",
+  "buttonEdit": "Edit",
+  "novaluereturn": "did not returned any value"
+}

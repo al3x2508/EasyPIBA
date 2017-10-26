@@ -2,6 +2,9 @@ var jsonPage = 'pages',
 	aoColumns = [
 		{ "mData": "id" },
 		{ "mData": "url" },
+		{ "mData": function(e) {
+			return e.languages.name;
+		} },
 		{ "mData": "title" },
 		{ "mData": "menu_text" },
 		{ "mData": function(e) {
@@ -20,6 +23,7 @@ function loadData(aoData) {
 	filters.filters = {};
 	if($("#idf").val()!='') filters.filters['id'] = $("#idf").val();
 	if($("#urlf").val()!='') filters.filters['url'] = $("#urlf").val();
+	if($("#languagef").val()!='0') filters.filters['language'] = $("#languagef").val();
 	if($("#titlef").val()!='') filters.filters['title'] = $("#titlef").val();
 	if($("#menutextf").val()!='') filters.filters['menu_text'] = $("#menutextf").val();
 	return filters;
@@ -31,5 +35,10 @@ $(window).on('load', function () {
 	});
 	$("body").on('click', 'span.actions', function() {
 		if($(this).hasClass('fa-folder-open')) window.open($(this).data('url'), '_blank');
+	});
+	$('.select2').select2({
+		width: '200px'
+	}).on('select2:select', function (e) {
+		table.fnReloadAjax();
 	});
 });

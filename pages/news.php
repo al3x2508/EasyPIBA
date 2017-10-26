@@ -99,6 +99,6 @@ else {
 			</div>
 		</article>' . PHP_EOL;
 	}
-	else header('Location: /');
+	else header('Location: ' . _FOLDER_URL_);
 }
 $page->content = $content;

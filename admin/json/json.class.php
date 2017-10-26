@@ -1,5 +1,7 @@
 <?php
 namespace json;
+use Controller\AdminController;
+
 abstract class json {
 	public static $columnsMap;
 	public static $instanceName;
@@ -11,7 +13,7 @@ abstract class json {
 	protected static $data = array();
 
 	public function __construct() {
-		$adminController = new \Controller\AdminController();
+		$adminController = new AdminController();
 		if($adminController->checkPermission(self::$permission) == false) die(__('You do not have permissions for this'));
 	}
 	public function output() {
@@ -47,10 +49,7 @@ abstract class json {
 						unlink($excelFile);
 						unlink($pdfFile);
 					}
-					else {
-						echo 'Eroare la procesare';
-						//unlink($excelFile);
-					}
+					else echo __('Error processing');
 					break;
 				case 'excel':
 				default:
@@ -64,47 +63,69 @@ abstract class json {
 		}
 		else {
 			if(array_key_exists('secho', $_REQUEST)) {
-				$entitati = array();
-				foreach(self::$data AS $entitate) {
-					if(array_key_exists('parola', $entitate)) unset($entitate['parola']);
-					$entitati[] = $entitate;
+				$entities = array();
+				foreach(self::$data AS $entity) {
+					if(array_key_exists('password', $entity)) unset($entity->password);
+					$entities[] = $entity;
 				}
-				$raspuns = json_encode(array(
+				$response = json_encode(array(
 					'sEcho'                => $_REQUEST['secho'],
 					'iTotalRecords'        => self::$countTotal,
 					'iTotalDisplayRecords' => self::$countFiltered,
-					'aaData'               => $entitati
+					'aaData'               => $entities
 				));
 			}
-			else $raspuns = json_encode(self::$data);
+			else $response = json_encode(self::$data);
 		}
-		if(array_key_exists('callback', $_REQUEST)) $raspuns = $_REQUEST['callback'] . '(' . $raspuns . ')';
-		echo $raspuns;
+		if(array_key_exists('callback', $_REQUEST)) $response = $_REQUEST['callback'] . '(' . $response . ')';
+		echo $response;
 	}
 	public static function excelExport() {
+		$data = array();
+		$columnNames = array();
+		foreach(self::$data AS $entity) {
+			foreach(get_object_vars($entity) AS $key => $value) {
+				if(!is_array($value) && !is_object($value)) {
+					if((!isset(self::$columnsMap) || !is_array(self::$columnsMap) || (count(self::$columnsMap) == 0)) || array_key_exists($key, self::$columnsMap)) {
+						$data[$key] = $value;
+						if(!in_array($key, $columnNames)) $columnNames[] = $key;
+					}
+				}
+				elseif(is_object($value)) foreach(get_object_vars($value) AS $key2 => $value2) {
+					if(!is_array($value2) && !is_object($value2)) {
+						$columnName = $key . '.' . $key2;
+						if((!isset(self::$columnsMap) || !is_array(self::$columnsMap) || (count(self::$columnsMap) == 0)) || array_key_exists($columnName, self::$columnsMap)) {
+							$data[$columnName] = $value2;
+							if(!in_array($columnName, $columnNames)) $columnNames[] = $columnName;
+						}
+					}
+				}
+			}
+		}
 		/** Include PHPExcel */
 		require_once(dirname(dirname(dirname(__FILE__))) . '/Utils/PHPExcel.php');
 		$objPHPExcel = new \PHPExcel();
-		//Seteaza proprietatile documentului
-		$objPHPExcel->getProperties()->setCreator("MyKoolio")->setLastModifiedBy("MyKoolio")->setTitle("Export " . self::$instanceName)->setSubject("Export " . self::$instanceName)->setDescription("Export " . self::$instanceName)->setKeywords("export date my koolio " . self::$instanceName)->setCategory("MyKoolio " . self::$instanceName);
-		//Adauga linia de antet cu numele coloanelor
-		$coloane = array_keys(self::$data[0]);
-		foreach($coloane AS $index => $numeColoana) {
-			if(array_key_exists($numeColoana, self::$columnsMap)) $numeColoana = self::$columnsMap[$numeColoana];
-			$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($index + 65) . '1', $numeColoana);
+		//Set document properties
+		$objPHPExcel->getProperties()->setCreator(_APP_NAME_)->setLastModifiedBy(_APP_NAME_)->setTitle("Export " . self::$instanceName)->setSubject("Export " . self::$instanceName)->setDescription("Export " . self::$instanceName)->setKeywords(_APP_NAME_ . "export data " . self::$instanceName)->setCategory(_APP_NAME_ . " " . self::$instanceName);
+		//Add header line
+		foreach($columnNames AS $index => $columnName) {
+			if((!isset(self::$columnsMap) || !is_array(self::$columnsMap) || (count(self::$columnsMap) == 0)) || array_key_exists($columnName, self::$columnsMap)) {
+				$columnName = self::$columnsMap[$columnName];
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($index + 65) . '1', $columnName);
+			}
 		}
-		//Punem bold pe prima linie
-		$objPHPExcel->getActiveSheet()->getStyle('A1:' . chr(count($coloane) + 64) . '1')->getFont()->setBold(true);
-		//Punem filtru
+		//Set bold the header line
+		$objPHPExcel->getActiveSheet()->getStyle('A1:' . chr(count($columnNames) + 64) . '1')->getFont()->setBold(true);
+		//Set filters
 		$objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
-		$objPHPExcel->getActiveSheet()->fromArray(self::$data, NULL, 'A2');
-		//Punem repeat pe primul rand si pagina in mod landscape
+		$objPHPExcel->getActiveSheet()->fromArray((array) $data, NULL, 'A2');
+		//Set to repeat the first row and the page in landscape mode
 		$objPHPExcel->getActiveSheet()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 1)->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
-		//Redenumim worksheetul
+		//Rename the worksheet
 		$objPHPExcel->getActiveSheet()->setTitle('Export ' . self::$instanceName);
-		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		//Set active sheet index to the first sheet, so Excel opens this as the first sheet
 		$objPHPExcel->setActiveSheetIndex(0);
-		//Redirectioneaza catre browser
+		//Redirect to browser
 		header('Cache-Control: max-age=0');
 		//If you're serving to IE 9, then the following may be needed
 		header('Cache-Control: max-age=1');
@@ -117,4 +138,3 @@ abstract class json {
 		return $objWriter;
 	}
 }
-?>

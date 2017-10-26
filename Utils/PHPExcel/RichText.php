@@ -101,6 +101,16 @@ class PHPExcel_RichText implements PHPExcel_IComparable
     }
 
     /**
+     * Convert to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getPlainText();
+    }
+
+    /**
      * Get plain text
      *
      * @return string
@@ -117,16 +127,6 @@ class PHPExcel_RichText implements PHPExcel_IComparable
 
         // Return
         return $returnValue;
-    }
-
-    /**
-     * Convert to string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getPlainText();
     }
 
     /**

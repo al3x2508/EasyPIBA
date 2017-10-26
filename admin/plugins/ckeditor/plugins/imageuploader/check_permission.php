@@ -6,12 +6,9 @@ $filenames = array(
     "pluginconfig.php",
     "uploads/",
 );
+$check_permission = false;
 foreach($filenames as $filename){
-    if (!is_writable($filename)){
-        $check_permission = false;
-    } else {
-        $check_permission = true;
-    }
+    $check_permission = is_writable($filename);
 }
 if(!$check_permission):
 ?>

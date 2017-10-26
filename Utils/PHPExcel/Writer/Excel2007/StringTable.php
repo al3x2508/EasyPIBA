@@ -77,6 +77,29 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
     }
 
     /**
+     * Flip string table (for index searching)
+     *
+     * @param     array    $stringTable    Stringtable
+     * @return     array
+     */
+    public function flipStringTable($stringTable = array())
+    {
+        // Return value
+        $returnValue = array();
+
+        // Loop through stringtable and add flipped items to $returnValue
+        foreach ($stringTable as $key => $value) {
+            if (! $value instanceof PHPExcel_RichText) {
+                $returnValue[$value] = $key;
+            } elseif ($value instanceof PHPExcel_RichText) {
+                $returnValue[$value->getHashCode()] = $key;
+            }
+        }
+
+        return $returnValue;
+    }
+
+    /**
      * Write string table to XML format
      *
      * @param     string[]     $pStringTable
@@ -142,7 +165,7 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
         if ($prefix !== null) {
             $prefix .= ':';
         }
-            
+
         // Loop through rich text elements
         $elements = $pRichText->getRichTextElements();
         foreach ($elements as $element) {
@@ -232,7 +255,7 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
         if ($prefix !== null) {
             $prefix .= ':';
         }
-            
+
         // Loop through rich text elements
         $elements = $pRichText->getRichTextElements();
         foreach ($elements as $element) {
@@ -286,28 +309,5 @@ class PHPExcel_Writer_Excel2007_StringTable extends PHPExcel_Writer_Excel2007_Wr
 
             $objWriter->endElement();
         }
-    }
-
-    /**
-     * Flip string table (for index searching)
-     *
-     * @param     array    $stringTable    Stringtable
-     * @return     array
-     */
-    public function flipStringTable($stringTable = array())
-    {
-        // Return value
-        $returnValue = array();
-
-        // Loop through stringtable and add flipped items to $returnValue
-        foreach ($stringTable as $key => $value) {
-            if (! $value instanceof PHPExcel_RichText) {
-                $returnValue[$value] = $key;
-            } elseif ($value instanceof PHPExcel_RichText) {
-                $returnValue[$value->getHashCode()] = $key;
-            }
-        }
-
-        return $returnValue;
     }
 }

@@ -513,6 +513,11 @@ class PHPExcel_Chart
         );
     }
 
+    public function getTopLeftXOffset()
+    {
+        return $this->topLeftXOffset;
+    }
+
     public function setTopLeftXOffset($xOffset)
     {
         $this->topLeftXOffset = $xOffset;
@@ -520,9 +525,9 @@ class PHPExcel_Chart
         return $this;
     }
 
-    public function getTopLeftXOffset()
+    public function getTopLeftYOffset()
     {
-        return $this->topLeftXOffset;
+        return $this->topLeftYOffset;
     }
 
     public function setTopLeftYOffset($yOffset)
@@ -530,11 +535,6 @@ class PHPExcel_Chart
         $this->topLeftYOffset = $yOffset;
 
         return $this;
-    }
-
-    public function getTopLeftYOffset()
-    {
-        return $this->topLeftYOffset;
     }
 
     /**
@@ -621,21 +621,14 @@ class PHPExcel_Chart
         );
     }
 
-    public function setBottomRightXOffset($xOffset)
-    {
-        $this->bottomRightXOffset = $xOffset;
-
-        return $this;
-    }
-
     public function getBottomRightXOffset()
     {
         return $this->bottomRightXOffset;
     }
 
-    public function setBottomRightYOffset($yOffset)
+    public function setBottomRightXOffset($xOffset)
     {
-        $this->bottomRightYOffset = $yOffset;
+        $this->bottomRightXOffset = $xOffset;
 
         return $this;
     }
@@ -645,12 +638,11 @@ class PHPExcel_Chart
         return $this->bottomRightYOffset;
     }
 
-
-    public function refresh()
+    public function setBottomRightYOffset($yOffset)
     {
-        if ($this->worksheet !== null) {
-            $this->plotArea->refresh($this->worksheet);
-        }
+        $this->bottomRightYOffset = $yOffset;
+
+        return $this;
     }
 
     public function render($outputDestination = null)
@@ -676,5 +668,12 @@ class PHPExcel_Chart
             $outputDestination = null;
         }
         return $renderer->render($outputDestination);
+    }
+
+    public function refresh()
+    {
+        if ($this->worksheet !== null) {
+            $this->plotArea->refresh($this->worksheet);
+        }
     }
 }

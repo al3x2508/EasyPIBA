@@ -217,13 +217,13 @@ namespace Model {
 			$data = array();
 			$param_type = '';
 			//Store the column types into $param_type (eg: `ids`, meaning integer double string)
-			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val)) $param_type .= (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && array_key_exists($key, $this->schema)) $param_type .= (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 			$data[] = &$param_type;
 			$cols = array();
 			//Store the values for the columns
 			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && array_key_exists($key, $this->schema)) {
 				$cols[] = $key;
-				if($this->$key == '0xNULL') $this->$key = null;
+				if($val === '0xNULL') $this->$key = null;
 				$data[] = &$this->$key;
 			}
 			//Build sql query
@@ -265,7 +265,7 @@ namespace Model {
 			//Build the join columns names
 			if(count($join)) {
 				foreach($join AS $table_reference => $arrJoin) {
-					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", {$table_reference}.{$column} AS {$table_reference}_{$column}";
+					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", {$table_reference}.{$column} AS `{$table_reference}-{$column}`";
 				}
 			}
 			//Build the sql joins
@@ -298,10 +298,12 @@ namespace Model {
 			//Append custom where parameter types if is set
 			if(count($this->where) > 0) {
 				foreach($this->where AS $key => $val) {
-					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?';
+					$w = ($val == 'complexW')?$key:((is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$tipData = (is_numeric($val) ? 'i' : 's');
-					$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
+					if($val != 'complexW') {
+						$tipData = (is_numeric($val) ? 'i' : 's');
+						$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
+					}
 				}
 			}
 			//Build the data parameters and types
@@ -326,14 +328,16 @@ namespace Model {
 			//Append custom where parameter values if is set
 			if(count($this->where) > 0) {
 				foreach($this->where AS $key => $val) {
-					if(is_array($val)) {
-						if($val[1] != 'BETWEEN') $data[] = &$this->where[$key][0];
-						else {
-							$data[] = &$this->where[$key][0];
-							$data[] = &$this->where[$key][2];
+					if($val != 'complexW') {
+						if(is_array($val)) {
+							if($val[1] != 'BETWEEN') $data[] = &$this->where[$key][0];
+							else {
+								$data[] = &$this->where[$key][0];
+								$data[] = &$this->where[$key][2];
+							}
 						}
+						else $data[] = &$this->where[$key];
 					}
-					else $data[] = &$this->where[$key];
 				}
 			}
 			//End of build data
@@ -354,7 +358,7 @@ namespace Model {
 						/** @var array $row */
 						foreach($row as $key => $val) {
 							if($ignore_password && $key == 'password') continue;
-							preg_match('/(.+?)(?=\_)\_(.*)/', $key, $matches);
+							preg_match('/(.+?)(?=\-)\-(.*)/', $key, $matches);
 							if(count($matches)) {
 								$table = $matches[1];
 								if(!property_exists($c, $table)) {
@@ -395,7 +399,7 @@ namespace Model {
 			}
 			if(count($join)) {
 				foreach($join AS $table_reference => $arrJoin) {
-					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", {$table_reference}.{$column} AS {$table_reference}_{$column}";
+					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", {$table_reference}.{$column} AS `{$table_reference}-{$column}`";
 				}
 			}
 			foreach($join AS $table_reference => $column_reference) {
@@ -416,16 +420,18 @@ namespace Model {
 					while($stmt->fetch()) {
 						/** @var array $row */
 						foreach($row as $key => $val) {
-							preg_match('/(.+?)(?=\_)\_(.*)/', $key, $matches);
-							if(count($matches)) {
-								$table = $matches[1];
-								if(!property_exists($this, $table)) {
-									$nc = new Model($table);
-									$this->$table = $nc;
+							if(array_key_exists($key, $this->schema)) $this->$key = $val;
+							else {
+								preg_match('/(.+?)(?=\-)\-(.*)/', $key, $matches);
+								if(count($matches)) {
+									$table = $matches[1];
+									if(!property_exists($this, $table)) {
+										$nc = new Model($table);
+										$this->$table = $nc;
+									}
+									$this->$table->$matches[2] = $val;
 								}
-								$this->$table->$matches[2] = $val;
 							}
-							else $this->$key = $val;
 						}
 					}
 					$stmt->free_result();
@@ -551,12 +557,13 @@ namespace Model {
 				$param_type .= 'i';
 				$data[] = &$param_type;
 				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) {
-					if($this->$key == '0xNULL') $this->$key = null;
+					if($this->$key === '0xNULL') $this->$key = null;
 					$data[] = &$this->$key;
 					$set .= ($set == '') ? $key . ' = ?' : ', ' . $key . ' = ?';
 				}
 				$data[] = &$id;
-				$stmt = $this->db->prepare("UPDATE {$this->tableName} SET " . $set . " WHERE id = ?");
+				$sql = "UPDATE {$this->tableName} SET " . $set . " WHERE id = ?";
+				$stmt = $this->db->prepare($sql);
 				call_user_func_array(array($stmt, 'bind_param'), $data);
 				try {
 					$stmt->execute();
@@ -574,7 +581,7 @@ namespace Model {
 				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) $param_type .= (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 				$data[] = &$param_type;
 				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) {
-					if($this->$key == '0xNULL') $this->$key = null;
+					if($this->$key === '0xNULL') $this->$key = null;
 					$data[] = &$this->$key;
 					$set .= ($set == '') ? $key . ' = ?' : ', ' . $key . ' = ?';
 				}
@@ -596,24 +603,31 @@ namespace Model {
 			$where = '';
 			$data = array();
 			$param_type = '';
+			//Build the sql where for table columns and their parameter types
 			foreach(get_object_vars($this) AS $key => $val) {
-				if(!in_array($key, self::getIgnoredKeys())) {
-					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : (($key == 'id') ? $this->tableName . '.' . $key . ' = ?' : $key . ' = ?');
+				if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) {
+					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : ($val !== null ? $key . ' = ?' : $key . ' IS NULL');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$tipData = (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
-					$param_type .= ($key == 'id') ? 'i' : ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
+					if($val !== null) {
+						$tipData = (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+						$param_type .= ($key == 'id') ? 'i' : ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
+					}
 				}
 			}
+			//Append custom where parameter types if is set
 			if(count($this->where) > 0) {
 				foreach($this->where AS $key => $val) {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?';
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$param_type .= ($val[1] != 'BETWEEN') ? $val[2] : $val[2] . $val[2];
+					$tipData = (is_numeric($val) ? 'i' : 's');
+					$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 				}
 			}
+			//Build the data parameters and types
 			if($param_type) $data[] = &$param_type;
+			foreach($this->customFields AS $key => $val) if(is_array($val)) $data[] = &$this->customFields[$key][2];
 			foreach(get_object_vars($this) AS $key => $val) {
-				if(!in_array($key, self::getIgnoredKeys())) {
+				if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) {
 					if(is_array($val)) {
 						if($val[1] != 'BETWEEN') {
 							$v = &$this->$key;
@@ -625,9 +639,10 @@ namespace Model {
 							$data[] = &$v[2];
 						}
 					}
-					else $data[] = &$this->$key;
+					else if($val !== null) $data[] = &$this->$key;
 				}
 			}
+			//Append custom where parameter values if is set
 			if(count($this->where) > 0) {
 				foreach($this->where AS $key => $val) {
 					if(is_array($val)) {
@@ -676,9 +691,11 @@ namespace Model {
 				call_user_func_array(array($stmt, 'bind_param'), $data);
 				$stmt->execute();
 				$meta = $stmt->result_metadata();
-				$params = array();
-				while($field = $meta->fetch_field()) $params[] = &$row[$field->name];
-				if(count($params)) call_user_func_array(array($stmt, 'bind_result'), $params);
+				if($meta) {
+					$params = array();
+					while($field = $meta->fetch_field()) $params[] = &$row[$field->name];
+					if(count($params)) call_user_func_array(array($stmt, 'bind_result'), $params);
+				}
 				/** @var array $row */
 				while($stmt->fetch()) $ret[] = $row;
 				$stmt->free_result();

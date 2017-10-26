@@ -1,8 +1,11 @@
 <?php
 
 /**
+ * @property string h1
+ * @property string title
  * @property array js
  * @property array css
+ * @property string APP_NAME
  * Class Template
  */
 class Template {
@@ -25,7 +28,7 @@ class Template {
 	/**
 	 * @var string
 	 */
-	private $content = '';
+	public $content = '';
 	/**
 	 * @var string
 	 */
@@ -59,7 +62,8 @@ class Template {
 	public function loadTemplate() {
 		if(!file_exists($this->filename) || is_dir($this->filename)) die("Error loading template ({$this->filename}).");
 		$this->template = file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . $this->filename);
-		$this->values['adminName'] = $this->adminName;
+		$this->APP_NAME = _APP_NAME_;
+		$this->logout = __('Logout');
 		foreach(get_object_vars($this) AS $key => $value) {
 			if(!is_object($value) && !is_array($value)) {
 				$change = "{" . $key . "}";

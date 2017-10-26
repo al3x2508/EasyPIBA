@@ -1,10 +1,12 @@
 <?php
 namespace Act;
+
 use Model\Model;
 use Utils\Bcrypt;
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/Utils/functions.php');
 require_once(dirname(__FILE__) . '/act.class.php');
+
 class Admin extends act {
 	public function __construct() {
 		$bcrypt = new Bcrypt(10);
@@ -19,4 +21,5 @@ class Admin extends act {
 		return $act;
 	}
 }
+
 new Admin();

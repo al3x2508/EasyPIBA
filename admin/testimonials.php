@@ -16,7 +16,7 @@ $content = '<div class="box">
 	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
 </div>
 <div id="ppEdit" class="modal dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="width: 80vw;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
@@ -24,17 +24,30 @@ $content = '<div class="box">
 				</button>
 				<h4 class="modal-title">' . __('Testimonials') . '</h4>
 			</div>
-			<div class="modal-body">
-				<table id="edtable" class="edtable">
-					<tr><td><label for="ednume">Nume:</label></td><td><input type="text" id="ednume" name="ednume" class="form-control" /></td></tr>
-					<tr><td><label for="edcalitate">Calitate:</label></td><td><input type="text" id="edcalitate" name="edcalitate" class="form-control" /></td></tr>
-					<tr><td><label for="edshort">Text scurt:</label></td><td><textarea id="edshort" name="edshort" class="form-control"></textarea></td></td></tr>
-					<tr><td><label for="edcontent">Con&#x21B;inut:</label></td><td><textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300"></textarea></td></tr>
-					<tr><td><label for="edstare">Status:</label></td><td><input type="checkbox" id="edstare" name="edstare" /></td></tr>
-				</table>
+			<div class="modal-body" id="edtable">
+				<div class="form-group">
+					<label for="edname">' . __('Name') . '</label>
+					<input type="text" class="form-control" id="edname" name="edname" placeholder="' . __('Name') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edcompany">' . __('Company') . '</label>
+					<input type="text" class="form-control" id="edcompany" name="edcompany" placeholder="' . __('Company') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edshort">' . __('Short text') . '</label>
+					<textarea id="edshort" name="edshort" class="form-control" rows="3" cols="30" placeholder="' . __('Short text') . '"></textarea>
+                </div>
+                <div class="form-group">
+					<label for="edcontent">' . __('Content') . '</label>
+					<textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300" placeholder="' . __('Content') . '"></textarea>
+                </div>
+                <div class="form-group">
+					<label for="edstatus">' . __('Status') . '</label>
+					<select id="edstatus" name="edstatus" class="form-control"><option value="1">' . __('Active') . '</option><option value="2">' . __('Blocked') . '</option></select>
+                </div>
 			</div>
 			<div class="modal-footer">
-				button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
 				<button type="button" class="btn btn-primary" id="save">' . __('Save') . '</button>
 			</div>
 		</div>

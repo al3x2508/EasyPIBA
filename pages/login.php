@@ -1,13 +1,13 @@
 <?php
 $content = '';
 $login_errors = array();
-$register_errors = array();
+$register_errors = '';
 //Check login
-if(array_key_exists('username', $_POST) && array_key_exists('password', $_POST) && array_key_exists('CSRFName', $_POST) && array_key_exists('CSRFToken', $_POST)) {
+if(array_key_exists('email', $_POST) && array_key_exists('password', $_POST) && !array_key_exists('confirmPassword', $_POST) && array_key_exists('CSRFName', $_POST) && array_key_exists('CSRFToken', $_POST)) {
 	if(\Utils\Util::csrfguard_validate_token($_POST['CSRFName'], $_POST['CSRFToken'])) {
 		$bcrypt = new Utils\Bcrypt(10);
 		$user = new Model\Model('users');
-		$user = $user->getOneResult('email', strip_tags($_POST['username']));
+		$user = $user->getOneResult('email', strip_tags($_POST['email']));
 		if($user) {
 			$userId = $user->id;
 			$status = $user->status;
@@ -22,7 +22,7 @@ if(array_key_exists('username', $_POST) && array_key_exists('password', $_POST) 
 					$_SESSION['user'] = $userId;
 					if(array_key_exists('keepLoggedIn', $_POST)) Utils\Util::storeCookie($userId);
 					$redirectUrl = _DEFAULT_REDIRECT_;
-					$location = (array_key_exists('ref', $_SESSION['site'])) ? $_SESSION['site']['ref'] : $redirectUrl;
+					$location = (array_key_exists('ref', $_SESSION)) ? $_SESSION['ref'] : $redirectUrl;
 					header("Location: {$location}");
 					exit;
 				}
@@ -47,29 +47,35 @@ $fields = array();
 //Check if register form was submited
 if(array_key_exists('lastname', $_POST) && array_key_exists('email', $_POST)) {
 	//Check register fields
-	$checkFields = array('lastname', 'firstname', 'email', 'password', 'cpassword', 'termsConditions', 'CSRFToken');
+	$checkFields = array('lastname', 'firstname', 'email', 'country', 'password', 'confirmPassword', 'termsConditions', 'CSRFToken');
 	foreach($checkFields AS $field) {
 		if(!array_key_exists($field, $_POST)) $fields[$field] = 1;
 		else if(array_key_exists($field, $_POST) && !\Utils\Util::checkFieldValue($field, $_POST[$field])) $fields[$field] = 1;
 	}
 	if(count($fields) == 0) {
 		$email = strtolower(strip_tags($_POST['email']));
+		$country = strtolower(strip_tags($_POST['country']));
 		$user = new Model\Model('users');
 		$user = $user->getOneResult('email', $email);
-		if($user) $register_errors[] = __('There is another user registered with this email address');
+		if($user) $register_errors = __('There is another user registered with this email address');
 		else {
 			$password = strip_tags($_POST['password']);
-			if($password == strip_tags($_POST['cpassword'])) {
-				$lastname = ucwords(strtolower(strip_tags(htmlspecialchars(stripslashes(trim($_POST['lastname']))))), " -");
-				$firstname = ucwords(strtolower(strip_tags(htmlspecialchars(stripslashes(trim($_POST['firstname']))))), " -");
+			if($password == strip_tags($_POST['confirmPassword'])) {
+				if($lastname = @ucwords(strtolower(strip_tags(htmlspecialchars(stripslashes(trim($_POST['lastname']))))), " -")) $firstname = ucwords(strtolower(strip_tags(htmlspecialchars(stripslashes(trim($_POST['firstname']))))), " -");
+				else {
+					$lastname = \Utils\Util::ucname(strip_tags(htmlspecialchars(stripslashes(trim($_POST['lastname'])))));
+					$firstname = \Utils\Util::ucname(strip_tags(htmlspecialchars(stripslashes(trim($_POST['firstname'])))));
+				}
 				$bcrypt = new Utils\Bcrypt(10);
+				$user = new Model\Model('users');
 				$user->lastname = $lastname;
 				$user->firstname = $firstname;
 				$user->email = $email;
+				$user->country = $country;
 				$user->status = 0;
 				$user->password = $bcrypt->hash($password);
 				$user->newsletter = (array_key_exists('subscribe', $_POST)) ? 1 : 0;
-				$id = $user->create();
+				$user = $user->create();
 				\Utils\Util::sendActivationEmail($user);
 				$content .= /** @lang text */
 					'<script type="text/javascript">
@@ -78,38 +84,41 @@ if(array_key_exists('lastname', $_POST) && array_key_exists('email', $_POST)) {
 					' . __('You will be redirected to confirm your email in 1 second');
 			}
 			else {
-				$register_errors[] = __('Password not confirmed');
-				$fields['cpassword'] = 1;
+				$register_errors = __('Password not confirmed');
+				$fields['confirmPassword'] = 1;
 			}
 		}
 	}
 	else {
-		$register_errors = "Nu ați completat/bifat câmpurile:\n";
-		foreach($fields AS $cheie => $val) {
-			switch($cheie) {
+		$register_errors = __('You did not filled the following inputs') . ":\n";
+		foreach($fields AS $key => $value) {
+			switch($key) {
 				case 'lastname':
-					$register_errors[] = '<br />' . __('lastname');
+					$register_errors .= '<br />' . __('lastname');
 					break;
 				case 'firstname':
-					$register_errors[] = '<br />' . __('firstname');
+					$register_errors .= '<br />' . __('firstname');
 					break;
 				case 'email':
-					$register_errors[] = '<br />' . __('email address');
+					$register_errors .= '<br />' . __('email address');
+					break;
+				case 'country':
+					$register_errors .= '<br />' . __('country');
 					break;
 				case 'password':
-					$register_errors[] = '<br />' . __('password');
+					$register_errors .= '<br />' . __('password');
 					break;
-				case 'cpassword':
-					$register_errors[] = '<br />' . __('password confirm');
+				case 'confirmPassword':
+					$register_errors .= '<br />' . __('password confirm');
 					break;
 				case 'termsConditions':
-					$register_errors[] = '<br />' . __('terms and conditions');
+					$register_errors .= '<br />' . __('terms and conditions');
 					break;
 			}
 		}
 	}
 }
-$usernameValue = (array_key_exists('username', $_POST))?' value="' . $_POST['username'] . '"':'';
+$emailValue = (array_key_exists('email', $_POST))?' value="' . $_POST['email'] . '"':'';
 $content .= '<div class="row justify-content-md-center mt-4">			
 			<div class="col-md-6">
 			<div class="panel panel-login">
@@ -128,31 +137,31 @@ $content .= '<div class="row justify-content-md-center mt-4">
 						<div class="row">
 							<div class="col-lg-12">
 								<form id="login-form" action="#" method="post" style="display: block;" class="validateform">';
-if(count($login_errors)) $content .= '									<div class="col-lg-12 col-12"><div class="alert alert-danger">' . implode("\n", $login_errors) . '</div></div>' . PHP_EOL;
-$content .= '									<div class="col-lg-12 col-12 mt-5 field form-group">
+if(count($login_errors)) $content .= '<div class="col-lg-12 col-12"><div class="alert alert-danger">' . implode("\n", $login_errors) . '</div></div>' . PHP_EOL;
+$content .= '						<div class="col-lg-12 col-12 mt-5 field form-group">
 										<div class="input input-hoshi">
-											<input type="text" name="username" id="username" class="input__field input__field-hoshi form-control"' . $usernameValue . ' data-rule="maxlen:4" required />
-											<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="username" data-ex="eg: john.smith@yahoo.com">
-												<span class="input__label-content input__label-content-hoshi">' . __('E-mail') . '</span>
+											<input type="email" name="email" id="email-login" class="input__field input__field-hoshi form-control"' . $emailValue . ' data-rule="maxlen:2" data-msg="' . __('Enter your email') . '" pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
+											<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="email-login" data-ex="eg: john.smith@yahoo.com">
+												<span class="input__label-content input__label-content-hoshi"><i class="fa fa-envelope-o"></i> ' . __('Email') . '</span>
 											</label>
 										</div>
 									</div>
 									<div class="col-lg-12 col-12 mt-5 field form-group">
 										<div class="input input-hoshi">
-											<input type="password" name="password" id="password" class="input__field input__field-hoshi form-control" data-rule="maxlen:4" required />
-											<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password">
+											<input type="password" name="password" id="password-login" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" pattern=".{8,}" required />
+											<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password-login">
 												<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Password') . '</span>
 											</label>
 										</div>
 									</div>
 									<div class="col-lg-12 col-12 field form-group text-center">
-										<input type="checkbox" tabindex="3" class="" name="remember" id="remember" />
+										<input type="checkbox" class="" name="remember" id="remember" />
 										<label for="remember"> ' . __('Remember me') . '</label>
 									</div>
 									<div class="col-lg-12 col-12 field form-group">
 										<div class="row justify-content-sm-center">
 											<div class="col-sm-6">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="' . __('Log in') . '" />
+												<input type="submit" class="form-control btn btn-login" value="' . __('Log in') . '" />
 											</div>
 										</div>
 									</div>
@@ -160,13 +169,14 @@ $content .= '									<div class="col-lg-12 col-12 mt-5 field form-group">
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="password_reset.html" tabindex="5" class="forgot-password">' . __('Forgot Password?') . '</a>
+													<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset.html" class="forgot-password">' . __('Forgot Password?') . '</a> | 
+													<a href="#" class="forgot-password" id="resend">' . __('Resend email confirmation') . '</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</form>';
-$content .= \Utils\Util::getAccountForm($fields, array(), 'register-form', true, __('Register'), $register_errors) . '
+$content .= \Utils\Util::getAccountForm($fields, array(), 'register-form', __('Register'), $register_errors) . '
 							</div>
 						</div>
 					</div>
@@ -176,6 +186,5 @@ $content .= \Utils\Util::getAccountForm($fields, array(), 'register-form', true,
 $page_title = __('Login | ' . _APP_NAME_);
 $description = __('Login | ' . _APP_NAME_);
 $h1 = '';
-$js = array('login.js', 'validate.min.js', 'svgcheckbx.js');
-$css = array('login.css', 'cinput.css');
-$bara = array('login.html' => 'Autentificare');
+$js = array('login.js', 'validate.min.js');
+$css = array('cinput.css');

@@ -1,5 +1,6 @@
 <?php
 namespace Act;
+
 use Controller\AdminController;
 use Model\Model;
 
@@ -32,7 +33,7 @@ abstract class act {
 				foreach($this->fields AS $key => $value) $this->entity->$key = $value;
 				if($where || (array_key_exists('id', $this->fields) && $this->fields['id'] > 0)) {
 					$this->entity->update($where);
-					return array_key_exists('id', $this->fields)?$this->fields['id']:1;
+					return array_key_exists('id', $this->fields) ? $this->fields['id'] : 1;
 				}
 				else return $this->entity->create();
 			}

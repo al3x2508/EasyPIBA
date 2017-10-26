@@ -66,11 +66,43 @@ class PHPExcel_Worksheet_ColumnCellIterator extends PHPExcel_Worksheet_CellItera
     }
 
     /**
-     * Destructor
+     * (Re)Set the end row
+     *
+     * @param integer    $endRow    The row number at which to stop iterating
+     * @return PHPExcel_Worksheet_ColumnCellIterator
+     * @throws PHPExcel_Exception
      */
-    public function __destruct()
+    public function resetEnd($endRow = null)
     {
-        unset($this->subject);
+        $this->endRow = ($endRow) ? $endRow : $this->subject->getHighestRow();
+        $this->adjustForExistingOnlyRange();
+
+        return $this;
+    }
+
+    /**
+     * Validate start/end values for "IterateOnlyExistingCells" mode, and adjust if necessary
+     *
+     * @throws PHPExcel_Exception
+     */
+    protected function adjustForExistingOnlyRange()
+    {
+        if ($this->onlyExistingCells) {
+            while ((!$this->subject->cellExistsByColumnAndRow($this->columnIndex, $this->startRow)) &&
+                ($this->startRow <= $this->endRow)) {
+                ++$this->startRow;
+            }
+            if ($this->startRow > $this->endRow) {
+                throw new PHPExcel_Exception('No cells exist within the specified range');
+            }
+            while ((!$this->subject->cellExistsByColumnAndRow($this->columnIndex, $this->endRow)) &&
+                ($this->endRow >= $this->startRow)) {
+                --$this->endRow;
+            }
+            if ($this->endRow < $this->startRow) {
+                throw new PHPExcel_Exception('No cells exist within the specified range');
+            }
+        }
     }
 
     /**
@@ -85,21 +117,6 @@ class PHPExcel_Worksheet_ColumnCellIterator extends PHPExcel_Worksheet_CellItera
         $this->startRow = $startRow;
         $this->adjustForExistingOnlyRange();
         $this->seek($startRow);
-
-        return $this;
-    }
-
-    /**
-     * (Re)Set the end row
-     *
-     * @param integer    $endRow    The row number at which to stop iterating
-     * @return PHPExcel_Worksheet_ColumnCellIterator
-     * @throws PHPExcel_Exception
-     */
-    public function resetEnd($endRow = null)
-    {
-        $this->endRow = ($endRow) ? $endRow : $this->subject->getHighestRow();
-        $this->adjustForExistingOnlyRange();
 
         return $this;
     }
@@ -121,6 +138,14 @@ class PHPExcel_Worksheet_ColumnCellIterator extends PHPExcel_Worksheet_CellItera
         $this->position = $row;
 
         return $this;
+    }
+
+    /**
+     * Destructor
+     */
+    public function __destruct()
+    {
+        unset($this->subject);
     }
 
     /**
@@ -187,30 +212,5 @@ class PHPExcel_Worksheet_ColumnCellIterator extends PHPExcel_Worksheet_CellItera
     public function valid()
     {
         return $this->position <= $this->endRow;
-    }
-
-    /**
-     * Validate start/end values for "IterateOnlyExistingCells" mode, and adjust if necessary
-     *
-     * @throws PHPExcel_Exception
-     */
-    protected function adjustForExistingOnlyRange()
-    {
-        if ($this->onlyExistingCells) {
-            while ((!$this->subject->cellExistsByColumnAndRow($this->columnIndex, $this->startRow)) &&
-                ($this->startRow <= $this->endRow)) {
-                ++$this->startRow;
-            }
-            if ($this->startRow > $this->endRow) {
-                throw new PHPExcel_Exception('No cells exist within the specified range');
-            }
-            while ((!$this->subject->cellExistsByColumnAndRow($this->columnIndex, $this->endRow)) &&
-                ($this->endRow >= $this->startRow)) {
-                --$this->endRow;
-            }
-            if ($this->endRow < $this->startRow) {
-                throw new PHPExcel_Exception('No cells exist within the specified range');
-            }
-        }
     }
 }

@@ -3,7 +3,7 @@ $(function() {
 	var loadMenu = function() {
 		$('#available').empty();
 		$('#nestable').empty();
-		$.getJSON('json/' + jsonPage + '.php', {menu: 1, language: 'en'}, function (data) {
+		$.getJSON('json/' + jsonPage + '.php', {menu: 1, language: $('.select2').val()}, function (data) {
 			$.each(data, function (key, val) {
 				if (val.menu_text) {
 					if (val.menu_order == 0) {
@@ -46,9 +46,14 @@ $(function() {
 		expandOnHover: 700,
 		startCollapsed: true
 	}).disableSelection();
-	$('#save').click(function() {
-		$.post("act/" + jsonPage + ".php", {menu: $('#nestable').nestedSortable('toArray', {startDepthCount: 0})}, function() {
+	$('#customSave').click(function() {
+		$.post("act/" + jsonPage + ".php", {menu: $('#nestable').nestedSortable('toArray', {startDepthCount: 0}), language: $('.select2').val()}, function() {
 			loadMenu();
 		});
+	});
+	$('.select2').select2({
+		width: '200px'
+	}).on('select2:select', function (e) {
+		loadMenu();
 	});
 });

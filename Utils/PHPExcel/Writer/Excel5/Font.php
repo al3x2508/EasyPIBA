@@ -28,12 +28,23 @@
 class PHPExcel_Writer_Excel5_Font
 {
     /**
+     * Map of BIFF2-BIFF8 codes for underline styles
+     * @static    array of int
+     *
+     */
+    private static $mapUnderline = array(
+        PHPExcel_Style_Font::UNDERLINE_NONE              => 0x00,
+        PHPExcel_Style_Font::UNDERLINE_SINGLE            => 0x01,
+        PHPExcel_Style_Font::UNDERLINE_DOUBLE            => 0x02,
+        PHPExcel_Style_Font::UNDERLINE_SINGLEACCOUNTING  => 0x21,
+        PHPExcel_Style_Font::UNDERLINE_DOUBLEACCOUNTING  => 0x22,
+    );
+    /**
      * Color index
      *
      * @var int
      */
     private $colorIndex;
-
     /**
      * Font
      *
@@ -136,19 +147,6 @@ class PHPExcel_Writer_Excel5_Font
         }
         return 0x190;      //  400 = Normal font weight
     }
-
-    /**
-     * Map of BIFF2-BIFF8 codes for underline styles
-     * @static    array of int
-     *
-     */
-    private static $mapUnderline = array(
-        PHPExcel_Style_Font::UNDERLINE_NONE              => 0x00,
-        PHPExcel_Style_Font::UNDERLINE_SINGLE            => 0x01,
-        PHPExcel_Style_Font::UNDERLINE_DOUBLE            => 0x02,
-        PHPExcel_Style_Font::UNDERLINE_SINGLEACCOUNTING  => 0x21,
-        PHPExcel_Style_Font::UNDERLINE_DOUBLEACCOUNTING  => 0x22,
-    );
 
     /**
      * Map underline

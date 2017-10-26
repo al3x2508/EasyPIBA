@@ -22,8 +22,8 @@ if($user) {
 			$userModel = $userModel->getOneResult('email', $email);
 			if(!$userModel || $userModel->id == $user->id) {
 				$password = strip_tags($_POST['password']);
-				$cpassword = strip_tags($_POST['cpassword']);
-				if($password == $cpassword) {
+				$confirmPassword = strip_tags($_POST['confirmPassword']);
+				if($password == $confirmPassword) {
 					$logout = false;
 					if($lastname = @ucwords(strtolower(strip_tags(htmlspecialchars(stripslashes(trim($_POST['lastname']))))), " -")) $firstname = ucwords(strtolower(strip_tags(htmlspecialchars(stripslashes(trim($_POST['firstname']))))), " -");
 					else {
@@ -49,12 +49,12 @@ if($user) {
 				}
 				else {
 					$message = __('Confirm the password');
-					$fields['cpassword'] = 1;
+					$fields['confirmPassword'] = 1;
 				}
 			}
 			else $message = __('There is another user registered with this email address');
 		}
-		else $message = __('You did not filled the following inputs') . "\n" . print_r($fields, true);
+		else $message = __('You did not filled the following inputs') . ":<br />\n" . implode(", ", array_keys($fields));
 	}
 	$values = array(
 		'firstname' => $user->firstname,
@@ -105,4 +105,4 @@ if($user) {
 			</div>
 		</div>';
 }
-else header("Location: /");
+else header("Location: " . _FOLDER_URL_);

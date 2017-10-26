@@ -1,23 +1,23 @@
 <?php
-$judeteOptions = '';
-$judete = new Model\Model('judete');
-$judete = $judete->get();
-foreach($judete AS $judet) $judeteOptions .= '<option value="' . $judet['id'] . '">' . $judet['nume_judet'] . '</option>'.PHP_EOL;
-$numePagina = "Editare p&#259;rin&#x21B;i";
-$js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','js/jsall.js','js/clienti.js');
+$countriesOptions = '';
+$countries = new Model\Model('countries');
+$countries = $countries->get();
+$page_title = __('Users');
+foreach($countries AS $country) $countriesOptions .= '<option value="' . $country->id . '">' . $country->name . '</option>'.PHP_EOL;
+$js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','js/jsall.js','js/users.js');
 $css = array('plugins/datatables/dataTables.bootstrap.css');
-$continut = '<div class="box">
-	<div class="box-header"><h3 class="box-title">List&#259; p&#259;rin&#x21B;i</h3></div>
+$content = '<div class="box">
+	<div class="box-header"><h3 class="box-title">' . __('Users') . '</h3></div>
 	<div class="box-body">
-		<table id="tabel_date" class="table table-bordered table-hover">
+		<table id="data_table" class="table table-bordered table-hover">
 			<thead>
-				<tr><th>#<br /><input type="text" id="idf" class="filtruTabel form-control" size="2"></th><th>Nume<br /><input type="text" size="10" id="numef" class="filtruTabel ui-autocomplete-input form-control" autocomplete="off"></th><th>Prenume<br /><input type="text" size="10" id="prenumef" class="filtruTabel ui-autocomplete-input form-control" autocomplete="off"></th><th>Localitate</th><!--<th>Jude&#x21B;<br /><select id="judetf" class="filtruTabel form-control"><option value="0">Toate</option>' . $judeteOptions . '</select></th>--><th>E-mail<br /><input type="text" id="emailf" class="filtruTabel form-control"></th><th>Telefon<br /><input type="tel" id="telefonf" size="10" class="filtruTabel form-control"></th><th>Status<br /><select id="statusf" class="filtruTabel form-control"><option value="-1">Oricare</option><option value="0">Neconfirmat</option><option value="1">Confirmat</option><option value="2">Blocat</option></select></th><th>Are copii<br /><select id="arecopiif" class="filtruTabel form-control"><option value="-1">Oricare</option><option value="0">Fara</option><option value="1">Cu</option></select></th><th>Copii premium<br /><select id="arecopiipf" class="filtruTabel form-control"><option value="-1">Oricare</option><option value="0">Fara</option><option value="1">Cu</option></select></th><th>Profesor<br /><select id="proff" class="filtruTabel form-control"><option value="-1">Oricare</option><option value="0">Fara</option><option value="1">Cu</option></select></th><th>Ac&#x21B;iuni</th></tr>
+				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" size="2"></th><th>' . __('Firstname') . '<br /><input type="text" size="10" id="firstnamef" class="tableFilter ui-autocomplete-input form-control" autocomplete="off"></th><th>' . __('Lastname') . '<br /><input type="text" size="10" id="lastnamef" class="tableFilter form-control" /></th><th>' . __('Country') . '<br /><select id="countryf" class="tableFilter form-control"><option value="0">' . __('Any') . '</option>' . $countriesOptions . '</select></th><th>' . __('Email') . '<br /><input type="text" id="emailf" class="tableFilter form-control"></th><th>' . __('Status') . '<br /><select id="statusf" class="tableFilter form-control"><option value="-1">' . __('Any') . '</option><option value="0">' . __('Not confirmed') . '</option><option value="1">' . __('Confirmed') . '</option><option value="2">' . __('Blocked') . '</option></select></th><th>' . __('Actions') . '</th></tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
 	</div>
-	<button id="adaugare" class="btn btn-primary">Adaug&#259;</button>
+	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
 	<button class="btn btn-primary btn-export">Excel</button>
 	<button class="btn btn-primary btn-export">PDF</button>
 </div>
@@ -25,27 +25,61 @@ $continut = '<div class="box">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Închide">
+				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
 					<span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title">Clienti</h4>
+				<h4 class="modal-title">' . __('Users') . '</h4>
 			</div>
-			<div class="modal-body">
-				<table id="edtabel" class="edtabel">
-					<tr><td><label for="ednume_client">Nume p&#259;rinte:</label></td><td><input type="text" id="ednume_client" name="ednume_client" class="form-control" /></td><td><label for="edprenume_client">Prenume p&#259;rinte:</label></td><td><input type="text" id="edprenume_client" name="edprenume_client" class="form-control" /></td></tr>
-					<tr><td><label for="edemail">E-mail:</label></td><td><input type="email" id="edemail" name="edemail" class="form-control" /></td><td><label for="edtelefon">Telefon:</label></td><td><input type="tel" id="edtelefon" name="edtelefon" class="form-control" /></td></tr>
-					<tr><td><label for="edlocalitate">Localitate:</label></td><td><input type="text" id="edlocalitate" name="edlocalitate" class="form-control" /></td><td><label for="edjudet">Jude&#x21B;:</label></td><td><select id="edjudet" name="edjudet" class="form-control">' . $judeteOptions . '</select></td></tr>
-					<tr><td><label for="edstare">Stare:</label></td><td><select id="edstare" name="edstare" class="form-control"><option value="1">Activ</option><option value="2">Blocat</option></select></td><td><label for="eduser_moodle">User moodle:</label></td><td><input type="text" name="eduser_moodle" id="eduser_moodle" class="form-control" disabled /></td></tr>
-					<tr><td><label for="edpremium">Premium:</label></td><td><input type="checkbox" id="edpremium" name="edpremium" /></td><td><label for="edcreat">Creat:</label></td><td><input type="text" name="edcreat" id="edcreat" class="form-control" disabled /></td></tr>
-					<tr><td><label for="edadresa">Adres&#259;:</label></td><td><textarea id="edadresa" name="edadresa" class="form-control" rows="3" cols="30"></textarea></td><td><label for="edcomentarii">Comentarii:</label></td><td><textarea id="edcomentarii" name="edcomentarii" rows="3" cols="30" class="form-control"></textarea></td><td></td><td></td></tr>
-					<tr><td><label for="edparola">Parol&#259;:</label></td><td><input type="password" id="edparola" name="edparola" class="form-control" /></td><td><label for="edcparola">Confirmare parol&#259;:</label></td><td><input type="password" id="edcparola" name="edcparola" class="form-control" /></td></tr>
-				</table>
+			<div class="modal-body" id="edtable">
+				<div class="form-group">
+					<label for="edfirstname">' . __('Firstname') . '</label>
+					<input type="text" class="form-control" id="edfirstname" name="edfirstname" placeholder="' . __('Firstname') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edlastname">' . __('Lastname') . '</label>
+					<input type="text" class="form-control" id="edlastname" name="edlastname" placeholder="' . __('Lastname') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edemail">' . __('Email') . '</label>
+					<input type="email" class="form-control" id="edemail" name="edemail" placeholder="' . __('Email') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edphone">' . __('Phone') . '</label>
+					<input type="text" class="form-control" id="edphone" name="edphone" placeholder="' . __('Phone') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edaddress">' . __('Address') . '</label>
+					<textarea id="edaddress" name="edaddress" class="form-control" rows="3" cols="30" placeholder="' . __('Address') . '"></textarea>
+                </div>
+                <div class="form-group">
+					<label for="edcity">' . __('City') . '</label>
+					<input type="text" class="form-control" id="edcity" name="edcity" placeholder="' . __('City') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edstate">' . __('State') . '</label>
+					<input type="text" class="form-control" id="edstate" name="edstate" placeholder="' . __('State') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edcountry">' . __('Country') . '</label>
+					<select id="edcountry" name="edcountry" class="form-control">' . $countriesOptions . '</select>
+                </div>
+                <div class="form-group">
+					<label for="edstatus">' . __('Status') . '</label>
+					<select id="edstatus" name="edstatus" class="form-control"><option value="1">' . __('Active') . '</option><option value="2">' . __('Blocked') . '</option></select>
+                </div>
+                <div class="form-group">
+					<label for="edpassword">' . __('Password') . '</label>
+					<input type="password" class="form-control" id="edpassword" name="edpassword" placeholder="' . __('Password') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edconfirmPassword">' . __('Confirm password') . '</label>
+					<input type="password" class="form-control" id="edconfirmPassword" name="edconfirmPassword" placeholder="' . __('Confirm password') . '" />
+                </div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Închide</button>
-				<button type="button" class="btn btn-primary" id="salveaza">Salvează</button>
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
+				<button type="button" class="btn btn-primary" id="save">' . __('Save') . '</button>
 			</div>
 		</div>
 	</div>
 </div>';
-?>

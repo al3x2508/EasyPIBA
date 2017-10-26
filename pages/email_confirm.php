@@ -4,35 +4,30 @@ $page_title = __('Email confirm');
 $description = __('Email confirm');
 $h1 = '';
 $js = array();
-$css = array();
-$code = (array_key_exists('code', $_GET) && ctype_alnum($_GET['code'])) ? trim($_GET['code']) : '';
+$css = array('cinput.css');
+$code = (array_key_exists('code', $_POST) && ctype_alnum($_POST['code'])) ? trim($_POST['code']) : '';
 $showForm = false;
 $errorForm = '';
-$codeError = (strlen($code) != 16)?'<div class="alert alert-danger">' . __('Enter the confirmation code') . '</div>':'';
-$form = '<div class="col-lg-12">
-			<div class="row">
-				<div class="col-lg-12"><h2>' . __('Email confirm') . '</h2></div>
-				<form action="#" method="get">
-					<div class="alert alert-danger"></div>
-					<div class="col-lg-12 col-12 mt-5 field form-group">
-						<div class="input input-hoshi">
-							<input type="text" name="code" id="code" class="input__field input__field-hoshi form-control" data-rule="maxlen:16" data-msg="' . sprintf(__('Enter at least %s characters'), '16') . '" pattern=".{16,16}" required />
-							<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="code" data-ex="' . __('16 characters code') . '">
-								<span class="input__label-content input__label-content-hoshi"> * ' . __('Confirmation code') . '</span>
-							</label>
-							' . $codeError . '
-						</div>
-					</div>
-					<div class="col-lg-12 col-12 field form-group">
-						<div class="row justify-content-sm-center">
-							<div class="col-sm-6">
-								<input type="submit" class="form-control btn btn-login" value="' . __('Send') . '" />
-							</div>
-						</div>
-					</div>
-				</form>
+$codeError = ($code && strlen($code) != 32)?'<div class="alert alert-danger">' . __('Enter the confirmation code') . '</div>':'';
+$form = '<form action="#" method="post">
+			<div class="alert alert-danger"></div>
+			<div class="col-lg-12 col-12 mt-5 field form-group">
+				<div class="input input-hoshi">
+					<input type="text" name="code" id="code" class="input__field input__field-hoshi form-control" data-rule="maxlen:32" data-msg="' . sprintf(__('Enter at least %s characters'), '32') . '" pattern=".{32,32}" required />
+					<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="code" data-ex="' . __('32 characters code') . '">
+						<span class="input__label-content input__label-content-hoshi"> * ' . __('Confirmation code') . '</span>
+					</label>
+					' . $codeError . '
+				</div>
 			</div>
-		</div>' . PHP_EOL;
+			<div class="col-lg-12 col-12 field form-group">
+				<div class="row justify-content-sm-center">
+					<div class="col-sm-6">
+						<input type="submit" class="form-control btn btn-login" value="' . __('Confirm') . '" />
+					</div>
+				</div>
+			</div>
+		</form>' . PHP_EOL;
 $content = '<div class="row justify-content-md-center mt-4">
 			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -60,8 +55,10 @@ if(!empty($code)) {
 	}
 }
 else $showForm = true;
-if(array_key_exists('cheie', $_GET) && !ctype_alnum($_GET['cheie'])) $content .= 'Cod invalid!<br />' . PHP_EOL;
-if($showForm) $content .= $form;
+if($showForm) {
+	$form = str_replace('<div class="alert alert-danger"></div>', '', $form);
+	$content .= $form;
+}
 $content .= '</div>
 						</div>
 					</div>

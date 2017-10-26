@@ -38,12 +38,6 @@ class PHPExcel_Shared_Font
     /* Methods for resolving autosize value */
     const AUTOSIZE_METHOD_APPROX    = 'approx';
     const AUTOSIZE_METHOD_EXACT     = 'exact';
-
-    private static $autoSizeMethods = array(
-        self::AUTOSIZE_METHOD_APPROX,
-        self::AUTOSIZE_METHOD_EXACT,
-    );
-
     /** Character set codes used by BIFF5-8 in Font records */
     const CHARSET_ANSI_LATIN                = 0x00;
     const CHARSET_SYSTEM_DEFAULT            = 0x01;
@@ -52,9 +46,9 @@ class PHPExcel_Shared_Font
     const CHARSET_ANSI_JAPANESE_SHIFTJIS    = 0x80;
     const CHARSET_ANSI_KOREAN_HANGUL        = 0x81;
     const CHARSET_ANSI_KOREAN_JOHAB         = 0x82;
-    const CHARSET_ANSI_CHINESE_SIMIPLIFIED  = 0x86;        //    gb2312
-    const CHARSET_ANSI_CHINESE_TRADITIONAL  = 0x88;        //    big5
-    const CHARSET_ANSI_GREEK                = 0xA1;
+const CHARSET_ANSI_CHINESE_SIMIPLIFIED  = 0x86;
+    const CHARSET_ANSI_CHINESE_TRADITIONAL  = 0x88;        //    gb2312
+        const CHARSET_ANSI_GREEK                = 0xA1;        //    big5
     const CHARSET_ANSI_TURKISH              = 0xA2;
     const CHARSET_ANSI_VIETNAMESE           = 0xA3;
     const CHARSET_ANSI_HEBREW               = 0xB1;
@@ -64,83 +58,54 @@ class PHPExcel_Shared_Font
     const CHARSET_ANSI_THAI                 = 0xDD;
     const CHARSET_ANSI_LATIN_II             = 0xEE;
     const CHARSET_OEM_LATIN_I               = 0xFF;
-
-    //  XXX: Constants created!
     /** Font filenames */
     const ARIAL                             = 'arial.ttf';
+
+    //  XXX: Constants created!
     const ARIAL_BOLD                        = 'arialbd.ttf';
     const ARIAL_ITALIC                      = 'ariali.ttf';
     const ARIAL_BOLD_ITALIC                 = 'arialbi.ttf';
-
     const CALIBRI                           = 'CALIBRI.TTF';
     const CALIBRI_BOLD                      = 'CALIBRIB.TTF';
     const CALIBRI_ITALIC                    = 'CALIBRII.TTF';
     const CALIBRI_BOLD_ITALIC               = 'CALIBRIZ.TTF';
-
     const COMIC_SANS_MS                     = 'comic.ttf';
     const COMIC_SANS_MS_BOLD                = 'comicbd.ttf';
-
     const COURIER_NEW                       = 'cour.ttf';
     const COURIER_NEW_BOLD                  = 'courbd.ttf';
     const COURIER_NEW_ITALIC                = 'couri.ttf';
     const COURIER_NEW_BOLD_ITALIC           = 'courbi.ttf';
-
     const GEORGIA                           = 'georgia.ttf';
     const GEORGIA_BOLD                      = 'georgiab.ttf';
     const GEORGIA_ITALIC                    = 'georgiai.ttf';
     const GEORGIA_BOLD_ITALIC               = 'georgiaz.ttf';
-
     const IMPACT                            = 'impact.ttf';
-
     const LIBERATION_SANS                   = 'LiberationSans-Regular.ttf';
     const LIBERATION_SANS_BOLD              = 'LiberationSans-Bold.ttf';
     const LIBERATION_SANS_ITALIC            = 'LiberationSans-Italic.ttf';
     const LIBERATION_SANS_BOLD_ITALIC       = 'LiberationSans-BoldItalic.ttf';
-
     const LUCIDA_CONSOLE                    = 'lucon.ttf';
     const LUCIDA_SANS_UNICODE               = 'l_10646.ttf';
-
     const MICROSOFT_SANS_SERIF              = 'micross.ttf';
-
     const PALATINO_LINOTYPE                 = 'pala.ttf';
     const PALATINO_LINOTYPE_BOLD            = 'palab.ttf';
     const PALATINO_LINOTYPE_ITALIC          = 'palai.ttf';
     const PALATINO_LINOTYPE_BOLD_ITALIC     = 'palabi.ttf';
-
     const SYMBOL                            = 'symbol.ttf';
-
     const TAHOMA                            = 'tahoma.ttf';
     const TAHOMA_BOLD                       = 'tahomabd.ttf';
-
     const TIMES_NEW_ROMAN                   = 'times.ttf';
     const TIMES_NEW_ROMAN_BOLD              = 'timesbd.ttf';
     const TIMES_NEW_ROMAN_ITALIC            = 'timesi.ttf';
     const TIMES_NEW_ROMAN_BOLD_ITALIC       = 'timesbi.ttf';
-
     const TREBUCHET_MS                      = 'trebuc.ttf';
     const TREBUCHET_MS_BOLD                 = 'trebucbd.ttf';
     const TREBUCHET_MS_ITALIC               = 'trebucit.ttf';
     const TREBUCHET_MS_BOLD_ITALIC          = 'trebucbi.ttf';
-
     const VERDANA                           = 'verdana.ttf';
     const VERDANA_BOLD                      = 'verdanab.ttf';
     const VERDANA_ITALIC                    = 'verdanai.ttf';
     const VERDANA_BOLD_ITALIC               = 'verdanaz.ttf';
-
-    /**
-     * AutoSize method
-     *
-     * @var string
-     */
-    private static $autoSizeMethod = self::AUTOSIZE_METHOD_APPROX;
-
-    /**
-     * Path to folder containing TrueType font .ttf files
-     *
-     * @var string
-     */
-    private static $trueTypeFontPath = null;
-
     /**
      * How wide is a default column for a given default font and size?
      * Empirical data found by inspecting real Excel files and reading off the pixel width
@@ -187,6 +152,32 @@ class PHPExcel_Shared_Font
             10 => array('px' => 72, 'width' =>  9.00000000),
         ),
     );
+    private static $autoSizeMethods = array(
+        self::AUTOSIZE_METHOD_APPROX,
+        self::AUTOSIZE_METHOD_EXACT,
+    );
+    /**
+     * AutoSize method
+     *
+     * @var string
+     */
+    private static $autoSizeMethod = self::AUTOSIZE_METHOD_APPROX;
+    /**
+     * Path to folder containing TrueType font .ttf files
+     *
+     * @var string
+     */
+    private static $trueTypeFontPath = null;
+
+    /**
+     * Get autoSize method
+     *
+     * @return string
+     */
+    public static function getAutoSizeMethod()
+    {
+        return self::$autoSizeMethod;
+    }
 
     /**
      * Set autoSize method
@@ -205,13 +196,13 @@ class PHPExcel_Shared_Font
     }
 
     /**
-     * Get autoSize method
+     * Get the path to the folder containing .ttf files.
      *
      * @return string
      */
-    public static function getAutoSizeMethod()
+    public static function getTrueTypeFontPath()
     {
-        return self::$autoSizeMethod;
+        return self::$trueTypeFontPath;
     }
 
     /**
@@ -228,16 +219,6 @@ class PHPExcel_Shared_Font
     public static function setTrueTypeFontPath($pValue = '')
     {
         self::$trueTypeFontPath = $pValue;
-    }
-
-    /**
-     * Get the path to the folder containing .ttf files.
-     *
-     * @return string
-     */
-    public static function getTrueTypeFontPath()
-    {
-        return self::$trueTypeFontPath;
     }
 
     /**
@@ -327,97 +308,6 @@ class PHPExcel_Shared_Font
         $textWidth = max($lowerRightCornerX - $upperLeftCornerX, $upperRightCornerX - $lowerLeftCornerX);
 
         return $textWidth;
-    }
-
-    /**
-     * Get approximate width in pixels for a string of text in a certain font at a certain rotation angle
-     *
-     * @param string $columnText
-     * @param PHPExcel_Style_Font $font
-     * @param int $rotation
-     * @return int Text width in pixels (no padding added)
-     */
-    public static function getTextWidthPixelsApprox($columnText, PHPExcel_Style_Font $font = null, $rotation = 0)
-    {
-        $fontName = $font->getName();
-        $fontSize = $font->getSize();
-
-        // Calculate column width in pixels. We assume fixed glyph width. Result varies with font name and size.
-        switch ($fontName) {
-            case 'Calibri':
-                // value 8.26 was found via interpolation by inspecting real Excel files with Calibri 11 font.
-                $columnWidth = (int) (8.26 * PHPExcel_Shared_String::CountCharacters($columnText));
-                $columnWidth = $columnWidth * $fontSize / 11; // extrapolate from font size
-                break;
-
-            case 'Arial':
-                // value 7 was found via interpolation by inspecting real Excel files with Arial 10 font.
-//                $columnWidth = (int) (7 * PHPExcel_Shared_String::CountCharacters($columnText));
-                // value 8 was set because of experience in different exports at Arial 10 font.
-                $columnWidth = (int) (8 * PHPExcel_Shared_String::CountCharacters($columnText));
-                $columnWidth = $columnWidth * $fontSize / 10; // extrapolate from font size
-                break;
-
-            case 'Verdana':
-                // value 8 was found via interpolation by inspecting real Excel files with Verdana 10 font.
-                $columnWidth = (int) (8 * PHPExcel_Shared_String::CountCharacters($columnText));
-                $columnWidth = $columnWidth * $fontSize / 10; // extrapolate from font size
-                break;
-
-            default:
-                // just assume Calibri
-                $columnWidth = (int) (8.26 * PHPExcel_Shared_String::CountCharacters($columnText));
-                $columnWidth = $columnWidth * $fontSize / 11; // extrapolate from font size
-                break;
-        }
-
-        // Calculate approximate rotated column width
-        if ($rotation !== 0) {
-            if ($rotation == -165) {
-                // stacked text
-                $columnWidth = 4; // approximation
-            } else {
-                // rotated text
-                $columnWidth = $columnWidth * cos(deg2rad($rotation))
-                                + $fontSize * abs(sin(deg2rad($rotation))) / 5; // approximation
-            }
-        }
-
-        // pixel width is an integer
-        return (int) $columnWidth;
-    }
-
-    /**
-     * Calculate an (approximate) pixel size, based on a font points size
-     *
-     * @param     int        $fontSizeInPoints    Font size (in points)
-     * @return     int        Font size (in pixels)
-     */
-    public static function fontSizeToPixels($fontSizeInPoints = 11)
-    {
-        return (int) ((4 / 3) * $fontSizeInPoints);
-    }
-
-    /**
-     * Calculate an (approximate) pixel size, based on inch size
-     *
-     * @param     int        $sizeInInch    Font size (in inch)
-     * @return     int        Size (in pixels)
-     */
-    public static function inchSizeToPixels($sizeInInch = 1)
-    {
-        return ($sizeInInch * 96);
-    }
-
-    /**
-     * Calculate an (approximate) pixel size, based on centimeter size
-     *
-     * @param     int        $sizeInCm    Font size (in centimeters)
-     * @return     int        Size (in pixels)
-     */
-    public static function centimeterSizeToPixels($sizeInCm = 1)
-    {
-        return ($sizeInCm * 37.795275591);
     }
 
     /**
@@ -530,6 +420,97 @@ class PHPExcel_Shared_Font
         }
 
         return $fontFile;
+    }
+
+    /**
+     * Get approximate width in pixels for a string of text in a certain font at a certain rotation angle
+     *
+     * @param string $columnText
+     * @param PHPExcel_Style_Font $font
+     * @param int $rotation
+     * @return int Text width in pixels (no padding added)
+     */
+    public static function getTextWidthPixelsApprox($columnText, PHPExcel_Style_Font $font = null, $rotation = 0)
+    {
+        $fontName = $font->getName();
+        $fontSize = $font->getSize();
+
+        // Calculate column width in pixels. We assume fixed glyph width. Result varies with font name and size.
+        switch ($fontName) {
+            case 'Calibri':
+                // value 8.26 was found via interpolation by inspecting real Excel files with Calibri 11 font.
+                $columnWidth = (int) (8.26 * PHPExcel_Shared_String::CountCharacters($columnText));
+                $columnWidth = $columnWidth * $fontSize / 11; // extrapolate from font size
+                break;
+
+            case 'Arial':
+                // value 7 was found via interpolation by inspecting real Excel files with Arial 10 font.
+//                $columnWidth = (int) (7 * PHPExcel_Shared_String::CountCharacters($columnText));
+                // value 8 was set because of experience in different exports at Arial 10 font.
+                $columnWidth = (int) (8 * PHPExcel_Shared_String::CountCharacters($columnText));
+                $columnWidth = $columnWidth * $fontSize / 10; // extrapolate from font size
+                break;
+
+            case 'Verdana':
+                // value 8 was found via interpolation by inspecting real Excel files with Verdana 10 font.
+                $columnWidth = (int) (8 * PHPExcel_Shared_String::CountCharacters($columnText));
+                $columnWidth = $columnWidth * $fontSize / 10; // extrapolate from font size
+                break;
+
+            default:
+                // just assume Calibri
+                $columnWidth = (int) (8.26 * PHPExcel_Shared_String::CountCharacters($columnText));
+                $columnWidth = $columnWidth * $fontSize / 11; // extrapolate from font size
+                break;
+        }
+
+        // Calculate approximate rotated column width
+        if ($rotation !== 0) {
+            if ($rotation == -165) {
+                // stacked text
+                $columnWidth = 4; // approximation
+            } else {
+                // rotated text
+                $columnWidth = $columnWidth * cos(deg2rad($rotation))
+                                + $fontSize * abs(sin(deg2rad($rotation))) / 5; // approximation
+            }
+        }
+
+        // pixel width is an integer
+        return (int) $columnWidth;
+    }
+
+    /**
+     * Calculate an (approximate) pixel size, based on a font points size
+     *
+     * @param     int        $fontSizeInPoints    Font size (in points)
+     * @return     int        Font size (in pixels)
+     */
+    public static function fontSizeToPixels($fontSizeInPoints = 11)
+    {
+        return (int) ((4 / 3) * $fontSizeInPoints);
+    }
+
+    /**
+     * Calculate an (approximate) pixel size, based on inch size
+     *
+     * @param     int        $sizeInInch    Font size (in inch)
+     * @return     int        Size (in pixels)
+     */
+    public static function inchSizeToPixels($sizeInInch = 1)
+    {
+        return ($sizeInInch * 96);
+    }
+
+    /**
+     * Calculate an (approximate) pixel size, based on centimeter size
+     *
+     * @param     int        $sizeInCm    Font size (in centimeters)
+     * @return     int        Size (in pixels)
+     */
+    public static function centimeterSizeToPixels($sizeInCm = 1)
+    {
+        return ($sizeInCm * 37.795275591);
     }
 
     /**

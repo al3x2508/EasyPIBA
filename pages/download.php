@@ -1,5 +1,5 @@
 <?php
-preg_match('/^download\/(.*)/', $pinf, $m);
+preg_match('/^download\/(.*)/', $page_url, $m);
 if(count($m) > 1) {
 	$file = $m[1] . ".pdf";
 	$spath = _APP_DIR_ . $file;

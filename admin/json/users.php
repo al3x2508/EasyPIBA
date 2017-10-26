@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'Utils' . DIRECTORY_SEPARATOR . 'functions.php');
-require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'json.class.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/Utils/functions.php');
+require_once(dirname(__FILE__) . '/json.class.php');
 class Users extends \json\json {
 	public function __construct() {
 		self::$permission = "View users";
@@ -12,7 +12,6 @@ class Users extends \json\json {
 			'address' => __('Address'),
 			'city' => __('City'),
 			'state' => __('State'),
-			'country' => __('Country ID'),
 			'countries.name' => __('Country'),
 			'status' => __('Status ID')
 		);
@@ -21,7 +20,7 @@ class Users extends \json\json {
 	}
 	public static function get() {
 		if(!array_key_exists('id', $_REQUEST)) {
-			$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['lungime']:10;
+			$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['length']:10;
 			$limit = ((array_key_exists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
 			$users = new Model\Model('users');
 			if(!array_key_exists('cRecords', $_REQUEST)) self::$countTotal = $users->countItems();

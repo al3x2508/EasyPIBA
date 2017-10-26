@@ -1,9 +1,14 @@
 <?php
+$configFile = dirname(__FILE__) . '/Utils/config.php';
+if(!file_exists($configFile)) {
+	header("Location: " . 'setup/setup.php');
+	exit;
+}
+else require_once($configFile);
 require_once(dirname(__FILE__) . '/Utils/functions.php');
 use Utils\Util;
 use Model\Model;
-$query_position = ($_SERVER['QUERY_STRING'] != '')?strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']):false;
-$page_url = ($query_position !== false)?trim(substr($_SERVER['REQUEST_URI'], 0, $query_position - 1), '/'):trim($_SERVER['REQUEST_URI'], '/');
+if(array_key_exists('logout', $_GET) || $page_url == 'logout') Util::logout();
 //Check if file exists on disk
 if(file_exists($page_url)) {
 	echo file_get_contents($page_url);
@@ -28,6 +33,7 @@ if(!empty(_INSTAGRAM_LINK_)) $socialLinks .= '<a href="' . _INSTAGRAM_LINK_ . '"
 
 //Build the page content data variables
 $content_values = array(
+	'LOGO' => _FOLDER_URL_ . 'img/' . _LOGO_,
 	'APP_NAME' => _APP_NAME_,
 	'COMPANY_NAME' => _COMPANY_NAME_,
 	'COMPANY_ADDRESS' => _COMPANY_ADDRESS_,
@@ -39,7 +45,8 @@ $content_values = array(
 	'GOOGLE_ANALYTICS' => '',
 	'FBAPPID' => ''
 );
-if(!empty(_GOOGLEANALYTICSID_)) $content_values['GOOGLE_ANALYTICS'] = '<script>
+if(!empty(_GOOGLEANALYTICSID_)) /** @noinspection CommaExpressionJS */
+	$content_values['GOOGLE_ANALYTICS'] = '<script>
 			(function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function() {
 						(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -64,25 +71,24 @@ $breadcrumbs = array();
 $js = array();
 $css = array();
 $description = _APP_NAME_;
-$og_image = _OG_IMAGE_;
+$og_image = defined('_OG_IMAGE_')?_OG_IMAGE_:_LOGO_;
 $h1 = '<h1>' . _APP_NAME_ . '</h1>';
 //Check if the equivalent php file exists as the url
 $filename = str_replace('.html', '.php', trim($page_url, '/'));
-if($filename == 'index.php') header("Location: /");
+if($filename == 'index.php') header("Location: " . _FOLDER_URL_);
 elseif($filename == 'news' || preg_match('/^news\/(pag\-[\d+]|.*\.html)/', $page_url)) $filename = 'news.php';
 elseif($filename == 'testimonials' || preg_match('/^testimonial(\d+)\.html/', $page_url)) $filename = 'testimonials.php';
 elseif($filename == 'sitemap.xml') $filename = 'sitemap.php';
 elseif(preg_match('/^download\/(.*)/', $page_url)) $filename = 'download.php';
-elseif(in_array($filename, array('email_confirm.php', 'emailconfirm.php'))) $filename = 'emailconfirm.php';
 $filenamePath = _APP_DIR_ . 'pages/' . $filename;
-if($filenamePath && !is_dir($filenamePath)) {
+if(file_exists($filenamePath) && !is_dir($filenamePath)) {
 	$found = true;
 	/** @noinspection PhpIncludeInspection */
 	include_once($filenamePath);
 	//If the included file has the variable mustBeLoggedIn set to true but the current user is guest, redirect him to the login page and "keep in mind" the url he came from
 	if($mustBeLoggedIn && !\Utils\Util::getCurrentUser()) {
 		$_SESSION['ref'] = $_SERVER['REQUEST_URI'];
-		header("Location: /login.html");
+		header("Location: " . _FOLDER_URL_ . 'login.html');
 		exit();
 	}
 }
@@ -113,6 +119,27 @@ if(!isset($page)) {
 	$pages->url = $filename;
 	$pages = $pages->get();
 	if(count($pages)) $page = $pages[0];
+	else {
+		preg_match('/^([a-z]{2,3})$/', $page_url, $matches);
+		if(count($matches)) {
+			$lang = $matches[1];
+			$pages = new Model('pages');
+			$pages->language = $lang;
+			$pages->url = '';
+			$pages = $pages->get();
+			if(count($pages)) $page = $pages[0];
+		}
+		preg_match('/^([a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
+		if(count($matches)) {
+			$lang = $matches[1];
+			$filename = str_replace('.html', '', trim($matches[2], '/'));
+			$pages = new Model('pages');
+			$pages->language = $lang;
+			$pages->url = $filename;
+			$pages = $pages->get();
+			if(count($pages)) $page = $pages[0];
+		}
+	}
 }
 if(isset($page)) {
 	if(property_exists($page, 'visible') && !$page->visible) header("HTTP/1.0 404 Not Found");
@@ -152,21 +179,15 @@ if(isset($page)) {
 		$explodedCss = explode(",", $page->css);
 		foreach($explodedCss AS $expCss) $css[] = trim($expCss);
 	}
-	if($filename == '') {
-		$js[] = 'jquery-ui.min.js';
-		$js[] = 'validate.min.js';
-	}
 }
 elseif((!isset($page) || !$page) && !$found) {
 	header('HTTP/1.0 404 Not Found');
 	require_once('pages/404.php');
 }
 $language = Util::getUserLanguage();
-if($language && $language != 'en') $content .= /** @lang text */
-	'<script type="text/javascript">var jslang = "' . $language . '";</script>';
 $content_values['title'] = htmlentities($page_title);
 $content_values['description'] = htmlentities($description);
-$content_values['ogimage'] = $og_image;
+$content_values['ogimage'] = _FOLDER_URL_ . 'img/' . $og_image;
 $content_values['url'] = _ADDRESS_ . '/' . $page_url;
 $content_values['js'] = $js;
 $content_values['css'] = $css;

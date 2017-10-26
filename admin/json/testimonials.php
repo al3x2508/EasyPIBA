@@ -3,40 +3,39 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/Utils/functions.php');
 $adminController = new Controller\AdminController();
 if($adminController->checkPermission("Edit testimonials")) {
 	if(!array_key_exists('id', $_REQUEST)) {
-		$testimoniale = new \Model\Model('testimoniale');
-		$pagina = (array_key_exists('start', $_REQUEST))?($_REQUEST['start'] / $_REQUEST['length']) + 1:1;
+		$testimonials = new \Model\Model('testimonials');
+		$pageNo = (array_key_exists('start', $_REQUEST))?($_REQUEST['start'] / $_REQUEST['length']) + 1:1;
 		$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['length']:10;
 		$limit = ((array_key_exists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
-		$countTotal = $testimoniale->countItems();
+		$countTotal = $testimonials->countItems();
 		if(array_key_exists('filters', $_REQUEST)) {
-			foreach($_REQUEST['filters'] AS $cheie => $valoare) {
-				if(in_array($cheie, array(
-					'nume'
-				))) $testimoniale->$cheie = array('%' . $valoare . '%', ' LIKE ');
-				else $testimoniale->$cheie = $valoare;
+			foreach($_REQUEST['filters'] AS $key => $value) {
+				if(in_array($key, array(
+					'name'
+				))) $testimonials->$key = array('%' . $value . '%', ' LIKE ');
+				else $testimonials->$key = $value;
 			}
 		}
-		$countFiltered = $testimoniale->countItems();
-		$testimoniale->limit($limit);
-		$tst = $testimoniale->get('AND');
-		$testimoniale = array();
-		foreach($tst AS $testimonial) {
-			unset($testimonial['content']);
-			$testimoniale[] = $testimonial;
+		$countFiltered = $testimonials->countItems();
+		$testimonials->limit($limit);
+		$testimonials = $testimonials->get('AND');
+		$testimonialsArray = array();
+		foreach($testimonials AS $testimonial) {
+			unset($testimonial->content);
+			$testimonialsArray[] = $testimonial;
 		}
-		$arrayRaspuns = array('sEcho'                => $_REQUEST['secho'],
+		$responseArray = array('sEcho'                => $_REQUEST['secho'],
 		                      'iTotalRecords'        => $countTotal,
 		                      'iTotalDisplayRecords' => $countFiltered,
-		                      'aaData'               => $testimoniale
+		                      'aaData'               => $testimonialsArray
 		);
-		$raspuns = json_encode($arrayRaspuns);
-		if(array_key_exists('callback', $_GET)) $raspuns = $_GET['callback'] . '(' . $raspuns . ')';
-		echo $raspuns;
+		$response = json_encode($responseArray);
+		if(array_key_exists('callback', $_GET)) $response = $_GET['callback'] . '(' . $response . ')';
+		echo $response;
 	}
 	else {
-		$testimonial = new \Model\Model('testimoniale');
+		$testimonial = new \Model\Model('testimonials');
 		$testimonial = $testimonial->getOneResult('id', $_REQUEST['id']);
 		echo json_encode($testimonial);
 	}
 }
-?>

@@ -28,7 +28,7 @@ if(isset($_SESSION['admin'])){
         $root = $_SERVER['DOCUMENT_ROOT'];
         $data = '
     $useruploadfolder = "'.$newpath.'";
-    $useruploadpath = "/var/www/html/img/uploads/" . $useruploadfolder;
+    $useruploadpath = "' . realpath(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))))) . '/img/uploads/" . $useruploadfolder;
     $foldershistory[] = "'.$newpath.'";
         '.PHP_EOL;
         $fp = fopen(__DIR__ . '/pluginconfig.php', 'a');

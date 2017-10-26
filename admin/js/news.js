@@ -1,11 +1,16 @@
-var jsonPage = 'stiri',
+var jsonPage = 'news',
 	aoColumns = [
 		{ "mData": "id" },
-		{ "mData": "titlu" },
-		{ "mData": "name_admin" },
-		{ "mData": "data" },
+		{ "mData": function(e) {
+			return e.languages.name;
+		} },
+		{ "mData": "title" },
+		{ "mData": function(e) {
+			return e.admins.name;
+		} },
+		{ "mData": "date_published" },
 		{ "mData": function (e) {
-			return $('#statusf option[value="' + e.stare + '"]').text();
+			return $('#statusf').find('option[value="' + e.status + '"]').text();
 		} },
 		{ "mData": function() {
 			return "<span class=\"actions btn fa fa-edit\"></span>";
@@ -17,14 +22,14 @@ $(function() {
 		allowedContent: true,
 		extraPlugins: 'justify'
 	});
-	$(".autocomplete-autor").combobox({
+	$(".autocomplete-author").combobox({
 		source: function(request, response) {
 			var data = {};
 			data.filters = {};
-			data.filters.nume = request.term;
+			data.filters.name = request.term;
 			$.ajax({
 				type: 'POST',
-				url: 'json/admins.php',
+				url: 'json/administrators.php',
 				data: data,
 				jsonp: "callback",
 				dataType: "jsonp",
@@ -44,6 +49,11 @@ $(function() {
 			$('#data_table').dataTable().fnReloadAjax();
 		}
 	});
+	$('.select2').select2({
+		width: '200px'
+	}).on('select2:select', function () {
+		table.fnReloadAjax();
+	});
 });
 function loadData(aoData) {
 	var filters = {};
@@ -52,10 +62,11 @@ function loadData(aoData) {
 		else if(val.name == 'iDisplayStart') filters.start = val.value;
 		else if(val.name == 'iDisplayLength') filters.length = val.value;
 	});
-	filters.filters = new Object();
+	filters.filters = {};
 	if($("#idf").val()!='') filters.filters['id'] = $("#idf").val();
-	if($("#titluf").val()!='') filters.filters['titlu'] = $("#titluf").val();
-	if($("#autorf").data('ui-autocomplete') && $("#autorf").data('ui-autocomplete').hasOwnProperty('selectedItem') && $("#autorf").data('ui-autocomplete').selectedItem) filters.filters['admin'] = $("#autorf").data('ui-autocomplete').selectedItem.id;
-	if($("#statusf").val()!='-1') filters.filters['stare'] = $("#statusf").val();
+	if($("#languagef").val()!='0') filters.filters['language'] = $("#languagef").val();
+	if($("#titlef").val()!='') filters.filters['title'] = $("#titlef").val();
+	if($("#authorf").data('ui-autocomplete') && $("#authorf").data('ui-autocomplete').hasOwnProperty('selectedItem') && $("#authorf").data('ui-autocomplete').selectedItem) filters.filters['admin'] = $("#authorf").data('ui-autocomplete').selectedItem.id;
+	if($("#statusf").val()!='-1') filters.filters['status'] = $("#statusf").val();
 	return filters;
 }

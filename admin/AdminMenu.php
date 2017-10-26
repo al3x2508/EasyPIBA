@@ -10,7 +10,7 @@ class AdminMenu {
 		$return = array();
 		$admin = new Controller\AdminController();
 		$permissions = $admin->getPermissions();
-		if(!$returnPermissions) $return[] = self::createLink(array('href' => '/admin/', 'text' => __('Statistics'), 'class' => 'dashboard'));
+		if(!$returnPermissions) $return[] = self::createLink(array('href' => '/' . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'));
 		if(in_array("View users", $permissions) || in_array("Edit users", $permissions)) {
 			if($returnPermissions) $return[] = 'users';
 			else $return[] = self::createLink(array('href' => 'users', 'text' => __('Users'), 'class' => 'users'));

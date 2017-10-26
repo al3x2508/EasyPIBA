@@ -1,13 +1,21 @@
 <?php
 $page_title = __('Edit pages');
-$js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/ckeditor/ckeditor.js','js/jsall.js','js/pages.js');
-$css = array('plugins/datatables/dataTables.bootstrap.css');
+$languages = new Model\Model('languages');
+$languages->order('name ASC');
+$languages = $languages->get();
+$languageOptions = '';
+foreach($languages AS $language) {
+	$selected = ($language->code == _DEFAULT_LANGUAGE_)?' selected':'';
+	$languageOptions .= "<option value=\"{$language->code}\"{$selected}>" . $language->name . "</option>";
+}
+$js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/ckeditor/ckeditor.js','bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','js/pages.js');
+$css = array('bower_components/select2/dist/css/select2.min.css', 'plugins/datatables/dataTables.bootstrap.css');
 $content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Edit pages') . '</h3></div>
 	<div class="box-body">
 		<table id="data_table" class="table table-bordered table-hover">
 			<thead>
-				<tr><th>#<br /><input type="text" id="idf" class="tableFilter" /></th><th>' . __('URL') . '<br /><input type="text" id="urlf" class="tableFilter" /></th><th>' . __('Title') . '<br /><input type="text" id="titlef" class="tableFilter" /></th><th>' . __('Menu text') . '<br /><input type="text" id="menutextf" class="tableFilter" /></th><th>' . __('Actions') . '</th></tr>
+				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" /></th><th>' . __('URL') . '<br /><input type="text" id="urlf" class="tableFilter form-control" /></th><th>' . __('Language') . '<br /><select class="form-control select2" id="languagef"><option value="0">' . __('Any') . '</option>' . $languageOptions . '</select></th><th>' . __('Title') . '<br /><input type="text" id="titlef" class="tableFilter form-control" /></th><th>' . __('Menu text') . '<br /><input type="text" id="menutextf" class="tableFilter form-control" /></th><th>' . __('Actions') . '</th></tr>
 			</thead>
 			<tbody>
 			</tbody>
@@ -16,7 +24,7 @@ $content = '<div class="box">
 	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
 </div>
 <div id="ppEdit" class="modal dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="width: 80vw;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
@@ -25,6 +33,10 @@ $content = '<div class="box">
 				<h4 class="modal-title">' . __('Edit pages') . '</h4>
 			</div>
 			<div class="modal-body" id="edtable">
+				<div class="form-group">
+					<label for="edlanguage">' . __('Language') . '</label>
+					<select class="form-control select2" id="edlanguage" name="edlanguage">' . $languageOptions . '</select>
+                </div>
 				<div class="form-group">
 					<label for="edurl">' . __('URL') . '</label>
 					<input type="text" class="form-control" id="edurl" name="edurl" placeholder="' . __('URL') . '" />

@@ -32,3 +32,38 @@ body {
 .user-menu>.dropdown-toggle:after {
 	display: none;
 }
+#edtable {
+	max-height: 70vh;
+	overflow: auto;
+}
+#dropdownMenuButton {
+	color: #292b2c;
+	background: #e6e6e6 none;
+	border-color: #adadad;
+}
+#dropdownMenuButton::after {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: .3em;
+	vertical-align: middle;
+	content: "";
+	border-top: .3em solid;
+	border-right: .3em solid transparent;
+	border-left: .3em solid transparent;
+}
+.dropdown-item {
+	display: block;
+	width: 100%;
+	padding: 3px 1.5rem;
+	clear: both;
+	font-weight: 400;
+	color: #292b2c;
+	text-align: inherit;
+	white-space: nowrap;
+	background: 0 0;
+	border: 0;
+}
+.img-flag {
+	height: 1em;
+}

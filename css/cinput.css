@@ -1,0 +1,139 @@
+.input {
+    position: relative;
+    z-index: 1;
+}
+
+.input__field:focus {
+    outline: none;
+}
+.input__label {
+    display: block;
+    margin: 0 !important;
+    font-weight: 400;
+    font-size: 70.25%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.input__label {
+    font-family: 'FontAwesome', 'roboto', Arial, Helvetica, sans-serif;
+}
+.input__label:before {
+    content: '';
+    display: none;
+}
+
+.input__label-content {
+    position: relative;
+    top: calc(50% - 1em);
+    width: calc(100% - 2em);
+    display: block;
+    padding: 0;
+    font-size: 1em;
+}
+.input__label-content em {
+    font-size: 60%;
+    color: #FFF;
+}
+/* Hoshi */
+.input-hoshi {
+    font-size: 1.5em;
+}
+.input__field-hoshi {
+    color: #ED297B;
+}
+.input__label-hoshi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2em 1em;
+    width: 100%;
+    line-height: 100% !important;
+    text-align: left;
+    pointer-events: none;
+}
+.input__label-content-hoshi {
+    position: absolute;
+    font-weight: 400;
+}
+.input__label-hoshi::after {
+    content: attr(data-ex);
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 80%;
+    font-style: italic;
+    color: #7F3F98;
+}
+.input-filled .input__label-hoshi::after {
+    top: 3.5em;
+}
+.input__label-hoshi-color-1::after {
+    border-color: hsl(200, 100%, 50%);
+}
+
+.input__label-hoshi-color-2::after {
+    border-color: hsl(160, 100%, 50%);
+}
+
+.input__label-hoshi-color-3::after {
+    border-color: hsl(20, 100%, 50%);
+}
+
+.input__field-hoshi:focus {
+    background-color: #f8f8f8;
+}
+
+.input__field-hoshi:focus + .input__label-hoshi::after,
+.input-filled .input__label-hoshi::after {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.input__field-hoshi:focus + .input__label-hoshi .input__label-content-hoshi,
+.input-filled .input__label-content-hoshi, .input__field-hoshi:-webkit-autofill + .input__label-hoshi .input__label-content-hoshi {
+    -webkit-animation: anim-1 0.3s forwards;
+    animation: anim-1 0.3s forwards;
+    color: #424242 !important;
+    top: -1em;
+}
+@-webkit-keyframes anim-1 {
+    50% {
+        opacity: 0;
+        -webkit-transform: translate3d(1em, 0, 0);
+        transform: translate3d(1em, 0, 0);
+    }
+    51% {
+        opacity: 0;
+        -webkit-transform: translate3d(-1em, -.5em, 0);
+        transform: translate3d(-1em, -.5em, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(-1em, -.5em, 0);
+        transform: translate3d(-1em, -.5em, 0);
+    }
+}
+
+@keyframes anim-1 {
+    50% {
+        opacity: 0;
+        -webkit-transform: translate3d(1em, 0, 0);
+        transform: translate3d(1em, 0, 0);
+    }
+    51% {
+        opacity: 0;
+        -webkit-transform: translate3d(-1em, -.5em, 0);
+        transform: translate3d(-1em, -.5em, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(-1em, -.5em, 0);
+        transform: translate3d(-1em, -.5em, 0);
+    }
+}

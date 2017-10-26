@@ -9,7 +9,7 @@ if(isset($_GET["f"])){
 
 function loadImages() {
     require(__DIR__ . '/pluginconfig.php');
-    
+    global $useruploadpath, $file_style, $useruploadfolder;
     if(file_exists($useruploadpath)){
         
         $filesizefinal = 0;
@@ -26,8 +26,7 @@ function loadImages() {
             $image_basename = $image_pathinfo['basename'];
         
             // image src/url
-            $protocol = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
-            $site = $protocol .'www.mykoolio.com/';
+            $site = _ADDRESS_ . _FOLDER_URL_;
             $image_url = $site.$useruploadfolder."/".$image_basename;
         
             $size = getimagesize($image);

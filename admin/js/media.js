@@ -1,9 +1,9 @@
 var jsonPage = 'media',
 	aoColumns = [
 		{ "mData": "id" },
-		{ "mData": "fisier" },
+		{ "mData": "filename" },
 		{ "mData": function(e) {
-			return "<img src='/img/uploads/" + e.fisier + "' />";
+			return "<img src='/img/uploads/" + e.filename + "' />";
 		} },
 		{ "mData": function() {
 			return "<span class=\"actions btn fa fa-trash-o\"></span>";
@@ -16,7 +16,7 @@ function loadData(aoData) {
 		else if(val.name == 'iDisplayStart') filters.start = val.value;
 		else if(val.name == 'iDisplayLength') filters.length = val.value;
 	});
-	filters.filters = new Object();
+	filters.filters = {};
 	if($("#idf").val()!='') filters.filters['id'] = $("#idf").val();
 	return filters;
 }

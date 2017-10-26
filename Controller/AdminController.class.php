@@ -1,68 +1,60 @@
 <?php
 namespace Controller;
 use \Model\Model;
+use Utils\Bcrypt;
+
 class AdminController {
 	public static function getCurrentUser() {
 		if(array_key_exists('admin', $_SESSION)) {
-			$admin = new Model('admin');
+			$admin = new Model('admins');
 			return $admin->getOneResult('id', $_SESSION['admin']);
 		}
 		return false;
 	}
 	public static function checkAuth($user, $pass) {
-		$bcrypt = new \Utils\Bcrypt(15);
-		$admin = new Model('admin');
-		$admin = $admin->getOneResult('user', $user);
+		$bcrypt = new Bcrypt(15);
+		$admin = new Model('admins');
+		$admin = $admin->getOneResult('username', $user);
 		if($admin && property_exists($admin, 'id')) {
-			if($admin->stare_admin == 1) {
+			if($admin->status == 1) {
 				$id = $admin->id;
-				$isGood = $bcrypt->verify($pass, $admin->parola);
+				$isGood = $bcrypt->verify($pass, $admin->password);
 				if($isGood) {
-					\setcookie('CHTID', $id, time() + 60 * 60 * 24 * 30);
 					$_SESSION['admin'] = $id;
 					return $id;
 				}
-				else {
-					$mesaj = "Parola gresita";
-					return array("mesaj" => $mesaj);
-				}
+				else return array("message" => __('Incorrect password'));
 			}
-			else {
-				$mesaj = "Utilizator blocat";
-				return array("mesaj" => $mesaj);
-			}
+			else return array("message" => __('Username blocked'));
 		}
-		else {
-			$mesaj = "Numele de utilizator {$user} nu exista";
-			return array("mesaj" => $mesaj);
-		}
+		else return array("message" => __('Username') . " " . $user . " " . _('does not exist'));
 	}
 	public static function checkPermission($perm) {
 		$admin = self::getCurrentUser();
 		if($admin) {
-			if($admin->acces == -1) return true;
-			$permisiuni = new Model('permisiuni');
-			$permisiuni->nume = $perm;
-			$permisiuni->where(array('EXISTS(SELECT * FROM {$this->tableName} WHERE id = ? AND acces REGEXP CONCAT(\'^\\\[([^\\,]+(\\\,))*\', permisiuni.id, \'((\\\,)[^\\,]+)*\\\]$\'))'));
-			$permisiuni = $permisiuni->get();
-			return count($permisiuni)?true:false;
+			if($admin->access == -1) return true;
+			$permissions = new Model('permissions');
+			$permissions->name = $perm;
+			$permissions->where(array('EXISTS(SELECT * FROM admins WHERE id = ' . $admin->id . ' AND access REGEXP CONCAT(\'^\\\[([^\\,]+(\\\,))*\', permissions.id, \'((\\\,)[^\\,]+)*\\\]$\'))' => 'complexW'));
+			$permissions = $permissions->get();
+			return count($permissions)?true:false;
 		}
 		return false;
 	}
-	public static function getPermisiuni() {
+	public static function getPermissions() {
 		$admin = self::getCurrentUser();
 		$perms = array();
 		if($admin) {
-			$acces = $admin->acces;
+			$access = $admin->access;
 			$perms = array();
-			$permisiuni = array();
-			$permisiuniEnt = new Model('permisiuni');
-			$permisiuniEnt = $permisiuniEnt->get();
-			foreach($permisiuniEnt AS $permisiune) $permisiuni[$permisiune['id']] = $permisiune['nume'];
-			if($acces == '-1') $perms = array_merge(array_values($permisiuni), array('Editeaza administratori'));
+			$permissions = array();
+			$permissionsEntity = new Model('permissions');
+			$permissionsEntity = $permissionsEntity->get();
+			foreach($permissionsEntity AS $permission) $permissions[$permission->id] = $permission->name;
+			if($access == '-1') $perms = array_merge(array_values($permissions), array('Edit administrators'));
 			else {
-				$acces = json_decode($acces, true);
-				foreach($acces AS $acc) $perms[$acc] = $permisiuni[$acc];
+				$access = json_decode($access, true);
+				foreach($access AS $acc) $perms[$acc] = $permissions[$acc];
 			}
 		}
 		return $perms;

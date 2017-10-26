@@ -4,152 +4,19 @@ namespace Utils {
 	use Controller\Mail;
 	use Model\Model;
 
-	if(!defined("_FOLDER_URL_")) {
-		/**
-		 * Database host
-		 */
-		define("_DB_HOST_", 'localhost');
-		/**
-		 * Database port
-		 */
-		define("_DB_PORT_", 3336);
-		/**
-		 * Database name
-		 */
-		define("_DB_NAME_", 'dbf');
-		/**
-		 * Database username
-		 */
-		define("_DB_USER_", 'dbf');
-		/**
-		 * Database password
-		 */
-		define("_DB_PASS_", 'test');
-		/**
-		 * Website folder
-		 */
-		define("_FOLDER_URL_", '/');
-		/**
-		 * Website root address
-		 */
-		define("_ADDRESS_", "http://192.168.0.144");
-		/**
-		 * Default redirect after login
-		 */
-		define("_DEFAULT_REDIRECT_", _ADDRESS_);
-		/**
-		 * Application name
-		 */
-		define("_APP_NAME_", "EasyPBI");
-		/**
-		 * Company name
-		 */
-		define("_COMPANY_NAME_", "EasyPBI Ltd.");
-		/**
-		 * Company address (full address)
-		 */
-		define("_COMPANY_ADDRESS_", "Address line 1, Address line 2");
-		/**
-		 * Company address (line 1)
-		 */
-		define("_COMPANY_ADDRESS_L1_", "Address line 1");
-		/**
-		 * Company address (line 2)
-		 */
-		define("_COMPANY_ADDRESS_L2_", "Address line 2");
-		/**
-		 * Company phone
-		 */
-		define("_COMPANY_PHONE_", "+40 722 222 555");
-		/**
-		 * Default application language
-		 */
-		define("_DEFAULT_LANGUAGE_", 'en');
-		/**
-		 * Entery your hash key
-		 */
-		define("_HASH_KEY_", "EnterYourHash");
-		/**
-		 * Facebook App Id
-		 */
-		define("_FBAPPID_", "");
-		/**
-		 * Facebook App Secret
-		 */
-		define("_FBAPPSECRET_", "");
-		/**
-		 * Google Analytics ID
-		 */
-		define("_GOOGLEANALYTICSID_", "");
-		/**
-		 * Facebook page url
-		 */
-		define("_FB_LINK_", "");
-		/**
-		 * Twitter page url
-		 */
-		define("_TWITTER_LINK_", "");
-		/**
-		 * LinkedIn page url
-		 */
-		define("_LINKEDIN_LINK_", "");
-		/**
-		 * Pinterest page url
-		 */
-		define("_PINTEREST_LINK_", "");
-		/**
-		 * Google+ page url
-		 */
-		define("_GPLUS_LINK_", "");
-		/**
-		 * Instagram page url
-		 */
-		define("_INSTAGRAM_LINK_", "");
-		/**
-		 * Open Graph image url
-		 */
-		define("_OG_IMAGE_", _ADDRESS_ . '/img/og_image.png');
-		/**
-		 * Email server address (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_HOST_", "");
-		/**
-		 * Email server port (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_PORT_", "25");
-		/**
-		 * Email username (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_USER_", '');
-		/**
-		 * Email password (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_PASS_", '');
-		/**
-		 * Email address (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_FROM_", "noreply@easypbi.com");
-		/**
-		 * Email display name (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_NAME_", "Webmaster");
-		/**
-		 * Email for respond (for contact forms, newsletter etc.)
-		 */
-		define("_MAIL_ADDRESS_", "contact@easypbi.com");
-		/**
-		 * Set to true if site is currently under maintenance
-		 */
-		define("MAINTENANCE", false);
-		/**
-		 * DO NOT MODIFY Application working directory
-		 */
-		define("_APP_DIR_", realpath(dirname(dirname(__FILE__))) . '/');
-		/**
-		 * DO NOT MODIFY HTML Templates directory
-		 */
-		define("_TEMPLATE_DIR_", _APP_DIR_ . 'templates/');
-	}
+	if(!defined("_FOLDER_URL_")) require_once(dirname(__FILE__) . '/config.php');
+	/**
+	 * Set to true if site is currently under maintenance
+	 */
+	define("MAINTENANCE", false);
+	/**
+	 * DO NOT MODIFY Application working directory
+	 */
+	define("_APP_DIR_", realpath(dirname(dirname(__FILE__))) . '/');
+	/**
+	 * DO NOT MODIFY HTML Templates directory
+	 */
+	define("_TEMPLATE_DIR_", _APP_DIR_ . 'templates/');
 
 	/**
 	 * Class Util
@@ -194,7 +61,7 @@ namespace Utils {
 				if(is_array($accountSettings) && array_key_exists('language', $accountSettings)) return $accountSettings['language'];
 			}
 			$acceptLanguage = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-			return (!empty($acceptLanguage)?$acceptLanguage:_DEFAULT_LANGUAGE_);
+			return (!empty($acceptLanguage) ? $acceptLanguage : _DEFAULT_LANGUAGE_);
 		}
 
 		/**
@@ -271,7 +138,7 @@ namespace Utils {
 		 * @param $user
 		 * @return string
 		 */
-		public static function storeResetting($user) {
+		public static function storeResetPassword($user) {
 			$token = self::GenerateRandomToken();
 			$resetting = new Model('passwords_reset');
 			$resetting->user = $user;
@@ -308,10 +175,8 @@ namespace Utils {
 		 * @return bool
 		 */
 		public static function checkFieldValue($key, $value) {
-			if($key == 'CSRFToken') {
-				return self::csrfguard_validate_token($_REQUEST['CSRFName'], $value);
-			}
-			$rules = array('lastname' => "/^([ \x{00c0}-\x{01ff}a-zA-Z\'\-]{2,20})+$/u", 'firstname' => "/^([ \x{00c0}-\x{01ff}a-zA-Z\'\-]{2,20})+$/u", 'email' => '/^(?:[\w\d-]+\.?)+\@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/', 'password' => '/^(.){8,30}$/', 'cpassword' => '/^(.){8,30}$/', 'user' => '/^([A-Za-z\.0-9]{4,16})$/', 'message' => '/^(.){10,1000}$/', 'referrer');
+			if($key == 'CSRFToken') return self::csrfguard_validate_token($_REQUEST['CSRFName'], $value);
+			$rules = array('firstname' => "/^([ \x{00c0}-\x{01ff}a-zA-Z\'\-]{2,20})+$/u", 'lastname' => "/^([ \x{00c0}-\x{01ff}a-zA-Z\'\-]{2,20})+$/u", 'email' => '/^(?:[\w\d-]+\.?)+\@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/', 'password' => '/^(.){8,30}$/', 'confirmPassword' => '/^(.){8,30}$/', 'country' => '/^([0-9]{1,3})$/', 'message' => '/^(.){10,1000}$/');
 			$v1 = mb_convert_encoding($value, "UTF-8", "auto");
 			if(array_key_exists($key, $rules) && (!preg_match($rules[$key], $v1) || strip_tags($value) != $v1)) return false;
 			return true;
@@ -327,7 +192,7 @@ namespace Utils {
 			if(!array_key_exists($unique_form_name, $_SESSION)) return false;
 			$token = $_SESSION[$unique_form_name];
 			if($token === false) return false;
-			elseif(hash_equals($token, $token_value)) $result = true;
+			elseif(\hash_equals($token, $token_value)) $result = true;
 			else $result = false;
 			unset($_SESSION[$unique_form_name]);
 			return $result;
@@ -371,8 +236,7 @@ namespace Utils {
 			$mail->Subject = '=?UTF-8?B?' . base64_encode(html_entity_decode($subject)) . '?=';
 			$mail->msgHTML($html, dirname(__FILE__));
 			if(!is_null($att)) $mail->addStringAttachment($att->body, $att->filename, 'base64', $att->mime);
-			$mail->send();
-
+			return $mail->send();
 		}
 
 		/**
@@ -383,7 +247,7 @@ namespace Utils {
 		 */
 		public static function sendActivationEmail($user, $generate = true) {
 			$code = '';
-			$lastname = $user->lastname . ' ' . $user->firstname;
+			$name = $user->lastname . ' ' . $user->firstname;
 			$email = $user->email;
 			$user_confirm = new Model('user_confirm');
 			$user_confirm->user = $user->id;
@@ -402,7 +266,7 @@ namespace Utils {
 					"<h2>" . __("Welcome") . ", {$user->firstname}!</h2>
 				<h3>" . __("Step") . " 1. " . __("Activate your account") . "!</h3>
 				<p>" . __("Activate your account") . " {$email} " . __("by clicking this link") . ": <a href=\"{$activationLink}?key={$code}\">{$activationLink}?key={$code}</a></p>";
-				self::send_email($email, $lastname, __('Activate your account'), $message, true);
+				self::send_email($email, $name, __('Activate your account'), $message, true);
 				return true;
 			}
 			else return false;
@@ -421,140 +285,99 @@ namespace Utils {
 		}
 
 		/**
+		 * Account form used for register and my account pages
 		 * @param $fields
 		 * @param $values
 		 * @param $formId
-		 * @param $checkPassword
 		 * @param bool $button
-		 * @param bool $subscribe
+		 * @param string $errors
 		 * @return string
 		 */
-		public static function getAccountForm($fields, $values, $formId, $checkPassword, $button = false, $subscribe = true) {
+		public static function getAccountForm($fields, $values, $formId, $button = false, $errors = '') {
 			function fieldValue($field, $values) {
 				if(array_key_exists($field, $_POST)) return strip_tags(htmlspecialchars(stripslashes(trim($_POST[$field]))));
 				if(array_key_exists($field, $values)) return strip_tags(htmlspecialchars(stripslashes(trim($values[$field]))));
 				return false;
 			}
 
-			$content = /** @lang text */
-				'				<form id="' . $formId . '" method="post" action="#" class="validateform contactform ac-custom ac-checkbox ac-boxfill">
-					<div class="row">
-						<div class="col-lg-12 col-xs-12 margintop20 field">
-							<div class="input input-hoshi">
-								<input type="text" name="lastname" id="lastname" class="input__field input__field-hoshi" data-rule="maxlen:2" data-msg="Introduceți cel puțin 2 characters"';
-			if(fieldValue('lastname', $values)) $content .= " value=\"" . fieldValue('lastname', $values) . "\"";
-			$content .= ' required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="lastname" data-ex="ex: Popescu">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * lastname</span>
-								</label>
-								<div class="validation">';
-			if(array_key_exists('lastname', $fields) && $fields['lastname'] == 1) $content .= __('Enter your lastname');
-			$content .= /** @lang text */
-				'		</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 col-xs-12 margintop10 field">
-							<div class="input input-hoshi">
-								<input type="text" name="firstname" id="firstname" class="input__field input__field-hoshi" data-rule="maxlen:2" data-msg="Introduceți cel puțin 2 characters"';
-			if(fieldValue('firstname', $values)) $content .= " value=\"" . fieldValue('firstname', $values) . "\"";
-			$content .= ' required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="firstname" data-ex="ex: Teodor">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * firstname</span>
-								</label>
-								<div class="validation">';
-			if(array_key_exists('firstname', $fields) && $fields['firstname'] == 1) $content .= __('Enter your firstname');
-			$content .= '			</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 col-xs-12 margintop10 field">
-							<div class="input input-hoshi">
-								<input type="email" name="email" id="email" class="input__field input__field-hoshi" data-rule="email" data-msg="Introduceți adresa de email"';
-			if(fieldValue('email', $values)) $content .= " value=\"" . fieldValue('email', $values) . "\"";
-			$content .= ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="email" data-ex="ex: popescu.teodor@gmail.com">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-envelope-o"></i> * Email</span>
-								</label>
-								<div class="validation">';
-			if(array_key_exists('email', $fields) && $fields['email'] == 1) $content .= __('Enter your email');
-			$content .= '			</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6 col-xs-12 margintop10 field">
-							<div class="input input-hoshi">' . PHP_EOL;
-			if($checkPassword) {
-				$content .= '	    					<input type="password" name="password" class="input__field input__field-hoshi" pattern=".{8,}" data-rule="maxlen:8" data-msg="Introduceți cel puțin 8 characters"';
-				if(fieldValue('password', $values)) $content .= " value=\"" . fieldValue('password', $values) . "\"";
-				$content .= ' required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password" data-ex="minim 8 characters">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * password</span>
-								</label>
-								<div class="validation">';
-				if(array_key_exists('password', $fields) && $fields['password'] == 1) $content .= __('Enter at least 8 characters');
-				$content .= '			</div>
-							</div>' . PHP_EOL;
+			$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
+			$countries = new Model('countries');
+			$countries = $countries->get();
+			foreach($countries AS $country) {
+				$selected = ($country->id == fieldValue('country', $values)) ? ' selected' : '';
+				$countriesOptions .= '	<option value="' . $country->id . '"' . $selected . '>' . $country->name . '</option>' . PHP_EOL;
 			}
-			else $content .= '							<input type="password" name="password" class="input__field input__field-hoshi" pattern=".{8,}" />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password" data-ex="8 characters minimum">
-									<span class="input__label-content input__label-content-hoshi">password</span>
+			$firstname = array('value' => (fieldValue('firstname', $values)) ? ' value="' . fieldValue('firstname', $values) . '"' : '', 'validation' => (array_key_exists('firstname', $fields) && $fields['firstname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your firstname') . '</div>' : '');
+			$lastname = array('value' => (fieldValue('lastname', $values)) ? ' value="' . fieldValue('lastname', $values) . '"' : '', 'validation' => (array_key_exists('lastname', $fields) && $fields['lastname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your lastname') . '</div>' : '');
+			$email = array('value' => (fieldValue('email', $values)) ? ' value="' . fieldValue('email', $values) . '"' : '', 'validation' => (array_key_exists('email', $fields) && $fields['email'] == 1) ? '<div class="alert alert-danger">' . __('Enter your email') . '</div>' : '');
+			$country = (array_key_exists('country', $fields) && $fields['country'] == 1) ? '<div class="alert alert-danger">' . __('Select your country') . '</div>' : '';
+			$password = (array_key_exists('password', $fields) && $fields['password'] == 1) ? '<div class="alert alert-danger">' . __('Enter a password') . '</div>' : '';
+			$confirmPassword = (array_key_exists('confirmPassword', $fields) && $fields['confirmPassword'] == 1) ? '<div class="alert alert-danger">' . __('Confirm the password') . '</div>' : '';
+			$content = '<form id="' . $formId . '" method="post" action="#" class="validateform">';
+			if(!empty($errors)) $content .= '<div class="col-lg-12 col-12"><div class="alert alert-danger">' . $errors . '</div></div>' . PHP_EOL;
+			$content .= '<div class="col-lg-12 col-12 mt-5 field form-group">
+							<div class="input input-hoshi">
+								<input type="text" name="firstname" id="firstname" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $firstname['value'] . ' pattern=".{2,}" required />
+								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="firstname" data-ex="eg: John">
+									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * ' . __('Firstname') . '</span>
 								</label>
-							</div>' . PHP_EOL;
-			$content .= '					</div>
-						<div class="col-lg-6 col-xs-12 margintop10 field">
-							<div class="input input-hoshi">' . PHP_EOL;
-			if($checkPassword) {
-				$content .= '	    					<input type="password" name="cpassword" id="cpassword" class="input__field input__field-hoshi" pattern=".{8,}" data-rule="maxlen:8" data-msg="Confirmați password"';
-				if(fieldValue('cpassword', $values)) $content .= " value=\"" . fieldValue('cpassword', $values) . "\"";
-				$content .= ' required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="cpassword">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Password confirm') . '</span>
-								</label>
-								<div class="validation">';
-				if(array_key_exists('cpassword', $fields) && $fields['cpassword'] == 1) $content .= __('Password confirm');
-				$content .= '		</div>
-							</div>' . PHP_EOL;
-			}
-			else $content .= '							<input type="password" name="cpassword" id="cpassword" class="input__field input__field-hoshi" pattern=".{8,}" />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="cpassword" data-ex="Introduceți din nou password">
-									<span class="input__label-content input__label-content-hoshi">Confirmare password</span>
-								</label>
-							</div>' . PHP_EOL;
-			$content .= '						</div>
-						<div class="col-lg-12"><em>' . __('Fields marked with') . ' * (' . __('except for password') . ') . ' . __('are required') . '.</em></div>.
+								' . $firstname['validation'] . '
+							</div>
 						</div>
-						<div class="row margintop10">' . PHP_EOL;
-			/**************************************************************************************/
+						<div class="col-lg-12 col-12 mt-5 field form-group">
+							<div class="input input-hoshi">
+								<input type="text" name="lastname" id="lastname" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $lastname['value'] . ' pattern=".{2,}" required />
+								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="lastname" data-ex="eg: Smith">
+									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * ' . __('Lastname') . '</span>
+								</label>
+								' . $lastname['validation'] . '
+							</div>
+						</div>
+						<div class="col-lg-12 col-12 mt-5 field form-group">
+							<div class="input input-hoshi">
+								<input type="email" name="email" id="email" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
+								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="email" data-ex="eg: john.smith@yahoo.com">
+									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-envelope-o"></i> * ' . __('Email') . '</span>
+								</label>
+								' . $email['validation'] . '
+							</div>
+						</div>
+						<div class="col-lg-12 col-12 mt-5 field form-group">
+							<select name="country" id="country" class="form-control" required>
+								' . $countriesOptions . '
+							</select>
+							' . $country . '
+						</div>
+						<div class="col-lg-12 col-12 mt-5 field form-group">
+							<div class="input input-hoshi">
+								<input type="password" name="password" id="password" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" required />
+								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password" data-ex="' . __('8 characters minimum') . '">
+									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Password') . '</span>
+								</label>
+								' . $password . '
+							</div>
+						</div>
+						<div class="col-lg-12 col-12 mt-5 field form-group">
+							<div class="input input-hoshi">
+								<input type="password" name="confirmPassword" id="confirmPassword" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" required />
+								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
+									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Confirm password') . '</span>
+								</label>
+								' . $confirmPassword . '
+							</div>
+						</div>
+						<div class="col-lg-12 form-group"><em>' . __('Fields marked with') . ' * ' . __('are required') . '.</em></div>' . PHP_EOL;
 			if($button) {
-				$content .= /** @lang text */
-					'							<div class="col-lg-8">
-								<div class="row">
-									<div class="col-lg-12 field checkbox">
-										<input type="checkbox" name="termsConditions" id="termsConditions" /><label for="termsConditions">Am citit și sunt de acord cu <a href="/termeni-conditii.html" target="_blank">Termenii și condițiile</a></label>
-										<div class="validation">';
-				if(array_key_exists('termsConditions', $fields) && $fields['termsConditions'] == 1) $content .= 'Trebuie să fiți de acord cu Termenii și condițiile';
-				/** @var bool $subscribe */
-				$content .= /** @lang text */
-					'		</div>
-									</div>
+				$termsConditions = (array_key_exists('termsConditions', $fields) && $fields['termsConditions'] == 1) ? '<div class="alert alert-danger">' . __('You must accept our Terms and conditions') . '</div>' : '';
+				$content .= '<div class="col-lg-12 col-12 field text-center">
+							<input type="checkbox" name="termsConditions" id="termsConditions" /><label for="termsConditions">' . sprintf(__('I have read and agree to the %s'), '<a href="terms-conditions.html">' . __('Terms and Conditions') . '</a>') . '</label>
+							' . $termsConditions . '
+						</div>
+						<div class="col-lg-12 col-12 field form-group">
+							<div class="row justify-content-sm-center">
+								<div class="col-sm-6">
+									<input type="submit" class="form-control btn btn-login" value="' . __($button) . '" />
 								</div>
-								<div class="row">
-									<div class="col-lg-12 field checkbox">
-										<input type="checkbox" name="subscribe" id="subscribe"' . ($subscribe ? ' checked' : '') . ' /><label for="subscribe">Doresc să mă abonez la newsletter</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12"><button type="submit" class="btn btn-theme floatright" id="inregistrare"><i class="fa fa-user-plus"></i> ' . $button . '</button></div>
-						</div>' . PHP_EOL;
-			}
-			else {
-				$content .= /** @lang text */
-					'							<div class="col-lg-6 col-xs-12 margintop10 field checkbox">
-								<input type="checkbox" name="subscribe" id="subscribe"' . ($subscribe ? ' checked' : '') . ' /><label for="subscribe">Doresc să mă abonez la newsletter</label>
 							</div>
 						</div>' . PHP_EOL;
 			}
@@ -614,14 +437,15 @@ namespace Utils {
 		 * Logout user
 		 */
 		public static function logout() {
-			session_name(_APP_NAME_ . 'Session');
-			if(!isset($_SESSION)) session_start();
-			if(array_key_exists('site', $_SESSION) && array_key_exists('user', $_SESSION)) {
-				$cookie = new Model('cookies');
-				$cookie->__set('user', $_SESSION['user'])->delete();
-				unset($_SESSION);
+			if(isset($_SESSION)) {
+				if(array_key_exists('user', $_SESSION)) {
+					$cookie = new Model('cookies');
+					$cookie->__set('user', $_SESSION['user'])->delete();
+					unset($_SESSION);
+					session_destroy();
+				}
+				header("Location: " . _FOLDER_URL_);
 			}
-			header("Location: " . _FOLDER_URL_);
 			exit;
 		}
 
@@ -635,7 +459,7 @@ namespace Utils {
 			$texts = new Model('translations');
 			$texts->where(array('language' => $lang, 'strings.text' => $string));
 			$texts = $texts->get();
-			return (count($texts)?$texts[0]->translation:$string);
+			return (count($texts) ? $texts[0]->translation : $string);
 		}
 
 		/**
@@ -643,7 +467,7 @@ namespace Utils {
 		 * @param $name
 		 * @return array
 		 */
-		public function checkUploaded($name) {
+		public static function checkUploaded($name) {
 			$allowedTypes = array('jpg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif', 'pdf' => 'application/pdf');
 			if(!isset($_FILES[$name]['error']) || is_array($_FILES[$name]['error'])) return array('ok' => 0, 'error' => 'File has errors');
 			switch($_FILES[$name]['error']) {
@@ -666,6 +490,14 @@ namespace Utils {
 
 			return array('ok' => 1, 'filename' => $filename, 'contents' => $contents);
 		}
+
+		public static function ucname($string, $delimiters = array(' -')) {
+			$string = ucwords(strtolower($string));
+			foreach($delimiters as $delimiter) {
+				if(strpos($string, $delimiter) !== false) $string = implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
+			}
+			return $string;
+		}
 	}
 
 	/**
@@ -685,6 +517,7 @@ namespace {
 		exit;
 	}*/
 	use \Utils\Util;
+
 	//If site is currently under maintenance and user IP is not in the decoded json from allowedIps setting in DB tell user to come back later
 	if(MAINTENANCE) {
 		$ok = false;
@@ -733,5 +566,19 @@ namespace {
 		if(!$lang) return $string;
 		return call_user_func_array('\Utils\Util::translate', array($string, $lang));
 	}
-	if(array_key_exists('logout', $_GET)) Util::logout();
+
+	if(!function_exists('hash_equals')) {
+		function hash_equals($str1, $str2) {
+			if(strlen($str1) != strlen($str2)) return false;
+			else {
+				$res = $str1 ^ $str2;
+				$ret = 0;
+				for($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
+				return !$ret;
+			}
+		}
+	}
+
+	$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
+	$page_url = ($query_position !== false) ? trim(substr($_SERVER['REQUEST_URI'], 0, $query_position - 1), '/') : trim($_SERVER['REQUEST_URI'], '/');
 }

@@ -17,7 +17,7 @@ function loadData(aoData) {
 	$(aoData).each(function(i, val) {
 		if(val.name == 'sEcho') filters.secho = val.value;
 		else if(val.name == 'iDisplayStart') filters.start = val.value;
-		else if(val.name == 'iDisplayLength') filters.lungime = val.value;
+		else if(val.name == 'iDisplayLength') filters.length = val.value;
 	});
 	filters.filters = {};
 	if($("#idf").val()!='') filters.filters['id'] = $("#idf").val();

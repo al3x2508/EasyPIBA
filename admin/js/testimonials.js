@@ -1,11 +1,11 @@
-var jsonPage = 'testimoniale',
+var jsonPage = 'testimonials',
 	aoColumns = [
 		{ "mData": "id" },
-		{ "mData": "nume" },
-		{ "mData": "calitate" },
+		{ "mData": "name" },
+		{ "mData": "company" },
 		{ "mData": "short" },
 		{ "mData": function (e) {
-			return $('#staref option[value="' + e.stare + '"]').text();
+			return $('#statusf option[value="' + e.status + '"]').text();
 		} },
 		{ "mData": function() {
 			return "<span class=\"actions btn fa fa-edit\"></span>";
@@ -26,7 +26,7 @@ function loadData(aoData) {
 	});
 	filters.filters = new Object();
 	if($("#idf").val()!='') filters.filters['id'] = $("#idf").val();
-	if($("#numef").val()!='') filters.filters['nume'] = $("#numef").val();
-	if($("#staref").val()!='-1') filters.filters['stare'] = $("#staref").val();
+	if($("#namef").val()!='') filters.filters['name'] = $("#namef").val();
+	if($("#statusf").val()!='-1') filters.filters['status'] = $("#statusf").val();
 	return filters;
 }

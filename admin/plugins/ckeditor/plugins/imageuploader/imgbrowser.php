@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/Utils/functii.php');
+require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/Utils/functions.php');
 
 // Don't remove the following two rows
 $link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -17,9 +17,6 @@ switch ($load_lang_code) {
     case "en":
         require(__DIR__ . '/lang/en.php');
         break;
-    case "pl":
-        require(__DIR__ . '/lang/pl.php');
-        break;
 }
 
 // Including the plugin config file, don't delete the following row!
@@ -30,7 +27,7 @@ require(__DIR__ . '/function.php');
 require(__DIR__ . '/check_permission.php');
 
 $adminController = new \Controller\AdminController();
-if($adminController->checkPermission('Editeaza pagini'))
+if($adminController->checkPermission('Edit pages'))
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/Utils/functii.php');
+require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/Utils/functions.php');
 $adminController = new \Controller\AdminController();
-if(!$adminController->checkPermission('Editeaza pagini')) exit;
+if(!$adminController->checkPermission('Edit pages')) exit;
 
 // checking lang value
 if(isset($_COOKIE['sy_lang'])) {
