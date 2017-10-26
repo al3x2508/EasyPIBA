@@ -72,7 +72,10 @@ $(function () {
 		$("#edtable").find(":input").each(function () {
 			var name = $(this).attr("name");
 			if (name && name.substring(0, 2) == "ed") {
-				if (name != 'edimage') $(this).val('');
+				if (name != 'edimage') {
+					if($(this).children('option[selected]')) $(this).val($(this).children('option[selected]').val());
+					else $(this).val('');
+				}
 				if ($(this).data('ui-autocomplete')) {
 					if (!$(this).data('ui-autocomplete').hasOwnProperty('selectedItem') || !$(this).data('ui-autocomplete').selectedItem) $(this).data('ui-autocomplete').selectedItem = {id: false};
 					else $(this).data('ui-autocomplete').selectedItem.id = false;

@@ -112,7 +112,7 @@ if(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER) && strtolower($_SERVER['H
 }
 $template = new Utils\Template($template_file);
 $filename = str_replace('.html', '', trim($page_url, '/'));
-$lang = Util::getUserSetting('language');
+$lang = Util::getUserLanguage();
 if(!isset($page)) {
 	$pages = new Model('pages');
 	$pages->language = $lang;

@@ -61,7 +61,7 @@ namespace Utils {
 				if(is_array($accountSettings) && array_key_exists('language', $accountSettings)) return $accountSettings['language'];
 			}
 			$acceptLanguage = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-			return (!empty($acceptLanguage) ? $acceptLanguage : _DEFAULT_LANGUAGE_);
+			return _DEFAULT_LANGUAGE_;
 		}
 
 		/**
