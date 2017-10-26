@@ -14,10 +14,14 @@ class PagesController {
 		}
 		$menuOrder .= ' ELSE 0' . PHP_EOL;
 		$menuParent .= ' ELSE 0' . PHP_EOL;
-		$sql = 'UPDATE pages SET' .$menuOrder . 'END, ' . $menuParent . 'END WHERE language = ?';
+		$sql = 'UPDATE pages SET' .$menuOrder . 'END, ' . $menuParent . 'END';
+		$data = array();
+		if(!empty($language)) {
+			$paramType = 's';
+			$sql .= ' WHERE language = ?';
+			$data = array(&$paramType, &$language);
+		}
 		$pages = new Model('pages');
-		$paramType = 's';
-		$data = array(&$paramType, &$language);
 		$pages->runQuery($sql, $data, false);
 	}
 }

@@ -31,7 +31,7 @@ if($adminController->checkPermission("Edit pages")) {
 			$arrayResponse = array('sEcho' => $_REQUEST['secho'], 'iTotalRecords' => $countTotal, 'iTotalDisplayRecords' => $countFiltered, 'aaData' => $pages);
 		}
 		else {
-			$pages->language = $_REQUEST['language'];
+			if(!empty($_REQUEST['language'])) $pages->language = $_REQUEST['language'];
 			$pages->order('menu_parent ASC , menu_order ASC');
 			$pg = $pages->get();
 			$pages = array();

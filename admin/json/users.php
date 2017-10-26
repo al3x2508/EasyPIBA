@@ -41,7 +41,7 @@ class Users extends \json\json {
 					}
 					else $users->$key = $value;
 				}
-				if(count($where) > 0) $users->where($where);
+				if(count($where)) $users->where($where);
 			}
 			if(!array_key_exists('cRecords', $_REQUEST)) self::$countFiltered = $users->countItems();
 			else {
