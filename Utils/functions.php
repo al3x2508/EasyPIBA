@@ -60,7 +60,6 @@ namespace Utils {
 				$accountSettings = json_decode($user->settings, true);
 				if(is_array($accountSettings) && array_key_exists('language', $accountSettings)) return $accountSettings['language'];
 			}
-			$acceptLanguage = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 			return _DEFAULT_LANGUAGE_;
 		}
 

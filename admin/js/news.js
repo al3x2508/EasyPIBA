@@ -46,13 +46,13 @@ $(function() {
 		},
 		minLength: 3,
 		change: function() {
-			$('#data_table').dataTable().fnReloadAjax();
+			if($(this).closest('#data_table').length) table.fnReloadAjax();
 		}
 	});
 	$('.select2').select2({
 		width: '200px'
 	}).on('select2:select', function () {
-		table.fnReloadAjax();
+		if($(this).closest('#data_table').length) table.fnReloadAjax();
 	});
 });
 function loadData(aoData) {

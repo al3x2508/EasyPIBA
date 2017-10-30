@@ -49,7 +49,30 @@ $(function () {
 			});
 		}
 	}
-
+	$(".drpicker").daterangepicker({
+		autoUpdateInput: false,
+		ranges: {
+			'Today': [moment(), moment()],
+			'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+			'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+			'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+			'This Month': [moment().startOf('month'), moment().endOf('month')],
+			'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+			'Always': ['', '']
+		}
+	}).on('apply.daterangepicker', function(ev, picker) {
+		if(picker.chosenLabel == 'Always') {
+			$(this).val(picker.chosenLabel);
+			if($(this).closest('#data_table').length) table.fnReloadAjax();
+		}
+		else {
+			$(this).val(picker.startDate.format('DD.MM.YYYY') + ' - ' + picker.endDate.format('DD.MM.YYYY'));
+			if($(this).closest('#data_table').length) table.fnReloadAjax();
+		}
+	}).on('cancel.daterangepicker', function() {
+		$(this).val('');
+		if($(this).closest('#data_table').length) table.fnReloadAjax();
+	});
 	$("body").on('click', 'span.fa-trash-o', function (event) {
 		var v = confirm(jsstrings.confirm_delete);
 		if (v == false) {
@@ -142,11 +165,11 @@ $(function () {
 									$('#imagePreview').attr('src', '/img/news/' + value);
 									$('#edimage').data('imgname', '');
 								}
-								if (key.indexOf('name_') === 0 && elm.hasClass('ui-autocomplete-input')) {
-									var dtId = key.replace('name_', '');
+								if (elm.hasClass('ui-autocomplete-input')) {
 									if (!elm.data('ui-autocomplete').hasOwnProperty('selectedItem') || !elm.data('ui-autocomplete').selectedItem) elm.data('ui-autocomplete').selectedItem = {};
 									if (!elm.data('ui-autocomplete').selectedItem) elm.data('ui-autocomplete').selectedItem.id = false;
-									elm.combobox().data('ui-autocomplete').selectedItem.id = data[dtId];
+									elm.combobox().data('ui-autocomplete').selectedItem.id = data[key];
+									elm.val(data[key + 's']['name']);
 								}
 							}
 							else CKEDITOR.instances.edcontent.setData(value);

@@ -39,6 +39,6 @@ $(window).on('load', function () {
 	$('.select2').select2({
 		width: '200px'
 	}).on('select2:select', function (e) {
-		table.fnReloadAjax();
+		if($(this).closest('#data_table').length) table.fnReloadAjax();
 	});
 });

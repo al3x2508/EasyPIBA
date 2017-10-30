@@ -16,7 +16,7 @@ abstract class json {
 		$adminController = new AdminController();
 		if($adminController->checkPermission(self::$permission) == false) die(__('You do not have permissions for this'));
 	}
-	public function output() {
+	public static function output() {
 		if(array_key_exists('export', $_REQUEST)) {
 			ini_set('memory_limit', -1);
 			error_reporting(E_ALL);
