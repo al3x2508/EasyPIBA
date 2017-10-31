@@ -169,7 +169,7 @@ $(function () {
 									if (!elm.data('ui-autocomplete').hasOwnProperty('selectedItem') || !elm.data('ui-autocomplete').selectedItem) elm.data('ui-autocomplete').selectedItem = {};
 									if (!elm.data('ui-autocomplete').selectedItem) elm.data('ui-autocomplete').selectedItem.id = false;
 									elm.combobox().data('ui-autocomplete').selectedItem.id = data[key];
-									elm.val(data[key + 's']['name']);
+									elm.val(data[data['schema'][key]['table_reference']]['name']);
 								}
 							}
 							else CKEDITOR.instances.edcontent.setData(value);

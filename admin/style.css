@@ -67,3 +67,6 @@ body {
 .img-flag {
 	height: 1em;
 }
+.ui-autocomplete.ui-front {
+	z-index: 2000;
+}

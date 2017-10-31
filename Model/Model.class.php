@@ -59,7 +59,7 @@ namespace Model {
 		 * Table schema
 		 * @var array
 		 */
-		protected $schema = array();
+		public $schema = array();
 
 		/**
 		 * Model constructor.
