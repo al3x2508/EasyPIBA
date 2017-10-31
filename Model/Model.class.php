@@ -265,13 +265,13 @@ namespace Model {
 			//Build the join columns names
 			if(count($join)) {
 				foreach($join AS $table_reference => $arrJoin) {
-					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", {$table_reference}.{$column} AS `{$table_reference}-{$column}`";
+					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", `j_{$table_reference}`.{$column} AS `{$table_reference}-{$column}`";
 				}
 			}
 			//Build the sql joins
 			foreach($join AS $table_reference => $column_reference) {
-				if(!is_array($column_reference['reference'])) $joins .= " {$column_reference['joinType']} JOIN {$table_reference} ON {$table_reference}.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
-				else $joins .= " {$column_reference['reference'][1]} JOIN {$table_reference} ON {$table_reference}.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
+				if(!is_array($column_reference['reference'])) $joins .= " {$column_reference['joinType']} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
+				else $joins .= " {$column_reference['reference'][1]} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
 			}
 			//Store the column types into $param_type (eg: `ids`, meaning integer double string)
 			//Build the sql for custom fields
@@ -399,12 +399,12 @@ namespace Model {
 			}
 			if(count($join)) {
 				foreach($join AS $table_reference => $arrJoin) {
-					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", {$table_reference}.{$column} AS `{$table_reference}-{$column}`";
+					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", `j_{$table_reference}`.{$column} AS `{$table_reference}-{$column}`";
 				}
 			}
 			foreach($join AS $table_reference => $column_reference) {
-				if(!is_array($column_reference['reference'])) $joins .= " {$column_reference['joinType']} JOIN {$table_reference} ON {$table_reference}.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
-				else $joins .= " {$column_reference['reference'][1]} JOIN {$table_reference} ON {$table_reference}.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
+				if(!is_array($column_reference['reference'])) $joins .= " {$column_reference['joinType']} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
+				else $joins .= " {$column_reference['reference'][1]} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
 			}
 			$sql = "SELECT " . $this->tableName . ".*" . $columnsToSelect . " FROM " . $this->tableName . "{$joins} WHERE {$this->tableName}.{$key} = ? LIMIT 0, 1";
 			try {
@@ -455,13 +455,10 @@ namespace Model {
 			$data = array();
 			$param_type = '';
 			$join = array();
-			$count = (empty($this->group_by)) ? '*' : ('DISTINCT ' . str_replace(' GROUP BY ', '', $this->group_by));
-
-			if(property_exists($this, 'schema')) foreach($this->schema AS $key => $val) {
-				if(!empty($val['column_reference'])) {
-					$join[$val['table_reference']] = $val['table_reference'] . '.' . $val['column_reference'] . ' = ' . $this->tableName . '.' . $key;
-				}
+			if(property_exists($this, 'schema')) foreach($this->schema AS $column => $colDetails) {
+				if(!empty($colDetails['column_reference'])) $join[$colDetails['table_reference']] = array('column' => $column, 'reference' => $colDetails['column_reference'], 'joinType' => (strtolower($colDetails['null']) == 'yes')?'LEFT':'INNER');
 			}
+			$count = (empty($this->group_by)) ? '*' : ('DISTINCT ' . str_replace(' GROUP BY ', '', $this->group_by));
 			foreach($this->customFields AS $customField) if(is_array($customField)) $param_type .= $customField[1];
 			foreach(get_object_vars($this) AS $key => $val) {
 				if(!in_array($key, self::getIgnoredKeys())) {
@@ -522,16 +519,13 @@ namespace Model {
 				}
 			}
 
-			$join = array();
 			$sql = sprintf("SELECT COUNT(" . $count . ") AS totalItems FROM %s", $this->tableName);
-			foreach($this->schema AS $column => $colDetails) {
-				if(!empty($colDetails['table_reference']) && !empty($colDetails['column_reference'])) $join[$colDetails['table_reference']] = array('column' => $column, 'reference' => $colDetails['column_reference'], 'columns' => $colDetails['trc']);
-			}
+			$joins = '';
 			foreach($join AS $table_reference => $column_reference) {
-				if(!is_array($column_reference['reference'])) $sql .= " INNER JOIN {$table_reference} ON {$table_reference}.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
-				else $sql .= " {$column_reference['reference'][1]} JOIN {$table_reference} ON {$table_reference}.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
+				if(!is_array($column_reference['reference'])) $joins .= " {$column_reference['joinType']} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
+				else $joins .= " {$column_reference['reference'][1]} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
 			}
-			$sql .= $where;
+			$sql .= $joins . $where;
 			$stmt = $this->db->prepare($sql);
 			if(count($data) > 0) call_user_func_array(array($stmt, 'bind_param'), $data);
 			$stmt->execute();

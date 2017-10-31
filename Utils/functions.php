@@ -456,7 +456,7 @@ namespace Utils {
 		 */
 		public static function translate($string, $lang) {
 			$texts = new Model('translations');
-			$texts->where(array('language' => $lang, 'strings.text' => $string));
+			$texts->where(array('language' => $lang, 'j_strings.text' => $string));
 			$texts = $texts->get();
 			return (count($texts) ? $texts[0]->translation : $string);
 		}

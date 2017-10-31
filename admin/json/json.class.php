@@ -15,6 +15,7 @@ abstract class json {
 	public function __construct() {
 		$adminController = new AdminController();
 		if($adminController->checkPermission(self::$permission) == false) die(__('You do not have permissions for this'));
+		if(!array_key_exists('export', $_REQUEST)) header('Content-Type: application/json');
 	}
 	public static function output() {
 		if(array_key_exists('export', $_REQUEST)) {
