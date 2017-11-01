@@ -14,11 +14,11 @@ function loadData(aoData) {
 	return filters;
 }
 function dateEdit(date) {
-	$('[name="edpermission[]"').each(function () {
+	$('[name="edpermission[]"]').each(function () {
 		$(this).prop('checked', false).iCheck('update');
 	});
 	$.each(date.access, function (index, value) {
-		$('[name="edpermission[' + value + ']"').prop('checked', true).iCheck('update');
+		$('[name="edpermission[' + value + ']"]').prop('checked', true).iCheck('update');
 	});
 }
 $(function () {

@@ -97,7 +97,10 @@ $(function () {
 			if (name && name.substring(0, 2) == "ed") {
 				if (name != 'edimage') {
 					if($(this).children('option[selected]')) $(this).val($(this).children('option[selected]').val());
-					else $(this).val('');
+					else {
+						if($(this).attr('value')) $(this).val($(this).attr('value'));
+						else $(this).val('');
+					}
 				}
 				if ($(this).data('ui-autocomplete')) {
 					if (!$(this).data('ui-autocomplete').hasOwnProperty('selectedItem') || !$(this).data('ui-autocomplete').selectedItem) $(this).data('ui-autocomplete').selectedItem = {id: false};
@@ -132,7 +135,10 @@ $(function () {
 		var actid = $(this).data('actid') ? $(this).data('actid') : $(this).closest('tr').children('td').eq(0).text();
 		if ($(this).hasClass('fa-edit')) {
 			$("#edtable").find("input").each(function () {
-				if ($(this).attr('type') != 'checkbox') $(this).val('');
+				if ($(this).attr('type') != 'checkbox') {
+					if($(this).attr('value')) $(this).val($(this).attr('value'));
+					else $(this).val('');
+				}
 				else $(this).prop('checked', false);
 			});
 			var dataPost = {};
@@ -220,13 +226,28 @@ $(function () {
 				if (fieldName == 'content') data.content = CKEDITOR.instances.edcontent.getData();
 				else if (fieldName == 'image') data[fieldName] = $(this).data('imgname');
 				else {
+					var isArray = false;
+					if(fieldName.substr(-2) == '[]') {
+						isArray = true;
+						fieldName = fieldName.replace("[]", "");
+						if(typeof data[fieldName] === 'undefined') data[fieldName] = [];
+					}
 					if ($(this).data('ui-autocomplete') && $(this).data('ui-autocomplete').hasOwnProperty('selectedItem') && $(this).data('ui-autocomplete').selectedItem) {
-						fieldName = fieldName.replace('name_', '');
-						data[fieldName] = $(this).data('ui-autocomplete').selectedItem.id;
+						if(!isArray) data[fieldName] = $(this).data('ui-autocomplete').selectedItem.id;
+						else data[fieldName].push($(this).data('ui-autocomplete').selectedItem.id);
 					}
 					else {
-						if ($(this).is(':checkbox')) data[fieldName] = ($(this).is(':checked')) ? 1 : 0;
-						else data[fieldName] = $(this).val();
+						if($(this).data('value')) {
+							if(!isArray) data[fieldName] = $(this).data('value');
+							else data[fieldName].push($(this).data('value'));
+						}
+						else {
+							if ($(this).is(':checkbox')) data[fieldName] = ($(this).is(':checked')) ? 1 : 0;
+							else {
+								if(!isArray) data[fieldName] = $(this).val();
+								else data[fieldName].push($(this).val());
+							}
+						}
 					}
 				}
 			}

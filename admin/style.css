@@ -70,3 +70,14 @@ body {
 .ui-autocomplete.ui-front {
 	z-index: 2000;
 }
+.ui-autocomplete .ui-menu-item span,
+.ui-autocomplete .ui-menu-item em {
+	font-size: .8em;
+	color: #3c8dbc;
+}
+.ui-autocomplete .ui-menu-item.ui-state-focus span, .ui-autocomplete .ui-menu-item em {
+	color: #000000;
+}
+.ui-autocomplete .ui-menu-item em {
+	float: right;
+}

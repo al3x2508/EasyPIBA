@@ -24,7 +24,7 @@ abstract class act {
 
 	/**
 	 * @param bool $where
-	 * @return bool|int|mixed
+	 * @return bool|int|Model
 	 */
 	public function act($where = false) {
 		$adminController = new AdminController();
