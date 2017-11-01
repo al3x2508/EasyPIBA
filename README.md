@@ -2,13 +2,13 @@
 
 In order to install EasyPIBA you need to follow these instructions:
 
-Download from github using git clone https://github.com/al3x2508/EasyPIBA.git or download a zip file from here
-Go to your url where you have the project, for example http://www.myurl.com/
-Go through setup
-Delete the setup/ folder from the application folder
-Customize your template by editing the templates/template.html and css/main.css
-Customize your app
-Your urls are loaded from the pages table from your database or from pages/ folder in the application root directory;
+1. Download from github using git clone https://github.com/al3x2508/EasyPIBA.git or download a zip file from here
+2. Go to your url where you have the project, for example http://www.myurl.com/
+3. Go through setup
+4. Delete the setup/ folder from the application folder
+5. Customize your template by editing the templates/template.html and css/main.css
+6. Customize your app
+7. Your urls are loaded from the pages table from your database or from pages/ folder in the application root directory;
 If you want to create a static html page you would need to create it from the administration section.
 If you want to create a dynamic content page (eg: my-orders page) you would need to create a php file in your pages/ folder (eg: pages/my-orders.php); You need to set the following variables: $page_title, $description and $content;
 The url for accessing your page would be http://yourAppUrl/my-orders.html (the app is striping pages/ from url and replaces php with html for extension)
@@ -18,8 +18,8 @@ Let's say you want to build a simple e-commerce application. Your shop should ha
 
 Users that are looking for Products inside your shop that are organized into Categories. After they found the specified products they add them into carts and finally are placing Orders.
 
-Download the demo sql file for this structure from here.
-Let's generate our informations and populate our tables by creating a php file containing the code bellow:
+1. Download the demo sql file for this structure from here.
+2. Let's generate our informations and populate our tables by creating a php file containing the code bellow:
 ```php
 <?php
 use \Model\Model;
@@ -325,6 +325,5 @@ $js          = array();
 $css         = array();
 ```
 Save this code into your pages folder inside your application directory (eg: pages/generate_data.php); Go in your browser to the address http://yourAppUrl/generate_data.html
-
-Download from here the administration files used for this demo.
-Take a look at the files.
+3. Download from here the administration files used for this demo.
+4. Take a look at the files.
