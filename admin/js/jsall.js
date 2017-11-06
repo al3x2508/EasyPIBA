@@ -29,7 +29,7 @@ $(function () {
 				"bAutoWidth": false,
 				"bProcessing": false,
 				"bServerSide": true,
-				"sAjaxSource": 'json/' + jsonPage + '.php',
+				"sAjaxSource": 'json/' + jsonPage,
 				"fnServerData": function (sSource, aoData, fnCallback, oSettings) {
 					oSettings.jqXHR = $.ajax({
 						"dataType": 'json',
@@ -85,7 +85,7 @@ $(function () {
 		else {
 			if (typeof jsonPage != 'undefined') {
 				var deleteId = ($(event.target).data('actid')) ? $(event.target).data('actid') : $(event.target).closest('tr').children('td').eq(0).text();
-				$.post("act/" + jsonPage + ".php", {delete: deleteId}, function () {
+				$.post("act/" + jsonPage, {delete: deleteId}, function () {
 					table.fnReloadAjax();
 				});
 			}
@@ -109,11 +109,11 @@ $(function () {
 			}
 		});
 		saveButton.data("actid", 0).closest('.modal').show().find('.modal-title').eq(0).text(jsstrings.buttonAdd);
-		$('#imagePreview').attr('src', '/img/news/default-360x220.jpg');
+		$('#imagePreview').attr('src', '/img/' + $('#imagePreview').data('folder') + '/' + $('#imagePreview').data('default'));
 		$('#edimage').data('imgname', '');
 	}).on('click', '.btn-export', function () {
 		var date = loadData(),
-			url = 'json/' + jsonPage + '.php',
+			url = 'json/' + jsonPage,
 			inputs = '';
 		date.secho = 1;
 		date.export = $(this).text().toLowerCase();
@@ -149,7 +149,7 @@ $(function () {
 			}
 			else dataPost.id = actid;
 			$.ajax({
-				url: 'json/' + jsonPage + '.php',
+				url: 'json/' + jsonPage,
 				type: 'POST',
 				data: dataPost,
 				dataType: 'json',
@@ -168,7 +168,7 @@ $(function () {
 								}
 								else if (!elm.is(':file')) elm.val(value);
 								else {
-									$('#imagePreview').attr('src', '/img/news/' + value);
+									$('#imagePreview').attr('src', '/img/' + $('#imagePreview').data('folder') + '/' + value);
 									$('#edimage').data('imgname', '');
 								}
 								if (elm.hasClass('ui-autocomplete-input')) {
@@ -181,7 +181,7 @@ $(function () {
 							else CKEDITOR.instances.edcontent.setData(value);
 						}
 					});
-					if (editData && typeof dateEdit == 'function') dateEdit(editData);
+					if (editData && typeof dataEdit == 'function') dataEdit(editData);
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
 					console.log(thrownError);
@@ -202,14 +202,14 @@ $(function () {
 		mdldlg.hide();
 		if (!sc.length || sc.data("actid") == 0) {
 			var eimg = mdldlg.find("#edimage");
-			if (eimg.length > 0 && eimg.data('imgname') != '') $.post('act/uploadimg.php', {clearImg: eimg.data('imgname')});
+			if (eimg.length > 0 && eimg.data('imgname') != '') $.post('act/Media', {clearImg: eimg.data('imgname')});
 			var fimghid = mdldlg.find('.fimghid');
 			if (fimghid.length > 0) {
 				fimghid.each(function () {
 					if ($(this).data('imgname') != '') {
 						var dataPost = {clearImg: $(this).data('imgname')};
 						if ($(this).data('targetdir') != '') dataPost.targetdir = $(this).data('targetdir');
-						$.post('act/uploadimg.php', dataPost);
+						$.post('act/Media', dataPost);
 					}
 				});
 			}
@@ -253,7 +253,7 @@ $(function () {
 			}
 		});
 		$.ajax({
-			url: 'act/' + jsonPage + '.php',
+			url: 'act/' + jsonPage,
 			type: 'POST',
 			data: data,
 			dataType: 'text',
@@ -276,7 +276,7 @@ $(function () {
 		formData.append('edimage', eimg[0].files[0]);
 		$.ajax({
 			type: 'POST',
-			url: 'act/uploadimg.php',
+			url: 'act/Media',
 			data: formData,
 			cache: false,
 			contentType: false,

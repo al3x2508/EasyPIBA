@@ -81,3 +81,10 @@ body {
 .ui-autocomplete .ui-menu-item em {
 	float: right;
 }
+#imagePreview {
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+#imagePreview:hover {
+	border-color: #CCC;
+}

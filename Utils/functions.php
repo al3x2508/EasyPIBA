@@ -3,8 +3,13 @@ namespace Utils {
 
 	use Controller\Mail;
 	use Model\Model;
+	use Module\Users\Controller;
 
 	if(!defined("_FOLDER_URL_")) require_once(dirname(__FILE__) . '/config.php');
+	/**
+	 * Set to true if this is a development environment
+	 */
+	define("DEVELOPER_MODE", false);
 	/**
 	 * Set to true if site is currently under maintenance
 	 */
@@ -33,46 +38,18 @@ namespace Utils {
 		}
 
 		/**
-		 * Get user setting
-		 * @param $setting
-		 * @param bool $user
-		 * @return mixed|null|string
-		 */
-		public static function getUserSetting($setting, $user = false) {
-			if($setting == 'language') return self::getUserLanguage($user);
-			if(!$user) $user = self::getCurrentUser();
-			if($user) {
-				$accountSettings = json_decode($user->settings, true);
-				if(is_array($accountSettings) && array_key_exists($setting, $accountSettings)) return $accountSettings[$setting];
-			}
-			return null;
-		}
-
-		/**
 		 * Get user language
 		 * @param bool $user
 		 * @return mixed|string
 		 */
 		public static function getUserLanguage($user = false) {
 			if(array_key_exists('language', $_COOKIE)) return $_COOKIE['language'];
-			if(!$user) $user = self::getCurrentUser();
+			if(!$user) $user = Controller::getCurrentUser();
 			if($user) {
 				$accountSettings = json_decode($user->settings, true);
 				if(is_array($accountSettings) && array_key_exists('language', $accountSettings)) return $accountSettings['language'];
 			}
 			return _DEFAULT_LANGUAGE_;
-		}
-
-		/**
-		 * Get logged in user
-		 * @return Model|bool
-		 */
-		public static function getCurrentUser() {
-			if(array_key_exists('user', $_SESSION)) {
-				$user = new Model('users');
-				return $user->getOneResult('id', $_SESSION['user']);
-			}
-			return false;
 		}
 
 		/**
@@ -115,35 +92,6 @@ namespace Utils {
 				}
 			}
 			$_SESSION[$unique_form_name] = $token;
-			return $token;
-		}
-
-		/**
-		 * Get user by cookie token
-		 * @param $token
-		 * @return bool
-		 */
-		public static function getUserFromToken($token) {
-			$cookie = new Model('cookies');
-			$cookie->token = $token;
-			$cookie->expiration_date = array(date('Y-m-d H:i:s'), '>=');
-			$cookie = $cookie->get();
-
-			return (count($cookie) > 0) ? $cookie[0]['user'] : false;
-		}
-
-		/**
-		 * Store password reset key for user
-		 * @param $user
-		 * @return string
-		 */
-		public static function storeResetPassword($user) {
-			$token = self::GenerateRandomToken();
-			$resetting = new Model('passwords_reset');
-			$resetting->user = $user;
-			$resetting->code = $token;
-			$resetting->expiration_date = date('Y-m-d H:i:s', strtotime("+1 week"));
-			$resetting->create();
 			return $token;
 		}
 
@@ -218,6 +166,7 @@ namespace Utils {
 		 * @param null|array $from Sender
 		 * @param null|object $att Attachment
 		 * @param bool $bcc_self Self BCC
+		 * @return bool
 		 */
 		public static function send_email($email, $lastname, $subject = '', $message = '', $isHtml = false, $from = null, $att = null, $bcc_self = false) {
 			$html = file_get_contents(_TEMPLATE_DIR_ . 'email_template.html');
@@ -239,39 +188,6 @@ namespace Utils {
 		}
 
 		/**
-		 * Send activation email
-		 * @param $user
-		 * @param bool $generate
-		 * @return bool
-		 */
-		public static function sendActivationEmail($user, $generate = true) {
-			$code = '';
-			$name = $user->lastname . ' ' . $user->firstname;
-			$email = $user->email;
-			$user_confirm = new Model('user_confirm');
-			$user_confirm->user = $user->id;
-			if($generate) {
-				$code = md5(time());
-				$user_confirm->code = $code;
-				$user_confirm->create();
-			}
-			else {
-				$user_confirm = $user_confirm->get();
-				if(count($user_confirm) > 0) $code = $user_confirm[0]->code;
-			}
-			if(!empty($code)) {
-				$activationLink = _ADDRESS_ . _FOLDER_URL_ . 'email_confirm.html';
-				$message = /** @lang text */
-					"<h2>" . __("Welcome") . ", {$user->firstname}!</h2>
-				<h3>" . __("Step") . " 1. " . __("Activate your account") . "!</h3>
-				<p>" . __("Activate your account") . " {$email} " . __("by clicking this link") . ": <a href=\"{$activationLink}?key={$code}\">{$activationLink}?key={$code}</a></p>";
-				self::send_email($email, $name, __('Activate your account'), $message, true);
-				return true;
-			}
-			else return false;
-		}
-
-		/**
 		 * @param $arr
 		 * @return string
 		 */
@@ -284,131 +200,6 @@ namespace Utils {
 		}
 
 		/**
-		 * Account form used for register and my account pages
-		 * @param $fields
-		 * @param $values
-		 * @param $formId
-		 * @param bool $button
-		 * @param string $errors
-		 * @return string
-		 */
-		public static function getAccountForm($fields, $values, $formId, $button = false, $errors = '') {
-			function fieldValue($field, $values) {
-				if(array_key_exists($field, $_POST)) return strip_tags(htmlspecialchars(stripslashes(trim($_POST[$field]))));
-				if(array_key_exists($field, $values)) return strip_tags(htmlspecialchars(stripslashes(trim($values[$field]))));
-				return false;
-			}
-
-			$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
-			$countries = new Model('countries');
-			$countries = $countries->get();
-			foreach($countries AS $country) {
-				$selected = ($country->id == fieldValue('country', $values)) ? ' selected' : '';
-				$countriesOptions .= '	<option value="' . $country->id . '"' . $selected . '>' . $country->name . '</option>' . PHP_EOL;
-			}
-			$firstname = array('value' => (fieldValue('firstname', $values)) ? ' value="' . fieldValue('firstname', $values) . '"' : '', 'validation' => (array_key_exists('firstname', $fields) && $fields['firstname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your firstname') . '</div>' : '');
-			$lastname = array('value' => (fieldValue('lastname', $values)) ? ' value="' . fieldValue('lastname', $values) . '"' : '', 'validation' => (array_key_exists('lastname', $fields) && $fields['lastname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your lastname') . '</div>' : '');
-			$email = array('value' => (fieldValue('email', $values)) ? ' value="' . fieldValue('email', $values) . '"' : '', 'validation' => (array_key_exists('email', $fields) && $fields['email'] == 1) ? '<div class="alert alert-danger">' . __('Enter your email') . '</div>' : '');
-			$country = (array_key_exists('country', $fields) && $fields['country'] == 1) ? '<div class="alert alert-danger">' . __('Select your country') . '</div>' : '';
-			$password = (array_key_exists('password', $fields) && $fields['password'] == 1) ? '<div class="alert alert-danger">' . __('Enter a password') . '</div>' : '';
-			$confirmPassword = (array_key_exists('confirmPassword', $fields) && $fields['confirmPassword'] == 1) ? '<div class="alert alert-danger">' . __('Confirm the password') . '</div>' : '';
-			$content = '<form id="' . $formId . '" method="post" action="#" class="validateform">';
-			if(!empty($errors)) $content .= '<div class="col-lg-12 col-12"><div class="alert alert-danger">' . $errors . '</div></div>' . PHP_EOL;
-			$content .= '<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="text" name="firstname" id="firstname" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $firstname['value'] . ' pattern=".{2,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="firstname" data-ex="eg: John">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * ' . __('Firstname') . '</span>
-								</label>
-								' . $firstname['validation'] . '
-							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="text" name="lastname" id="lastname" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $lastname['value'] . ' pattern=".{2,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="lastname" data-ex="eg: Smith">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * ' . __('Lastname') . '</span>
-								</label>
-								' . $lastname['validation'] . '
-							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="email" name="email" id="email" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="email" data-ex="eg: john.smith@yahoo.com">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-envelope-o"></i> * ' . __('Email') . '</span>
-								</label>
-								' . $email['validation'] . '
-							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<select name="country" id="country" class="form-control" required>
-								' . $countriesOptions . '
-							</select>
-							' . $country . '
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="password" name="password" id="password" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password" data-ex="' . __('8 characters minimum') . '">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Password') . '</span>
-								</label>
-								' . $password . '
-							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="password" name="confirmPassword" id="confirmPassword" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Confirm password') . '</span>
-								</label>
-								' . $confirmPassword . '
-							</div>
-						</div>
-						<div class="col-lg-12 form-group"><em>' . __('Fields marked with') . ' * ' . __('are required') . '.</em></div>' . PHP_EOL;
-			if($button) {
-				$termsConditions = (array_key_exists('termsConditions', $fields) && $fields['termsConditions'] == 1) ? '<div class="alert alert-danger">' . __('You must accept our Terms and conditions') . '</div>' : '';
-				$content .= '<div class="col-lg-12 col-12 field text-center">
-							<input type="checkbox" name="termsConditions" id="termsConditions" /><label for="termsConditions">' . sprintf(__('I have read and agree to the %s'), '<a href="terms-conditions.html">' . __('Terms and Conditions') . '</a>') . '</label>
-							' . $termsConditions . '
-						</div>
-						<div class="col-lg-12 col-12 field form-group">
-							<div class="row justify-content-sm-center">
-								<div class="col-sm-6">
-									<input type="submit" class="form-control btn btn-login" value="' . __($button) . '" />
-								</div>
-							</div>
-						</div>' . PHP_EOL;
-			}
-			$content .= '				</form>';
-			return $content;
-		}
-
-		/**
-		 * Login user
-		 * @param $user
-		 * @param bool $keepLoggedIn
-		 */
-		public static function login($user, $keepLoggedIn = false) {
-			$_SESSION['user'] = $user;
-			if($keepLoggedIn) self::storeCookie($user);
-		}
-
-		/**
-		 * Cookie generator for keep logged in
-		 * @param $user
-		 */
-		public static function storeCookie($user) {
-			$secretKey = self::getSetting('SECRET_KEY');
-			$token = self::GenerateRandomToken(24, true);
-			self::storeTokenForUser($user, $token);
-			$cookie = $token;
-			$mac = hash_hmac('sha256', $cookie, $secretKey);
-			$cookie .= ':' . $mac;
-			\setcookie('rme' . _APP_NAME_, $cookie, time() + 60 * 60 * 24 * 30);
-		}
-
-		/**
 		 * Get application setting
 		 * @param $key
 		 * @return bool|float|int|null|string
@@ -417,35 +208,6 @@ namespace Utils {
 			$setting = new Model('settings');
 			$setting = $setting->getOneResult('setting', $key);
 			return (property_exists($setting, 'value')) ? $setting->value : false;
-		}
-
-		/**
-		 * Store cookie for user in database
-		 * @param $user
-		 * @param $token
-		 */
-		private static function storeTokenForUser($user, $token) {
-			$cookie = new Model('cookies');
-			$cookie->user = $user;
-			$cookie->token = $token;
-			$cookie->expiration_date = date('Y-m-d H:i:s', strtotime("+1 week"));
-			$cookie->create();
-		}
-
-		/**
-		 * Logout user
-		 */
-		public static function logout() {
-			if(isset($_SESSION)) {
-				if(array_key_exists('user', $_SESSION)) {
-					$cookie = new Model('cookies');
-					$cookie->__set('user', $_SESSION['user'])->delete();
-					unset($_SESSION);
-					session_destroy();
-				}
-				header("Location: " . _FOLDER_URL_);
-			}
-			exit;
 		}
 
 		/**
@@ -515,6 +277,7 @@ namespace {
 		header('Location: ' . $protocol . 'www.' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI']);
 		exit;
 	}*/
+	use Module\Users\Controller;
 	use \Utils\Util;
 
 	//If site is currently under maintenance and user IP is not in the decoded json from allowedIps setting in DB tell user to come back later
@@ -533,6 +296,8 @@ namespace {
 		}
 	}
 
+	if(DEVELOPER_MODE) ini_set('display_errors', '1');
+
 	//Autoload classes (PSR-0)
 	if(version_compare(PHP_VERSION, '5.3.0', '>=')) spl_autoload_register('\Utils\Util::register', true, true);
 	else spl_autoload_register('\Utils\Util::register');
@@ -549,11 +314,16 @@ namespace {
 		$cookie = $_COOKIE['rme' . _APP_NAME_];
 		list ($token, $mac) = explode(':', $cookie);
 		if($mac === hash_hmac('sha256', $token, $secretKey)) {
-			$user = Util::getUserFromToken($token);
+			$user = Controller::getUserFromToken($token);
 			if($user) $_SESSION['user'] = $user;
 		}
 	}
-
+	//Sanitize POST
+	if(count($_POST)) {
+		foreach($_POST AS $key => $value) {
+			if(is_string($value)) $_POST[$key] = strip_tags(htmlspecialchars(stripslashes(trim($value))));
+		}
+	}
 	/**
 	 * Translate a string
 	 * @param $string
@@ -561,7 +331,7 @@ namespace {
 	 * @return mixed
 	 */
 	function __($string, $lang = false) {
-		if(!$lang) $lang = Util::getUserSetting('language');
+		if(!$lang) $lang = Util::getUserLanguage();
 		if(!$lang) return $string;
 		return call_user_func_array('\Utils\Util::translate', array($string, $lang));
 	}
@@ -577,7 +347,9 @@ namespace {
 			}
 		}
 	}
-
-	$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
-	$page_url = ($query_position !== false) ? trim(substr($_SERVER['REQUEST_URI'], 0, $query_position - 1), '/') : trim($_SERVER['REQUEST_URI'], '/');
+	if (php_sapi_name() != "cli") {
+		$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
+		$page_url = ($query_position !== false) ? trim(substr($_SERVER['REQUEST_URI'], 0, $query_position - 1), '/') : trim($_SERVER['REQUEST_URI'], '/');
+		if(array_key_exists('logout', $_GET) || $page_url == 'logout') Controller::logout();
+	}
 }

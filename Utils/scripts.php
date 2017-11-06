@@ -1,11 +1,11 @@
 <?PHP
 ini_set("zlib.output_compression", 4096);
 if(!defined("_APP_NAME_")) require_once(dirname(__FILE__) . '/functions.php');
-function loadJs($js, $fromCache = true) {
+function loadJs($js, $fromCache = true, $return = true) {
 	$cache = Utils\getCache();
 	$scripts=explode(',', $js);
 	$md5Value = md5($js);
-	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) return file_get_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js');
+	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js'):true;
 	$buffer = '';
 	/** @var bool|Memcached $cache */
 	if(!$cache || !($buffer = $cache->get('javaScript' . $md5Value))) {
@@ -22,13 +22,13 @@ function loadJs($js, $fromCache = true) {
 		}
 	}
 	if(!$fromCache || !file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) file_put_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js', $buffer);
-	return $buffer;
+	return ($return)?$buffer:true;
 }
-function loadCss($css, $fromCache = true) {
+function loadCss($css, $fromCache = true, $return = true) {
 	$cache = Utils\getCache();
 	$scripts=explode(',', $css);
 	$md5Value = md5($css);
-	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) return file_get_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css');
+	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css'):true;
 	$buffer = '';
 	if(!$cache || !($buffer = $cache->get('css' . $md5Value))) {
 		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
@@ -49,7 +49,7 @@ function loadCss($css, $fromCache = true) {
 		}
 	}
 	if(!$fromCache || !file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) file_put_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css', $buffer);
-	return $buffer;
+	return ($return)?$buffer:true;
 }
 if(array_key_exists('js', $_GET)) {
 	header("content-type: text/javascript");

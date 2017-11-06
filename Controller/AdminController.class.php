@@ -32,31 +32,12 @@ class AdminController {
 	public static function checkPermission($perm) {
 		$admin = self::getCurrentUser();
 		if($admin) {
-			if($admin->access == -1) return true;
-			$permissions = new Model('permissions');
-			$permissions->name = $perm;
-			$permissions->where(array('EXISTS(SELECT * FROM admins WHERE id = ' . $admin->id . ' AND access REGEXP CONCAT(\'^\\\[([^\\,]+(\\\,))*\', permissions.id, \'((\\\,)[^\\,]+)*\\\]$\'))' => 'complexW'));
+			$permissions = new Model('admins_permissions');
+			$permissions->admin = $admin->id;
+			$permissions->where(array('j_permissions.name' => $perm));
 			$permissions = $permissions->get();
 			return count($permissions)?true:false;
 		}
 		return false;
-	}
-	public static function getPermissions() {
-		$admin = self::getCurrentUser();
-		$perms = array();
-		if($admin) {
-			$access = $admin->access;
-			$perms = array();
-			$permissions = array();
-			$permissionsEntity = new Model('permissions');
-			$permissionsEntity = $permissionsEntity->get();
-			foreach($permissionsEntity AS $permission) $permissions[$permission->id] = $permission->name;
-			if($access == '-1') $perms = array_merge(array_values($permissions), array('Edit administrators'));
-			else {
-				$access = json_decode($access, true);
-				foreach($access AS $acc) $perms[$acc] = $permissions[$acc];
-			}
-		}
-		return $perms;
 	}
 }
