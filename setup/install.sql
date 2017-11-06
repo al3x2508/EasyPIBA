@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.0.10deb1
--- http://www.phpmyadmin.net
---
--- Gazda: localhost
--- Timp de generare: 26 Oct 2017 la 09:07
--- Versiune server: 5.5.46-0ubuntu0.14.04.2
--- Versiune PHP: 5.5.9-1ubuntu4.14
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -16,32 +7,31 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Bază de date: `dbf`
---
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `admins`
---
 
 CREATE TABLE IF NOT EXISTS `admins` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `username` varchar(16) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `access` tinytext,
   `status` tinyint(2) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `admins_permissions` (
+  `admin` int(3) NOT NULL,
+  `permission` tinyint(2) NOT NULL,
+  PRIMARY KEY (`admin`,`permission`),
+  KEY `permission` (`permission`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Structura de tabel pentru tabelul `cookies`
---
+INSERT INTO `admins_permissions` (`admin`, `permission`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6);
 
 CREATE TABLE IF NOT EXISTS `cookies` (
   `user` varchar(9) NOT NULL,
@@ -51,12 +41,6 @@ CREATE TABLE IF NOT EXISTS `cookies` (
   KEY `client` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `countries`
---
-
 CREATE TABLE IF NOT EXISTS `countries` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
@@ -65,10 +49,6 @@ CREATE TABLE IF NOT EXISTS `countries` (
   PRIMARY KEY (`id`),
   KEY `language_code` (`language_code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=248 ;
-
---
--- Salvarea datelor din tabel `countries`
---
 
 INSERT INTO `countries` (`id`, `name`, `code`, `language_code`) VALUES
 (1, 'Andorra', 'AD', 'ca'),
@@ -319,21 +299,11 @@ INSERT INTO `countries` (`id`, `name`, `code`, `language_code`) VALUES
 (246, 'Zambia', 'ZM', 'en'),
 (247, 'Zimbabwe', 'ZW', 'en');
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `languages`
---
-
 CREATE TABLE IF NOT EXISTS `languages` (
   `code` varchar(3) CHARACTER SET utf8 NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Salvarea datelor din tabel `languages`
---
 
 INSERT INTO `languages` (`code`, `name`) VALUES
 ('aa', 'Afar'),
@@ -520,23 +490,11 @@ INSERT INTO `languages` (`code`, `name`) VALUES
 ('zh', 'Chinese'),
 ('zu', 'Zulu');
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `media`
---
-
 CREATE TABLE IF NOT EXISTS `media` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `news`
---
 
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
@@ -551,12 +509,6 @@ CREATE TABLE IF NOT EXISTS `news` (
   KEY `admin` (`admin`),
   KEY `language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `pages`
---
 
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
@@ -580,12 +532,6 @@ CREATE TABLE IF NOT EXISTS `pages` (
   KEY `language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `passwords_reset`
---
-
 CREATE TABLE IF NOT EXISTS `passwords_reset` (
   `user` int(5) NOT NULL,
   `code` varchar(64) NOT NULL,
@@ -593,21 +539,11 @@ CREATE TABLE IF NOT EXISTS `passwords_reset` (
   PRIMARY KEY (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `permissions`
---
-
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` tinyint(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
---
--- Salvarea datelor din tabel `permissions`
---
 
 INSERT INTO `permissions` (`id`, `name`) VALUES
 (1, 'View users'),
@@ -617,21 +553,11 @@ INSERT INTO `permissions` (`id`, `name`) VALUES
 (5, 'Edit testimonials'),
 (6, 'Edit administrators');
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `strings`
---
-
 CREATE TABLE IF NOT EXISTS `strings` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `text` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
-
---
--- Salvarea datelor din tabel `strings`
---
 
 INSERT INTO `strings` (`id`, `text`) VALUES
 (1, 'This site uses cookies. By continuing to browse the site, you are agreeing to our use of cookies.'),
@@ -652,27 +578,16 @@ INSERT INTO `strings` (`id`, `text`) VALUES
 (16, 'There is another user registered with this email address'),
 (17, 'You will be redirected to confirm your email in 1 second');
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `testimonials`
---
-
 CREATE TABLE IF NOT EXISTS `testimonials` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `company` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `short` text CHARACTER SET utf8,
   `content` text CHARACTER SET utf8 NOT NULL,
   `status` tinyint(1) DEFAULT '1' COMMENT '0 - Hidden, 1 - Visible',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `translations`
---
 
 CREATE TABLE IF NOT EXISTS `translations` (
   `string_id` int(5) NOT NULL,
@@ -682,12 +597,6 @@ CREATE TABLE IF NOT EXISTS `translations` (
   KEY `string_id` (`string_id`),
   KEY `language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `users`
---
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
@@ -711,12 +620,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `cookie` (`cookie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `user_confirm`
---
-
 CREATE TABLE IF NOT EXISTS `user_confirm` (
   `user` int(5) NOT NULL,
   `code` varchar(64) NOT NULL,
@@ -724,51 +627,30 @@ CREATE TABLE IF NOT EXISTS `user_confirm` (
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Restrictii pentru tabele sterse
---
+ALTER TABLE `admins_permissions`
+  ADD CONSTRAINT `admins_permissions_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `admins_permissions_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Restrictii pentru tabele `countries`
---
 ALTER TABLE `countries`
   ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`language_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Restrictii pentru tabele `news`
---
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `news_ibfk_2` FOREIGN KEY (`language`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Restrictii pentru tabele `pages`
---
 ALTER TABLE `pages`
   ADD CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`language`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Restrictii pentru tabele `passwords_reset`
---
 ALTER TABLE `passwords_reset`
   ADD CONSTRAINT `passwords_reset_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Restrictii pentru tabele `translations`
---
 ALTER TABLE `translations`
   ADD CONSTRAINT `translations_ibfk_1` FOREIGN KEY (`string_id`) REFERENCES `strings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `translations_ibfk_2` FOREIGN KEY (`language`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Restrictii pentru tabele `users`
---
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
---
--- Restrictii pentru tabele `user_confirm`
---
 ALTER TABLE `user_confirm`
   ADD CONSTRAINT `user_confirm_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
