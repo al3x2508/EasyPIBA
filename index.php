@@ -20,7 +20,10 @@ $og_image = defined('_OG_IMAGE_')?_OG_IMAGE_:_LOGO_;
 $language = Util::getUserLanguage();
 //Check if language exists in url; if exists, set $language from url
 preg_match('/^([a-z]{2,3})$/', $page_url, $matches);
-if(count($matches)) $language = $matches[1];
+if(count($matches)) {
+	$language = $matches[1];
+	$filename = '';
+}
 preg_match('/^([a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
 if(count($matches)) {
 	$language = $matches[1];

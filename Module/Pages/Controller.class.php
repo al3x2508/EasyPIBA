@@ -103,12 +103,26 @@ class Controller {
 				$class = 'Module\\' . $module->name . '\\Page';
 				$class = new $class($_SERVER['REQUEST_URI']);
 				$classMenu = $class->getMenu();
-				if($classMenu) foreach($classMenu AS $page) {
-					if(!array_key_exists($page['menu_parent'], $array_menu)) $array_menu[$page['menu_parent']] = array();
-					$pag = array('url' => _FOLDER_URL_ . $langUrl . $page['url'], 'menu_text' => $page['menu_text'], 'submenu_text' => $page['submenu_text'], 'menu_parent' => $page['menu_parent']);
-					//If page url is the same as the current url set link class as active
-					if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page['url'] || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page['url']) $pag['classes'] = 'active';
-					$array_menu[$page['menu_parent']][] = $pag;
+				if($classMenu) foreach($classMenu AS $index => $page) {
+					if($index !== 'menu_right') {
+						if(!array_key_exists($page['menu_parent'], $array_menu)) $array_menu[$page['menu_parent']] = array();
+						$pag = array('url' => _FOLDER_URL_ . $langUrl . $page['url'], 'menu_text' => $page['menu_text'], 'submenu_text' => $page['submenu_text'], 'menu_parent' => $page['menu_parent']);
+						//If page url is the same as the current url set link class as active
+						if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page['url'] || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page['url']) $pag['classes'] = 'active';
+						$array_menu[$page['menu_parent']][] = $pag;
+					}
+					else {
+						foreach($page AS $indexr => $pager) {
+							if(!array_key_exists('menu_parent', $pager)) $pager['menu_parent'] = 0;
+							if(!array_key_exists('menu_right', $array_menu)) $array_menu['menu_right'] = array();
+							if(!array_key_exists($pager['menu_parent'], $array_menu['menu_right'])) $array_menu['menu_right'][$pager['menu_parent']] = array();
+							$pag = array('url' => _FOLDER_URL_ . $langUrl . $pager['url'], 'menu_text' => $pager['menu_text'], 'submenu_text' => $pager['submenu_text'], 'menu_parent' => $pager['menu_parent']);
+							if(array_key_exists('id', $pager)) $pag['id'] = $pager['id'];
+							//If page url is the same as the current url set link class as active
+							if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $pager['url'] || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $pager['url']) $pag['classes'] = 'active';
+							$array_menu['menu_right'][$pager['menu_parent']][] = $pag;
+						}
+					}
 				}
 			}
 		}

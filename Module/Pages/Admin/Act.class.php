@@ -29,7 +29,8 @@ class Act extends AdminAct {
 				$menu[$item['item_id']] = array('order' => $order, 'parent' => $currentParent);
 			}
 		}
-		$this->actMenu($menu, $_REQUEST['language']);
+		if(count($menu)) $this->actMenu($menu, $_REQUEST['language']);
+		else $this->actMenu(false, $_REQUEST['language']);
 	}
 
 	/**
@@ -37,16 +38,19 @@ class Act extends AdminAct {
 	 * @param $language
 	 */
 	public function actMenu($menu, $language) {
-		$menuOrder = ' menu_order = CASE id' . PHP_EOL;
-		$menuParent = 'menu_parent = CASE id' . PHP_EOL;
-		foreach($menu AS $id => $value) {
-			$menuOrder .= 'WHEN ' . $id . ' THEN ' . $value['order'] . PHP_EOL;
-			$menuParent .= 'WHEN ' . $id . ' THEN ' . $value['parent'] . PHP_EOL;
-		}
-		$menuOrder .= ' ELSE 0' . PHP_EOL;
-		$menuParent .= ' ELSE 0' . PHP_EOL;
-		$sql = 'UPDATE pages SET' .$menuOrder . 'END, ' . $menuParent . 'END';
 		$data = array();
+		if(!$menu) $sql = 'UPDATE pages SET menu_order = 0';
+		else {
+			$menuOrder = ' menu_order = CASE id' . PHP_EOL;
+			$menuParent = 'menu_parent = CASE id' . PHP_EOL;
+			foreach($menu AS $id => $value) {
+				$menuOrder .= 'WHEN ' . $id . ' THEN ' . $value['order'] . PHP_EOL;
+				$menuParent .= 'WHEN ' . $id . ' THEN ' . $value['parent'] . PHP_EOL;
+			}
+			$menuOrder .= ' ELSE 0' . PHP_EOL;
+			$menuParent .= ' ELSE 0' . PHP_EOL;
+			$sql = 'UPDATE pages SET' . $menuOrder . 'END, ' . $menuParent . 'END';
+		}
 		if(!empty($language)) {
 			$paramType = 's';
 			$sql .= ' WHERE language = ?';
