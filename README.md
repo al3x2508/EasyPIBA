@@ -18,8 +18,9 @@ Users that are looking for Products inside your shop that are organized into Cat
 1. Download the demo sql file for this structure from http://www.easypiba.com/Demo/demo.sql (works only with MySQL >= 5.6).
 2. Download from http://www.easypiba.com/Demo/Module.zip the modules used for this demo.
 3. Unzip the contents of the zip you downloaded in your Module folder
-4.1. Run the following command: php admin/modules.php reread
-4.2. If you don't have access to CLI then add the following records in your application database:
+4. Add the new modules in the database
+   - Run the following command: php admin/modules.php reread
+   - If you don't have access to CLI then add the following records in your application database:
 INSERT INTO `modules` (`name`, `has_frontend`, `has_backend`) VALUES ('Demo', 1, 0), ('Categories', 0, 1), ('Orders', 0, 1), ('Products', 0, 1);
 5. Go to http://YourUrl/demo-shop address to generate the sample records for the demo shop
 6. Take a look at the administration section and the files from the Module folder
