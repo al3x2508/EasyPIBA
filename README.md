@@ -15,8 +15,8 @@ Let's say you want to build a simple e-commerce application. Your shop should ha
 
 Users that are looking for Products inside your shop that are organized into Categories. After they found the specified products they add them into carts and finally are placing Orders.
 
-Download the demo sql file for this structure from here (works only with MySQL >= 5.6).
-Download from here the modules used for this demo.
+Download the demo sql file for this structure from http://www.easypiba.com/Demo/demo.sql (works only with MySQL >= 5.6).
+Download from http://www.easypiba.com/Demo/Module.zip the modules used for this demo.
 Unzip the contents of the zip you downloaded in your Module folder
 Run the following command: php admin/modules.php reread
 If you don't have access to CLI then add the following records in your application database:
