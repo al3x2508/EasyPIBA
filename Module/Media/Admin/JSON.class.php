@@ -10,7 +10,7 @@ class JSON extends Admin {
 		$this->permission = "Edit pages";
 		parent::__construct();
 	}
-	public static function get() {
+	public function get() {
 		if(!array_key_exists('id', $_REQUEST)) {
 			$media = new Model('media');
 			$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['length']:10;

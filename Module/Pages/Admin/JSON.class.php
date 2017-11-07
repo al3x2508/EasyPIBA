@@ -9,7 +9,7 @@ class JSON extends Admin {
 		$this->permission = "Edit pages";
 		parent::__construct();
 	}
-	public static function get() {
+	public function get() {
 		if(!array_key_exists('id', $_REQUEST)) {
 			$pages = new Model('pages');
 			if(!array_key_exists('menu', $_REQUEST)) {
