@@ -1,14 +1,9 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
-
-CREATE TABLE IF NOT EXISTS `admins` (
+CREATE TABLE `admins` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `username` varchar(16) NOT NULL,
@@ -18,22 +13,14 @@ CREATE TABLE IF NOT EXISTS `admins` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `admins_permissions` (
+CREATE TABLE `admins_permissions` (
   `admin` int(3) NOT NULL,
   `permission` tinyint(2) NOT NULL,
   PRIMARY KEY (`admin`,`permission`),
   KEY `permission` (`permission`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `admins_permissions` (`admin`, `permission`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6);
-
-CREATE TABLE IF NOT EXISTS `cookies` (
+CREATE TABLE `cookies` (
   `user` varchar(9) NOT NULL,
   `token` varchar(255) NOT NULL,
   `expiration_date` timestamp NULL DEFAULT NULL,
@@ -41,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `cookies` (
   KEY `client` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `countries` (
+CREATE TABLE `countries` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `code` varchar(3) CHARACTER SET utf8 NOT NULL,
@@ -299,7 +286,7 @@ INSERT INTO `countries` (`id`, `name`, `code`, `language_code`) VALUES
 (246, 'Zambia', 'ZM', 'en'),
 (247, 'Zimbabwe', 'ZW', 'en');
 
-CREATE TABLE IF NOT EXISTS `languages` (
+CREATE TABLE `languages` (
   `code` varchar(3) CHARACTER SET utf8 NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`code`)
@@ -490,13 +477,28 @@ INSERT INTO `languages` (`code`, `name`) VALUES
 ('zh', 'Chinese'),
 ('zu', 'Zulu');
 
-CREATE TABLE IF NOT EXISTS `media` (
+CREATE TABLE `media` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `news` (
+CREATE TABLE `modules` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `has_frontend` tinyint(1) NOT NULL,
+  `has_backend` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+INSERT INTO `modules` (`id`, `name`, `has_frontend`, `has_backend`) VALUES
+(1, 'Users', 1, 1),
+(2, 'Testimonials', 1, 1),
+(3, 'News', 1, 1),
+(4, 'Pages', 0, 1),
+(5, 'Administrators', 0, 1);
+
+CREATE TABLE `news` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `language` varchar(3) CHARACTER SET utf8 DEFAULT 'en',
   `title` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -510,7 +512,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   KEY `language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `pages` (
+CREATE TABLE `pages` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `language` varchar(3) DEFAULT 'en',
@@ -532,14 +534,14 @@ CREATE TABLE IF NOT EXISTS `pages` (
   KEY `language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `passwords_reset` (
+CREATE TABLE `passwords_reset` (
   `user` int(5) NOT NULL,
   `code` varchar(64) NOT NULL,
   `expiration_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `permissions` (
+CREATE TABLE `permissions` (
   `id` tinyint(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -553,7 +555,7 @@ INSERT INTO `permissions` (`id`, `name`) VALUES
 (5, 'Edit testimonials'),
 (6, 'Edit administrators');
 
-CREATE TABLE IF NOT EXISTS `strings` (
+CREATE TABLE `strings` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `text` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
@@ -578,18 +580,18 @@ INSERT INTO `strings` (`id`, `text`) VALUES
 (16, 'There is another user registered with this email address'),
 (17, 'You will be redirected to confirm your email in 1 second');
 
-CREATE TABLE IF NOT EXISTS `testimonials` (
+CREATE TABLE `testimonials` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `company` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_bin NOT NULL,
   `short` text CHARACTER SET utf8,
   `content` text CHARACTER SET utf8 NOT NULL,
   `status` tinyint(1) DEFAULT '1' COMMENT '0 - Hidden, 1 - Visible',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `translations` (
+CREATE TABLE `translations` (
   `string_id` int(5) NOT NULL,
   `language` varchar(3) CHARACTER SET utf8 NOT NULL,
   `translation` text CHARACTER SET utf8 NOT NULL,
@@ -598,7 +600,7 @@ CREATE TABLE IF NOT EXISTS `translations` (
   KEY `language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
   `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -620,16 +622,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `cookie` (`cookie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `user_confirm` (
+CREATE TABLE `user_confirm` (
   `user` int(5) NOT NULL,
   `code` varchar(64) NOT NULL,
   PRIMARY KEY (`user`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 ALTER TABLE `admins_permissions`
-  ADD CONSTRAINT `admins_permissions_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `admins_permissions_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `admins_permissions_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `admins_permissions_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `countries`
   ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`language_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -653,7 +656,4 @@ ALTER TABLE `users`
 
 ALTER TABLE `user_confirm`
   ADD CONSTRAINT `user_confirm_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+COMMIT;
