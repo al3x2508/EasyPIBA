@@ -656,4 +656,3 @@ ALTER TABLE `users`
 
 ALTER TABLE `user_confirm`
   ADD CONSTRAINT `user_confirm_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
