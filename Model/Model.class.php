@@ -75,7 +75,7 @@ namespace Model {
 			//Use the first parameter as the table name
 			$this->tableName = $tableName;
 			//If the second parameter isn't set then get the table schema
-			if(!$schema) $this->getSchema();
+			if($schema === false) $this->getSchema();
 			else $this->schema = $schema;
 		}
 
@@ -208,7 +208,7 @@ namespace Model {
 
 		/**
 		 * Insert a new record
-		 * @return bool|Model
+		 * @return array|Model
 		 */
 		public function create() {
 			//If the last entity was not cleared by ID field we'll clear it
@@ -233,15 +233,18 @@ namespace Model {
 			try {
 				$stmt = $this->db->prepare($sql);
 				call_user_func_array(array($stmt, 'bind_param'), $data);
-				$stmt->execute();
-				$id = $stmt->insert_id;
-				$stmt->free_result();
-				if($id) $this->id = $id;
-				return $this;
+				$return = $stmt->execute();
+				if($return) {
+					$id = $stmt->insert_id;
+					$stmt->free_result();
+					if($id) $this->id = $id;
+					return $this;
+				}
+				return array('error' => $stmt->error);
 			}
 			catch(\mysqli_sql_exception $e) {
 				trigger_error($sql . "****" . $e->getMessage() . "\r\n" . print_r(debug_backtrace(), true), E_USER_WARNING);
-				return false;
+				return array('error' => $e->getMessage());
 			}
 		}
 
@@ -266,12 +269,9 @@ namespace Model {
 			if(count($join)) {
 				foreach($join AS $table_reference => $arrJoin) {
 					foreach($arrJoin['columns'] AS $column) $columnsToSelect .= ", `j_{$table_reference}`.{$column} AS `{$table_reference}-{$column}`";
+					if(!is_array($arrJoin['reference'])) $joins .= " {$arrJoin['joinType']} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$arrJoin['reference']} = {$this->tableName}.{$arrJoin['column']}";
+					else $joins .= " {$arrJoin['reference'][1]} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$arrJoin['reference'][0]} = {$this->tableName}.{$arrJoin['column']}";
 				}
-			}
-			//Build the sql joins
-			foreach($join AS $table_reference => $column_reference) {
-				if(!is_array($column_reference['reference'])) $joins .= " {$column_reference['joinType']} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference']} = {$this->tableName}.{$column_reference['column']}";
-				else $joins .= " {$column_reference['reference'][1]} JOIN {$table_reference} `j_{$table_reference}` ON `j_{$table_reference}`.{$column_reference['reference'][0]} = {$this->tableName}.{$column_reference['column']}";
 			}
 			//Store the column types into $param_type (eg: `ids`, meaning integer double string)
 			//Build the sql for custom fields
@@ -538,7 +538,7 @@ namespace Model {
 
 		/**
 		 * @param bool $where
-		 * @return Model|bool
+		 * @return Model|array
 		 */
 		public function update($where = false) {
 			if(property_exists($this, 'id')) {
@@ -581,17 +581,17 @@ namespace Model {
 				}
 				$stmt = $this->db->prepare("UPDATE {$this->tableName} SET " . $set . " WHERE {$where}");
 				call_user_func_array(array($stmt, 'bind_param'), $data);
-				$stmt->execute();
+				$return = $stmt->execute();
 				$stmt->free_result();
-
-				return $this;
+				if($return) return $this;
+				return array('error' => $stmt->error);
 			}
-			return false;
+			return array('error' => __('No where statement'));
 		}
 
 		/**
 		 * @param string $whereOp
-		 * @return bool
+		 * @return bool|array
 		 */
 		public function delete($whereOp = 'AND') {
 			$where = '';
@@ -653,11 +653,12 @@ namespace Model {
 			if(!empty($where)) {
 				$stmt = $this->db->prepare($sql);
 				if(count($data) > 0) call_user_func_array(array($stmt, 'bind_param'), $data);
-				$stmt->execute();
+				$return = $stmt->execute();
 				$stmt->free_result();
+				if($return) return true;
+				return array('error' => $stmt->error);
 			}
-
-			return true;
+			return array('error' => __('No where statement'));
 		}
 
 		/**

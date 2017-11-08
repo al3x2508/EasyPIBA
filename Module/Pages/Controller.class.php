@@ -109,7 +109,8 @@ class Controller {
 						$pag = array('url' => _FOLDER_URL_ . $langUrl . $page['url'], 'menu_text' => $page['menu_text'], 'submenu_text' => $page['submenu_text'], 'menu_parent' => $page['menu_parent']);
 						//If page url is the same as the current url set link class as active
 						if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page['url'] || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page['url']) $pag['classes'] = 'active';
-						$array_menu[$page['menu_parent']][] = $pag;
+						$array_menu[$page['menu_parent']][$page['menu_order']] = $pag;
+						ksort($array_menu[$page['menu_parent']]);
 					}
 					else {
 						foreach($page AS $indexr => $pager) {

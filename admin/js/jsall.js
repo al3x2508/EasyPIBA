@@ -192,6 +192,10 @@ $(function () {
 	});
 	$(window).on('keyup', function (e) {
 		if (e.which == 27 && $('.modal:visible').length > 0) {
+			$(".remove-pic").each(function() {
+				var filename = $(this).data('src');
+				$.post('act/Media', {clearImg: filename});
+			});
 			saveButton.data("actid", 0);
 			$('.modal').hide();
 		}
@@ -203,16 +207,10 @@ $(function () {
 		if (!sc.length || sc.data("actid") == 0) {
 			var eimg = mdldlg.find("#edimage");
 			if (eimg.length > 0 && eimg.data('imgname') != '') $.post('act/Media', {clearImg: eimg.data('imgname')});
-			var fimghid = mdldlg.find('.fimghid');
-			if (fimghid.length > 0) {
-				fimghid.each(function () {
-					if ($(this).data('imgname') != '') {
-						var dataPost = {clearImg: $(this).data('imgname')};
-						if ($(this).data('targetdir') != '') dataPost.targetdir = $(this).data('targetdir');
-						$.post('act/Media', dataPost);
-					}
-				});
-			}
+			$(".remove-pic").each(function() {
+				var filename = $(this).data('src');
+				$.post('act/Media', {clearImg: filename});
+			});
 		}
 	});
 	$("#save").click(function () {
@@ -252,14 +250,23 @@ $(function () {
 				}
 			}
 		});
+		if($(".remove-pic").length > 0) {
+			data.pictures = [];
+			$(".remove-pic").each(function () {
+				data.pictures.push($(this).data('src'));
+			});
+		}
 		$.ajax({
 			url: 'act/' + jsonPage,
 			type: 'POST',
 			data: data,
 			dataType: 'text',
-			success: function () {
-				table.fnReloadAjax();
-				mdl.hide();
+			success: function (data) {
+				if(data != 1) alert(data);
+				else {
+					table.fnReloadAjax();
+					mdl.hide();
+				}
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				console.log(thrownError);

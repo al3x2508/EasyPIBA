@@ -19,7 +19,7 @@ class Page {
 		}
 	}
 	public function getMenu() {
-		$menu = array('url' => 'news/', 'menu_text' => __('News'), 'submenu_text' => '', 'menu_parent' => 0);
+		$menu = array('url' => 'news/', 'menu_text' => __('News'), 'submenu_text' => '', 'menu_parent' => 0, 'menu_order' => 1);
 		if(preg_match('/news\/.*/', $this->url)) $menu['class'] = 'active';
 		return array($menu);
 	}

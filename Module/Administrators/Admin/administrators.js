@@ -13,11 +13,11 @@ function loadData(aoData) {
 	if ($("#statusf").val() != '-1') filters.filters['status'] = $("#statusf").val();
 	return filters;
 }
-function dataEdit(date) {
+function dataEdit(data) {
 	$('[name="edpermission[]"]').each(function () {
 		$(this).prop('checked', false).iCheck('update');
 	});
-	$.each(date.access, function (index, value) {
+	$.each(data.access, function (index, value) {
 		$('[name="edpermission[' + value.permission + ']"]').prop('checked', true).iCheck('update');
 	});
 }

@@ -318,12 +318,6 @@ namespace {
 			if($user) $_SESSION['user'] = $user;
 		}
 	}
-	//Sanitize POST
-	if(count($_POST)) {
-		foreach($_POST AS $key => $value) {
-			if(is_string($value)) $_POST[$key] = strip_tags(htmlspecialchars(stripslashes(trim($value))));
-		}
-	}
 	/**
 	 * Translate a string
 	 * @param $string

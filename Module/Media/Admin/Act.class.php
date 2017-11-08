@@ -63,41 +63,21 @@ class Act extends AdminAct {
 			}
 			else {
 				if(isset($_FILES) && array_key_exists('edimage', $_FILES)) {
-					if($_FILES['edimage']['size'] <= 5242880) {
-						$allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
-						$detectedType = exif_imagetype($_FILES['edimage']['tmp_name']);
-						if(in_array($detectedType, $allowedTypes)) {
-							$uid = uniqid('img_');
-							$filename = $uid . basename($_FILES['edimage']['name']);
-							$target_dir = _APP_DIR_ . 'uploads/';
-							if(array_key_exists('targetdir', $_REQUEST)) $target_dir .= $_REQUEST['targetdir'] . '/';
-							$target_file = $target_dir . $filename;
-							$check = getimagesize($_FILES['edimage']['tmp_name']);
-							if($check !== false) {
-								if(move_uploaded_file($_FILES['edimage']['tmp_name'], $target_file)) {
-									$path_parts = pathinfo($target_file);
-									$thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
-									$thumb_target_file = $target_dir . $thumb_file_name;
-									$thumb = new \Utils\PHPThumb\GD($target_file);
-									$thumb->resize(100, 100);
-									$thumb->save($thumb_target_file, 'jpg');
-									$targetThumbDir = _ADDRESS_ . _FOLDER_URL_ . 'uploads/';
-									if(array_key_exists('targetdir', $_REQUEST)) $targetThumbDir .= $_REQUEST['targetdir'] . '/';
-									echo json_encode(array('src' => $targetThumbDir . $thumb_file_name, 'image' => $filename));
-									exit;
-								}
-								else $error = __('Error uploading');
-							}
-							else $error = __('File is not an image');
+					if(is_array($_FILES['edimage']['name'])) {
+						$return = array();
+						for($i = 0; $i < count($_FILES['edimage']['name']); $i++) {
+							$file = array();
+							foreach(array_keys($_FILES['edimage']) AS $key) $file[$key] = $_FILES['edimage'][$key][$i];
+							$return[] = self::uploadImg($file, true);
 						}
-						else $error = __('File is not an image');
+						echo json_encode($return);
+						exit;
 					}
-					else $error = __('Max upload 5MB');
+					else $error = self::uploadImg($_FILES['edimage']);
 				}
 				elseif(array_key_exists('clearImg', $_POST)) {
 					$filename = strip_tags($_POST['clearImg']);
 					$target_dir = _APP_DIR_ . 'uploads/';
-					if(array_key_exists('targetdir', $_REQUEST)) $target_dir .= $_REQUEST['targetdir'] . '/';
 					$target_file = $target_dir . $filename;
 					$path_parts = pathinfo($target_file);
 					$thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
@@ -112,6 +92,40 @@ class Act extends AdminAct {
 			return true;
 		}
 		return false;
+	}
+	private static function uploadImg($file, $return = false) {
+		if($file['size'] <= 5242880) {
+			$allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
+			$detectedType = exif_imagetype($file['tmp_name']);
+			if(in_array($detectedType, $allowedTypes)) {
+				$uid = uniqid('img_');
+				$filename = $uid . basename($file['name']);
+				$target_dir = _APP_DIR_ . 'uploads/';
+				$target_file = $target_dir . $filename;
+				$check = getimagesize($file['tmp_name']);
+				if($check !== false) {
+					if(move_uploaded_file($file['tmp_name'], $target_file)) {
+						$path_parts = pathinfo($target_file);
+						$thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
+						$thumb_target_file = $target_dir . $thumb_file_name;
+						$thumb = new \Utils\PHPThumb\GD($target_file);
+						$thumb->resize(100, 100);
+						$thumb->save($thumb_target_file, 'jpg');
+						$targetThumbDir = _FOLDER_URL_ . 'uploads/';
+						if(!$return) {
+							echo json_encode(array('src' => $targetThumbDir . $thumb_file_name, 'image' => $filename));
+							exit;
+						}
+							else return array('src' => $targetThumbDir . $thumb_file_name, 'image' => $filename);
+					}
+					else $error = __('Error uploading');
+				}
+				else $error = __('File is not an image');
+			}
+			else $error = __('File is not an image');
+		}
+		else $error = __('Max upload 5MB');
+		return $error;
 	}
 }
 $media = new Act();

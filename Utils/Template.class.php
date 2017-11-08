@@ -171,6 +171,7 @@ class Template {
 		if(!file_exists($this->filename) || is_dir($this->filename)) die("Error loading template ({$this->filename}).");
 		//Load the html template
 		$this->template = file_get_contents($this->filename);
+		$this->HOME_LINK = _FOLDER_URL_;
 		require_once(dirname(__FILE__) . '/scripts.php');
 		$userLanguage = Util::getUserLanguage();
 		//Set the javascript variable for language
@@ -225,7 +226,8 @@ class Template {
 			$menuRight .= '  					</div>
 				</div>' . PHP_EOL;
 		}
-		$menuRight .= $this->menu($array_menu['menu_right']);
+		$menuR = $this->menu($array_menu['menu_right']);
+		if(!empty($menuR)) $menuRight .= '<ul class="navbar-nav mr-auto">' . $menuR . '</ul>';
 		$this->menu_right = $menuRight;
 		//End of menu right
 
