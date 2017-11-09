@@ -3,7 +3,7 @@ if (php_sapi_name() == "cli") {
 	if($argv[1] == 'reread') {
 		require_once dirname(dirname(__FILE__)) . '/Utils/functions.php';
 		$modules = new \Model\Model('modules');
-		$modules->where(array('id' => array(0, ' > ', 'i')));
+		$modules->where(array('id' => array(0, ' > ', 'i'), 'name' => array('Pages', '!=', 's')));
 		$modules->delete();
 		$objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(dirname(dirname(__FILE__))), \RecursiveIteratorIterator::SELF_FIRST);
 		$Regex = new \RegexIterator($objects, '/^.+\/Page\.class\.php$/i', \RecursiveRegexIterator::GET_MATCH);

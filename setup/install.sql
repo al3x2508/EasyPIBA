@@ -495,7 +495,7 @@ INSERT INTO `modules` (`id`, `name`, `has_frontend`, `has_backend`) VALUES
 (1, 'Users', 1, 1),
 (2, 'Testimonials', 1, 1),
 (3, 'News', 1, 1),
-(4, 'Pages', 0, 1),
+(4, 'Pages', 1, 1),
 (5, 'Administrators', 0, 1);
 
 CREATE TABLE `news` (
