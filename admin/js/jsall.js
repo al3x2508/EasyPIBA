@@ -262,7 +262,7 @@ $(function () {
 			data: data,
 			dataType: 'text',
 			success: function (data) {
-				if(data != 1) alert(data);
+				if(data != 1 && data != '') alert(data);
 				else {
 					table.fnReloadAjax();
 					mdl.hide();
