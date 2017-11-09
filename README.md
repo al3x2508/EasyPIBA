@@ -21,6 +21,6 @@ Users that are looking for Products inside your shop that are organized into Cat
 4. Add the new modules in the database
    - Run the following command: php admin/modules.php reread
    - If you don't have access to CLI then add the following records in your application database:
-INSERT INTO `modules` (`name`, `has_frontend`, `has_backend`) VALUES ('Demo', 1, 0), ('Categories', 0, 1), ('Orders', 0, 1), ('Products', 0, 1);
+```INSERT INTO `modules` (`name`, `has_frontend`, `has_backend`) VALUES ('Demo', 1, 0), ('Categories', 0, 1), ('Orders', 0, 1), ('Products', 1, 1);```
 5. Go to http://YourUrl/demo-shop address to generate the sample records for the demo shop
 6. Take a look at the administration section and the files from the Module folder
