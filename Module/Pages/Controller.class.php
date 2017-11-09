@@ -29,7 +29,7 @@ class Controller {
 		$this->language = $language;
 		$page = new Model('pages');
 		$page->language = $language;
-		$page->url = $url;
+		$page->url = str_replace('.html', '', $url);
 		$page->visible = 1;
 		$page = $page->get();
 		if(count($page)) {
