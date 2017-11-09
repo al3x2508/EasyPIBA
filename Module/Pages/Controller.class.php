@@ -105,6 +105,7 @@ class Controller {
 				$classMenu = $class->getMenu();
 				if($classMenu) foreach($classMenu AS $index => $page) {
 					if($index !== 'menu_right') {
+						if($page['menu_parent'] === 0) $page['menu_order'] += count($pages);
 						if(!array_key_exists($page['menu_parent'], $array_menu)) $array_menu[$page['menu_parent']] = array();
 						$pag = array('url' => _FOLDER_URL_ . $langUrl . $page['url'], 'menu_text' => $page['menu_text'], 'submenu_text' => $page['submenu_text'], 'menu_parent' => $page['menu_parent']);
 						//If page url is the same as the current url set link class as active
