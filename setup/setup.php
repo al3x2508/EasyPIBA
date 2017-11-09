@@ -1,4 +1,6 @@
 <?php
+$utilsDir = dirname(dirname(__FILE__)) . '/Utils/';
+if(!is_writable($utilsDir)) die($utilsDir . ' directory is not writable!');
 if(!count($_POST)) echo file_get_contents(dirname(__FILE__) . '/setup.html');
 else {
 	$configFile = dirname(dirname(__FILE__)) . '/Utils/config.php';
