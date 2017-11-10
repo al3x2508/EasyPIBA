@@ -1,6 +1,4 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
@@ -524,13 +522,6 @@ CREATE TABLE IF NOT EXISTS `module_routes` (
   KEY `module` (`module`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-ALTER TABLE `module_admin_routes`
-  ADD CONSTRAINT `module_admin_routes_ibfk_1` FOREIGN KEY (`module`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `module_admin_routes_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `module_routes`
-  ADD CONSTRAINT `module_routes_ibfk_1` FOREIGN KEY (`module`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 CREATE TABLE `news` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `language` varchar(3) CHARACTER SET utf8 DEFAULT 'en',
@@ -669,6 +660,13 @@ ALTER TABLE `admins_permissions`
 
 ALTER TABLE `countries`
   ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`language_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `module_admin_routes`
+  ADD CONSTRAINT `module_admin_routes_ibfk_1` FOREIGN KEY (`module`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `module_admin_routes_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `module_routes`
+  ADD CONSTRAINT `module_routes_ibfk_1` FOREIGN KEY (`module`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
