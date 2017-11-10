@@ -226,7 +226,7 @@ class Template {
 			$menuRight .= '  					</div>
 				</div>' . PHP_EOL;
 		}
-		$menuR = $this->menu($array_menu['menu_right']);
+		$menuR = (array_key_exists('menu_right', $array_menu))?$this->menu($array_menu['menu_right']):'';
 		if(!empty($menuR)) $menuRight .= '<ul class="navbar-nav mr-auto">' . $menuR . '</ul>';
 		$this->menu_right = $menuRight;
 		//End of menu right

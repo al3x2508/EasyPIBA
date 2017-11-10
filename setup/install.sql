@@ -487,13 +487,6 @@ CREATE TABLE `modules` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-INSERT INTO `modules` (`id`, `name`) VALUES
-(1, 'Users'),
-(2, 'Testimonials'),
-(3, 'News'),
-(4, 'Pages'),
-(5, 'Administrators');
-
 CREATE TABLE IF NOT EXISTS `module_admin_routes` (
   `module` int(3) NOT NULL,
   `permission` tinyint(2) NOT NULL,
