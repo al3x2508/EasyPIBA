@@ -486,17 +486,50 @@ CREATE TABLE `media` (
 CREATE TABLE `modules` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `has_frontend` tinyint(1) NOT NULL,
-  `has_backend` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-INSERT INTO `modules` (`id`, `name`, `has_frontend`, `has_backend`) VALUES
-(1, 'Users', 1, 1),
-(2, 'Testimonials', 1, 1),
-(3, 'News', 1, 1),
-(4, 'Pages', 0, 1),
-(5, 'Administrators', 0, 1);
+INSERT INTO `modules` (`id`, `name`) VALUES
+(1, 'Users'),
+(2, 'Testimonials'),
+(3, 'News'),
+(4, 'Pages'),
+(5, 'Administrators');
+
+CREATE TABLE IF NOT EXISTS `module_admin_routes` (
+  `module` int(3) NOT NULL,
+  `permission` tinyint(2) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `menu_text` varchar(255) NOT NULL,
+  `menu_class` varchar(64) DEFAULT '',
+  `menu_parent` varchar(255) DEFAULT '',
+  PRIMARY KEY (`url`),
+  KEY `module` (`module`),
+  KEY `permission` (`permission`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `module_routes` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `module` int(3) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `type` tinyint(1) DEFAULT '0' COMMENT '0 - Exact match; 1 - Regex match',
+  `mustBeLoggedIn` tinyint(1) DEFAULT '0' COMMENT 'False - Guest; True - Logged in user',
+  `menu_position` tinyint(1) DEFAULT '0' COMMENT '0 - Not shown in menu; 1 - Top menu (default); 2 - Right menu',
+  `menu_text` varchar(255) DEFAULT NULL,
+  `submenu_text` varchar(255) DEFAULT NULL,
+  `menu_order` tinyint(3) DEFAULT '0',
+  `menu_parent` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `url` (`url`),
+  KEY `module` (`module`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+ALTER TABLE `module_admin_routes`
+  ADD CONSTRAINT `module_admin_routes_ibfk_1` FOREIGN KEY (`module`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `module_admin_routes_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `module_routes`
+  ADD CONSTRAINT `module_routes_ibfk_1` FOREIGN KEY (`module`) REFERENCES `modules` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE `news` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
