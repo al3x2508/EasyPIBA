@@ -163,6 +163,8 @@ define("_OG_IMAGE_", \'' . $filenameOgimg . '\');' . PHP_EOL;
 	COMMIT;";
 	$db = \Utils\Database::getInstance();
 	$db->multi_query($sql);
+	require_once dirname(dirname(__FILE__)) . '/admin/modules.php';
+	reread();
 	$db->close();
 	echo "Everything done. You can now delete the folder /setup from your installation directory.";
 }
