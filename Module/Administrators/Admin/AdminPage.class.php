@@ -1,22 +1,8 @@
 <?php
 namespace Module\Administrators\Admin;
-use Controller\AdminController;
 use Model\Model;
 
 class AdminPage extends \Controller\AdminPage {
-	public function __construct() {
-		$this->permission = 'Edit administrators';
-		$adminController = new AdminController();
-		$this->hasAccess = $adminController->checkPermission($this->permission);
-		return $this;
-	}
-	public function getMenu($returnPermissions, $currentLink = '') {
-		if($this->hasAccess) {
-			if($returnPermissions) return array('administrators');
-			else return self::createLink(array('href' => 'administrators', 'text' => __('Administrators'), 'class' => 'users'), $currentLink);
-		}
-		return false;
-	}
 	public function output() {
 		$page = new \stdClass();
 		$page->title = __('Edit administrators');

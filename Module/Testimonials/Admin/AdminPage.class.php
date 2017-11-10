@@ -1,21 +1,7 @@
 <?php
 namespace Module\Testimonials\Admin;
-use Controller\AdminController;
 
 class AdminPage extends \Controller\AdminPage {
-	public function __construct() {
-		$this->permission = 'Edit testimonials';
-		$adminController = new AdminController();
-		$this->hasAccess = $adminController->checkPermission($this->permission);
-		return $this;
-	}
-	public function getMenu($returnPermissions, $currentLink = '') {
-		if($this->hasAccess) {
-			if($returnPermissions) return array('testimonials');
-			else return self::createLink(array('href' => 'testimonials', 'text' => __('Testimonials'), 'class' => 'comment-o'), $currentLink);
-		}
-		return false;
-	}
 	public function output() {
 		$page = new \stdClass();
 		$page->title = __('Testimonials');

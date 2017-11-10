@@ -7,14 +7,6 @@ use Model\Model;
  */
 abstract class AdminPage {
 	/**
-	 * @var string
-	 */
-	public $hasAccess = false;
-	/**
-	 * @var
-	 */
-	public $permission;
-	/**
 	 * @param $key
 	 * @param $value
 	 */
@@ -27,14 +19,16 @@ abstract class AdminPage {
 	 * @return bool|string
 	 */
 	public static function getCurrentModule($pagename) {
-		$modules = new Model('modules');
-		$modules->has_backend = 1;
-		$modules = $modules->get();
-		foreach($modules AS $module) {
-			$class = 'Module\\' . $module->name . '\\Admin\\AdminPage';
-			$class = new $class();
-			$classMenu = $class->getMenu(true);
-			if($classMenu && in_array($pagename, $classMenu)) return $class;
+		if(!empty($pagename)) {
+			$mAR = new Model('module_admin_routes');
+			$mAR = $mAR->getOneResult('url', $pagename);
+			$admins_permissions = new Model('admins_permissions');
+			$admins_permissions->admin = AdminController::getCurrentUser()->id;
+			$admins_permissions->permission = $mAR->permission;
+			if(count($admins_permissions->get())) {
+				$class = 'Module\\' . $mAR->modules->name . '\\Admin\\AdminPage';
+				return new $class();
+			}
 		}
 		return false;
 	}

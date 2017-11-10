@@ -168,7 +168,7 @@ $(function () {
 								}
 								else if (!elm.is(':file')) elm.val(value);
 								else {
-									$('#imagePreview').attr('src', '/img/' + $('#imagePreview').data('folder') + '/' + value);
+									if(value) $('#imagePreview').attr('src', '/img/' + $('#imagePreview').data('folder') + '/' + value);
 									$('#edimage').data('imgname', '');
 								}
 								if (elm.hasClass('ui-autocomplete-input')) {

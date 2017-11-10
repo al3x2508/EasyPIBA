@@ -1,4 +1,6 @@
 <?php
+use Controller\AdminController;
+use Controller\AdminPage;
 use Model\Model;
 /**
  * @property string h1
@@ -84,16 +86,23 @@ class Template {
 
 	public function getLinks() {
 		$return = array();
-		$return[] = \Controller\AdminPage::createLink(array('href' => '/' . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
-		$modules = new Model('modules');
-		$modules->has_backend = 1;
-		$modules = $modules->get();
-		foreach($modules AS $module) {
-			$class = 'Module\\' . $module->name . '\\Admin\\AdminPage';
-			$class = new $class();
-			$classMenu = $class->getMenu(false, $this->page_name);
-			if($classMenu) $return[] = $classMenu;
+		$return[] = AdminPage::createLink(array('href' => '/' . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
+		$admins_permissions = new Model('admins_permissions');
+		$admins_permissions->admin = AdminController::getCurrentUser()->id;
+		$admins_permissions = $admins_permissions->get();
+		$idPermissions = array();
+		foreach($admins_permissions AS $permission) $idPermissions[] = $permission->permission;
+		$mAR = new Model('module_admin_routes');
+		$mAR->order('menu_parent ASC, permission ASC, url ASC');
+		$mAR = $mAR->get();
+		$menuArray = [];
+		foreach($mAR AS $moduleURL) {
+			if(in_array($moduleURL->permission, $idPermissions) && !empty($moduleURL->menu_text)) {
+				if(empty($moduleURL->menu_parent)) $menuArray[$moduleURL->url] = array('href' => $moduleURL->url, 'text' => __($moduleURL->menu_text), 'class' => $moduleURL->menu_class);
+				else $menuArray[$moduleURL->menu_parent]['submenu'][] = array('href' => $moduleURL->url, 'text' => __($moduleURL->menu_text), 'class' => $moduleURL->menu_class);
+			}
 		}
+		foreach($menuArray AS $menu) $return[] = AdminPage::createLink($menu, $this->currentUrl);
 		return '<ul class="sidebar-menu">' . join('', $return) . '</ul>';
 	}
 

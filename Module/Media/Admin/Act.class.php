@@ -116,7 +116,7 @@ class Act extends AdminAct {
 							echo json_encode(array('src' => $targetThumbDir . $thumb_file_name, 'image' => $filename));
 							exit;
 						}
-							else return array('src' => $targetThumbDir . $thumb_file_name, 'image' => $filename);
+						else return array('src' => $targetThumbDir . $thumb_file_name, 'image' => $filename);
 					}
 					else $error = __('Error uploading');
 				}
