@@ -1,3 +1,5 @@
+<p align="center"><img src="http://www.easypiba.com/img/easypiba.png"></p>
+
 # EasyPIBA - A lightweight PHP framework
 
 In order to install EasyPIBA you need to follow these instructions:

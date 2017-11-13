@@ -5,6 +5,9 @@ var jsstrings = {},
 	currentPage = 0,
 	saveButton;
 $(function () {
+	$(".sidebar-toggle").click(function() {
+		$('body').toggleClass('sidebar-collapse');
+	});
 	if ($("#save").length > 0) saveButton = $("#save");
 	else saveButton = $("#customSave");
 	$.getJSON("/js/en.json", function (data) {
