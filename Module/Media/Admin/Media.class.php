@@ -11,7 +11,7 @@ class Media {
 	public function __construct() {
 		$this->title = __('Media');
 		$this->h1 = __('Media');
-		$this->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','js/jsall.js','../../Module/Media/Admin/media.js');
+		$this->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','js/jsall.js','../Module/Media/Admin/media.js');
 		$this->css = array('plugins/datatables/dataTables.bootstrap.css');
 		$this->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Media') . '</h3></div>

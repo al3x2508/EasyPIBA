@@ -13,7 +13,7 @@ class Admins {
 	public function __construct() {
 		$this->title = __('Edit administrators');
 		$this->h1 = __('Edit administrators');
-		$this->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/iCheck/icheck.min.js','js/jsall.js','../../Module/Administrators/Admin/administrators.js');
+		$this->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/iCheck/icheck.min.js','js/jsall.js','../Module/Administrators/Admin/administrators.js');
 		$this->css = array('plugins/datatables/dataTables.bootstrap.css', 'plugins/iCheck/all.css');
 		$htmlPerms = '';
 		$permissions = new Model('permissions');

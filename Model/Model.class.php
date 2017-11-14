@@ -715,6 +715,15 @@ namespace Model {
 			return true;
 		}
 
+		public function runMultiQuery($sql) {
+			$db = $this->db;
+			$db->begin_transaction();
+			$db->multi_query($sql);
+			$db->commit();
+			while(mysqli_more_results($db)) mysqli_next_result($db);
+			return true;
+		}
+
 		/**
 		 * @return array
 		 */

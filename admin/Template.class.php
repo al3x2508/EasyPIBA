@@ -50,8 +50,11 @@ class Template {
 
 	public function loadTemplate() {
 		if(!file_exists($this->filename) || is_dir($this->filename)) die("Error loading template ({$this->filename}).");
+		$adminFolder = _FOLDER_URL_ . basename(dirname(__FILE__)) . '/';
 		$this->template = file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . $this->filename);
 		$this->APP_NAME = _APP_NAME_;
+		$this->FOLDER_URL = _FOLDER_URL_;
+		$this->ADMIN_FOLDER_URL = $adminFolder;
 		$this->logout = __('Logout');
 		foreach(get_object_vars($this) AS $key => $value) {
 			if(!is_object($value) && !is_array($value)) {
@@ -69,13 +72,13 @@ class Template {
 		}
 		if(property_exists($this->page, 'css') && count($this->page->css)) {
 			$replacement = '';
-			foreach($this->page->css AS $script) $replacement .= '		<link rel="stylesheet" href="' . $script . '" />' . PHP_EOL;
+			foreach($this->page->css AS $script) $replacement .= '		<link rel="stylesheet" href="' . $adminFolder . $script . '" />' . PHP_EOL;
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}
 		if(property_exists($this->page, 'js') && count($this->page->js)) {
 			$replacement = '';
-			foreach($this->page->js AS $script) $replacement .= '		<script type="text/javascript" src="' . $script . '"></script>' . PHP_EOL;
+			foreach($this->page->js AS $script) $replacement .= '		<script type="text/javascript" src="' . $adminFolder . $script . '"></script>' . PHP_EOL;
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}

@@ -11,7 +11,7 @@ class Modules {
 	public function __construct() {
 		$this->title = __('Modules');
 		$this->h1 = __('Modules');
-		$this->js = array('../../Module/Administrators/Admin/modules.js');
+		$this->js = array();
 		$this->css = array();
 		$this->content = '';
 		if(array_key_exists('reread', $_REQUEST)) {

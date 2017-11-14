@@ -172,6 +172,7 @@ class Template {
 		//Load the html template
 		$this->template = file_get_contents($this->filename);
 		$this->HOME_LINK = _FOLDER_URL_;
+		$this->FOLDER_URL = _FOLDER_URL_;
 		require_once(dirname(__FILE__) . '/scripts.php');
 		$userLanguage = Util::getUserLanguage();
 		//Set the javascript variable for language
@@ -234,7 +235,7 @@ class Template {
 		//Set the main javascripts
 		$mainJavascripts = 'jquery.min.js,main.js';
 		loadJs($mainJavascripts, $this->from_cache, false);
-		$this->MAIN_JAVASCRIPTS = '<script type="text/javascript" src="/js/' . md5($mainJavascripts) .'.js"></script>';
+		$this->MAIN_JAVASCRIPTS = '<script type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) .'.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
 
 		//Set the content values to replace inside html template
 		foreach(get_object_vars($this) AS $key => $value) {
@@ -260,7 +261,7 @@ class Template {
 				$scripts = implode(",", $js);
 				loadJs($scripts, $this->from_cache);
 				$replacement .= /** @lang text */
-					'		<script defer type="text/javascript" src="/js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
+					'		<script defer type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
 			}
 			$pos = strripos($this->template, "</script>");
 			$this->template = substr_replace($this->template, "\n" . $replacement, $pos + 9, 0);
@@ -283,7 +284,7 @@ class Template {
 
 			$footer = /** @lang text */
 				'		<noscript id="deferred-styles">
-			<link rel="stylesheet" type="text/css" href="/css/' . md5($scripts) . '.css" id="cssdeferred" />
+			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/' . md5($scripts) . '.css" id="cssdeferred" />
 		</noscript>
 		<script>
 			var loadDeferredStyles = function() {
