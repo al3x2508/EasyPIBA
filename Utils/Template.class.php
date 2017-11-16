@@ -111,9 +111,9 @@ class Template {
 	public function setBreadcrumbs($links) {
 		foreach($links as $key => $value) {
 			if('/' . $key != $_SERVER['REQUEST_URI']) $this->breadcrumbs = ($this->breadcrumbs == '') ? /** @lang text */
-				'<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
+				'<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
 			else $this->breadcrumbs = ($this->breadcrumbs == '') ? /** @lang text */
-				'<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
+				'<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
 		}
 	}
 
@@ -121,11 +121,22 @@ class Template {
 	 * @param $links
 	 */
 	public function setSidebar($links) {
-		$this->colsize = 9;
-		$this->sidebar = '<div class="sidebar col-3"><ul>';
+		$this->colsize = 10;
+		$this->sidebar = '<div class="sidebar col-2"><ul>';
 		foreach($links as $key => $value) {
-			$selected = ('/' . $key == $_SERVER['REQUEST_URI'])?' class="selected"':'';
-			$this->sidebar .= '<li' . $selected . '><a href="/' . $key . '" title="' . $value . '">' . $value . '</a></li>';
+			if(!is_array($value)) {
+				$selected = ('/' . $key == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
+				$this->sidebar .= '<li' . $selected . '><a href="' . _FOLDER_URL_ . $key . '" title="' . $value . '">' . $value . '</a></li>';
+			}
+			else {
+				$selected = ('/' . $key == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
+				$this->sidebar .= '<li' . $selected . '><a href="' . _FOLDER_URL_ . $key . '" title="' . $value['title'] . '">' . $value['title'] . '</a><ul>';
+				foreach($value['submenu'] as $key1 => $value1) {
+					$selected = ('/' . $key1 == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
+					$this->sidebar .= '<li' . $selected . '><a href="' . _FOLDER_URL_ . $key1 . '" title="' . $value1 . '">' . $value1 . '</a></li>';
+				}
+				$this->sidebar .= '</ul></li>';
+			}
 		}
 		$this->sidebar .= '</ul></div>';
 	}
@@ -345,7 +356,7 @@ class Template {
 							<div class="title testi-hone">' . $testimonial->name . '</div>
 							<div class="subtitle testi-htwo">' . $testimonial->authority . '</div>
 							<p class="testimonial-text">"' . nl2br($testimonial_content) . '"</p>
-							<a href="/testimonial' . $testimonial->id . '.html" class="readmore">' . __('read full text') . '</a>
+							<a href="' . _FOLDER_URL_ . 'testimonial' . $testimonial->id . '.html" class="readmore">' . __('read full text') . '</a>
 						</div>
 					</div>' . PHP_EOL;
 			}

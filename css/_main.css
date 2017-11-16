@@ -105,7 +105,14 @@ body {
 #testimonialsControls .carousel-item.active {
 	display:block;
 }
-.sidebar ul {
+.sidebar > ul {
 	list-style: none;
 	padding: 0;
+	font-size: .9em;
+}
+.sidebar > ul > li > ul {
+	color: #d6d6d6;
+	list-style: disc;
+	margin: 0;
+	padding-left: 2em;
 }
