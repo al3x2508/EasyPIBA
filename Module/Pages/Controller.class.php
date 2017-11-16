@@ -17,6 +17,7 @@ class Controller {
 	public $ogimage = '';
 	public $h1 = '';
 	public $breadcrumbs = array();
+	public $sidebar = array();
 	public $js = array();
 	public $css = array();
 	public $visible = true;

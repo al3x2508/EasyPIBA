@@ -41,6 +41,7 @@ if(!$page->title && $page->content && $page->visible) {
 }
 $template = new Utils\Template('template.html');
 $page->ogimage = _FOLDER_URL_ . 'img/' . (!empty($page->ogimage)?$page->ogimage:$og_image);
-foreach($page AS $key => $value) if($key != 'breadcrumbs') $template->$key = $value;
+foreach($page AS $key => $value) if(!in_array($key, array('breadcrumbs', 'sidebar'))) $template->$key = $value;
 if(count($page->breadcrumbs)) $template->setBreadcrumbs($page->breadcrumbs);
+if(count($page->sidebar)) $template->setSidebar($page->sidebar);
 $template->output();

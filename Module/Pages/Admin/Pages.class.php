@@ -75,6 +75,10 @@ class Pages {
 					<input type="text" class="form-control" id="edsubmenu_text" name="edsubmenu_text" placeholder="' . __('Submenu text') . '" />
                 </div>
                 <div class="form-group">
+					<label for="edvisible">' . __('Visible') . '</label>
+					<input type="checkbox" id="edvisible" name="edvisible" />
+                </div>
+                <div class="form-group">
 					<label for="edcontent">' . __('Content') . '</label>
 					<textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300" placeholder="' . __('Content') . '"></textarea>
                 </div>

@@ -32,6 +32,10 @@ class Template {
 	 */
 	private $breadcrumbs = '';
 	/**
+	 * @var string
+	 */
+	private $sidebar = '';
+	/**
 	 * @var bool
 	 */
 	private $menu = false;
@@ -90,6 +94,7 @@ class Template {
 		</script>';
 		if(!empty(_FBAPPID_)) $content_values['FBAPPID'] = '<meta property="fb:app_id" content="' . _FBAPPID_ . '" />';
 		foreach($content_values AS $key => $value) $this->$key = $value;
+		$this->colsize = 12;
 	}
 
 	/**
@@ -110,6 +115,19 @@ class Template {
 			else $this->breadcrumbs = ($this->breadcrumbs == '') ? /** @lang text */
 				'<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
 		}
+	}
+
+	/**
+	 * @param $links
+	 */
+	public function setSidebar($links) {
+		$this->colsize = 9;
+		$this->sidebar = '<div class="sidebar col-3"><ul>';
+		foreach($links as $key => $value) {
+			$selected = ('/' . $key == $_SERVER['REQUEST_URI'])?' class="selected"':'';
+			$this->sidebar .= '<li' . $selected . '><a href="/' . $key . '" title="' . $value . '">' . $value . '</a></li>';
+		}
+		$this->sidebar .= '</ul></div>';
 	}
 
 	/**
