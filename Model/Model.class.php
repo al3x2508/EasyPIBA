@@ -301,7 +301,7 @@ namespace Model {
 					$w = ($val == 'complexW')?$key:((is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
 					if($val != 'complexW') {
-						$tipData = (is_numeric($val) ? 'i' : 's');
+						$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && array_key_exists(2, $val))?$val[2]:'s'));
 						$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 					}
 				}
@@ -475,7 +475,7 @@ namespace Model {
 				foreach($this->where AS $key => $val) {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?';
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$tipData = (is_numeric($val) ? 'i' : 's');
+					$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && array_key_exists(2, $val))?$val[2]:'s'));
 					$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 				}
 			}
@@ -613,7 +613,7 @@ namespace Model {
 				foreach($this->where AS $key => $val) {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?';
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$tipData = (is_numeric($val) ? 'i' : 's');
+					$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && array_key_exists(2, $val))?$val[2]:'s'));
 					$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 				}
 			}
@@ -651,12 +651,17 @@ namespace Model {
 			}
 			$sql = "DELETE FROM " . $this->tableName . $where;
 			if(!empty($where)) {
-				$stmt = $this->db->prepare($sql);
-				if(count($data) > 0) call_user_func_array(array($stmt, 'bind_param'), $data);
-				$return = $stmt->execute();
-				$stmt->free_result();
-				if($return) return true;
-				return array('error' => $stmt->error);
+				try {
+					$stmt = $this->db->prepare($sql);
+					if(count($data) > 0) call_user_func_array(array($stmt, 'bind_param'), $data);
+					$return = $stmt->execute();
+					$stmt->free_result();
+					if($return) return true;
+					return array('error' => $stmt->error);
+				}
+				catch(\Exception $e) {
+					die($e->getMessage());
+				}
 			}
 			return array('error' => __('No where statement'));
 		}
@@ -707,6 +712,15 @@ namespace Model {
 				else $this->db->query($sql);
 			}
 
+			return true;
+		}
+
+		public function runMultiQuery($sql) {
+			$db = $this->db;
+			$db->begin_transaction();
+			$db->multi_query($sql);
+			$db->commit();
+			while(mysqli_more_results($db)) mysqli_next_result($db);
 			return true;
 		}
 

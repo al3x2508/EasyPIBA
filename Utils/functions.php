@@ -259,6 +259,13 @@ namespace Utils {
 			}
 			return $string;
 		}
+
+		public static function getCurrentUrl() {
+			$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
+			$page_url = ($query_position !== false) ? substr($_SERVER['REQUEST_URI'], 0, $query_position - 1) : $_SERVER['REQUEST_URI'];
+			$page_url = preg_replace('/^(' . str_replace('/', '\/', _FOLDER_URL_) . ')(.*)/', '$2', $page_url);
+			return $page_url;
+		}
 	}
 
 	/**
@@ -342,8 +349,7 @@ namespace {
 		}
 	}
 	if (php_sapi_name() != "cli") {
-		$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
-		$page_url = ($query_position !== false) ? trim(substr($_SERVER['REQUEST_URI'], 0, $query_position - 1), '/') : trim($_SERVER['REQUEST_URI'], '/');
+		$page_url = Util::getCurrentUrl();
 		if(array_key_exists('logout', $_GET) || $page_url == 'logout') Controller::logout();
 	}
 }

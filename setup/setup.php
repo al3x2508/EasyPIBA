@@ -1,6 +1,7 @@
 <?php
 $utilsDir = dirname(dirname(__FILE__)) . '/Utils/';
 if(!is_writable($utilsDir)) die($utilsDir . ' directory is not writable!');
+if(!file_exists(dirname(dirname(__FILE__)) . '/uploads/')) mkdir(dirname(dirname(__FILE__)) . '/uploads/');
 if(!count($_POST)) echo file_get_contents(dirname(__FILE__) . '/setup.html');
 else {
 	$configFile = dirname(dirname(__FILE__)) . '/Utils/config.php';
@@ -153,16 +154,17 @@ define("_LOGO_", \'' . $filenameLogo . '\');' . PHP_EOL;
 define("_OG_IMAGE_", \'' . $filenameOgimg . '\');' . PHP_EOL;
 	file_put_contents($configFile, $configFileContents);
 	require_once($configFile);
-	require_once(dirname(dirname(__FILE__)) . '/Utils/Database.class.php');
-	require_once(dirname(dirname(__FILE__)) . '/Utils/Bcrypt.class.php');
+	require_once($utilsDir . 'Database.class.php');
+	require_once($utilsDir . 'Bcrypt.class.php');
 	$bcrypt = new Utils\Bcrypt(10);
 	$adminPassword = $bcrypt->hash($_REQUEST['adminPassword']);
 	$sql = file_get_contents(dirname(__FILE__) . '/install.sql');
 	$sql .= "INSERT INTO `admins` (`id`, `name`, `username`, `password`, `status`) VALUES(1, 'Administrator', 'admin', '{$adminPassword}', 1);
-	INSERT INTO `admins_permissions` VALUES(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6);
-	COMMIT;";
+	INSERT INTO `admins_permissions` VALUES(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6);";
 	$db = \Utils\Database::getInstance();
 	$db->multi_query($sql);
-	$db->close();
+	while(mysqli_more_results($db)) mysqli_next_result($db);
+	require_once dirname(dirname(__FILE__)) . '/admin/modules.php';
+	reread();
 	echo "Everything done. You can now delete the folder /setup from your installation directory.";
 }

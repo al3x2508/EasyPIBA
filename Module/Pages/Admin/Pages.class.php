@@ -21,7 +21,7 @@ class Pages {
 			$selected = ($language->code == _DEFAULT_LANGUAGE_)?' selected':'';
 			$languageOptions .= "<option value=\"{$language->code}\"{$selected}>" . $language->name . "</option>";
 		}
-		$this->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/ckeditor/ckeditor.js','bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../../Module/Pages/Admin/pages.js');
+		$this->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/ckeditor/ckeditor.js','bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../Module/Pages/Admin/pages.js');
 		$this->css = array('bower_components/select2/dist/css/select2.min.css', 'plugins/datatables/dataTables.bootstrap.css');
 		$this->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Edit pages') . '</h3></div>
@@ -73,6 +73,10 @@ class Pages {
                 <div class="form-group">
 					<label for="edsubmenu_text">' . __('Submenu text') . '</label>
 					<input type="text" class="form-control" id="edsubmenu_text" name="edsubmenu_text" placeholder="' . __('Submenu text') . '" />
+                </div>
+                <div class="form-group">
+					<label for="edvisible">' . __('Visible') . '</label>
+					<input type="checkbox" id="edvisible" name="edvisible" />
                 </div>
                 <div class="form-group">
 					<label for="edcontent">' . __('Content') . '</label>

@@ -1,23 +1,11 @@
 <?php
 namespace Module\Testimonials;
 use Model\Model;
+use Utils\Util;
 
 class Page {
-	public $url = '';
-	public function __construct($url) {
-		$this->url = $url;
-	}
-	public function isOwnUrl() {
-		if(strpos($this->url, 'testimonials') === 0) return true;
-		else {
-			preg_match('/^testimonial(\d+)\.html/', $this->url, $matches);
-			return (count($matches))?true:false;
-		}
-	}
-	public function getMenu() {
-		return false;
-	}
 	public function output() {
+		$currentUrl = Util::getCurrentUrl();
 		$page = new \stdClass();
 		$page->title = __('Testimonials');
 		$page->description = __('Testimonials');
@@ -26,7 +14,7 @@ class Page {
 		$page->js = array();
 		$page->css = array();
 		$testimonials = new Model('testimonials');
-		if(strpos($this->url, 'testimonials') === 0) {
+		if(strpos($currentUrl, 'testimonials') === 0) {
 			$testimonials->status = 1;
 			$testimonials->order('id DESC');
 			$testimonials = $testimonials->get();
@@ -50,7 +38,7 @@ class Page {
 			}
 		}
 		else {
-			preg_match('/^testimonial(\d+)\.html/', $this->url, $matches);
+			preg_match('/^testimonial(\d+)\.html/', $currentUrl, $matches);
 			$id = $matches[1];
 			$testimonial = $testimonials->getOneResult('id', $id);
 			if($testimonial) {

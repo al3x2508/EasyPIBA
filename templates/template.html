@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<title>{title}</title>
-		<link rel="stylesheet" href="/css/fcddd62f559f5e59432c02cfbccf1c97.css" />
+		<link rel="stylesheet" href="{FOLDER_URL}css/main.css" />
 		<meta name="description" content="{description}" />
 		<meta property="og:title" content="{title}" />
 		<meta property="og:description" content="{description}" />
@@ -33,12 +33,13 @@
 				</nav>
 			</div>
 			<div class="row">
-				<div class="col-12 bd-content">
+				{sidebar}
+				<div class="col-{colsize} bd-content">
 					{content}
 				</div>
 			</div>
 		</div>
 		{MAIN_JAVASCRIPTS}
-		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="{FOLDER_URL}js/bootstrap.min.js" type="text/javascript"></script>
 	</body>
 </html>

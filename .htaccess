@@ -9,8 +9,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^logout$ index.php?logout=true [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^scripts.js /Utils/scripts.php [L]
-RewriteRule ^scripts.css /Utils/scripts.php [L]
+RewriteRule ^scripts.js Utils/scripts.php [L]
+RewriteRule ^scripts.css Utils/scripts.php [L]
+RewriteRule ^css/main.css Utils/scripts.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [L]

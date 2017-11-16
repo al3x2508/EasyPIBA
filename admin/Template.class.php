@@ -1,4 +1,6 @@
 <?php
+use Controller\AdminController;
+use Controller\AdminPage;
 use Model\Model;
 /**
  * @property string h1
@@ -48,8 +50,11 @@ class Template {
 
 	public function loadTemplate() {
 		if(!file_exists($this->filename) || is_dir($this->filename)) die("Error loading template ({$this->filename}).");
+		$adminFolder = _FOLDER_URL_ . basename(dirname(__FILE__)) . '/';
 		$this->template = file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . $this->filename);
 		$this->APP_NAME = _APP_NAME_;
+		$this->FOLDER_URL = _FOLDER_URL_;
+		$this->ADMIN_FOLDER_URL = $adminFolder;
 		$this->logout = __('Logout');
 		foreach(get_object_vars($this) AS $key => $value) {
 			if(!is_object($value) && !is_array($value)) {
@@ -67,13 +72,13 @@ class Template {
 		}
 		if(property_exists($this->page, 'css') && count($this->page->css)) {
 			$replacement = '';
-			foreach($this->page->css AS $script) $replacement .= '		<link rel="stylesheet" href="' . $script . '" />' . PHP_EOL;
+			foreach($this->page->css AS $script) $replacement .= '		<link rel="stylesheet" href="' . $adminFolder . $script . '" />' . PHP_EOL;
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}
 		if(property_exists($this->page, 'js') && count($this->page->js)) {
 			$replacement = '';
-			foreach($this->page->js AS $script) $replacement .= '		<script type="text/javascript" src="' . $script . '"></script>' . PHP_EOL;
+			foreach($this->page->js AS $script) $replacement .= '		<script type="text/javascript" src="' . $adminFolder . $script . '"></script>' . PHP_EOL;
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}
@@ -84,16 +89,23 @@ class Template {
 
 	public function getLinks() {
 		$return = array();
-		$return[] = \Controller\AdminPage::createLink(array('href' => '/' . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
-		$modules = new Model('modules');
-		$modules->has_backend = 1;
-		$modules = $modules->get();
-		foreach($modules AS $module) {
-			$class = 'Module\\' . $module->name . '\\Admin\\AdminPage';
-			$class = new $class();
-			$classMenu = $class->getMenu(false, $this->page_name);
-			if($classMenu) $return[] = $classMenu;
+		$return[] = AdminPage::createLink(array('href' => '/' . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
+		$admins_permissions = new Model('admins_permissions');
+		$admins_permissions->admin = AdminController::getCurrentUser()->id;
+		$admins_permissions = $admins_permissions->get();
+		$idPermissions = array();
+		foreach($admins_permissions AS $permission) $idPermissions[] = $permission->permission;
+		$mAR = new Model('module_admin_routes');
+		$mAR->order('menu_parent ASC, permission ASC, url ASC');
+		$mAR = $mAR->get();
+		$menuArray = [];
+		foreach($mAR AS $moduleURL) {
+			if(in_array($moduleURL->permission, $idPermissions) && !empty($moduleURL->menu_text)) {
+				if(empty($moduleURL->menu_parent)) $menuArray[$moduleURL->url] = array('href' => $moduleURL->url, 'text' => __($moduleURL->menu_text), 'class' => $moduleURL->menu_class);
+				else $menuArray[$moduleURL->menu_parent]['submenu'][] = array('href' => $moduleURL->url, 'text' => __($moduleURL->menu_text), 'class' => $moduleURL->menu_class);
+			}
 		}
+		foreach($menuArray AS $menu) $return[] = AdminPage::createLink($menu, $this->currentUrl);
 		return '<ul class="sidebar-menu">' . join('', $return) . '</ul>';
 	}
 

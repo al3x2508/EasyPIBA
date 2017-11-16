@@ -5,12 +5,17 @@ var jsstrings = {},
 	currentPage = 0,
 	saveButton;
 $(function () {
+	var folder = $("#mainjs").data('appdir'),
+		adminfolder = $("#mainjs").data('admindir');
+	$(".sidebar-toggle").click(function() {
+		$('body').toggleClass('sidebar-collapse');
+	});
 	if ($("#save").length > 0) saveButton = $("#save");
 	else saveButton = $("#customSave");
-	$.getJSON("/js/en.json", function (data) {
+	$.getJSON(folder + "js/en.json", function (data) {
 		jsstrings = data;
 		if (typeof jslang != 'undefined') {
-			$.getJSON("/js/" + jslang + ".json", function (data) {
+			$.getJSON(folder + "js/" + jslang + ".json", function (data) {
 				$.extend(jsstrings, data);
 				initComplete();
 			});
@@ -109,7 +114,7 @@ $(function () {
 			}
 		});
 		saveButton.data("actid", 0).closest('.modal').show().find('.modal-title').eq(0).text(jsstrings.buttonAdd);
-		$('#imagePreview').attr('src', '/img/' + $('#imagePreview').data('folder') + '/' + $('#imagePreview').data('default'));
+		$('#imagePreview').attr('src', folder + 'img/' + $('#imagePreview').data('folder') + '/' + $('#imagePreview').data('default'));
 		$('#edimage').data('imgname', '');
 	}).on('click', '.btn-export', function () {
 		var date = loadData(),
@@ -168,7 +173,7 @@ $(function () {
 								}
 								else if (!elm.is(':file')) elm.val(value);
 								else {
-									$('#imagePreview').attr('src', '/img/' + $('#imagePreview').data('folder') + '/' + value);
+									if(value) $('#imagePreview').attr('src', folder + 'img/' + $('#imagePreview').data('folder') + '/' + value);
 									$('#edimage').data('imgname', '');
 								}
 								if (elm.hasClass('ui-autocomplete-input')) {
@@ -262,7 +267,7 @@ $(function () {
 			data: data,
 			dataType: 'text',
 			success: function (data) {
-				if(data != 1) alert(data);
+				if(data != 1 && data != '') alert(data);
 				else {
 					table.fnReloadAjax();
 					mdl.hide();

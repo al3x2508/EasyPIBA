@@ -1,3 +1,5 @@
+<p align="center"><img src="http://www.easypiba.com/img/easypiba.png"></p>
+
 # EasyPIBA - A lightweight PHP framework
 
 In order to install EasyPIBA you need to follow these instructions:
@@ -15,12 +17,8 @@ Let's say you want to build a simple e-commerce application. Your shop should ha
 
 Users that are looking for Products inside your shop that are organized into Categories. After they found the specified products they add them into carts and finally are placing Orders.
 
-1. Download the demo sql file for this structure from http://www.easypiba.com/Demo/demo.sql (works only with MySQL >= 5.6).
-2. Download from http://www.easypiba.com/Demo/Module.zip the modules used for this demo.
-3. Unzip the contents of the zip you downloaded in your Module folder
-4. Add the new modules in the database
-   - Run the following command: php admin/modules.php reread
-   - If you don't have access to CLI then add the following records in your application database:
-```INSERT INTO `modules` (`name`, `has_frontend`, `has_backend`) VALUES ('Demo', 1, 0), ('Categories', 0, 1), ('Orders', 0, 1), ('Products', 1, 1);```
-5. Go to http://YourUrl/demo-shop address to generate the sample records for the demo shop
-6. Take a look at the administration section and the files from the Module folder
+1. Download from http://www.easypiba.com/Demo/Module.zip the modules used for this demo.
+2. Unzip the contents of the zip you downloaded in your Module folder
+3. Go to ```Clear modules``` cache administration section and click ```Reread modules```
+4. Go to http://YourUrl/demo-shop address to generate the sample records for the demo shop
+5. Take a look at the administration section and the files from the Module folder

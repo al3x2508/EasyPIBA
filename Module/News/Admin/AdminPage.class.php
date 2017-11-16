@@ -1,22 +1,8 @@
 <?php
 namespace Module\News\Admin;
-use Controller\AdminController;
 use Model\Model;
 
 class AdminPage extends \Controller\AdminPage {
-	public function __construct() {
-		$this->permission = 'Edit news';
-		$adminController = new AdminController();
-		$this->hasAccess = $adminController->checkPermission($this->permission);
-		return $this;
-	}
-	public function getMenu($returnPermissions, $currentLink = '') {
-		if($this->hasAccess) {
-			if($returnPermissions) return array('news');
-			else return self::createLink(array('href' => 'news', 'text' => __('News'), 'class' => 'newspaper-o'), $currentLink);
-		}
-		return false;
-	}
 	public function output() {
 		$page = new \stdClass();
 		$page->title = __('Edit news');
@@ -29,14 +15,14 @@ class AdminPage extends \Controller\AdminPage {
 			$selected = ($language->code == _DEFAULT_LANGUAGE_)?' selected':'';
 			$languageOptions .= "<option value=\"{$language->code}\"{$selected}>" . $language->name . "</option>";
 		}
-		$page->js = array('js/combobox.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/ckeditor/ckeditor.js','bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../../Module/News/Admin/news.js');
+		$page->js = array('js/combobox.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','plugins/ckeditor/ckeditor.js','bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../Module/News/Admin/news.js');
 		$page->css = array('bower_components/select2/dist/css/select2.min.css','plugins/datatables/dataTables.bootstrap.css');
 		$page->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Edit news') . '</h3></div>
 	<div class="box-body">
 		<table id="data_table" class="table table-bordered table-hover">
 			<thead>
-				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" size="2"></th><th>' . __('Language') . '<br /><select class="form-control select2" id="languagef"><option value="0">' . __('Any') . '</option>' . $languageOptions . '</select></th><th>' . __('Title') . '<br /><input type="text" size="10" id="titluf" class="tableFilter form-control"></th><th>' . __('Author') . '<br /><input type="text" size="2" id="authorf" class="tableFilter ui-autocomplete-input autocomplete-author form-control" autocomplete="off" /></th><th>' . __('Date') . '</th><th>' . __('Status') . '<br /><select id="statusf" class="tableFilter form-control"><option value="-1">' . __('Any') . '</option><option value="0">' . __('Hidden') . '</option><option value="1">' . __('Published') . '</option></select></th><th>' . __('Actions') . '</th></tr>
+				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" size="2"></th><th>' . __('Language') . '<br /><select class="form-control select2" id="languagef"><option value="0">' . __('Any') . '</option>' . $languageOptions . '</select></th><th>' . __('Title') . '<br /><input type="text" size="10" id="titlef" class="tableFilter form-control"></th><th>' . __('Author') . '<br /><input type="text" size="2" id="authorf" class="tableFilter ui-autocomplete-input autocomplete-author form-control" autocomplete="off" /></th><th>' . __('Date') . '</th><th>' . __('Status') . '<br /><select id="statusf" class="tableFilter form-control"><option value="-1">' . __('Any') . '</option><option value="0">' . __('Hidden') . '</option><option value="1">' . __('Published') . '</option></select></th><th>' . __('Actions') . '</th></tr>
 			</thead>
 			<tbody>
 			</tbody>

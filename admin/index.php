@@ -77,7 +77,7 @@ else { ?>
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		<!-- Bootstrap 3.3.5 -->
-		<link rel="stylesheet" href="/css/fcddd62f559f5e59432c02cfbccf1c97.css">
+		<link rel="stylesheet" href="<?php echo _FOLDER_URL_; ?>css/main.css">
 		<!-- Theme style -->
 		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 
@@ -118,8 +118,8 @@ else { ?>
 			<!-- /.login-box-body -->
 		</div>
 		<!-- /.login-box -->
-		<script type="text/javascript" src="/js/jquery.min.js"></script>
-		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?php echo _FOLDER_URL_; ?>js/jquery.min.js"></script>
+		<script type="text/javascript" src="<?php echo _FOLDER_URL_; ?>js/bootstrap.min.js"></script>
 	</body>
 </html>
 <?php

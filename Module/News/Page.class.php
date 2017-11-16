@@ -4,26 +4,8 @@ use Model\Model;
 use Utils\Util;
 
 class Page {
-	public $url = '';
-	public function __construct($url) {
-		$this->url = $url;
-	}
-	public function isOwnUrl() {
-		if($this->url == 'news' || preg_match('/news\/pag\-[\d+]/', $this->url)) return true;
-		else {
-			$title = str_replace(array('news/', '.html'), '', $this->url);
-			$news = new Model('news');
-			$news->title = array($title, 'LIKE');
-			$news = $news->get();
-			return count($news)?true:false;
-		}
-	}
-	public function getMenu() {
-		$menu = array('url' => 'news/', 'menu_text' => __('News'), 'submenu_text' => '', 'menu_parent' => 0, 'menu_order' => 1);
-		if(preg_match('/news\/.*/', $this->url)) $menu['class'] = 'active';
-		return array($menu);
-	}
 	public function output() {
+		$currentUrl = Util::getCurrentUrl();
 		$page = new \stdClass();
 		$page->title = _APP_NAME_ . ' ' . __('news');
 		$page->description = _APP_NAME_ . ' ' . __('news');
@@ -33,8 +15,8 @@ class Page {
 		$page->css = array();
 		$news = new Model('news');
 		$content = '';
-		if($this->url == 'news' || preg_match('/news\/pag\-[\d+]/', $this->url)) {
-			$pageno = preg_match('/news\/pag\-(\d+)/', $this->url, $matches)?$matches[1]:1;
+		if($currentUrl == 'news' || preg_match('/news\/pag\-[\d+]/', $currentUrl)) {
+			$pageno = preg_match('/news\/pag\-(\d+)/', $currentUrl, $matches)?$matches[1]:1;
 			$limit = (($pageno - 1) * 6) . ', 6';
 			$content = /** @lang text */
 				'<div class="container-fluid" id="news">
@@ -52,14 +34,14 @@ class Page {
 			$news = $news->get();
 			foreach($news AS $index => $story) {
 				if(empty(trim($story->image))) {
-					$img = _LOGO_;
+					$img = _FOLDER_URL_ . 'img/' . _LOGO_;
 					$spanimgc = ' noimg';
 				}
 				else {
-					$img = '/img/news/' . str_replace('.jpg', '-360x220.jpg', rawurlencode($story->image));
+					$img = _FOLDER_URL_ . 'img/news/' . str_replace('.jpg', '-360x220.jpg', rawurlencode($story->image));
 					$spanimgc = '';
 				}
-				$href = '/news/' . Util::getUrlFromString($story->title) . '.html';
+				$href = _FOLDER_URL_ . 'news/' . Util::getUrlFromString($story->title) . '.html';
 				if(strlen($story->content) > 200) {
 					$pos = strpos($story->content, ' ', 200);
 					$storyText = substr(strip_tags($story->content), 0, $pos) . '...';
@@ -87,8 +69,8 @@ class Page {
 			}
 			if(count($news) % 3 != 0) $content .= '</div>';
 			if($totalNews > 6) {
-				$butBack = ($pageno > 1)?'<li class="previous"><a href="/news/pag-' . ($pageno - 1) . '">' . __('Newer') . ' <span aria-hidden="true">&larr;</span></a></li>' . PHP_EOL:'';
-				$butForward = ($pageno < ceil($totalNews / 6))?'<li class="next"><a href="/news/pag-' . ($pageno + 1) . '">' . __('Older') . ' <span aria-hidden="true">&rarr;</span></a></li>' . PHP_EOL:'';
+				$butBack = ($pageno > 1)?'<li class="previous"><a href="' . _FOLDER_URL_ . 'news/pag-' . ($pageno - 1) . '">' . __('Newer') . ' <span aria-hidden="true">&larr;</span></a></li>' . PHP_EOL:'';
+				$butForward = ($pageno < ceil($totalNews / 6))?'<li class="next"><a href="' . _FOLDER_URL_ . 'news/pag-' . ($pageno + 1) . '">' . __('Older') . ' <span aria-hidden="true">&rarr;</span></a></li>' . PHP_EOL:'';
 				$content .= '<nav>
 			<ul class="pager">
 				' . $butBack . $butForward . '
@@ -98,7 +80,7 @@ class Page {
 			$content .= '</div>' . PHP_EOL;
 		}
 		else {
-			$title = str_replace(array('news/', '.html'), '', $this->url);
+			$title = str_replace(array('news/', '.html'), '', $currentUrl);
 			$news->title = array($title, 'LIKE');
 			$news = $news->get();
 			if(count($news)) {
@@ -109,8 +91,8 @@ class Page {
 				$page->h1 = $page_title;
 				if(empty(trim($story->image))) $image = '';
 				else {
-					$image = "<img src='/img/news/" . rawurlencode($story->image) . "' id='imgstory' />";
-					$page->ogimage = _ADDRESS_ . '/img/news/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
+					$image = "<img src='" .  _FOLDER_URL_ . "img/news/" . rawurlencode($story->image) . "' id='imgstory' />";
+					$page->ogimage = _ADDRESS_ . 'img/news/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
 				}
 				$content = $image . '
 		<article id="content" class="container marginbot40">

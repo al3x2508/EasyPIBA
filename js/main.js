@@ -7,14 +7,15 @@ function blurfocus($el, dataAndEvents) {
     }
 }
 $(document).ready(function() {
+    var folder = $("#mainjs").data('appdir');
    $(".language").click(function() {
-       document.cookie = "language=" + $(this).data('language') + "; path=/";
+       document.cookie = "language=" + $(this).data('language') + "; path=" + folder;
    });
-    $.getJSON("/js/en.json", function(data) {
+    $.getJSON(folder + "js/en.json", function(data) {
         jsstrings = data;
         var jslang = document.documentElement.lang;
         if (jslang != 'en') {
-            $.getJSON("/js/" + jslang + ".json", function (data) {
+            $.getJSON(folder + "js/" + jslang + ".json", function (data) {
                 $.extend(jsstrings, data);
             });
         }

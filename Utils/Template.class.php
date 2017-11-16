@@ -32,6 +32,10 @@ class Template {
 	 */
 	private $breadcrumbs = '';
 	/**
+	 * @var string
+	 */
+	private $sidebar = '';
+	/**
 	 * @var bool
 	 */
 	private $menu = false;
@@ -90,6 +94,7 @@ class Template {
 		</script>';
 		if(!empty(_FBAPPID_)) $content_values['FBAPPID'] = '<meta property="fb:app_id" content="' . _FBAPPID_ . '" />';
 		foreach($content_values AS $key => $value) $this->$key = $value;
+		$this->colsize = 12;
 	}
 
 	/**
@@ -106,10 +111,34 @@ class Template {
 	public function setBreadcrumbs($links) {
 		foreach($links as $key => $value) {
 			if('/' . $key != $_SERVER['REQUEST_URI']) $this->breadcrumbs = ($this->breadcrumbs == '') ? /** @lang text */
-				'<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
+				'<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
 			else $this->breadcrumbs = ($this->breadcrumbs == '') ? /** @lang text */
-				'<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/' . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
+				'<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>' : $this->breadcrumbs . '<li id="bselected" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . _FOLDER_URL_ . $key . '" itemprop="url" title="' . $value . '"><span itemprop="title">' . $value . '</span></a></li>';
 		}
+	}
+
+	/**
+	 * @param $links
+	 */
+	public function setSidebar($links) {
+		$this->colsize = 10;
+		$this->sidebar = '<div class="sidebar col-2"><ul>';
+		foreach($links as $key => $value) {
+			if(!is_array($value)) {
+				$selected = ('/' . $key == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
+				$this->sidebar .= '<li' . $selected . '><a href="' . _FOLDER_URL_ . $key . '" title="' . $value . '">' . $value . '</a></li>';
+			}
+			else {
+				$selected = ('/' . $key == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
+				$this->sidebar .= '<li' . $selected . '><a href="' . _FOLDER_URL_ . $key . '" title="' . $value['title'] . '">' . $value['title'] . '</a><ul>';
+				foreach($value['submenu'] as $key1 => $value1) {
+					$selected = ('/' . $key1 == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
+					$this->sidebar .= '<li' . $selected . '><a href="' . _FOLDER_URL_ . $key1 . '" title="' . $value1 . '">' . $value1 . '</a></li>';
+				}
+				$this->sidebar .= '</ul></li>';
+			}
+		}
+		$this->sidebar .= '</ul></div>';
 	}
 
 	/**
@@ -172,6 +201,7 @@ class Template {
 		//Load the html template
 		$this->template = file_get_contents($this->filename);
 		$this->HOME_LINK = _FOLDER_URL_;
+		$this->FOLDER_URL = _FOLDER_URL_;
 		require_once(dirname(__FILE__) . '/scripts.php');
 		$userLanguage = Util::getUserLanguage();
 		//Set the javascript variable for language
@@ -226,7 +256,7 @@ class Template {
 			$menuRight .= '  					</div>
 				</div>' . PHP_EOL;
 		}
-		$menuR = $this->menu($array_menu['menu_right']);
+		$menuR = (array_key_exists('menu_right', $array_menu))?$this->menu($array_menu['menu_right']):'';
 		if(!empty($menuR)) $menuRight .= '<ul class="navbar-nav mr-auto">' . $menuR . '</ul>';
 		$this->menu_right = $menuRight;
 		//End of menu right
@@ -234,7 +264,7 @@ class Template {
 		//Set the main javascripts
 		$mainJavascripts = 'jquery.min.js,main.js';
 		loadJs($mainJavascripts, $this->from_cache, false);
-		$this->MAIN_JAVASCRIPTS = '<script type="text/javascript" src="/js/' . md5($mainJavascripts) .'.js"></script>';
+		$this->MAIN_JAVASCRIPTS = '<script type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) .'.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
 
 		//Set the content values to replace inside html template
 		foreach(get_object_vars($this) AS $key => $value) {
@@ -260,7 +290,7 @@ class Template {
 				$scripts = implode(",", $js);
 				loadJs($scripts, $this->from_cache);
 				$replacement .= /** @lang text */
-					'		<script defer type="text/javascript" src="/js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
+					'		<script defer type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
 			}
 			$pos = strripos($this->template, "</script>");
 			$this->template = substr_replace($this->template, "\n" . $replacement, $pos + 9, 0);
@@ -283,7 +313,7 @@ class Template {
 
 			$footer = /** @lang text */
 				'		<noscript id="deferred-styles">
-			<link rel="stylesheet" type="text/css" href="/css/' . md5($scripts) . '.css" id="cssdeferred" />
+			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/' . md5($scripts) . '.css" id="cssdeferred" />
 		</noscript>
 		<script>
 			var loadDeferredStyles = function() {
@@ -326,7 +356,7 @@ class Template {
 							<div class="title testi-hone">' . $testimonial->name . '</div>
 							<div class="subtitle testi-htwo">' . $testimonial->authority . '</div>
 							<p class="testimonial-text">"' . nl2br($testimonial_content) . '"</p>
-							<a href="/testimonial' . $testimonial->id . '.html" class="readmore">' . __('read full text') . '</a>
+							<a href="' . _FOLDER_URL_ . 'testimonial' . $testimonial->id . '.html" class="readmore">' . __('read full text') . '</a>
 						</div>
 					</div>' . PHP_EOL;
 			}

@@ -3,7 +3,9 @@ namespace Module\News\Admin;
 use Controller\AdminAct;
 use Controller\AdminController;
 use Model\Model;
+use Module\News\Setup;
 use Utils\PHPThumb\GD;
+use Utils\Util;
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
 
@@ -45,6 +47,19 @@ class Act extends AdminAct {
 						else unset($this->fields['image']);
 					}
 					elseif($key == 'content') $this->fields[$key] = htmlspecialchars_decode($value);
+					elseif($key == 'title') {
+						$this->fields[$key] = $value;
+						$url = 'news/' . Util::getUrlFromString($this->fields['title']) . '.html';
+						$mR = new Model('module_routes');
+						$mR = $mR->getOneResult('url', $url);
+						if($mR && $mR->modules->name != 'News') return false;
+						else {
+							if(!$mR) {
+								$setup = new Setup();
+								$setup->registerFrontendUrl(array('url' => $url, 'type' => 0, 'mustBeLoggedIn' => 0, 'menu_position' => 0));
+							}
+						}
+					}
 				}
 			}
 		}

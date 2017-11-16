@@ -29,15 +29,25 @@ class AdminController {
 		}
 		else return array("message" => __('Username') . " " . $user . " " . _('does not exist'));
 	}
-	public static function checkPermission($perm) {
+	public static function checkPermission($permissionName) {
 		$admin = self::getCurrentUser();
 		if($admin) {
 			$permissions = new Model('admins_permissions');
 			$permissions->admin = $admin->id;
-			$permissions->where(array('j_permissions.name' => $perm));
+			$permissions->where(array('j_permissions.name' => $permissionName));
 			$permissions = $permissions->get();
 			return count($permissions)?true:false;
 		}
 		return false;
+	}
+	public static function registerPermission($permissionName) {
+		$permission = new Model('permissions');
+		//Check if permission exists
+		if($permission->getOneResult('name', $permissionName) === false) {
+			//Create permission
+			$permission->name = $permissionName;
+			$permission = $permission->create();
+		}
+		return $permission;
 	}
 }

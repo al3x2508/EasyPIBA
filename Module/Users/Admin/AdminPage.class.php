@@ -1,22 +1,8 @@
 <?php
 namespace Module\Users\Admin;
-use Controller\AdminController;
 use Model\Model;
 
 class AdminPage extends \Controller\AdminPage {
-	public function __construct() {
-		$this->permission = 'View users';
-		$adminController = new AdminController();
-		$this->hasAccess = $adminController->checkPermission($this->permission);
-		return $this;
-	}
-	public function getMenu($returnPermissions, $currentLink = '') {
-		if($this->hasAccess) {
-			if($returnPermissions) return array('users');
-			else return self::createLink(array('href' => 'users', 'text' => __('Users'), 'class' => 'users'), $currentLink);
-		}
-		return false;
-	}
 	public function output() {
 		$page = new \stdClass();
 		$countriesOptions = '';
@@ -25,7 +11,7 @@ class AdminPage extends \Controller\AdminPage {
 		$page->title = __('Users');
 		$page->h1 = __('Users');
 		foreach($countries AS $country) $countriesOptions .= '<option value="' . $country->id . '">' . $country->name . '</option>'.PHP_EOL;
-		$page->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','js/jsall.js','../../Module/Users/Admin/users.js');
+		$page->js = array('plugins/datatables/jquery.dataTables.js','plugins/datatables/fnReloadAjax.js','plugins/datatables/dataTables.bootstrap.js','js/jsall.js','../Module/Users/Admin/users.js');
 		$page->css = array('plugins/datatables/dataTables.bootstrap.css');
 		$page->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Users') . '</h3></div>
