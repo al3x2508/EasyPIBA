@@ -5,7 +5,8 @@ if(!file_exists($configFile)) {
 	header("Location: setup/setup.php");
 	exit;
 }
-else require_once($configFile);
+else /** @noinspection PhpIncludeInspection */
+	require_once($configFile);
 //Start building the page
 require_once(dirname(__FILE__) . '/Utils/functions.php');
 use Utils\Util;
@@ -14,6 +15,7 @@ if(strpos($_SERVER['REQUEST_URI'], '//') !== false) {
 	$new_url = str_replace('//', '/', $_SERVER['REQUEST_URI']);
 	header("Location: " . $new_url);
 }
+$page_url = (isset($page_url))?$page_url:'';
 $filename = $page_url;
 $og_image = defined('_OG_IMAGE_')?_OG_IMAGE_:_LOGO_;
 //Set $language as user language
@@ -39,7 +41,7 @@ if(!$page->title && $page->content && $page->visible) {
 	echo $page->content;
 	exit;
 }
-$template = new Utils\Template('template.html');
+$template = new Utils\Template($page->template);
 $page->ogimage = _FOLDER_URL_ . 'img/' . (!empty($page->ogimage)?$page->ogimage:$og_image);
 foreach($page AS $key => $value) if(!in_array($key, array('breadcrumbs', 'sidebar'))) $template->$key = $value;
 if(count($page->breadcrumbs)) $template->setBreadcrumbs($page->breadcrumbs);

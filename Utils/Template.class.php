@@ -2,6 +2,7 @@
 namespace Utils;
 
 use Model\Model;
+use Module\Pages\Controller;
 
 /**
  * @property string title
@@ -13,6 +14,11 @@ use Model\Model;
  * @property string header
  * @property float|int|mixed|null|string content
  * @property float|int|null|string h1
+ * @property string HOME_LINK
+ * @property string FOLDER_URL
+ * @property mixed|string LANGUAGE
+ * @property string menu_right
+ * @property string MAIN_JAVASCRIPTS
  */
 class Template {
 	/**
@@ -84,7 +90,8 @@ class Template {
 			'FBAPPID' => ''
 		);
 		if(!empty(_GOOGLEANALYTICSID_)) /** @noinspection CommaExpressionJS */
-			$content_values['GOOGLE_ANALYTICS'] = '<script>
+			$content_values['GOOGLE_ANALYTICS'] = /** @lang text */
+				'<script>
 			(function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function() {
 						(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -184,7 +191,7 @@ class Template {
 				if (strpos($m[1],"nocsrf")!==false) continue;
 				$name="CSRFGuard_".mt_rand(0,mt_getrandmax());
 				$token=Util::csrfguard_generate_token($name);
-				$form_data_html=str_replace($m[0],
+				$form_data_html=str_replace($m[0], /** @lang text */
 					"<form{$m[1]}>
 <input type='hidden' name='CSRFName' value='{$name}' />
 <input type='hidden' name='CSRFToken' value='{$token}' />{$m[2]}</form>",$form_data_html);
@@ -226,7 +233,7 @@ class Template {
 		/*
 		 * Build the menu left
 		*/
-		$array_menu = \Module\Pages\Controller::getMenu();
+		$array_menu = Controller::getMenu();
 		$this->menu = $this->menu($array_menu);
 		//End of menu left
 		/*
@@ -360,7 +367,8 @@ class Template {
 						</div>
 					</div>' . PHP_EOL;
 			}
-			$testimonials .= '</div>
+			$testimonials .= /** @lang text */
+				'</div>
 					<a class="carousel-control-prev" href="#testimonialsControls" role="button" data-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 						<span class="sr-only">Previous</span>

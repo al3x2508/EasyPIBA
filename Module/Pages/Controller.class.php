@@ -21,6 +21,7 @@ class Controller {
 	public $js = array();
 	public $css = array();
 	public $visible = true;
+	public $template = 'template.html';
 
 	/**
 	 * Pages constructor.
