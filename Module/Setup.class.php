@@ -10,6 +10,10 @@ abstract class Setup {
 		$module = $module->getOneResult('name', $moduleName);
 		$this->moduleId = $module->id;
 	}
+
+	/**
+	 * @param $url
+	 */
 	public function registerFrontendUrl($url) {
 		$mR = new Model('module_routes');
 		$mR->module = $this->moduleId;

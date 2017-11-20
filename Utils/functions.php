@@ -46,6 +46,7 @@ namespace Utils {
 			if(array_key_exists('language', $_COOKIE)) return $_COOKIE['language'];
 			if(!$user) $user = Controller::getCurrentUser();
 			if($user) {
+				/** @noinspection PhpUndefinedFieldInspection */
 				$accountSettings = json_decode($user->settings, true);
 				if(is_array($accountSettings) && array_key_exists('language', $accountSettings)) return $accountSettings['language'];
 			}
@@ -352,4 +353,6 @@ namespace {
 		$page_url = Util::getCurrentUrl();
 		if(array_key_exists('logout', $_GET) || $page_url == 'logout') Controller::logout();
 	}
+	else /** @noinspection PhpUnusedLocalVariableInspection */
+		$page_url = dirname(realpath($argv[0]));
 }
