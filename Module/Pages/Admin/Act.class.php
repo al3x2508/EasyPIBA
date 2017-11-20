@@ -10,7 +10,6 @@ class Act extends AdminAct {
 		$this->permission = 'Edit pages';
 		$this->entity = new Model('pages');
 		$this->fields = $_POST;
-		if(array_key_exists('content', $_POST)) $this->fields['content'] = htmlspecialchars_decode($_POST['content']);
 		return true;
 	}
 
@@ -34,7 +33,7 @@ class Act extends AdminAct {
 	}
 
 	/**
-	 * @param array $menu
+	 * @param bool|array $menu
 	 * @param $language
 	 */
 	public function actMenu($menu, $language) {

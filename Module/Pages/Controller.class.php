@@ -37,12 +37,18 @@ class Controller {
 		$page = $page->get();
 		if(count($page)) {
 			$page = $page[0];
-			$explodedJs = explode(",", $page->js);
-			$page->js = array();
-			foreach($explodedJs AS $expJs) $page->js[] = trim($expJs);
-			$explodedCss = explode(",", $page->css);
-			$page->css = array();
-			foreach($explodedCss AS $expCss) $page->css[] = trim($expCss);
+			if(!empty($page->js)) {
+				$explodedJs = explode(",", $page->js);
+				$page->js = array();
+				foreach($explodedJs AS $expJs) $page->js[] = trim($expJs);
+			}
+			else $page->js = array();
+			if(!empty($page->css)) {
+				$explodedCss = explode(",", $page->css);
+				$page->css = array();
+				foreach($explodedCss AS $expCss) $page->css[] = trim($expCss);
+			}
+			else $page->css = array();
 		}
 		else {
 			if(strpos($url, 'json/') === 0) {
