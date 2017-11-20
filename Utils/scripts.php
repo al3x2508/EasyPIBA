@@ -21,13 +21,13 @@ function loadJs($js, $fromCache = true, $return = true) {
 			if($cache) $cache->set('javaScript' . $md5Value, $buffer);
 		}
 	}
-	if(!$fromCache || !file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) file_put_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js', $buffer);
+	if($fromCache || !file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) file_put_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js', $buffer);
 	return ($return)?$buffer:true;
 }
-function loadCss($css, $fromCache = true, $return = true) {
+function loadCss($css, $fromCache = true, $return = true, $filename = '') {
 	$cache = Utils\getCache();
 	$scripts=explode(',', $css);
-	$md5Value = md5($css);
+	$md5Value = (empty($filename))?md5($css):$filename;
 	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css'):true;
 	$buffer = '';
 	if(!$cache || !($buffer = $cache->get('css' . $md5Value))) {
@@ -48,7 +48,7 @@ function loadCss($css, $fromCache = true, $return = true) {
 			if($cache) $cache->set('css' . $md5Value, $buffer);
 		}
 	}
-	if(!$fromCache || !file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) file_put_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css', $buffer);
+	if($fromCache || !file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) file_put_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css', $buffer);
 	return ($return)?$buffer:true;
 }
 if(array_key_exists('js', $_GET)) {
@@ -65,10 +65,10 @@ elseif(array_key_exists('css', $_GET)) {
 	echo $buffer;
 	exit;
 }
-elseif($page_url == 'css/main.css') {
+elseif(isset($page_url) && $page_url == 'css/main.css') {
 	header("content-type: text/css");
 	header('Cache-Control: public');
-	$buffer = loadCss('font-montserrat.css,font-awesome.css,bootstrap.css,_main.css');
+	$buffer = loadCss('font-montserrat.css,font-awesome.css,bootstrap.css,_main.css', true, true, 'main.css');
 	echo $buffer;
 	exit;
 }

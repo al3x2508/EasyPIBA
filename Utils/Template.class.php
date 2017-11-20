@@ -309,7 +309,7 @@ class Template {
 			}
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
-			loadCss($scripts, $this->from_cache, false);
+			if(!empty($scripts)) loadCss($scripts, $this->from_cache, false);
 
 			$footer = /** @lang text */
 				'		<noscript id="deferred-styles">
