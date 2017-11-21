@@ -188,7 +188,7 @@ class LoginPage {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset.html" class="forgot-password">' . __('Forgot Password?') . '</a> | 
+													<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" class="forgot-password">' . __('Forgot Password?') . '</a> | 
 													<a href="#" class="forgot-password" id="resend">' . __('Resend email confirmation') . '</a>
 												</div>
 											</div>

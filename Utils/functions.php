@@ -170,10 +170,16 @@ namespace Utils {
 		 * @return bool
 		 */
 		public static function send_email($email, $lastname, $subject = '', $message = '', $isHtml = false, $from = null, $att = null, $bcc_self = false) {
+			$path = _APP_DIR_ . 'img/' . _LOGO_;
+			$type = pathinfo($path, PATHINFO_EXTENSION);
+			$data = file_get_contents($path);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 			$html = file_get_contents(_TEMPLATE_DIR_ . 'email_template.html');
-			$html = str_replace('#title#', $subject, $html);
-			if(!$isHtml) $html = str_replace('#content#', nl2br($message), $html);
-			else $html = str_replace('#content#', $message, $html);
+			$html = str_replace('{title}', $subject, $html);
+			$html = str_replace('{LOGO_BASE64}', $base64, $html);
+			$html = str_replace('{APP_NAME}', _APP_NAME_, $html);
+			if(!$isHtml) $html = str_replace('{content}', nl2br($message), $html);
+			else $html = str_replace('{content}', $message, $html);
 			$mail = new Mail();
 			$mail->addAddress($email, $lastname);
 			$mail->setFrom(_MAIL_FROM_, _MAIL_NAME_);

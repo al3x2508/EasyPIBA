@@ -25,12 +25,12 @@ class Page {
 			<priority>1.00</priority>
 		</url>
 		<url>
-			<loc>' . $siteUrl . 'password_reset.html</loc>
+			<loc>' . $siteUrl . 'password_reset</loc>
 			<changefreq>weekly</changefreq>
 			<priority>1.00</priority>
 		</url>
 		<url>
-			<loc>' . $siteUrl . 'testimonials.html</loc>
+			<loc>' . $siteUrl . 'testimonials</loc>
 			<changefreq>weekly</changefreq>
 			<priority>1.00</priority>
 		</url>
@@ -45,7 +45,7 @@ class Page {
 		$pages = $pages->get();
 		foreach($pages AS $page) {
 			if(!empty($page->url)) $return .= '		<url>
-			<loc>' . $siteUrl . $page->url . '.html</loc>
+			<loc>' . $siteUrl . $page->url . '</loc>
 			<changefreq>monthly</changefreq>
 			<priority>0.90</priority>
 		</url>' . PHP_EOL;
@@ -54,7 +54,7 @@ class Page {
 		$news->order('date_published DESC');
 		$news = $news->get();
 		foreach($news AS $n) {
-			$url = 'news/' . Util::getUrlFromString($n->title) . '.html';
+			$url = 'news/' . Util::getUrlFromString($n->title);
 			$return .= '		<url>
 			<loc>' . $siteUrl . $url . '</loc>
 			<changefreq>monthly</changefreq>
@@ -66,7 +66,7 @@ class Page {
 		$testimonials = $testimonials->get();
 		foreach($testimonials AS $testimonial) {
 			$return .= '		<url>
-			<loc>' . $siteUrl . 'testimonial' . $testimonial['id'] . '.html</loc>
+			<loc>' . $siteUrl . 'testimonial' . $testimonial['id'] . '</loc>
 			<changefreq>monthly</changefreq>
 			<priority>0.70</priority>
 		</url>' . PHP_EOL;

@@ -42,7 +42,7 @@ class PasswordResetPage {
 						$resetModel->delete();
 						$code = Controller::storeResetPassword($user->id);
 					}
-					$resetLink = _ADDRESS_ . _FOLDER_URL_ . 'password_reset.html?code=' . $code;
+					$resetLink = _ADDRESS_ . _FOLDER_URL_ . 'password_reset?code=' . $code;
 					$message = '<h2>' . __('Hi') . ' ' . $name . '</h2>
 				<p> '. __('To reset your password click the link below') . ':</p>
 				<p><a href="' . $resetLink . '">' . $resetLink . '</a></p>';
@@ -86,7 +86,7 @@ class PasswordResetPage {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form action="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset.html" method="post" autocomplete="off" class="validateform">
+								<form action="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" method="post" autocomplete="off" class="validateform">
 									<input type="hidden" name="code" value="' . strip_tags(htmlspecialchars(stripslashes(trim($_REQUEST['code'])))) . '" />
 									<div class="col-lg-12 col-12 mt-5 field form-group">
 										<div class="input input-hoshi">
@@ -132,7 +132,7 @@ class PasswordResetPage {
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form action="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset.html" method="post" class="validateform">
+									<form action="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" method="post" class="validateform">
 										<div class="col-lg-12 col-12 mt-5 field form-group">
 											<div class="input input-hoshi">
 												<input type="email" name="email" id="email" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
