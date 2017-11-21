@@ -38,7 +38,8 @@ class LoginPage {
 						$isGood = $bcrypt->verify(strip_tags($_POST['password']), $user->password);
 						//Successfully logged in
 						if($isGood) {
-							$_SESSION['user'] = $userId;
+							unset($user->password);
+							$_SESSION['user'] = $user;
 							if(array_key_exists('keepLoggedIn', $_POST)) Controller::storeCookie($userId);
 							$redirectUrl = _DEFAULT_REDIRECT_;
 							$location = (array_key_exists('ref', $_SESSION)) ? $_SESSION['ref'] : $redirectUrl;
@@ -98,7 +99,7 @@ class LoginPage {
 						Controller::sendActivationEmail($user);
 						$this->content .= /** @lang text */
 							'<script type="text/javascript">
-						setTimeout("location.href = \'/email_confirm.html\';",1000);
+						setTimeout("location.href = \'/email_confirm\';",1000);
 					</script>
 					' . __('You will be redirected to confirm your email in 1 second');
 					}
@@ -188,7 +189,7 @@ class LoginPage {
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset.html" class="forgot-password">' . __('Forgot Password?') . '</a> | 
+													<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" class="forgot-password">' . __('Forgot Password?') . '</a> | 
 													<a href="#" class="forgot-password" id="resend">' . __('Resend email confirmation') . '</a>
 												</div>
 											</div>

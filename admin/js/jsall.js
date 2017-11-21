@@ -3,10 +3,12 @@ var jsstrings = {},
 	dataTable = false,
 	table = false,
 	currentPage = 0,
-	saveButton;
+	saveButton,
+	folder = '',
+	adminfolder = '';
 $(function () {
-	var folder = $("#mainjs").data('appdir'),
-		adminfolder = $("#mainjs").data('admindir');
+	folder = $("#mainjs").data('appdir');
+	adminfolder = $("#mainjs").data('admindir');
 	$(".sidebar-toggle").click(function() {
 		$('body').toggleClass('sidebar-collapse');
 	});
@@ -34,7 +36,7 @@ $(function () {
 				"bAutoWidth": false,
 				"bProcessing": false,
 				"bServerSide": true,
-				"sAjaxSource": 'json/' + jsonPage,
+				"sAjaxSource": adminfolder + 'json/' + jsonPage,
 				"fnServerData": function (sSource, aoData, fnCallback, oSettings) {
 					oSettings.jqXHR = $.ajax({
 						"dataType": 'json',
@@ -52,6 +54,7 @@ $(function () {
 				var info = dataTable.DataTable().page.info();
 				currentPage = info.page;
 			});
+			$.fn.dataTable.ext.errMode = 'none';
 		}
 	}
 	$(".drpicker").daterangepicker({
@@ -90,7 +93,7 @@ $(function () {
 		else {
 			if (typeof jsonPage != 'undefined') {
 				var deleteId = ($(event.target).data('actid')) ? $(event.target).data('actid') : $(event.target).closest('tr').children('td').eq(0).text();
-				$.post("act/" + jsonPage, {delete: deleteId}, function () {
+				$.post(adminfolder + "act/" + jsonPage, {delete: deleteId}, function () {
 					table.fnReloadAjax();
 				});
 			}
@@ -118,7 +121,7 @@ $(function () {
 		$('#edimage').data('imgname', '');
 	}).on('click', '.btn-export', function () {
 		var date = loadData(),
-			url = 'json/' + jsonPage,
+			url = adminfolder + 'json/' + jsonPage,
 			inputs = '';
 		date.secho = 1;
 		date.export = $(this).text().toLowerCase();
@@ -154,7 +157,7 @@ $(function () {
 			}
 			else dataPost.id = actid;
 			$.ajax({
-				url: 'json/' + jsonPage,
+				url: adminfolder + 'json/' + jsonPage,
 				type: 'POST',
 				data: dataPost,
 				dataType: 'json',
@@ -199,7 +202,7 @@ $(function () {
 		if (e.which == 27 && $('.modal:visible').length > 0) {
 			$(".remove-pic").each(function() {
 				var filename = $(this).data('src');
-				$.post('act/Media', {clearImg: filename});
+				$.post(adminfolder + 'act/Media', {clearImg: filename});
 			});
 			saveButton.data("actid", 0);
 			$('.modal').hide();
@@ -211,10 +214,10 @@ $(function () {
 		mdldlg.hide();
 		if (!sc.length || sc.data("actid") == 0) {
 			var eimg = mdldlg.find("#edimage");
-			if (eimg.length > 0 && eimg.data('imgname') != '') $.post('act/Media', {clearImg: eimg.data('imgname')});
+			if (eimg.length > 0 && eimg.data('imgname') != '') $.post(adminfolder + 'act/Media', {clearImg: eimg.data('imgname')});
 			$(".remove-pic").each(function() {
 				var filename = $(this).data('src');
-				$.post('act/Media', {clearImg: filename});
+				$.post(adminfolder + 'act/Media', {clearImg: filename});
 			});
 		}
 	});
@@ -262,7 +265,7 @@ $(function () {
 			});
 		}
 		$.ajax({
-			url: 'act/' + jsonPage,
+			url: adminfolder + 'act/' + jsonPage,
 			type: 'POST',
 			data: data,
 			dataType: 'text',
@@ -288,7 +291,7 @@ $(function () {
 		formData.append('edimage', eimg[0].files[0]);
 		$.ajax({
 			type: 'POST',
-			url: 'act/Media',
+			url: adminfolder + 'act/Media',
 			data: formData,
 			cache: false,
 			contentType: false,

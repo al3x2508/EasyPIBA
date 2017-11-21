@@ -19,7 +19,7 @@ class EmailConfirmPage {
 		$this->content = '';
 		$this->title = __('Email confirm');
 		$this->description = __('Email confirm');
-		$code = (array_key_exists('code', $_POST) && ctype_alnum($_POST['code'])) ? trim($_POST['code']) : '';
+		$code = (array_key_exists('code', $_REQUEST) && ctype_alnum($_REQUEST['code'])) ? trim($_REQUEST['code']) : '';
 		$showForm = false;
 		$codeError = ($code && strlen($code) != 32)?'<div class="alert alert-danger">' . __('Enter the confirmation code') . '</div>':'';
 		$form = '<form action="#" method="post">
@@ -58,7 +58,7 @@ class EmailConfirmPage {
 					$user->status = 1;
 					$user->update();
 					$this->content .= '<h1>' . __('Your email has been confirmed') . '</h1>
-			' . sprintf(__('You can login now %s'), '<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'login.html">' . __('here') . '</a>') . PHP_EOL;
+			' . sprintf(__('You can login now %s'), '<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'login">' . __('here') . '</a>') . PHP_EOL;
 				}
 				else $this->content .= '<h1> ' . __('Your account is blocked!') . '!</h1>' . PHP_EOL;
 			}

@@ -34,7 +34,7 @@ if(count($matches)) {
 $page = new Module\Pages\Controller($filename, $language);
 if($page->mustBeLoggedIn && !\Module\Users\Controller::getCurrentUser()) {
 	$_SESSION['ref'] = $_SERVER['REQUEST_URI'];
-	header("Location: " . _FOLDER_URL_ . 'login.html');
+	header("Location: " . _FOLDER_URL_ . 'login');
 	exit();
 }
 if(!$page->title && $page->content && $page->visible) {
