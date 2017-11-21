@@ -11,7 +11,7 @@ class Page {
 				$user = $user->getOneResult('email', $_REQUEST['email']);
 				if($user) {
 					$send = Controller::sendActivationEmail($user, false);
-					if($send) $response = array('message' => __('Confirmation code was sent to your email address'), 'redirect' => _ADDRESS_ . _FOLDER_URL_ . 'email_confirm.html');
+					if($send) $response = array('message' => __('Confirmation code was sent to your email address'), 'redirect' => _ADDRESS_ . _FOLDER_URL_ . 'email_confirm');
 					else $response = array('message' => __('Your account is already confirmed'));
 				}
 				else $response = array('message' => __('No account registered with this email address'));

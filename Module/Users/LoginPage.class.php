@@ -98,7 +98,7 @@ class LoginPage {
 						Controller::sendActivationEmail($user);
 						$this->content .= /** @lang text */
 							'<script type="text/javascript">
-						setTimeout("location.href = \'/email_confirm.html\';",1000);
+						setTimeout("location.href = \'/email_confirm\';",1000);
 					</script>
 					' . __('You will be redirected to confirm your email in 1 second');
 					}

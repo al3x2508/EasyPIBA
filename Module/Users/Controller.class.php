@@ -183,7 +183,7 @@ class Controller {
 			if(count($user_confirm) > 0) $code = $user_confirm[0]->code;
 		}
 		if(!empty($code)) {
-			$activationLink = _ADDRESS_ . _FOLDER_URL_ . 'email_confirm.html';
+			$activationLink = _ADDRESS_ . _FOLDER_URL_ . 'email_confirm';
 			$message = /** @lang text */
 				"<h2>" . __("Welcome") . ", {$user->firstname}!</h2>
 				<h3>" . __("Step") . " 1. " . __("Activate your account") . "!</h3>
