@@ -209,6 +209,8 @@ class Template {
 		$this->template = file_get_contents($this->filename);
 		$this->HOME_LINK = _FOLDER_URL_;
 		$this->FOLDER_URL = _FOLDER_URL_;
+		if(!property_exists($this, 'css')) $this->css = array();
+		$this->css[] = 'main.css';
 		require_once(dirname(__FILE__) . '/scripts.php');
 		$userLanguage = Util::getUserLanguage();
 		//Set the javascript variable for language
@@ -303,6 +305,7 @@ class Template {
 			$this->template = substr_replace($this->template, "\n" . $replacement, $pos + 9, 0);
 		}
 		//Add styles in page
+		$cssLR = '';
 		if(count($this->css) > 0) {
 			$scripts = '';
 			$css = array();
@@ -316,11 +319,15 @@ class Template {
 			}
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
-			if(!empty($scripts)) loadCss($scripts, $this->from_cache, false);
-
-			$footer = /** @lang text */
-				'		<noscript id="deferred-styles">
-			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/' . md5($scripts) . '.css" id="cssdeferred" />
+			if(!empty($scripts)) {
+				loadCss($scripts, $this->from_cache, false);
+				$cssLR = '<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/' . md5($scripts) . '.css" id="cssdeferred" />';
+			}
+		}
+		$footer = /** @lang text */
+			'		<noscript id="deferred-styles">
+			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/main.css" id="cssdeferredmain" />
+			' . $cssLR . '
 		</noscript>
 		<script>
 			var loadDeferredStyles = function() {
@@ -334,7 +341,6 @@ class Template {
 			if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
 			else window.addEventListener(\'load\', loadDeferredStyles);
 		</script>' . PHP_EOL;
-		}
 		//Build header and content
 		$this->header = substr($this->template, 0, strripos($this->template, "\t</head>") + 9);
 		$this->content = substr($this->template, strlen($this->header), strlen($this->template) - strlen($this->header));

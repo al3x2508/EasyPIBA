@@ -22,7 +22,7 @@ RewriteRule . index.php [L]
     </filesMatch>
 </IfModule>
 <IfModule mod_expires.c>
-	<Filesmatch "\.(jpg|jpeg|png|gif|js|css|swf|ico|woff|mp3)$">
+	<Filesmatch "\.(jpg|jpeg|png|gif|js|css|swf|ico|woff|mp3|json)$">
 		ExpiresActive on
 		ExpiresDefault "access plus 30 days"
 	</Filesmatch>
