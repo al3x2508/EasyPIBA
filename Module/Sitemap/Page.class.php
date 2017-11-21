@@ -20,7 +20,7 @@ class Page {
 			<priority>1.00</priority>
 		</url>
 		<url>
-			<loc>' . $siteUrl . 'login.html</loc>
+			<loc>' . $siteUrl . 'login</loc>
 			<changefreq>weekly</changefreq>
 			<priority>1.00</priority>
 		</url>

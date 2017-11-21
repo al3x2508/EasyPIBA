@@ -58,7 +58,7 @@ class EmailConfirmPage {
 					$user->status = 1;
 					$user->update();
 					$this->content .= '<h1>' . __('Your email has been confirmed') . '</h1>
-			' . sprintf(__('You can login now %s'), '<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'login.html">' . __('here') . '</a>') . PHP_EOL;
+			' . sprintf(__('You can login now %s'), '<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'login">' . __('here') . '</a>') . PHP_EOL;
 				}
 				else $this->content .= '<h1> ' . __('Your account is blocked!') . '!</h1>' . PHP_EOL;
 			}
