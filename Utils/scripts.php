@@ -68,7 +68,7 @@ elseif(array_key_exists('css', $_GET)) {
 elseif(isset($page_url) && $page_url == 'css/main.css') {
 	header("content-type: text/css");
 	header('Cache-Control: public');
-	$buffer = loadCss('font-montserrat.css,font-awesome.css,bootstrap.css,_main.css', true, true, 'main.css');
+	$buffer = loadCss('font-montserrat.css,font-awesome.css,_main.css', true, true, 'main.css');
 	echo $buffer;
 	exit;
 }
