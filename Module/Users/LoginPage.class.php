@@ -38,7 +38,8 @@ class LoginPage {
 						$isGood = $bcrypt->verify(strip_tags($_POST['password']), $user->password);
 						//Successfully logged in
 						if($isGood) {
-							$_SESSION['user'] = $userId;
+							unset($user->password);
+							$_SESSION['user'] = $user;
 							if(array_key_exists('keepLoggedIn', $_POST)) Controller::storeCookie($userId);
 							$redirectUrl = _DEFAULT_REDIRECT_;
 							$location = (array_key_exists('ref', $_SESSION)) ? $_SESSION['ref'] : $redirectUrl;

@@ -110,10 +110,7 @@ class Controller {
 	 * @return Model|bool
 	 */
 	public static function getCurrentUser() {
-		if(array_key_exists('user', $_SESSION)) {
-			$user = new Model('users');
-			return $user->getOneResult('id', $_SESSION['user']);
-		}
+		if(array_key_exists('user', $_SESSION)) return $_SESSION['user'];
 		return false;
 	}
 
@@ -135,7 +132,7 @@ class Controller {
 	/**
 	 * Get user by cookie token
 	 * @param $token
-	 * @return bool
+	 * @return bool|Model
 	 */
 	public static function getUserFromToken($token) {
 		$cookie = new Model('cookies');
@@ -143,7 +140,7 @@ class Controller {
 		$cookie->expiration_date = array(date('Y-m-d H:i:s'), '>=');
 		$cookie = $cookie->get();
 
-		return (count($cookie) > 0) ? $cookie[0]['user'] : false;
+		return (count($cookie) > 0) ? $cookie[0]->users : false;
 	}
 
 	/**
@@ -228,7 +225,7 @@ class Controller {
 		if(isset($_SESSION)) {
 			if(array_key_exists('user', $_SESSION)) {
 				$cookie = new Model('cookies');
-				$cookie->__set('user', $_SESSION['user'])->delete();
+				$cookie->__set('user', $_SESSION['user']->id)->delete();
 				unset($_SESSION);
 				session_destroy();
 			}
