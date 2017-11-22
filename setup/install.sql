@@ -572,31 +572,6 @@ INSERT INTO `permissions` (`id`, `name`) VALUES
 (5, 'Edit testimonials'),
 (6, 'Edit administrators');
 
-CREATE TABLE `strings` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `text` text CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
-
-INSERT INTO `strings` (`id`, `text`) VALUES
-(1, 'This site uses cookies. By continuing to browse the site, you are agreeing to our use of cookies.'),
-(2, 'More details'),
-(3, 'here'),
-(4, 'Accept'),
-(5, 'News'),
-(6, 'Login'),
-(7, 'Logout'),
-(8, 'Page not found'),
-(9, 'Error 404'),
-(10, 'The page you requested could not be found, either contact your webmaster or try again. Use your browsers <strong>Back</strong> button to navigate to the page you have prevously come from.'),
-(11, 'Or you could just press this neat little button'),
-(12, 'Take Me Home'),
-(13, 'You did not confirmed your account'),
-(14, 'Your account is blocked'),
-(15, 'No user registered with these info'),
-(16, 'There is another user registered with this email address'),
-(17, 'You will be redirected to confirm your email in 1 second');
-
 CREATE TABLE `testimonials` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -607,15 +582,6 @@ CREATE TABLE `testimonials` (
   `status` tinyint(1) DEFAULT '1' COMMENT '0 - Hidden, 1 - Visible',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
-CREATE TABLE `translations` (
-  `string_id` int(5) NOT NULL,
-  `language` varchar(3) CHARACTER SET utf8 NOT NULL,
-  `translation` text CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`string_id`,`language`),
-  KEY `string_id` (`string_id`),
-  KEY `language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `users` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
@@ -670,10 +636,6 @@ ALTER TABLE `pages`
 
 ALTER TABLE `passwords_reset`
   ADD CONSTRAINT `passwords_reset_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE `translations`
-  ADD CONSTRAINT `translations_ibfk_1` FOREIGN KEY (`string_id`) REFERENCES `strings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `translations_ibfk_2` FOREIGN KEY (`language`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;

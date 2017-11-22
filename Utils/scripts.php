@@ -54,6 +54,7 @@ function loadCss($css, $fromCache = true, $return = true, $filename = '') {
 if(array_key_exists('js', $_GET)) {
 	header("content-type: text/javascript");
 	header('Cache-Control: public');
+	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
 	$buffer = loadJs($_GET['js']);
 	echo $buffer;
 	exit;
@@ -61,6 +62,7 @@ if(array_key_exists('js', $_GET)) {
 elseif(array_key_exists('css', $_GET)) {
 	header("content-type: text/css");
 	header('Cache-Control: public');
+	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
 	$buffer = loadCss($_GET['css']);
 	echo $buffer;
 	exit;
@@ -68,6 +70,7 @@ elseif(array_key_exists('css', $_GET)) {
 elseif(isset($page_url) && $page_url == 'css/main.css') {
 	header("content-type: text/css");
 	header('Cache-Control: public');
+	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
 	$buffer = loadCss('font-montserrat.css,font-awesome.css,_main.css', true, true, 'main.css');
 	echo $buffer;
 	exit;
