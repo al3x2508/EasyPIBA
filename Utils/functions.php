@@ -221,66 +221,6 @@ namespace Utils {
 			return (property_exists($setting, 'value')) ? $setting->value : false;
 		}
 
-
-		/**
-		 * Thanks to user Trick
-		 * https://stackoverflow.com/users/3763023/trick
-		 * returns the current locale based on the LANG environment variable.
-		 * Only calls getenv() once, after that uses a cached value.  remove the static
-		 * keyword to disable this functionality.
-		 *
-		 * @return string returns the current locale, or DEFAULT_LANG on error.
-		 */
-		private static function get_lang() {
-			static $lang;
-			if (!isset($lang) || $lang=="") {
-				$lang = getenv('LANG');
-				if (trim($lang)=='') $lang = _DEFAULT_LANGUAGE_;
-			}
-			return $lang;
-		}
-
-		/**
-		 * Thanks to user Trick
-		 * https://stackoverflow.com/users/3763023/trick
-		 * Translate a string
-		 * @param string $text string to translate
-		 * @param string $locale locale to translate to, i.e. de_DE
-		 * @param boolean $provideFallback - provide the original local as a fallback if locale is not recognized
-		 * @return boolean|string returns $text translated to $locale, or FALSE on error.
-		 * @return mixed
-		 */
-		public static function translate($text, $locale, $provideFallback = false, $resetLocale = true) {
-			if ((empty($locale) || trim($locale)=='') && !$provideFallback) return false;
-			if (empty($text)) return $text;
-
-			$original = self::get_lang();
-			putenv("LANG=$locale");
-
-			//provide a fallback locale in case $locale is not recognized.
-			if ($provideFallback) {
-				$l = strval($locale);
-				if (empty($locale) || trim($locale)=='') $l = $original; //set locale to the original locale, since none was provided.
-				$locale = array($l, $original, _DEFAULT_LANGUAGE_);
-			}
-
-			setlocale(LC_MESSAGES, $locale);
-			$domain = 'i18n';
-			$localeDirectory = _APP_DIR_ . 'locale';
-			bindtextdomain($domain, $localeDirectory);
-			bind_textdomain_codeset($domain, 'UTF-8');
-			textdomain($domain);
-
-
-			$translated = _($text);
-			echo $text . ' ' . $translated . ' ' . print_r($locale, true); exit;
-			if ($resetLocale) {
-				setlocale(LC_MESSAGES, $original);
-				putenv("LANG=$original");
-			}
-			return $translated;
-		}
-
 		/**
 		 * Check image / pdf uploaded
 		 * @param $name
