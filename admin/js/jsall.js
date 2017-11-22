@@ -14,7 +14,7 @@ $(function () {
 	});
 	if ($("#save").length > 0) saveButton = $("#save");
 	else saveButton = $("#customSave");
-	$.getJSON(folder + "js/en.json", function (data) {
+	$.getJSON(folder + "js/en_US.json", function (data) {
 		jsstrings = data;
 		if (typeof jslang != 'undefined') {
 			$.getJSON(folder + "js/" + jslang + ".json", function (data) {

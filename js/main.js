@@ -11,7 +11,7 @@ $(document).ready(function() {
    $(".language").click(function() {
        document.cookie = "language=" + $(this).data('language') + "; path=" + folder;
    });
-    $.getJSON(folder + "js/en.json", function(data) {
+    $.getJSON(folder + "js/en_US.json", function(data) {
         jsstrings = data;
         var jslang = document.documentElement.lang;
         if (jslang != 'en') {

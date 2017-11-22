@@ -19,6 +19,10 @@ namespace Utils {
 	 */
 	define("_APP_DIR_", realpath(dirname(dirname(__FILE__))) . '/');
 	/**
+	 * DO NOT MODIFY Application working directory
+	 */
+	define("_LOCALE_DIR_", _APP_DIR_ . 'locale');
+	/**
 	 * DO NOT MODIFY HTML Templates directory
 	 */
 	define("_TEMPLATE_DIR_", _APP_DIR_ . 'templates/');
@@ -217,17 +221,64 @@ namespace Utils {
 			return (property_exists($setting, 'value')) ? $setting->value : false;
 		}
 
+
 		/**
+		 * Thanks to user Trick
+		 * https://stackoverflow.com/users/3763023/trick
+		 * returns the current locale based on the LANG environment variable.
+		 * Only calls getenv() once, after that uses a cached value.  remove the static
+		 * keyword to disable this functionality.
+		 *
+		 * @return string returns the current locale, or DEFAULT_LANG on error.
+		 */
+		private static function get_lang() {
+			static $lang;
+			if (!isset($lang) || $lang=="") {
+				$lang = getenv('LANG');
+				if (trim($lang)=='') $lang = _DEFAULT_LANGUAGE_;
+			}
+			return $lang;
+		}
+
+		/**
+		 * Thanks to user Trick
+		 * https://stackoverflow.com/users/3763023/trick
 		 * Translate a string
-		 * @param $string
-		 * @param $lang
+		 * @param string $text string to translate
+		 * @param string $locale locale to translate to, i.e. de_DE
+		 * @param boolean $provideFallback - provide the original local as a fallback if locale is not recognized
+		 * @return boolean|string returns $text translated to $locale, or FALSE on error.
 		 * @return mixed
 		 */
-		public static function translate($string, $lang) {
-			$texts = new Model('translations');
-			$texts->where(array('language' => $lang, 'j_strings.text' => $string));
-			$texts = $texts->get();
-			return (count($texts) ? $texts[0]->translation : $string);
+		public static function translate($text, $locale, $provideFallback = false, $resetLocale = true) {
+			if ((empty($locale) || trim($locale)=='') && !$provideFallback) return false;
+			if (empty($text)) return $text;
+
+			$original = self::get_lang();
+			putenv("LANG=$locale");
+
+			//provide a fallback locale in case $locale is not recognized.
+			if ($provideFallback) {
+				$l = strval($locale);
+				if (empty($locale) || trim($locale)=='') $l = $original; //set locale to the original locale, since none was provided.
+				$locale = array($l, $original, _DEFAULT_LANGUAGE_);
+			}
+
+			setlocale(LC_MESSAGES, $locale);
+			$domain = 'i18n';
+			$localeDirectory = _APP_DIR_ . 'locale';
+			bindtextdomain($domain, $localeDirectory);
+			bind_textdomain_codeset($domain, 'UTF-8');
+			textdomain($domain);
+
+
+			$translated = _($text);
+			echo $text . ' ' . $translated . ' ' . print_r($locale, true); exit;
+			if ($resetLocale) {
+				setlocale(LC_MESSAGES, $original);
+				putenv("LANG=$original");
+			}
+			return $translated;
 		}
 
 		/**
@@ -332,16 +383,24 @@ namespace {
 			if($user) $_SESSION['user'] = $user;
 		}
 	}
+	if(!array_key_exists('userLanguage', $_SESSION)) {
+		$userLanguage = Util::getUserLanguage();
+		$_SESSION['userLanguage'] = $userLanguage;
+	}
+	else if(array_key_exists('language', $_COOKIE) && $_SESSION['userLanguage'] != $_COOKIE['language']) $_SESSION['userLanguage'] = $_COOKIE['language'];
+	require_once(_APP_DIR_ . 'locale/gettext.php');
+	require_once(_APP_DIR_ . 'locale/streams.php');
+	$streamer = new FileReader(_LOCALE_DIR_ . '/' . $_SESSION['userLanguage'] . '/LC_MESSAGES/i18n.mo');
+	$translations = new gettext_reader($streamer);
+
 	/**
 	 * Translate a string
 	 * @param $string
-	 * @param bool $lang
 	 * @return mixed
 	 */
-	function __($string, $lang = false) {
-		if(!$lang) $lang = Util::getUserLanguage();
-		if(!$lang) return $string;
-		return call_user_func_array('\Utils\Util::translate', array($string, $lang));
+	function __($string) {
+		global $translations;
+		return $translations->translate($string);
 	}
 
 	if(!function_exists('hash_equals')) {
