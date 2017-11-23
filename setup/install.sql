@@ -505,6 +505,7 @@ CREATE TABLE IF NOT EXISTS `module_routes` (
   `url` varchar(255) NOT NULL,
   `type` tinyint(1) DEFAULT '0' COMMENT '0 - Exact match; 1 - Regex match',
   `mustBeLoggedIn` tinyint(1) DEFAULT '0' COMMENT 'False - Guest; True - Logged in user',
+  `hiddenForLoggedIn` tinyint(1) DEFAULT '0',
   `menu_position` tinyint(1) DEFAULT '0' COMMENT '0 - Not shown in menu; 1 - Top menu (default); 2 - Right menu',
   `menu_text` varchar(255) DEFAULT NULL,
   `submenu_text` varchar(255) DEFAULT NULL,
@@ -512,7 +513,9 @@ CREATE TABLE IF NOT EXISTS `module_routes` (
   `menu_parent` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`),
-  KEY `module` (`module`)
+  KEY `module` (`module`),
+  KEY `mustBeLoggedIn` (`mustBeLoggedIn`),
+  KEY `hiddenForLoggedIn` (`hiddenForLoggedIn`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 CREATE TABLE `news` (

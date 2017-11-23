@@ -319,10 +319,9 @@ namespace {
 		unset($_COOKIE["PHPSESSID"]);
 	}
 	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !array_key_exists('admin', $_SESSION) && isset($_COOKIE['rme' . _APP_NAME_]) && !array_key_exists('user', $_SESSION)) {
-		$secretKey = Util::getSetting('SECRET_KEY');
 		$cookie = $_COOKIE['rme' . _APP_NAME_];
 		list ($token, $mac) = explode(':', $cookie);
-		if($mac === hash_hmac('sha256', $token, $secretKey)) {
+		if($mac === hash_hmac('sha256', $token, _HASH_KEY_)) {
 			$user = Controller::getUserFromToken($token);
 			if($user) $_SESSION['user'] = $user;
 		}

@@ -104,8 +104,6 @@ class Controller {
 		$userLanguage = Util::getUserLanguage();
 		$redis = \Utils\Predis::getInstance();
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
-		$redisKey = _APP_NAME_ . 'menu|' . str_replace('.html', '', $_SERVER['REQUEST_URI']) . '|' . $langUrl;
-		if($redis && $redis->exists($redisKey)) return json_decode($redis->get($redisKey), true);
 		$pages = new Model('pages');
 		$pages->language = $userLanguage;
 		$pages->visible = 1;
@@ -122,7 +120,8 @@ class Controller {
 		}
 		$module_routes = new Model('module_routes');
 		$module_routes->type = 0;
-		$module_routes->mustBeLoggedIn = (UserController::getCurrentUser()?1:0);
+		if(!UserController::getCurrentUser()) $module_routes->mustBeLoggedIn = 0;
+		else $module_routes->hiddenForLoggedIn = 0;
 		$module_routes->menu_position = array(0, '>');
 		$module_routes->order('menu_position ASC, menu_parent ASC, menu_order ASC');
 		$module_routes = $module_routes->get();
@@ -148,7 +147,6 @@ class Controller {
 				$array_menu['menu_right'][$menuParent][] = $pag;
 			}
 		}
-		if($redis) $redis->set($redisKey, json_encode($array_menu));
 		return $array_menu;
 	}
 }
