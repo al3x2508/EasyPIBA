@@ -110,6 +110,11 @@ namespace Model {
 		 * @return $this
 		 */
 		private function getSchema() {
+			$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
+			if($cache && $buffer = $cache->get(_APP_NAME_ . 'schema' . $this->tableName) && !empty($buffer)) {
+				$this->schema = json_decode($buffer, true);
+				return $this;
+			}
 			$schema = array();
 			$sql = sprintf(/** @lang text */ "SELECT `COLUMNS`.`COLUMN_NAME` AS `column`, `COLUMN_DEFAULT` AS `default`, `IS_NULLABLE` AS `null`, `DATA_TYPE`, `EXTRA` AS `extra`, `REFERENCED_TABLE_NAME` AS `table_reference`, `REFERENCED_COLUMN_NAME` AS `column_reference`, (SELECT GROUP_CONCAT(`COLUMN_NAME` SEPARATOR ',') FROM `INFORMATION_SCHEMA`.`COLUMNS` `c` WHERE `c`.`TABLE_SCHEMA` LIKE '%s' AND `TABLE_NAME` = `REFERENCED_TABLE_NAME`) AS `trc` FROM `INFORMATION_SCHEMA`.`COLUMNS` LEFT OUTER JOIN `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` ON `KEY_COLUMN_USAGE`.`TABLE_SCHEMA` = `COLUMNS`.`TABLE_SCHEMA` AND `KEY_COLUMN_USAGE`.`TABLE_NAME` = `COLUMNS`.`TABLE_NAME` AND `KEY_COLUMN_USAGE`.`COLUMN_NAME` = `COLUMNS`.`COLUMN_NAME` WHERE `COLUMNS`.`TABLE_SCHEMA` LIKE '%s' AND `COLUMNS`.`TABLE_NAME` LIKE '%s'", _DB_NAME_, _DB_NAME_, $this->tableName);
 			$stmt = $this->db->query($sql);
@@ -149,6 +154,7 @@ namespace Model {
 				$stmt->free_result();
 			}
 			$this->schema = $schema;
+			if($cache && $cache->getResultCode() == \Memcached::RES_NOTFOUND) $cache->set(_APP_NAME_ . 'schema' . $this->tableName, json_encode($schema));
 			return $this;
 		}
 
@@ -561,8 +567,10 @@ namespace Model {
 				$stmt = $this->db->prepare($sql);
 				call_user_func_array(array($stmt, 'bind_param'), $data);
 				try {
-					$stmt->execute();
+					$return = $stmt->execute();
 					$stmt->free_result();
+					$this->id = $id;
+					if($return) return $this;
 				}
 				catch(\Exception $e) {
 					error_log($e->getMessage());
@@ -716,6 +724,10 @@ namespace Model {
 			return true;
 		}
 
+		/**
+		 * @param $sql
+		 * @return bool
+		 */
 		public function runMultiQuery($sql) {
 			$db = $this->db;
 			$db->begin_transaction();

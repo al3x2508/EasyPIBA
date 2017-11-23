@@ -2,13 +2,12 @@
 ini_set("zlib.output_compression", 4096);
 if(!defined("_APP_NAME_")) require_once(dirname(__FILE__) . '/functions.php');
 function loadJs($js, $fromCache = true, $return = true) {
-	$cache = Utils\getCache();
+	$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 	$scripts=explode(',', $js);
 	$md5Value = md5($js);
-	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js'):true;
 	$buffer = '';
 	/** @var bool|Memcached $cache */
-	if(!$cache || !($buffer = $cache->get('javaScript' . $md5Value))) {
+	if(!$cache || !($buffer = $cache->get(_APP_NAME_ . 'javaScript' . $md5Value))) {
 		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
 			$buffer = "";
 			if(count($scripts) > 0) {
@@ -18,19 +17,21 @@ function loadJs($js, $fromCache = true, $return = true) {
 			}
 			require_once(dirname(dirname(__FILE__)) . '/Utils/JShrink/Minifier.class.php');
 			$buffer = \Utils\JShrink\Minifier::minify($buffer, array('flaggedComments' => false));
-			if($cache) $cache->set('javaScript' . $md5Value, $buffer);
+			if($cache) $cache->set(_APP_NAME_ . 'javaScript' . $md5Value, $buffer);
 		}
 	}
-	if($fromCache || !file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) file_put_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js', $buffer);
+	if($fromCache) {
+		if(file_exists(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js'):true;
+		else file_put_contents(dirname(dirname(__FILE__)) . '/js/' . $md5Value . '.js', $buffer);
+	}
 	return ($return)?$buffer:true;
 }
 function loadCss($css, $fromCache = true, $return = true, $filename = '') {
-	$cache = Utils\getCache();
+	$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 	$scripts=explode(',', $css);
 	$md5Value = (empty($filename))?md5($css):$filename;
-	if($fromCache && file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css'):true;
 	$buffer = '';
-	if(!$cache || !($buffer = $cache->get('css' . $md5Value))) {
+	if(!$cache || !($buffer = $cache->get(_APP_NAME_ . 'css' . $md5Value))) {
 		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
 			$buffer = "";
 			if(count($scripts) > 0) {
@@ -45,10 +46,13 @@ function loadCss($css, $fromCache = true, $return = true, $filename = '') {
 			// Remove whitespace
 			$buffer = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $buffer);
 			// Enable GZip encoding.
-			if($cache) $cache->set('css' . $md5Value, $buffer);
+			if($cache) $cache->set(_APP_NAME_ . 'css' . $md5Value, $buffer);
 		}
 	}
-	if($fromCache || !file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) file_put_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css', $buffer);
+	if($fromCache) {
+		if(file_exists(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css')) return ($return)?file_get_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css'):true;
+		else file_put_contents(dirname(dirname(__FILE__)) . '/css/' . $md5Value . '.css', $buffer);
+	}
 	return ($return)?$buffer:true;
 }
 if(array_key_exists('js', $_GET)) {
@@ -67,11 +71,11 @@ elseif(array_key_exists('css', $_GET)) {
 	echo $buffer;
 	exit;
 }
-elseif(isset($page_url) && $page_url == 'css/main.css') {
+elseif(isset($page_url) && $page_url == 'main.css') {
 	header("content-type: text/css");
 	header('Cache-Control: public');
 	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
-	$buffer = loadCss('font-montserrat.css,font-awesome.css,_main.css', true, true, 'main.css');
+	$buffer = loadCss('font-montserrat.css,font-awesome.css,_main.css', true, true, 'main');
 	echo $buffer;
 	exit;
 }

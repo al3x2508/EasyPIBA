@@ -29,16 +29,25 @@ class Controller {
 	 * @param string $language
 	 */
 	public function __construct($url, $language = _DEFAULT_LANGUAGE_) {
+		$redis = \Utils\Predis::getInstance();
 		$this->url = $url;
 		$this->language = $language;
-		$page = new Model('pages');
-		$page->language = $language;
-		$page->url = str_replace('.html', '', $url);
-		$page->visible = 1;
-		$page = $page->get();
-		if(count($page)) {
-			$page = $page[0];
-			if(!empty($page->js)) {
+		$redisKey = _APP_NAME_ . str_replace('.html', '', $url) . '|' . $language;
+		if($redis && $redis->exists($redisKey)) $page = json_decode($redis->get($redisKey));
+		else {
+			$page = new Model('pages');
+			$page->language = $language;
+			$page->url = str_replace('.html', '', $url);
+			$page->visible = 1;
+			$page = $page->get();
+			if(count($page)) {
+				$page = $page[0];
+				if($redis) $redis->set($redisKey, json_encode($page));
+			}
+			else $page = false;
+		}
+		if($page) {
+				if(!empty($page->js)) {
 				$explodedJs = explode(",", $page->js);
 				$page->js = array();
 				foreach($explodedJs AS $expJs) $page->js[] = trim($expJs);
@@ -68,7 +77,11 @@ class Controller {
 				if(count($module_routes)) {
 					$class = 'Module\\' . $module_routes[0]->modules->name . '\\Page';
 					$class = new $class();
-					$page = $class->output();
+					if($class && property_exists($class, 'useCache') && $class->useCache && $redis) $page = json_decode($redis->get($redisKey));
+					if(!$page) {
+						$page = $class->output();
+						if($page && property_exists($page, 'useCache') && $page->useCache && $redis) $redis->set($redisKey, json_encode($page));
+					}
 				}
 			}
 		}
@@ -89,7 +102,10 @@ class Controller {
 
 	public static function getMenu() {
 		$userLanguage = Util::getUserLanguage();
+		$redis = \Utils\Predis::getInstance();
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
+		$redisKey = _APP_NAME_ . 'menu|' . str_replace('.html', '', $_SERVER['REQUEST_URI']) . '|' . $langUrl;
+		if($redis && $redis->exists($redisKey)) return json_decode($redis->get($redisKey), true);
 		$pages = new Model('pages');
 		$pages->language = $userLanguage;
 		$pages->visible = 1;
@@ -132,6 +148,7 @@ class Controller {
 				$array_menu['menu_right'][$menuParent][] = $pag;
 			}
 		}
+		if($redis) $redis->set($redisKey, json_encode($array_menu));
 		return $array_menu;
 	}
 }

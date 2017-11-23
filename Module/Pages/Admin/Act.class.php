@@ -58,6 +58,37 @@ class Act extends AdminAct {
 		$pages = new Model('pages');
 		$pages->runQuery($sql, $data, false);
 	}
+
+	public function act() {
+		$redis = \Utils\Predis::getInstance();
+		if($redis) {
+			if(array_key_exists('id', $this->fields)) {
+				if($this->fields['id'] > 0) {
+					$page = new Model('pages');
+					$page = $page->getOneResult('id', $this->fields['id']);
+					$url = $page->url;
+					$language = $page->language;
+					$redisKey = _APP_NAME_ . $url . '|' . $language;
+					if($redis->exists($redisKey)) $redis->del($redisKey);
+				}
+			}
+			else {
+				$page = new Model('pages');
+				$page = $page->getOneResult('id', $this->fields['delete']);
+				$url = $page->url;
+				$language = $page->language;
+				$redisKey = _APP_NAME_ . $url . '|' . $language;
+				if($redis->exists($redisKey)) $redis->del($redisKey);
+			}
+		}
+		$act = parent::act();
+		if($redis && property_exists($act, 'id')) {
+			$url = $act->url;
+			$language = $act->language;
+			$redisKey = _APP_NAME_ . $url . '|' . $language;
+			$redis->set($redisKey, json_encode($act));
+		}
+	}
 }
 $pages = new Act();
 if($pages) {

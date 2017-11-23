@@ -22,12 +22,14 @@ abstract class AdminPage {
 		if(!empty($pagename)) {
 			$mAR = new Model('module_admin_routes');
 			$mAR = $mAR->getOneResult('url', $pagename);
-			$admins_permissions = new Model('admins_permissions');
-			$admins_permissions->admin = AdminController::getCurrentUser()->id;
-			$admins_permissions->permission = $mAR->permission;
-			if(count($admins_permissions->get())) {
-				$class = 'Module\\' . $mAR->modules->name . '\\Admin\\AdminPage';
-				return new $class();
+			if($mAR) {
+				$admins_permissions = new Model('admins_permissions');
+				$admins_permissions->admin = AdminController::getCurrentUser()->id;
+				$admins_permissions->permission = $mAR->permission;
+				if(count($admins_permissions->get())) {
+					$class = 'Module\\' . $mAR->modules->name . '\\Admin\\AdminPage';
+					return new $class();
+				}
 			}
 		}
 		return false;
