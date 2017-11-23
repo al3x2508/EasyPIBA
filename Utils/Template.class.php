@@ -283,9 +283,9 @@ class Template {
 		//End of menu right
 
 		//Set the main javascripts
-		$mainJavascripts = 'jquery.min.js,main.js';
+		$mainJavascripts = 'jquery.min.js,bootstrap.min.js,main.js';
 		loadJs($mainJavascripts, $this->from_cache, false);
-		$this->MAIN_JAVASCRIPTS = '<script type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) .'.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
+		$this->MAIN_JAVASCRIPTS = '<script defer type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) .'.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
 
 		//Set the content values to replace inside html template
 		foreach(get_object_vars($this) AS $key => $value) {
@@ -318,6 +318,7 @@ class Template {
 		}
 		//Add styles in page
 		$cssLR = '';
+		$this->css[] = 'main.css';
 		if(count($this->css) > 0) {
 			$scripts = '';
 			$css = array();
@@ -338,7 +339,7 @@ class Template {
 		}
 		$footer = /** @lang text */
 			'		<noscript id="deferred-styles">
-			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/main.css" id="cssdeferredmain" />
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
 			' . $cssLR . '
 		</noscript>
 		<script>
