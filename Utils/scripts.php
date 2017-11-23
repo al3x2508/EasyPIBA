@@ -2,7 +2,7 @@
 ini_set("zlib.output_compression", 4096);
 if(!defined("_APP_NAME_")) require_once(dirname(__FILE__) . '/functions.php');
 function loadJs($js, $fromCache = true, $return = true) {
-	$cache = \Utils\Memcached::getInstance();
+	$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 	$scripts=explode(',', $js);
 	$md5Value = md5($js);
 	$buffer = '';
@@ -27,7 +27,7 @@ function loadJs($js, $fromCache = true, $return = true) {
 	return ($return)?$buffer:true;
 }
 function loadCss($css, $fromCache = true, $return = true, $filename = '') {
-	$cache = \Utils\Memcached::getInstance();
+	$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 	$scripts=explode(',', $css);
 	$md5Value = (empty($filename))?md5($css):$filename;
 	$buffer = '';

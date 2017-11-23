@@ -110,7 +110,7 @@ namespace Model {
 		 * @return $this
 		 */
 		private function getSchema() {
-			$cache = \Utils\Memcached::getInstance();
+			$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 			if($cache && $buffer = $cache->get(_APP_NAME_ . 'schema' . $this->tableName) && !empty($buffer)) {
 				$this->schema = json_decode($buffer, true);
 				return $this;

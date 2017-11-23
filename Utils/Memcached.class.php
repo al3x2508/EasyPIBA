@@ -1,4 +1,5 @@
 <?php
+
 namespace Utils;
 /**
  * Class Memcached
@@ -14,14 +15,27 @@ class Memcached extends \Memcached {
 	 * Memcached constructor.
 	 */
 	public function __construct() {
-		parent::__construct();
-		$this->addServer('127.0.0.1', 11211);
+		try {
+			parent::__construct();
+			$this->addServer('127.0.0.1', 11211);
+			return $this;
+		} catch (\Exception $e) {
+			return false;
+		}
 	}
+
 	/**
-	 * @return Memcached|null
+	 * @return Memcached|null|bool
 	 */
 	public static function getInstance() {
-		if (self::$instance == null) self::$instance = new self();
-		return self::$instance;
+		if (extension_loaded('Memcached')) {
+			try {
+				if (self::$instance == null) self::$instance = new self();
+				return self::$instance;
+			} catch (\Exception $e) {
+				return false;
+			}
+		}
+		return false;
 	}
 }
