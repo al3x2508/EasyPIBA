@@ -196,11 +196,10 @@ class Controller {
 	 * @param $user
 	 */
 	public static function storeCookie($user) {
-		$secretKey = Util::getSetting('SECRET_KEY');
 		$token = Util::GenerateRandomToken(24, true);
 		self::storeTokenForUser($user, $token);
 		$cookie = $token;
-		$mac = hash_hmac('sha256', $cookie, $secretKey);
+		$mac = hash_hmac('sha256', $cookie, _HASH_KEY_);
 		$cookie .= ':' . $mac;
 		\setcookie('rme' . _APP_NAME_, $cookie, time() + 60 * 60 * 24 * 30);
 	}

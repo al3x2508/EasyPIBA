@@ -40,7 +40,7 @@ class LoginPage {
 						if($isGood) {
 							unset($user->password);
 							$_SESSION['user'] = $user;
-							if(array_key_exists('keepLoggedIn', $_POST)) Controller::storeCookie($userId);
+							if(array_key_exists('remember', $_POST)) Controller::storeCookie($userId);
 							$redirectUrl = _DEFAULT_REDIRECT_;
 							$location = (array_key_exists('ref', $_SESSION)) ? $_SESSION['ref'] : $redirectUrl;
 							header("Location: {$location}");

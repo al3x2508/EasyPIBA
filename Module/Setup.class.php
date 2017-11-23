@@ -23,6 +23,8 @@ abstract class Setup {
 		$mR->type = array_key_exists('type', $url)?$url['type']:0;
 		//Must be logged in: 0 - Visible for guest users; 1 - Visible for logged in users
 		$mR->mustBeLoggedIn = array_key_exists('mustBeLoggedIn', $url)?$url['mustBeLoggedIn']:0;
+		//Hidden for logged in users
+		$mR->hiddenForLoggedIn = array_key_exists('hiddenForLoggedIn', $url)?$url['hiddenForLoggedIn']:0;
 		//Menu position: 0 - Not shown in menu; 1 - Top menu (default); 2 - Right menu (eg: Login, My account)
 		$mR->menu_position = array_key_exists('menu_position', $url)?$url['menu_position']:0;
 		//Menu text: the text used for the link in menu
