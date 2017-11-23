@@ -26,7 +26,7 @@ abstract class AdminAct {
 			if($where || array_key_exists('id', $this->fields)) {
 				foreach($this->fields AS $key => $value) $this->entity->$key = $value;
 				if($where || (array_key_exists('id', $this->fields) && $this->fields['id'] > 0)) {
-					if($this->entity->update($where)) return array_key_exists('id', $this->fields) ? $this->fields['id'] : 1;
+					if($this->entity->update($where)) return $this->entity;
 					else return false;
 				}
 				else return $this->entity->create();

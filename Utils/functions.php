@@ -262,17 +262,20 @@ namespace Utils {
 			$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
 			$page_url = ($query_position !== false) ? substr($_SERVER['REQUEST_URI'], 0, $query_position - 1) : $_SERVER['REQUEST_URI'];
 			$page_url = preg_replace('/^(' . str_replace('/', '\/', _FOLDER_URL_) . ')(.*)/', '$2', $page_url);
+
+			preg_match('/^([a-z]{2,3})$/', $page_url, $matches);
+			if(count($matches)) {
+				$_COOKIE['language'] = $matches[1];
+				$page_url = '';
+			}
+			preg_match('/^([a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
+			if(count($matches)) {
+				$_COOKIE['language'] = $matches[1];
+				$page_url = str_replace('.html', '', trim($matches[2], '/'));
+			}
+
 			return $page_url;
 		}
-	}
-
-	/**
-	 * @return bool|\Memcached
-	 */
-	function getCache() {
-		//TODO: implement cache system
-		$cache = false;
-		return $cache;
 	}
 }
 namespace {
@@ -283,6 +286,7 @@ namespace {
 		exit;
 	}*/
 	use Module\Users\Controller;
+	use Utils\Translations;
 	use \Utils\Util;
 
 	//If site is currently under maintenance and user IP is not in the decoded json from allowedIps setting in DB tell user to come back later
@@ -328,20 +332,6 @@ namespace {
 		$_SESSION['userLanguage'] = $userLanguage;
 	}
 	else if(array_key_exists('language', $_COOKIE) && $_SESSION['userLanguage'] != $_COOKIE['language']) $_SESSION['userLanguage'] = $_COOKIE['language'];
-	require_once(_APP_DIR_ . 'locale/gettext.php');
-	require_once(_APP_DIR_ . 'locale/streams.php');
-	$streamer = new FileReader(_LOCALE_DIR_ . '/' . $_SESSION['userLanguage'] . '/LC_MESSAGES/i18n.mo');
-	$translations = new gettext_reader($streamer);
-
-	/**
-	 * Translate a string
-	 * @param $string
-	 * @return mixed
-	 */
-	function __($string) {
-		global $translations;
-		return $translations->translate($string);
-	}
 
 	if(!function_exists('hash_equals')) {
 		function hash_equals($str1, $str2) {
@@ -358,6 +348,20 @@ namespace {
 		$page_url = Util::getCurrentUrl();
 		if(array_key_exists('logout', $_GET) || $page_url == 'logout') Controller::logout();
 	}
-	else /** @noinspection PhpUnusedLocalVariableInspection */
+	else {
+		global $argv;
+		/** @noinspection PhpUnusedLocalVariableInspection */
 		$page_url = dirname(realpath($argv[0]));
+	}
+
+	/**
+	 * Translate a string
+	 * @param $string
+	 * @return mixed
+	 */
+	function __($string) {
+		$translations = new Translations();
+		return $translations->translate($string);
+	}
+
 }

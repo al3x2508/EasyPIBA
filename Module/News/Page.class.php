@@ -4,6 +4,7 @@ use Model\Model;
 use Utils\Util;
 
 class Page {
+	public $useCache = true;
 	public function output() {
 		$currentUrl = Util::getCurrentUrl();
 		$page = new \stdClass();
@@ -13,6 +14,7 @@ class Page {
 		$page->content = '';
 		$page->js = array();
 		$page->css = array();
+		$page->useCache = true;
 		$news = new Model('news');
 		$content = '';
 		if($currentUrl == 'news' || preg_match('/news\/pag\-[\d+]/', $currentUrl)) {

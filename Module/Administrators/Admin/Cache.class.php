@@ -1,6 +1,6 @@
 <?php
 namespace Module\Administrators\Admin;
-class Modules {
+class Cache {
 	/**
 	 * @param $key
 	 * @param $value
@@ -9,8 +9,8 @@ class Modules {
 		$this->$key = $value;
 	}
 	public function __construct() {
-		$this->title = __('Modules');
-		$this->h1 = __('Modules');
+		$this->title = __('Cache');
+		$this->h1 = __('Cache');
 		$this->js = array();
 		$this->css = array();
 		$this->content = '';

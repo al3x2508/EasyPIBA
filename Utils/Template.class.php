@@ -216,10 +216,16 @@ class Template {
 		//Set the javascript variable for language
 		$this->LANGUAGE = $userLanguage;
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_)?'':$userLanguage . '/';
-		$pages = new Model('pages');
-		$pages->language = $userLanguage;
-		$pages->visible = 1;
-		$pagesArray = $pages->get();
+		$redis = \Utils\Predis::getInstance();
+		$redisKey = _APP_NAME_ . 'menu|' . $langUrl;
+		if($redis && $redis->exists($redisKey)) $pagesArray = json_decode($redis->get($redisKey));
+		else {
+			$pages = new Model('pages');
+			$pages->language = $userLanguage;
+			$pages->visible = 1;
+			$pagesArray = $pages->get();
+			if($redis) $redis->set($redisKey, json_encode($pagesArray));
+		}
 		foreach($pagesArray AS $page) {
 			if(($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url . '.html') && !empty($page->metaog)) {
 				$metaog = json_decode($page->metaog, true);
@@ -242,10 +248,16 @@ class Template {
 		 * Build the menu right: Dropdown for languages, login button
 		 */
 		$menuRight = '';
-		$pages->clear();
-		$pages->groupBy('language');
-		$pages->order('language ASC');
-		$pagesArray = $pages->get();
+		$redisKey = _APP_NAME_ . 'menuLanguage|' . $langUrl;
+		if($redis && $redis->exists($redisKey)) $pagesArray = json_decode($redis->get($redisKey));
+		else {
+			if(!isset($pages)) $pages = new Model('pages');
+			$pages->clear();
+			$pages->groupBy('language');
+			$pages->order('language ASC');
+			$pagesArray = $pages->get();
+			if($redis) $redis->set($redisKey, json_encode($pagesArray));
+		}
 		if(count($pagesArray) > 1) {
 			$currentLanguage = array('native' => 'English', 'flag' => 'us');
 			foreach($pagesArray AS $page) {
@@ -387,11 +399,13 @@ class Template {
 			$this->content = str_replace('#testimonials#', $testimonials, $this->content);
 		}
 		if(isset($footer)) $this->content = str_replace("\t</body>", $footer . "\t</body>", $this->content);
-		$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
-		$countries = new Model('countries');
-		$countries = $countries->get();
-		foreach($countries AS $country) $countriesOptions .= '	<option value="' . $country->id . '">' . $country->name . '</option>' . PHP_EOL;
-		$this->content = str_replace('<option value="">' . __('Country') . '</option>', $countriesOptions, $this->content);
+		if(strpos($this->content, '<option value="">' . __('Country') . '</option>') !== false) {
+			$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
+			$countries = new Model('countries');
+			$countries = $countries->get();
+			foreach($countries AS $country) $countriesOptions .= '	<option value="' . $country->id . '">' . $country->name . '</option>' . PHP_EOL;
+			$this->content = str_replace('<option value="">' . __('Country') . '</option>', $countriesOptions, $this->content);
+		}
 		return true;
 	}
 

@@ -6,8 +6,8 @@ class AdminPage extends \Controller\AdminPage {
 		switch($filename) {
 			case 'administrators':
 				return new Admins();
-			case 'reread':
-				return new Modules();
+			case 'cache':
+				return new Cache();
 			default:
 				break;
 		}

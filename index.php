@@ -16,22 +16,11 @@ if(strpos($_SERVER['REQUEST_URI'], '//') !== false) {
 	header("Location: " . $new_url);
 }
 $page_url = (isset($page_url))?$page_url:'';
-$filename = $page_url;
 $og_image = defined('_OG_IMAGE_')?_OG_IMAGE_:_LOGO_;
 //Set $language as user language
 $language = Util::getUserLanguage();
 //Check if language exists in url; if exists, set $language from url
-preg_match('/^([a-z]{2,3})$/', $page_url, $matches);
-if(count($matches)) {
-	$language = $matches[1];
-	$filename = '';
-}
-preg_match('/^([a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
-if(count($matches)) {
-	$language = $matches[1];
-	$filename = str_replace('.html', '', trim($matches[2], '/'));
-}
-$page = new Module\Pages\Controller($filename, $language);
+$page = new Module\Pages\Controller($page_url, $language);
 if($page->mustBeLoggedIn && !\Module\Users\Controller::getCurrentUser()) {
 	$_SESSION['ref'] = $_SERVER['REQUEST_URI'];
 	header("Location: " . _FOLDER_URL_ . 'login');
