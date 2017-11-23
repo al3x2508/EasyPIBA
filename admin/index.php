@@ -76,8 +76,7 @@ else { ?>
 		<title><?php echo _APP_NAME_; ?> Admin | <?php echo __('Login'); ?></title>
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<!-- Bootstrap 3.3.5 -->
-		<link rel="stylesheet" href="<?php echo _FOLDER_URL_; ?>css/bootstrap.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
 		<link rel="stylesheet" href="<?php echo _FOLDER_URL_; ?>css/main.css">
 		<!-- Theme style -->
 		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
@@ -120,7 +119,8 @@ else { ?>
 		</div>
 		<!-- /.login-box -->
 		<script type="text/javascript" src="<?php echo _FOLDER_URL_; ?>js/jquery.min.js"></script>
-		<script type="text/javascript" src="<?php echo _FOLDER_URL_; ?>js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	</body>
 </html>
 <?php
