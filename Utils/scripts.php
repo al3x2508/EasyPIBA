@@ -75,7 +75,7 @@ elseif(isset($page_url) && $page_url == 'main.css') {
 	header("content-type: text/css");
 	header('Cache-Control: public');
 	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
-	$buffer = loadCss('font-montserrat.css,font-awesome.css,_main.css', true, true, 'main');
+	$buffer = loadCss('bootstrap.css,font-montserrat.css,font-awesome.css,_main.css', true, true, 'main');
 	echo $buffer;
 	exit;
 }

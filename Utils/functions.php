@@ -258,6 +258,9 @@ namespace Utils {
 			return $string;
 		}
 
+		/**
+		 * @return string
+		 */
 		public static function getCurrentUrl() {
 			$query_position = ($_SERVER['QUERY_STRING'] != '') ? strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']) : false;
 			$page_url = ($query_position !== false) ? substr($_SERVER['REQUEST_URI'], 0, $query_position - 1) : $_SERVER['REQUEST_URI'];

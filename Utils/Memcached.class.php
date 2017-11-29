@@ -25,7 +25,7 @@ class Memcached extends \Memcached {
 	}
 
 	/**
-	 * @return Memcached|null|bool
+	 * @return Memcached|false
 	 */
 	public static function getInstance() {
 		if (extension_loaded('Memcached')) {

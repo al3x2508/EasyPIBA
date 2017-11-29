@@ -29,7 +29,7 @@ class Controller {
 	 * @param string $language
 	 */
 	public function __construct($url, $language = _DEFAULT_LANGUAGE_) {
-		$redis = \Utils\Predis::getInstance();
+		$redis = \Utils\Redis::getInstance();
 		$this->url = $url;
 		$this->language = $language;
 		$redisKey = _APP_NAME_ . str_replace('.html', '', $url) . '|' . $language;
@@ -102,7 +102,7 @@ class Controller {
 
 	public static function getMenu() {
 		$userLanguage = Util::getUserLanguage();
-		$redis = \Utils\Predis::getInstance();
+		$redis = \Utils\Redis::getInstance();
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
 		$pages = new Model('pages');
 		$pages->language = $userLanguage;
