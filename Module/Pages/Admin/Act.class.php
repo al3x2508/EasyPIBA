@@ -70,6 +70,8 @@ class Act extends AdminAct {
 					$language = $page->language;
 					$redisKey = _APP_NAME_ . $url . '|' . $language;
 					if($redis->exists($redisKey)) $redis->del($redisKey);
+					$redisKey = _APP_NAME_ . 'output|' . $language . '|' . md5($url);
+					if($redis->exists($redisKey)) $redis->del($redisKey);
 				}
 			}
 			else {
@@ -78,6 +80,8 @@ class Act extends AdminAct {
 				$url = $page->url;
 				$language = $page->language;
 				$redisKey = _APP_NAME_ . $url . '|' . $language;
+				if($redis->exists($redisKey)) $redis->del($redisKey);
+				$redisKey = _APP_NAME_ . 'output|' . $language . '|' . md5($url);
 				if($redis->exists($redisKey)) $redis->del($redisKey);
 			}
 		}
