@@ -58,11 +58,14 @@ class Template {
 	 */
 	public $css = array();
 
+	private $rediscache = false;
+
 	/**
 	 * Template constructor.
 	 * @param $filename
 	 */
 	public function __construct($filename) {
+		$this->rediscache = \Utils\Redis::getInstance();
 		$this->page_url .= $_SERVER['REQUEST_URI'];
 		$this->filename = _TEMPLATE_DIR_ . $filename;
 		//Build the social links variable for footer in case you need it
@@ -75,20 +78,7 @@ class Template {
 		if(!empty(_INSTAGRAM_LINK_)) $socialLinks .= '<a href="' . _INSTAGRAM_LINK_ . '" rel="nofollow" target="_blank">Instagram</a>';
 
 		//Build the page content data variables
-		$content_values = array(
-			'url' => _ADDRESS_ . '/' . $this->page_url,
-			'LOGO' => _FOLDER_URL_ . 'img/' . _LOGO_,
-			'APP_NAME' => _APP_NAME_,
-			'COMPANY_NAME' => _COMPANY_NAME_,
-			'COMPANY_ADDRESS' => _COMPANY_ADDRESS_,
-			'ADDRESS1' => _COMPANY_ADDRESS_L1_,
-			'ADDRESS2' => _COMPANY_ADDRESS_L2_,
-			'PHONE' => _COMPANY_PHONE_,
-			'GAID' => _GOOGLEANALYTICSID_,
-			'SOCIAL_LINKS' => $socialLinks,
-			'GOOGLE_ANALYTICS' => '',
-			'FBAPPID' => ''
-		);
+		$content_values = array('url' => _ADDRESS_ . '/' . $this->page_url, 'LOGO' => _FOLDER_URL_ . 'img/' . _LOGO_, 'APP_NAME' => _APP_NAME_, 'COMPANY_NAME' => _COMPANY_NAME_, 'COMPANY_ADDRESS' => _COMPANY_ADDRESS_, 'ADDRESS1' => _COMPANY_ADDRESS_L1_, 'ADDRESS2' => _COMPANY_ADDRESS_L2_, 'PHONE' => _COMPANY_PHONE_, 'GAID' => _GOOGLEANALYTICSID_, 'SOCIAL_LINKS' => $socialLinks, 'GOOGLE_ANALYTICS' => '', 'FBAPPID' => '');
 		if(!empty(_GOOGLEANALYTICSID_)) /** @noinspection CommaExpressionJS */
 			$content_values['GOOGLE_ANALYTICS'] = /** @lang text */
 				'<script>
@@ -185,16 +175,16 @@ class Template {
 	 * @return mixed
 	 */
 	private function csrfguard_replace_forms($form_data_html) {
-		preg_match_all("/<form(.*?)>(.*?)<\\/form>/is",$form_data_html,$matches,PREG_SET_ORDER);
-		if (is_array($matches)) {
-			foreach ($matches as $m) {
-				if (strpos($m[1],"nocsrf")!==false) continue;
-				$name="CSRFGuard_".mt_rand(0,mt_getrandmax());
-				$token=Util::csrfguard_generate_token($name);
-				$form_data_html=str_replace($m[0], /** @lang text */
+		preg_match_all("/<form(.*?)>(.*?)<\\/form>/is", $form_data_html, $matches, PREG_SET_ORDER);
+		if(is_array($matches)) {
+			foreach($matches as $m) {
+				if(strpos($m[1], "nocsrf") !== false) continue;
+				$name = "CSRFGuard_" . mt_rand(0, mt_getrandmax());
+				$token = Util::csrfguard_generate_token($name);
+				$form_data_html = str_replace($m[0], /** @lang text */
 					"<form{$m[1]}>
 <input type='hidden' name='CSRFName' value='{$name}' />
-<input type='hidden' name='CSRFToken' value='{$token}' />{$m[2]}</form>",$form_data_html);
+<input type='hidden' name='CSRFToken' value='{$token}' />{$m[2]}</form>", $form_data_html);
 			}
 		}
 		return $form_data_html;
@@ -215,16 +205,15 @@ class Template {
 		$userLanguage = Util::getUserLanguage();
 		//Set the javascript variable for language
 		$this->LANGUAGE = $userLanguage;
-		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_)?'':$userLanguage . '/';
-		$redis = \Utils\Predis::getInstance();
+		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
 		$redisKey = _APP_NAME_ . 'menu|' . $langUrl;
-		if($redis && $redis->exists($redisKey)) $pagesArray = json_decode($redis->get($redisKey));
+		if($this->rediscache && $this->rediscache->exists($redisKey)) $pagesArray = json_decode($this->rediscache->get($redisKey));
 		else {
 			$pages = new Model('pages');
 			$pages->language = $userLanguage;
 			$pages->visible = 1;
 			$pagesArray = $pages->get();
-			if($redis) $redis->set($redisKey, json_encode($pagesArray));
+			if($this->rediscache) $this->rediscache->set($redisKey, json_encode($pagesArray));
 		}
 		foreach($pagesArray AS $page) {
 			if(($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url . '.html') && !empty($page->metaog)) {
@@ -249,14 +238,14 @@ class Template {
 		 */
 		$menuRight = '';
 		$redisKey = _APP_NAME_ . 'menuLanguage|' . $langUrl;
-		if($redis && $redis->exists($redisKey)) $pagesArray = json_decode($redis->get($redisKey));
+		if($this->rediscache && $this->rediscache->exists($redisKey)) $pagesArray = json_decode($this->rediscache->get($redisKey));
 		else {
 			if(!isset($pages)) $pages = new Model('pages');
 			$pages->clear();
 			$pages->groupBy('language');
 			$pages->order('language ASC');
 			$pagesArray = $pages->get();
-			if($redis) $redis->set($redisKey, json_encode($pagesArray));
+			if($this->rediscache) $this->rediscache->set($redisKey, json_encode($pagesArray));
 		}
 		if(count($pagesArray) > 1) {
 			$currentLanguage = array('native' => 'English', 'flag' => 'us');
@@ -267,17 +256,17 @@ class Template {
 			$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css';
 			$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css';
 			$menuRight = '<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-' . ($currentLanguage['flag'] == 'en'?'us':$currentLanguage['flag']) . '"></span> ' . $currentLanguage['native'] . '</button>
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-' . ($currentLanguage['flag'] == 'en' ? 'us' : $currentLanguage['flag']) . '"></span> ' . $currentLanguage['native'] . '</button>
   					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' . PHP_EOL;
 			foreach($pagesArray AS $page) {
-				$flag = ($page->language == 'en')?'us':$page->language;
-				$href = ($page->language == _DEFAULT_LANGUAGE_)?'':$page->language;
+				$flag = ($page->language == 'en') ? 'us' : $page->language;
+				$href = ($page->language == _DEFAULT_LANGUAGE_) ? '' : $page->language;
 				$menuRight .= "  						<a class=\"dropdown-item language\" href=\"" . _FOLDER_URL_ . $href . "\" data-language=\"{$page->language}\"><span class=\"flag-icon flag-icon-{$flag}\"></span> " . $page->languages->name . "</a>";
 			}
 			$menuRight .= '  					</div>
 				</div>' . PHP_EOL;
 		}
-		$menuR = (array_key_exists('menu_right', $array_menu))?$this->menu($array_menu['menu_right']):'';
+		$menuR = (array_key_exists('menu_right', $array_menu)) ? $this->menu($array_menu['menu_right']) : '';
 		if(!empty($menuR)) $menuRight .= '<ul class="navbar-nav mr-auto">' . $menuR . '</ul>';
 		$this->menu_right = $menuRight;
 		//End of menu right
@@ -285,7 +274,7 @@ class Template {
 		//Set the main javascripts
 		$mainJavascripts = 'jquery.min.js,bootstrap.min.js,main.js';
 		loadJs($mainJavascripts, $this->from_cache, false);
-		$this->MAIN_JAVASCRIPTS = '<script defer type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) .'.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
+		$this->MAIN_JAVASCRIPTS = '<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
 
 		//Set the content values to replace inside html template
 		foreach(get_object_vars($this) AS $key => $value) {
@@ -311,14 +300,13 @@ class Template {
 				$scripts = implode(",", $js);
 				loadJs($scripts, $this->from_cache);
 				$replacement .= /** @lang text */
-					'		<script defer type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
+					'		<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
 			}
 			$pos = strripos($this->template, "</script>");
 			$this->template = substr_replace($this->template, "\n" . $replacement, $pos + 9, 0);
 		}
 		//Add styles in page
 		$cssLR = '';
-		$this->css[] = 'main.css';
 		if(count($this->css) > 0) {
 			$scripts = '';
 			$css = array();
@@ -339,7 +327,7 @@ class Template {
 		}
 		$footer = /** @lang text */
 			'		<noscript id="deferred-styles">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/main.css" id="cssdeferredmain" />
 			' . $cssLR . '
 		</noscript>
 		<script>
@@ -376,7 +364,7 @@ class Template {
 				$thumbnail = $fname . '-160x160.' . $extension;
 
 				$testimonials .= /** @lang text */
-					'<div class="carousel-item' . ($index == 0?' active':'') . '">
+					'<div class="carousel-item' . ($index == 0 ? ' active' : '') . '">
 						<img src="' . _FOLDER_URL_ . 'img/testimonials/' . $thumbnail . '" />
 						<div>
 							<div class="title testi-hone">' . $testimonial->name . '</div>
@@ -415,10 +403,23 @@ class Template {
 	 */
 	public function output() {
 		$this->load_template();
-		$buffer = $this->header;
-		$buffer .= $this->content;
-		$buffer = self::sanitize_output($buffer);
-		$buffer = self::csrfguard_replace_forms($buffer);
+		$md5url = md5(Util::getCurrentUrl());
+		$redisKey = _APP_NAME_ . 'output|' . $md5url;
+		if($this->rediscache && $this->rediscache->exists($redisKey)) $buffer = $this->rediscache->get($redisKey);
+		else {
+			$buffer = $this->header;
+			$buffer .= $this->content;
+			$buffer = self::sanitize_output($buffer);
+			$buffer = self::csrfguard_replace_forms($buffer);
+		}
+		$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
+		$inpageUrl = false;
+		if($cache && !($inpageUrl = $cache->get(_APP_NAME_ . 'inpageurl' . $md5url))) {
+			$redisKey = _APP_NAME_ . 'output|' . $md5url;
+			if($this->rediscache && !$this->rediscache->exists($redisKey)) $this->rediscache->set($redisKey, $buffer);
+			exec('php ' . _APP_DIR_ . 'cli.php buildcss ' . $md5url . ' > /dev/null 2>/dev/null &');
+		}
+		elseif($cache && $inpageUrl) $buffer = str_replace('</head>', '<style>' . $cache->get($inpageUrl) . '</style>', $buffer);
 		echo $buffer;
 	}
 
@@ -427,16 +428,11 @@ class Template {
 	 * @return mixed
 	 */
 	public static function sanitize_output($buffer) {
-		$search = array(
-			'/\>[^\S ]+/s',  // strip whitespaces after tags, except space
+		$search = array('/\>[^\S ]+/s',  // strip whitespaces after tags, except space
 			'/[^\S ]+\</s',  // strip whitespaces before tags, except space
 			'/(\s)+/s'       // shorten multiple whitespace sequences
 		);
-		$replace = array(
-			'>',
-			'<',
-			'\\1'
-		);
+		$replace = array('>', '<', '\\1');
 		$buffer = preg_replace($search, $replace, $buffer);
 		return $buffer;
 	}

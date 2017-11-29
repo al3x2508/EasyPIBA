@@ -60,7 +60,7 @@ class Act extends AdminAct {
 	}
 
 	public function act() {
-		$redis = \Utils\Predis::getInstance();
+		$redis = \Utils\Redis::getInstance();
 		if($redis) {
 			if(array_key_exists('id', $this->fields)) {
 				if($this->fields['id'] > 0) {
