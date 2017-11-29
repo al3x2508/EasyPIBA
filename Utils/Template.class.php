@@ -91,7 +91,7 @@ class Template {
 		</script>';
 		if(!empty(_FBAPPID_)) $content_values['FBAPPID'] = '<meta property="fb:app_id" content="' . _FBAPPID_ . '" />';
 		foreach($content_values AS $key => $value) $this->$key = $value;
-		$this->colsize = 12;
+		$this->colsize = 'sm-12 col-md-10';
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Template {
 	 */
 	public function setSidebar($links) {
 		$this->colsize = 10;
-		$this->sidebar = '<div class="sidebar col-2"><ul>';
+		$this->sidebar = '<div class="sidebar sidebar col-sm-12 col-md-2"><ul>';
 		foreach($links as $key => $value) {
 			if(!is_array($value)) {
 				$selected = ('/' . $key == $_SERVER['REQUEST_URI']) ? ' class="selected"' : '';
