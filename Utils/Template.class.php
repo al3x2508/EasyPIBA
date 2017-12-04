@@ -405,17 +405,14 @@ class Template {
 		$this->load_template();
 		$md5url = md5(Util::getCurrentUrl());
 		$language = Util::getUserLanguage();
-		$redisKey = _APP_NAME_ . 'output|' . $language . '|' . $md5url;
-		if($this->rediscache && $this->rediscache->exists($redisKey)) $buffer = $this->rediscache->get($redisKey);
-		else {
-			$buffer = $this->header;
-			$buffer .= $this->content;
-			$buffer = self::sanitize_output($buffer);
-			$buffer = self::csrfguard_replace_forms($buffer);
-		}
+		$buffer = $this->header;
+		$buffer .= $this->content;
+		$buffer = self::sanitize_output($buffer);
+		$buffer = self::csrfguard_replace_forms($buffer);
 		$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 		$inpageUrl = false;
 		if($cache && !($inpageUrl = $cache->get(_APP_NAME_ . 'inpageurl' . $md5url))) {
+			$redisKey = _APP_NAME_ . 'output|' . $language . '|' . $md5url;
 			if($this->rediscache && !$this->rediscache->exists($redisKey)) $this->rediscache->set($redisKey, $buffer);
 			exec('php ' . _APP_DIR_ . 'cli.php buildcss ' . $md5url . ' > /dev/null 2>/dev/null &');
 		}
