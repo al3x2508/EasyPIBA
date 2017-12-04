@@ -78,7 +78,7 @@ class BuildInPageCSS {
 				$inpageCss = file_get_contents($inPageFile);
 				if($cache) $cache->set($cacheKey, $inpageCss);
 			}
-			if($cache) $cache->set(_APP_NAME_ . 'inpageurl' . $md5url, $cacheKey);
+			if($cache) $cache->set(_APP_NAME_ . 'inpageurl|' . $md5url, $cacheKey);
 		}
 	}
 
