@@ -12,13 +12,15 @@ class MyAccountPage {
 	public $ogimage = '';
 	public $h1 = '';
 	public $breadcrumbs = array();
-	public $js = array('validate.min.js', 'my-account.js');
+	public $js = array('validate.min.js', '../Module/Users/my-account.js');
 	public $css = array('cinput.css');
 	public $visible = true;
 
 	public function __construct() {
-		$user = Controller::getCurrentUser();
-		if($user) {
+		$userId = Controller::getCurrentUser();
+		if($userId) {
+			$user = new Model('users');
+			$user = $user->getOneResult('id', $userId);
 			$this->title = __('My account');
 			$this->description = __('My account');
 			$this->h1 = '';
@@ -35,7 +37,7 @@ class MyAccountPage {
 					$email = strtolower(strip_tags($_POST['email']));
 					$userModel = new Model('users');
 					$userModel = $userModel->getOneResult('email', $email);
-					if(!$userModel || $userModel->id == $user->id) {
+					if(!$userModel || $userModel->id == $userId) {
 						$password = strip_tags($_POST['password']);
 						$confirmPassword = strip_tags($_POST['confirmPassword']);
 						if($password == $confirmPassword) {

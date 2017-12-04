@@ -4,6 +4,7 @@ namespace Module\Users;
 use Utils\Util;
 
 class Page {
+	public $useCache = false;
 	public function output() {
 		$currentUrl = Util::getCurrentUrl();
 		if(strpos($currentUrl, 'login') === 0) return new LoginPage();

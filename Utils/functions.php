@@ -48,7 +48,11 @@ namespace Utils {
 		 */
 		public static function getUserLanguage($user = false) {
 			if(array_key_exists('language', $_COOKIE)) return $_COOKIE['language'];
-			if(!$user) $user = Controller::getCurrentUser();
+			if(!$user) {
+				$userId = Controller::getCurrentUser();
+				$user = new Model('users');
+				$user = $user->getOneResult('id', $userId);
+			}
 			if($user) {
 				/** @noinspection PhpUndefinedFieldInspection */
 				$accountSettings = json_decode($user->settings, true);

@@ -121,7 +121,11 @@ class Controller {
 	 * @return mixed|null|string
 	 */
 	public static function getUserSetting($setting, $user = false) {
-		if(!$user) $user = self::getCurrentUser();
+		if(!$user) {
+			$userId = self::getCurrentUser();
+			$user = new Model('users');
+			$user = $user->getOneResult('id', $userId);
+		}
 		if($user) {
 			$accountSettings = json_decode($user->settings, true);
 			if(is_array($accountSettings) && array_key_exists($setting, $accountSettings)) return $accountSettings[$setting];

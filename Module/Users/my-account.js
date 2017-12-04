@@ -53,7 +53,7 @@ $(function() {
 			if(!invalidFields) form.submit();
 			else {
 				$.each(invalidFields, function(invalidField, value) {
-					$("#" + invalidField).closest(".input").append($("<div></div>").addClass("alert alert-danger").text(value));
+					$("#" + invalidField).closest(".field").append($("<div></div>").addClass("alert alert-danger").text(value));
 				});
 			}
 		}
