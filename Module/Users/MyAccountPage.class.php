@@ -17,10 +17,8 @@ class MyAccountPage {
 	public $visible = true;
 
 	public function __construct() {
-		$userId = Controller::getCurrentUser();
-		if($userId) {
-			$user = new Model('users');
-			$user = $user->getOneResult('id', $userId);
+		$user = Controller::getCurrentUser(false);
+		if($user) {
 			$this->title = __('My account');
 			$this->description = __('My account');
 			$this->h1 = '';
@@ -37,7 +35,7 @@ class MyAccountPage {
 					$email = strtolower(strip_tags($_POST['email']));
 					$userModel = new Model('users');
 					$userModel = $userModel->getOneResult('email', $email);
-					if(!$userModel || $userModel->id == $userId) {
+					if(!$userModel || $userModel->id == $user->id) {
 						$password = strip_tags($_POST['password']);
 						$confirmPassword = strip_tags($_POST['confirmPassword']);
 						if($password == $confirmPassword) {

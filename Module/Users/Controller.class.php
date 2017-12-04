@@ -109,8 +109,14 @@ class Controller {
 	 * Get logged in user
 	 * @return Model|bool
 	 */
-	public static function getCurrentUser() {
-		if(array_key_exists('user', $_SESSION)) return $_SESSION['user'];
+	public static function getCurrentUser($returnId = true) {
+		if(array_key_exists('user', $_SESSION)) {
+			if($returnId) return $_SESSION['user'];
+			else {
+				$user = new Model('users');
+				return $user->getOneResult('id', $_SESSION['user']);
+			}
+		}
 		return false;
 	}
 
@@ -121,11 +127,7 @@ class Controller {
 	 * @return mixed|null|string
 	 */
 	public static function getUserSetting($setting, $user = false) {
-		if(!$user) {
-			$userId = self::getCurrentUser();
-			$user = new Model('users');
-			$user = $user->getOneResult('id', $userId);
-		}
+		if(!$user) $user = self::getCurrentUser(false);
 		if($user) {
 			$accountSettings = json_decode($user->settings, true);
 			if(is_array($accountSettings) && array_key_exists($setting, $accountSettings)) return $accountSettings[$setting];

@@ -49,6 +49,10 @@ $(function () {
 				"aoColumns": aoColumns
 			};
 			if (typeof jslang != 'undefined') dataTableOptions.oLanguage = jsstrings.datatables;
+			if(typeof dtSort != 'undefined') {
+				dataTableOptions.order = dtSort;
+				dataTableOptions.bSort = true;
+			}
 			table = dataTable.dataTable(dataTableOptions);
 			dataTable.on('page.dt', function () {
 				var info = dataTable.DataTable().page.info();
