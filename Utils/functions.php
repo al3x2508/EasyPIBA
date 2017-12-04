@@ -48,7 +48,7 @@ namespace Utils {
 		 */
 		public static function getUserLanguage($user = false) {
 			if(array_key_exists('language', $_COOKIE)) return $_COOKIE['language'];
-			if(!$user) $user = Controller::getCurrentUser();
+			if(!$user) $user = Controller::getCurrentUser(false);
 			if($user) {
 				/** @noinspection PhpUndefinedFieldInspection */
 				$accountSettings = json_decode($user->settings, true);
@@ -325,8 +325,8 @@ namespace {
 		$cookie = $_COOKIE['rme' . _APP_NAME_];
 		list ($token, $mac) = explode(':', $cookie);
 		if($mac === hash_hmac('sha256', $token, _HASH_KEY_)) {
-			$user = Controller::getUserFromToken($token);
-			if($user) $_SESSION['user'] = $user;
+			$userId = Controller::getUserFromToken($token);
+			if($userId) $_SESSION['user'] = $userId;
 		}
 	}
 	if(!array_key_exists('userLanguage', $_SESSION)) {

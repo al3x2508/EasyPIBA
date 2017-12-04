@@ -109,8 +109,15 @@ class Controller {
 	 * Get logged in user
 	 * @return Model|bool
 	 */
-	public static function getCurrentUser() {
-		if(array_key_exists('user', $_SESSION)) return $_SESSION['user'];
+	public static function getCurrentUser($returnId = true) {
+		if(array_key_exists('user', $_SESSION)) {
+			if($returnId) return $_SESSION['user'];
+			else {
+				$user = new Model('users');
+				$user = $user->getOneResult('id', $_SESSION['user']);
+				return $user;
+			}
+		}
 		return false;
 	}
 
@@ -121,7 +128,7 @@ class Controller {
 	 * @return mixed|null|string
 	 */
 	public static function getUserSetting($setting, $user = false) {
-		if(!$user) $user = self::getCurrentUser();
+		if(!$user) $user = self::getCurrentUser(false);
 		if($user) {
 			$accountSettings = json_decode($user->settings, true);
 			if(is_array($accountSettings) && array_key_exists($setting, $accountSettings)) return $accountSettings[$setting];
@@ -140,7 +147,7 @@ class Controller {
 		$cookie->expiration_date = array(date('Y-m-d H:i:s'), '>=');
 		$cookie = $cookie->get();
 
-		return (count($cookie) > 0) ? $cookie[0]->users : false;
+		return (count($cookie) > 0) ? $cookie[0]->users->id : false;
 	}
 
 	/**
@@ -224,7 +231,7 @@ class Controller {
 		if(isset($_SESSION)) {
 			if(array_key_exists('user', $_SESSION)) {
 				$cookie = new Model('cookies');
-				$cookie->__set('user', $_SESSION['user']->id)->delete();
+				$cookie->__set('user', $_SESSION['user'])->delete();
 				unset($_SESSION);
 				session_destroy();
 			}

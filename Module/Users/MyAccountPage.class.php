@@ -12,12 +12,12 @@ class MyAccountPage {
 	public $ogimage = '';
 	public $h1 = '';
 	public $breadcrumbs = array();
-	public $js = array('validate.min.js', 'my-account.js');
+	public $js = array('validate.min.js', '../Module/Users/my-account.js');
 	public $css = array('cinput.css');
 	public $visible = true;
 
 	public function __construct() {
-		$user = Controller::getCurrentUser();
+		$user = Controller::getCurrentUser(false);
 		if($user) {
 			$this->title = __('My account');
 			$this->description = __('My account');
