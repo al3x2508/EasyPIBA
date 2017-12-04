@@ -114,7 +114,8 @@ class Controller {
 			if($returnId) return $_SESSION['user'];
 			else {
 				$user = new Model('users');
-				return $user->getOneResult('id', $_SESSION['user']);
+				$user = $user->getOneResult('id', $_SESSION['user']);
+				return $user;
 			}
 		}
 		return false;
