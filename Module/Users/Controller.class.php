@@ -146,7 +146,7 @@ class Controller {
 		$cookie->expiration_date = array(date('Y-m-d H:i:s'), '>=');
 		$cookie = $cookie->get();
 
-		return (count($cookie) > 0) ? $cookie[0]->users : false;
+		return (count($cookie) > 0) ? $cookie[0]->users->id : false;
 	}
 
 	/**
@@ -230,7 +230,7 @@ class Controller {
 		if(isset($_SESSION)) {
 			if(array_key_exists('user', $_SESSION)) {
 				$cookie = new Model('cookies');
-				$cookie->__set('user', $_SESSION['user']->id)->delete();
+				$cookie->__set('user', $_SESSION['user'])->delete();
 				unset($_SESSION);
 				session_destroy();
 			}
