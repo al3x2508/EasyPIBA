@@ -602,7 +602,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `country` (`country`),
-  KEY `status` (`status`),
+  KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE `user_confirm` (
