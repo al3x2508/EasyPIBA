@@ -1,5 +1,6 @@
 <?php
 namespace Utils {
+	//Start user session
 	if (session_status() == PHP_SESSION_NONE) {
 		session_name(_APP_NAME_ . 'Session');
 		session_start();
@@ -316,7 +317,6 @@ namespace {
 	//Autoload classes (PSR-0)
 	if(version_compare(PHP_VERSION, '5.3.0', '>=')) spl_autoload_register('\Utils\Util::register', true, true);
 	else spl_autoload_register('\Utils\Util::register');
-	//Start user session
 	if(isset($_SERVER['HTTP_COOKIE'])) {
 		setcookie('PHPSESSID', '', time() - 1000);
 		$_COOKIE["PHPSESSID"] = null;
