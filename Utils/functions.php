@@ -1,15 +1,16 @@
 <?php
 namespace Utils {
-	//Start user session
-	if (session_status() == PHP_SESSION_NONE) {
-		session_name(_APP_NAME_ . 'Session');
-		session_start();
-	}
 	use Controller\Mail;
 	use Model\Model;
 	use Module\Users\Controller;
 
 	if(!defined("_FOLDER_URL_")) require_once(dirname(__FILE__) . '/config.php');
+	//Start user session
+	if (session_status() == PHP_SESSION_NONE) {
+		$sessionName = Util::getUrlFromString(_APP_NAME_) . 'Session';
+		if(session_name() != $sessionName) session_name($sessionName);
+		session_start();
+	}
 	/**
 	 * Set to true if this is a development environment
 	 */
