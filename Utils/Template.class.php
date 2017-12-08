@@ -315,6 +315,7 @@ class Template {
 			}
 			$replacement = '';
 			if (($key = array_search('main.css', $css)) !== false) unset($css[$key]);
+			if (($key = array_search('main.css', $this->css)) !== false) unset($this->css[$key]);
 			if(count($css) > 0) $scripts .= implode(',', $css);
 			foreach($this->css AS $fcss) {
 				if(strpos($fcss, '//') !== false) $replacement .= '		<link rel="stylesheet" href="' . $fcss . '" />' . PHP_EOL;
