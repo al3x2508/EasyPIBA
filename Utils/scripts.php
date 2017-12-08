@@ -7,7 +7,7 @@ function loadJs($js, $fromCache = true, $return = true) {
 	$md5Value = md5($js);
 	$buffer = '';
 	/** @var bool|Memcached $cache */
-	if(!$cache || !($buffer = $cache->get(_APP_NAME_ . 'javaScript' . $md5Value))) {
+	if(!$cache || !($buffer = $cache->get(_CACHE_PREFIX_ . 'javaScript' . $md5Value))) {
 		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
 			$buffer = "";
 			if(count($scripts) > 0) {
@@ -17,7 +17,7 @@ function loadJs($js, $fromCache = true, $return = true) {
 			}
 			require_once(dirname(dirname(__FILE__)) . '/Utils/JShrink/Minifier.class.php');
 			$buffer = \Utils\JShrink\Minifier::minify($buffer, array('flaggedComments' => false));
-			if($cache) $cache->set(_APP_NAME_ . 'javaScript' . $md5Value, $buffer);
+			if($cache) $cache->set(_CACHE_PREFIX_ . 'javaScript' . $md5Value, $buffer);
 		}
 	}
 	if($fromCache) {
@@ -31,7 +31,7 @@ function loadCss($css, $fromCache = true, $return = true, $filename = '') {
 	$scripts=explode(',', $css);
 	$md5Value = (empty($filename))?md5($css):$filename;
 	$buffer = '';
-	if(!$cache || !($buffer = $cache->get(_APP_NAME_ . 'css' . $md5Value))) {
+	if(!$cache || !($buffer = $cache->get(_CACHE_PREFIX_ . 'css' . $md5Value))) {
 		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
 			$buffer = "";
 			if(count($scripts) > 0) {
@@ -46,7 +46,7 @@ function loadCss($css, $fromCache = true, $return = true, $filename = '') {
 			// Remove whitespace
 			$buffer = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $buffer);
 			// Enable GZip encoding.
-			if($cache) $cache->set(_APP_NAME_ . 'css' . $md5Value, $buffer);
+			if($cache) $cache->set(_CACHE_PREFIX_ . 'css' . $md5Value, $buffer);
 		}
 	}
 	if($fromCache) {

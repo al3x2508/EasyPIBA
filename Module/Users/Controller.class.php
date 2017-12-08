@@ -208,7 +208,7 @@ class Controller {
 		$cookie = $token;
 		$mac = hash_hmac('sha256', $cookie, _HASH_KEY_);
 		$cookie .= ':' . $mac;
-		\setcookie('rme' . _APP_NAME_, $cookie, time() + 60 * 60 * 24 * 30);
+		\setcookie('rme' . _CACHE_PREFIX_, $cookie, time() + 60 * 60 * 24 * 30);
 	}
 
 	/**

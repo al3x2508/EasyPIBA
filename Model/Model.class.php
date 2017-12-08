@@ -111,7 +111,7 @@ namespace Model {
 		 */
 		private function getSchema() {
 			$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
-			if($cache && $buffer = $cache->get(_APP_NAME_ . 'schema' . $this->tableName) && !empty($buffer)) {
+			if($cache && $buffer = $cache->get(_CACHE_PREFIX_ . 'schema' . $this->tableName) && !empty($buffer)) {
 				$this->schema = json_decode($buffer, true);
 				return $this;
 			}
@@ -154,7 +154,7 @@ namespace Model {
 				$stmt->free_result();
 			}
 			$this->schema = $schema;
-			if($cache && $cache->getResultCode() == \Memcached::RES_NOTFOUND) $cache->set(_APP_NAME_ . 'schema' . $this->tableName, json_encode($schema));
+			if($cache && $cache->getResultCode() == \Memcached::RES_NOTFOUND) $cache->set(_CACHE_PREFIX_ . 'schema' . $this->tableName, json_encode($schema));
 			return $this;
 		}
 

@@ -32,7 +32,7 @@ class Controller {
 		$redis = \Utils\Redis::getInstance();
 		$this->url = $url;
 		$this->language = $language;
-		$redisKey = _APP_NAME_ . str_replace('.html', '', $url) . '|' . $language;
+		$redisKey = _CACHE_PREFIX_ . str_replace('.html', '', $url) . '|' . $language;
 		if($redis && $redis->exists($redisKey)) $page = json_decode($redis->get($redisKey));
 		else {
 			$page = new Model('pages');

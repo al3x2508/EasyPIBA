@@ -206,7 +206,7 @@ class Template {
 		//Set the javascript variable for language
 		$this->LANGUAGE = $userLanguage;
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
-		$redisKey = _APP_NAME_ . 'menu|' . $langUrl;
+		$redisKey = _CACHE_PREFIX_ . 'menu|' . $langUrl;
 		if($this->rediscache && $this->rediscache->exists($redisKey)) $pagesArray = json_decode($this->rediscache->get($redisKey));
 		else {
 			$pages = new Model('pages');
@@ -237,7 +237,7 @@ class Template {
 		 * Build the menu right: Dropdown for languages, login button
 		 */
 		$menuRight = '';
-		$redisKey = _APP_NAME_ . 'menuLanguage|' . $langUrl;
+		$redisKey = _CACHE_PREFIX_ . 'menuLanguage|' . $langUrl;
 		if($this->rediscache && $this->rediscache->exists($redisKey)) $pagesArray = json_decode($this->rediscache->get($redisKey));
 		else {
 			if(!isset($pages)) $pages = new Model('pages');
@@ -412,8 +412,8 @@ class Template {
 		$buffer = self::csrfguard_replace_forms($buffer);
 		$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 		$inpageUrl = false;
-		if($cache && !($inpageUrl = $cache->get(_APP_NAME_ . 'inpageurl|' . $language . '|' . $md5url))) {
-			$redisKey = _APP_NAME_ . 'output|' . $language . '|' . $md5url;
+		if($cache && !($inpageUrl = $cache->get(_CACHE_PREFIX_ . 'inpageurl|' . $language . '|' . $md5url))) {
+			$redisKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . $md5url;
 			if($this->rediscache && !$this->rediscache->exists($redisKey)) $this->rediscache->set($redisKey, $buffer);
 			exec('php ' . _APP_DIR_ . 'cli.php buildcss "' .  $language . '|' . $md5url . '" > /dev/null 2>/dev/null &');
 		}

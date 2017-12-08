@@ -315,6 +315,8 @@ namespace {
 
 	if(DEVELOPER_MODE) ini_set('display_errors', '1');
 
+	if(!defined('_CACHE_PREFIX_')) define("_CACHE_PREFIX_", Util::getUrlFromString(_APP_NAME_));
+
 	//Autoload classes (PSR-0)
 	if(version_compare(PHP_VERSION, '5.3.0', '>=')) spl_autoload_register('\Utils\Util::register', true, true);
 	else spl_autoload_register('\Utils\Util::register');
@@ -323,8 +325,8 @@ namespace {
 		$_COOKIE["PHPSESSID"] = null;
 		unset($_COOKIE["PHPSESSID"]);
 	}
-	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !array_key_exists('admin', $_SESSION) && isset($_COOKIE['rme' . _APP_NAME_]) && !array_key_exists('user', $_SESSION)) {
-		$cookie = $_COOKIE['rme' . _APP_NAME_];
+	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !array_key_exists('admin', $_SESSION) && isset($_COOKIE['rme' . _CACHE_PREFIX_]) && !array_key_exists('user', $_SESSION)) {
+		$cookie = $_COOKIE['rme' . _CACHE_PREFIX_];
 		list ($token, $mac) = explode(':', $cookie);
 		if($mac === hash_hmac('sha256', $token, _HASH_KEY_)) {
 			$userId = Controller::getUserFromToken($token);

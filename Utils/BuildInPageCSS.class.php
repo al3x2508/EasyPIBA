@@ -11,7 +11,7 @@ class BuildInPageCSS {
 	public function __construct($md5url) {
 		$rediscache = \Utils\Redis::getInstance();
 		if($rediscache) {
-			$redisKey = _APP_NAME_ . 'output|' . $md5url;
+			$redisKey = _CACHE_PREFIX_ . 'output|' . $md5url;
 			$buffer = $rediscache->get($redisKey);
 			$cache = (extension_loaded('Memcached')) ? Memcached::getInstance() : false;
 			$dom = new \DomDocument();
@@ -36,7 +36,7 @@ class BuildInPageCSS {
 			sort($this->selectors);
 			$md5buffer = md5(json_encode($this->selectors));
 			$inPageFile = _APP_DIR_ . 'css/' . $md5buffer . '.inpage';
-			$cacheKey = _APP_NAME_ . 'inpage' . $md5buffer;
+			$cacheKey = _CACHE_PREFIX_ . 'inpage' . $md5buffer;
 			if(!file_exists($inPageFile)) {
 				if(!$cache || !($inpageCss = $cache->get($cacheKey))) {
 					require_once _APP_DIR_ . 'Utils/PHPHtmlParser/Autoloader.php';
@@ -78,7 +78,7 @@ class BuildInPageCSS {
 				$inpageCss = file_get_contents($inPageFile);
 				if($cache) $cache->set($cacheKey, $inpageCss);
 			}
-			if($cache) $cache->set(_APP_NAME_ . 'inpageurl|' . $md5url, $cacheKey);
+			if($cache) $cache->set(_CACHE_PREFIX_ . 'inpageurl|' . $md5url, $cacheKey);
 		}
 	}
 
