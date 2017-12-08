@@ -317,7 +317,6 @@ namespace {
 	if(version_compare(PHP_VERSION, '5.3.0', '>=')) spl_autoload_register('\Utils\Util::register', true, true);
 	else spl_autoload_register('\Utils\Util::register');
 	//Start user session
-	session_name(_APP_NAME_ . 'Session');
 	if(isset($_SERVER['HTTP_COOKIE'])) {
 		setcookie('PHPSESSID', '', time() - 1000);
 		$_COOKIE["PHPSESSID"] = null;
