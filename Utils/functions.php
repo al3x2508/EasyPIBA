@@ -1,6 +1,9 @@
 <?php
 namespace Utils {
-
+	if (session_status() == PHP_SESSION_NONE) {
+		session_name(_APP_NAME_ . 'Session');
+		session_start();
+	}
 	use Controller\Mail;
 	use Model\Model;
 	use Module\Users\Controller;
@@ -315,7 +318,6 @@ namespace {
 	else spl_autoload_register('\Utils\Util::register');
 	//Start user session
 	session_name(_APP_NAME_ . 'Session');
-	if(!isset($_SESSION)) session_start();
 	if(isset($_SERVER['HTTP_COOKIE'])) {
 		setcookie('PHPSESSID', '', time() - 1000);
 		$_COOKIE["PHPSESSID"] = null;
