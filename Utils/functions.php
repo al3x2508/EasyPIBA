@@ -1,11 +1,16 @@
 <?php
 namespace Utils {
-
 	use Controller\Mail;
 	use Model\Model;
 	use Module\Users\Controller;
 
 	if(!defined("_FOLDER_URL_")) require_once(dirname(__FILE__) . '/config.php');
+	//Start user session
+	if (session_status() == PHP_SESSION_NONE) {
+		$sessionName = Util::getUrlFromString(_APP_NAME_) . 'Session';
+		if(session_name() != $sessionName) session_name($sessionName);
+		session_start();
+	}
 	/**
 	 * Set to true if this is a development environment
 	 */
@@ -279,6 +284,15 @@ namespace Utils {
 
 			return $page_url;
 		}
+
+		/**
+		 * @return false|Memcached|Redis
+		 */
+		public static function getCache() {
+			$cache = \Utils\Memcached::getInstance();
+			if(!$cache || ($cache && !$cache->isConnected())) $cache = \Utils\Redis::getInstance();
+			return $cache;
+		}
 	}
 }
 namespace {
@@ -310,19 +324,18 @@ namespace {
 
 	if(DEVELOPER_MODE) ini_set('display_errors', '1');
 
+	if(!defined('_CACHE_PREFIX_')) define("_CACHE_PREFIX_", Util::getUrlFromString(_APP_NAME_));
+
 	//Autoload classes (PSR-0)
 	if(version_compare(PHP_VERSION, '5.3.0', '>=')) spl_autoload_register('\Utils\Util::register', true, true);
 	else spl_autoload_register('\Utils\Util::register');
-	//Start user session
-	session_name(_APP_NAME_ . 'Session');
-	if(!isset($_SESSION)) session_start();
 	if(isset($_SERVER['HTTP_COOKIE'])) {
 		setcookie('PHPSESSID', '', time() - 1000);
 		$_COOKIE["PHPSESSID"] = null;
 		unset($_COOKIE["PHPSESSID"]);
 	}
-	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !array_key_exists('admin', $_SESSION) && isset($_COOKIE['rme' . _APP_NAME_]) && !array_key_exists('user', $_SESSION)) {
-		$cookie = $_COOKIE['rme' . _APP_NAME_];
+	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !array_key_exists('admin', $_SESSION) && isset($_COOKIE['rme' . _CACHE_PREFIX_]) && !array_key_exists('user', $_SESSION)) {
+		$cookie = $_COOKIE['rme' . _CACHE_PREFIX_];
 		list ($token, $mac) = explode(':', $cookie);
 		if($mac === hash_hmac('sha256', $token, _HASH_KEY_)) {
 			$userId = Controller::getUserFromToken($token);

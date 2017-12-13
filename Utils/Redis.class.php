@@ -61,6 +61,9 @@ class Redis {
 	private static $instance = null;
 	/* Connection ---------------------------------------------------------- */
 
+	/**
+	 * @return false|Redis
+	 */
 	public static function getInstance() {
 		if (self::$instance == null) self::$instance = new self();
 		return self::$instance;

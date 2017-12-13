@@ -2,6 +2,7 @@
 namespace Module\Pages\Admin;
 use Controller\AdminAct;
 use Model\Model;
+use Utils\Util;
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
 
@@ -60,18 +61,18 @@ class Act extends AdminAct {
 	}
 
 	public function act() {
-		$redis = \Utils\Redis::getInstance();
-		if($redis) {
+		$cache = Util::getCache();
+		if($cache) {
 			if(array_key_exists('id', $this->fields)) {
 				if($this->fields['id'] > 0) {
 					$page = new Model('pages');
 					$page = $page->getOneResult('id', $this->fields['id']);
 					$url = $page->url;
 					$language = $page->language;
-					$redisKey = _APP_NAME_ . $url . '|' . $language;
-					if($redis->exists($redisKey)) $redis->del($redisKey);
-					$redisKey = _APP_NAME_ . 'output|' . $language . '|' . md5($url);
-					if($redis->exists($redisKey)) $redis->del($redisKey);
+					$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+					if($cache->exists($cacheKey)) $cache->del($cacheKey);
+					$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
+					if($cache->exists($cacheKey)) $cache->del($cacheKey);
 				}
 			}
 			else {
@@ -79,18 +80,18 @@ class Act extends AdminAct {
 				$page = $page->getOneResult('id', $this->fields['delete']);
 				$url = $page->url;
 				$language = $page->language;
-				$redisKey = _APP_NAME_ . $url . '|' . $language;
-				if($redis->exists($redisKey)) $redis->del($redisKey);
-				$redisKey = _APP_NAME_ . 'output|' . $language . '|' . md5($url);
-				if($redis->exists($redisKey)) $redis->del($redisKey);
+				$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+				if($cache->exists($cacheKey)) $cache->del($cacheKey);
+				$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
+				if($cache->exists($cacheKey)) $cache->del($cacheKey);
 			}
 		}
 		$act = parent::act();
-		if($redis && property_exists($act, 'id')) {
+		if($cache && property_exists($act, 'id')) {
 			$url = $act->url;
 			$language = $act->language;
-			$redisKey = _APP_NAME_ . $url . '|' . $language;
-			$redis->set($redisKey, json_encode($act));
+			$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+			$cache->set($cacheKey, json_encode($act));
 		}
 	}
 }

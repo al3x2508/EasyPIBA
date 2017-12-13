@@ -58,14 +58,14 @@ class Template {
 	 */
 	public $css = array();
 
-	private $rediscache = false;
+	private $cache = false;
 
 	/**
 	 * Template constructor.
 	 * @param $filename
 	 */
 	public function __construct($filename) {
-		$this->rediscache = \Utils\Redis::getInstance();
+		$this->cache = Util::getCache();
 		$this->page_url .= $_SERVER['REQUEST_URI'];
 		$this->filename = _TEMPLATE_DIR_ . $filename;
 		//Build the social links variable for footer in case you need it
@@ -206,14 +206,14 @@ class Template {
 		//Set the javascript variable for language
 		$this->LANGUAGE = $userLanguage;
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
-		$redisKey = _APP_NAME_ . 'menu|' . $langUrl;
-		if($this->rediscache && $this->rediscache->exists($redisKey)) $pagesArray = json_decode($this->rediscache->get($redisKey));
+		$cacheKey = _CACHE_PREFIX_ . 'menu|' . $langUrl;
+		if($this->cache && $this->cache->exists($cacheKey)) $pagesArray = json_decode($this->cache->get($cacheKey));
 		else {
 			$pages = new Model('pages');
 			$pages->language = $userLanguage;
 			$pages->visible = 1;
 			$pagesArray = $pages->get();
-			if($this->rediscache) $this->rediscache->set($redisKey, json_encode($pagesArray));
+			if($this->cache) $this->cache->set($cacheKey, json_encode($pagesArray));
 		}
 		foreach($pagesArray AS $page) {
 			if(($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url . '.html') && !empty($page->metaog)) {
@@ -237,15 +237,15 @@ class Template {
 		 * Build the menu right: Dropdown for languages, login button
 		 */
 		$menuRight = '';
-		$redisKey = _APP_NAME_ . 'menuLanguage|' . $langUrl;
-		if($this->rediscache && $this->rediscache->exists($redisKey)) $pagesArray = json_decode($this->rediscache->get($redisKey));
+		$cacheKey = _CACHE_PREFIX_ . 'menuLanguage|' . $langUrl;
+		if($this->cache && $this->cache->exists($cacheKey)) $pagesArray = json_decode($this->cache->get($cacheKey));
 		else {
 			if(!isset($pages)) $pages = new Model('pages');
 			$pages->clear();
 			$pages->groupBy('language');
 			$pages->order('language ASC');
 			$pagesArray = $pages->get();
-			if($this->rediscache) $this->rediscache->set($redisKey, json_encode($pagesArray));
+			if($this->cache) $this->cache->set($cacheKey, json_encode($pagesArray));
 		}
 		if(count($pagesArray) > 1) {
 			$currentLanguage = array('native' => 'English', 'flag' => 'us');
@@ -307,6 +307,7 @@ class Template {
 		}
 		//Add styles in page
 		$cssLR = '';
+		if (($key = array_search('main.css', $this->css)) !== false) unset($this->css[$key]);
 		if(count($this->css) > 0) {
 			$scripts = '';
 			$css = array();
@@ -409,14 +410,13 @@ class Template {
 		$buffer .= $this->content;
 		$buffer = self::sanitize_output($buffer);
 		$buffer = self::csrfguard_replace_forms($buffer);
-		$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
 		$inpageUrl = false;
-		if($cache && !($inpageUrl = $cache->get(_APP_NAME_ . 'inpageurl|' . $language . '|' . $md5url))) {
-			$redisKey = _APP_NAME_ . 'output|' . $language . '|' . $md5url;
-			if($this->rediscache && !$this->rediscache->exists($redisKey)) $this->rediscache->set($redisKey, $buffer);
+		if($this->cache && !($inpageUrl = $this->cache->get(_CACHE_PREFIX_ . 'inpageurl|' . $language . '|' . $md5url))) {
+			$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . $md5url;
+			if($this->cache && !$this->cache->exists($cacheKey)) $this->cache->set($cacheKey, $buffer);
 			exec('php ' . _APP_DIR_ . 'cli.php buildcss "' .  $language . '|' . $md5url . '" > /dev/null 2>/dev/null &');
 		}
-		elseif($cache && $inpageUrl) $buffer = str_replace('</head>', '<style>' . $cache->get($inpageUrl) . '</style>', $buffer);
+		elseif($this->cache && $inpageUrl) $buffer = str_replace('</head>', '<style>' . $this->cache->get($inpageUrl) . '</style>', $buffer);
 		echo $buffer;
 	}
 
