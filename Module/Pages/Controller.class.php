@@ -29,11 +29,11 @@ class Controller {
 	 * @param string $language
 	 */
 	public function __construct($url, $language = _DEFAULT_LANGUAGE_) {
-		$redis = \Utils\Redis::getInstance();
+		$cache = Util::getCache();
 		$this->url = $url;
 		$this->language = $language;
-		$redisKey = _CACHE_PREFIX_ . str_replace('.html', '', $url) . '|' . $language;
-		if($redis && $redis->exists($redisKey)) $page = json_decode($redis->get($redisKey));
+		$cacheKey = _CACHE_PREFIX_ . str_replace('.html', '', $url) . '|' . $language;
+		if($cache && $cache->exists($cacheKey)) $page = json_decode($cache->get($cacheKey));
 		else {
 			$page = new Model('pages');
 			$page->language = $language;
@@ -42,7 +42,7 @@ class Controller {
 			$page = $page->get();
 			if(count($page)) {
 				$page = $page[0];
-				if($redis) $redis->set($redisKey, json_encode($page));
+				if($cache) $cache->set($cacheKey, json_encode($page));
 			}
 			else $page = false;
 		}
@@ -77,10 +77,10 @@ class Controller {
 				if(count($module_routes)) {
 					$class = 'Module\\' . $module_routes[0]->modules->name . '\\Page';
 					$class = new $class();
-					if($class && property_exists($class, 'useCache') && $class->useCache && $redis) $page = json_decode($redis->get($redisKey));
+					if($class && property_exists($class, 'useCache') && $class->useCache && $cache) $page = json_decode($cache->get($cacheKey));
 					if(!$page) {
 						$page = $class->output();
-						if($page && property_exists($page, 'useCache') && $page->useCache && $redis) $redis->set($redisKey, json_encode($page));
+						if($page && property_exists($page, 'useCache') && $page->useCache && $cache) $cache->set($cacheKey, json_encode($page));
 					}
 				}
 			}
@@ -102,7 +102,6 @@ class Controller {
 
 	public static function getMenu() {
 		$userLanguage = Util::getUserLanguage();
-		$redis = \Utils\Redis::getInstance();
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
 		$pages = new Model('pages');
 		$pages->language = $userLanguage;

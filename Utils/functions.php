@@ -284,6 +284,15 @@ namespace Utils {
 
 			return $page_url;
 		}
+
+		/**
+		 * @return false|Memcached|Redis
+		 */
+		public static function getCache() {
+			$cache = \Utils\Memcached::getInstance();
+			if(!$cache || ($cache && !$cache->isConnected())) $cache = \Utils\Redis::getInstance();
+			return $cache;
+		}
 	}
 }
 namespace {

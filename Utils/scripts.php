@@ -1,14 +1,16 @@
 <?PHP
+use Utils\Util;
+
 ini_set("zlib.output_compression", 4096);
 if(!defined("_APP_NAME_")) require_once(dirname(__FILE__) . '/functions.php');
 function loadJs($js, $fromCache = true, $return = true) {
-	$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
+	$cache = Util::getCache();
 	$scripts=explode(',', $js);
 	$md5Value = md5($js);
 	$buffer = '';
 	/** @var bool|Memcached $cache */
 	if(!$cache || !($buffer = $cache->get(_CACHE_PREFIX_ . 'javaScript' . $md5Value))) {
-		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
+		if(!$cache) {
 			$buffer = "";
 			if(count($scripts) > 0) {
 				foreach($scripts as $script) {
@@ -27,12 +29,12 @@ function loadJs($js, $fromCache = true, $return = true) {
 	return ($return)?$buffer:true;
 }
 function loadCss($css, $fromCache = true, $return = true, $filename = '') {
-	$cache = (extension_loaded('Memcached'))?\Utils\Memcached::getInstance():false;
+	$cache = Util::getCache();
 	$scripts=explode(',', $css);
 	$md5Value = (empty($filename))?md5($css):$filename;
 	$buffer = '';
 	if(!$cache || !($buffer = $cache->get(_CACHE_PREFIX_ . 'css' . $md5Value))) {
-		if(!$cache || $cache->getResultCode() == Memcached::RES_NOTFOUND) {
+		if(!$cache) {
 			$buffer = "";
 			if(count($scripts) > 0) {
 				foreach($scripts as $script) {

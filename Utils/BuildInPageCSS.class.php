@@ -9,11 +9,10 @@ class BuildInPageCSS {
 	private $selectors;
 
 	public function __construct($md5url) {
-		$rediscache = \Utils\Redis::getInstance();
-		if($rediscache) {
-			$redisKey = _CACHE_PREFIX_ . 'output|' . $md5url;
-			$buffer = $rediscache->get($redisKey);
-			$cache = (extension_loaded('Memcached')) ? Memcached::getInstance() : false;
+		$cache = Util::getCache();
+		if($cache) {
+			$cacheKey = _CACHE_PREFIX_ . 'output|' . $md5url;
+			$buffer = $cache->get($cacheKey);
 			$dom = new \DomDocument();
 			$dom->loadHTML($buffer);
 			$xpath = new \DomXPath($dom);
