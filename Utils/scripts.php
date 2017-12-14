@@ -10,7 +10,7 @@ function loadJs($js, $fromCache = true, $return = true) {
 	$buffer = '';
 	/** @var bool|Memcached $cache */
 	if(!$cache || !($buffer = $cache->get(_CACHE_PREFIX_ . 'javaScript' . $md5Value))) {
-		if(!$cache) {
+		if(!$cache || empty($buffer)) {
 			$buffer = "";
 			if(count($scripts) > 0) {
 				foreach($scripts as $script) {
@@ -34,7 +34,7 @@ function loadCss($css, $fromCache = true, $return = true, $filename = '') {
 	$md5Value = (empty($filename))?md5($css):$filename;
 	$buffer = '';
 	if(!$cache || !($buffer = $cache->get(_CACHE_PREFIX_ . 'css' . $md5Value))) {
-		if(!$cache) {
+		if(!$cache || empty($buffer)) {
 			$buffer = "";
 			if(count($scripts) > 0) {
 				foreach($scripts as $script) {
