@@ -30,6 +30,14 @@ class Controller {
 	 */
 	public function __construct($url, $language = _DEFAULT_LANGUAGE_) {
 		$cache = Util::getCache();
+		if(strpos($url, 'amp/') === 0) {
+			$url = str_replace('amp/', '', $url);
+			$this->template = 'amp_template.html';
+			$this->HTML_URL = _FOLDER_URL_ . $url;
+		}
+		else {
+			$this->AMP_URL = _FOLDER_URL_ . 'amp/' . $url;
+		}
 		$this->url = $url;
 		$this->language = $language;
 		$cacheKey = _CACHE_PREFIX_ . str_replace('.html', '', $url) . '|' . $language;
