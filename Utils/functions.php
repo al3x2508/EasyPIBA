@@ -276,13 +276,27 @@ namespace Utils {
 				$_COOKIE['language'] = $matches[1];
 				$page_url = '';
 			}
-			preg_match('/^([a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
+			preg_match('/^((?!amp)[a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
 			if(count($matches)) {
 				$_COOKIE['language'] = $matches[1];
 				$page_url = str_replace('.html', '', trim($matches[2], '/'));
 			}
 
 			return $page_url;
+		}
+
+		public static function getImageSize($img) {
+			$img = ltrim($img, _FOLDER_URL_);
+			$cache = self::getCache();
+			$md5img = md5($img);
+			if($cache && $buffer = $cache->get(_CACHE_PREFIX_ . 'imgsize' . $md5img) && !empty($buffer)) {
+				return json_decode($buffer, true);
+			}
+			else {
+				$size = getimagesize(_APP_DIR_ . $img);
+				if($cache) $cache->set(_CACHE_PREFIX_ . 'imgsize' . $md5img, json_encode($size));
+				return $size;
+			}
 		}
 
 		/**

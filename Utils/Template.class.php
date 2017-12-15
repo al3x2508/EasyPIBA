@@ -60,6 +60,8 @@ class Template {
 
 	private $cache = false;
 
+	private $isAmp = false;
+
 	/**
 	 * Template constructor.
 	 * @param $filename
@@ -195,6 +197,7 @@ class Template {
 	 */
 	public function load_template() {
 		if(!file_exists($this->filename) || is_dir($this->filename)) die("Error loading template ({$this->filename}).");
+		$this->isAmp = (strpos($this->page_url, 'amp/') !== false);
 		//Load the html template
 		$this->template = file_get_contents($this->filename);
 		$this->HOME_LINK = _FOLDER_URL_;
@@ -253,28 +256,32 @@ class Template {
 				if($page->language == $userLanguage) $currentLanguage = array('native' => $page->languages->name, 'flag' => $page->languages->code);
 			}
 			if(!property_exists($this, 'css')) $this->css = array();
-			$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css';
-			$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css';
-			$menuRight = '<div class="dropdown">
+			if(!$this->isAmp) {
+				$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css';
+				$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css';
+				$menuRight = '<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-' . ($currentLanguage['flag'] == 'en' ? 'us' : $currentLanguage['flag']) . '"></span> ' . $currentLanguage['native'] . '</button>
   					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' . PHP_EOL;
-			foreach($pagesArray AS $page) {
-				$flag = ($page->language == 'en') ? 'us' : $page->language;
-				$href = ($page->language == _DEFAULT_LANGUAGE_) ? '' : $page->language;
-				$menuRight .= "  						<a class=\"dropdown-item language\" href=\"" . _FOLDER_URL_ . $href . "\" data-language=\"{$page->language}\"><span class=\"flag-icon flag-icon-{$flag}\"></span> " . $page->languages->name . "</a>";
-			}
-			$menuRight .= '  					</div>
+				foreach($pagesArray AS $page) {
+					$flag = ($page->language == 'en') ? 'us' : $page->language;
+					$href = ($page->language == _DEFAULT_LANGUAGE_) ? '' : $page->language;
+					$menuRight .= "  						<a class=\"dropdown-item language\" href=\"" . _FOLDER_URL_ . $href . "\" data-language=\"{$page->language}\"><span class=\"flag-icon flag-icon-{$flag}\"></span> " . $page->languages->name . "</a>";
+				}
+				$menuRight .= '  					</div>
 				</div>' . PHP_EOL;
+			}
 		}
-		$menuR = (array_key_exists('menu_right', $array_menu)) ? $this->menu($array_menu['menu_right']) : '';
+		$menuR = (!$this->isAmp && array_key_exists('menu_right', $array_menu)) ? $this->menu($array_menu['menu_right']) : '';
 		if(!empty($menuR)) $menuRight .= '<ul class="navbar-nav mr-auto">' . $menuR . '</ul>';
 		$this->menu_right = $menuRight;
 		//End of menu right
 
 		//Set the main javascripts
-		$mainJavascripts = 'jquery.min.js,bootstrap.min.js,main.js';
-		loadJs($mainJavascripts, $this->from_cache, false);
-		$this->MAIN_JAVASCRIPTS = '<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
+		if(!$this->isAmp) {
+			$mainJavascripts = 'jquery.min.js,bootstrap.min.js,main.js';
+			loadJs($mainJavascripts, $this->from_cache, false);
+			$this->MAIN_JAVASCRIPTS = '<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
+		}
 
 		//Set the content values to replace inside html template
 		foreach(get_object_vars($this) AS $key => $value) {
@@ -326,7 +333,7 @@ class Template {
 				$cssLR = '<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/' . md5($scripts) . '.css" id="cssdeferred" />';
 			}
 		}
-		$footer = /** @lang text */
+		if(!$this->isAmp) $footer = /** @lang text */
 			'		<noscript id="deferred-styles">
 			<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/main.css" id="cssdeferredmain" />
 			' . $cssLR . '
@@ -411,13 +418,29 @@ class Template {
 		$buffer = self::sanitize_output($buffer);
 		$buffer = self::csrfguard_replace_forms($buffer);
 		$inpageUrl = false;
-		if($this->cache && !($inpageUrl = $this->cache->get(_CACHE_PREFIX_ . 'inpageurl|' . $language . '|' . $md5url))) {
-			$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . $md5url;
-			if($this->cache && !$this->cache->exists($cacheKey)) $this->cache->set($cacheKey, $buffer);
-			exec('php ' . _APP_DIR_ . 'cli.php buildcss "' .  $language . '|' . $md5url . '" > /dev/null 2>/dev/null &');
+		if(!$this->isAmp) {
+			if($this->cache && !($inpageUrl = $this->cache->get(_CACHE_PREFIX_ . 'inpageurl|' . $language . '|' . $md5url))) {
+				$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . $md5url;
+				if($this->cache && !$this->cache->exists($cacheKey)) $this->cache->set($cacheKey, $buffer);
+				exec('php ' . _APP_DIR_ . 'cli.php buildcss "' . $language . '|' . $md5url . '" > /dev/null 2>/dev/null &');
+			}
+			elseif($this->cache && $inpageUrl) $buffer = str_replace('</head>', '<style>' . $this->cache->get($inpageUrl) . '</style>', $buffer);
 		}
-		elseif($this->cache && $inpageUrl) $buffer = str_replace('</head>', '<style>' . $this->cache->get($inpageUrl) . '</style>', $buffer);
+		else {
+			$buffer = str_ireplace(
+				['<img','<video','/video>','<audio','/audio>'],
+				['<amp-img layout="responsive"','<amp-video','/amp-video>','<amp-audio','/amp-audio>'],
+				$buffer
+			);
+			$buffer = preg_replace_callback('/<amp-img(.*?)( ?\/)?>/', array($this, 'ampsize'), $buffer);
+		}
 		echo $buffer;
+	}
+
+	public function ampsize($matches) {
+		preg_match('/src\=\"([^\"]*)/', $matches[1], $src);
+		$size = Util::getImageSize($src[1]);
+		return '<amp-img' . $matches[1] . ' width="' . $size[0] . '" height="' . $size[1] . '"></amp-img>';
 	}
 
 	/**
