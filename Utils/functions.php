@@ -63,6 +63,17 @@ namespace Utils {
 		}
 
 		/**
+		 * Set language
+		 * @param string $language
+		 * @return bool
+		 */
+		public static function setUserLanguage($language) {
+			$_SESSION['userLanguage'] = $language;
+			echo $_SESSION['userLanguage']; exit;
+			return setcookie('language', $language, time() + 60 * 60 * 24 * 30);
+		}
+
+		/**
 		 * Get the user IP
 		 * @return mixed
 		 */
@@ -271,14 +282,16 @@ namespace Utils {
 			$page_url = ($query_position !== false) ? substr($_SERVER['REQUEST_URI'], 0, $query_position - 1) : $_SERVER['REQUEST_URI'];
 			$page_url = preg_replace('/^(' . str_replace('/', '\/', _FOLDER_URL_) . ')(.*)/', '$2', $page_url);
 
-			preg_match('/^([a-z]{2,3})$/', $page_url, $matches);
+			preg_match('/^((?!amp)[a-z]{2,3})$/', $page_url, $matches);
 			if(count($matches)) {
 				$_COOKIE['language'] = $matches[1];
+				$_SESSION['userLanguage'] = $matches[1];
 				$page_url = '';
 			}
 			preg_match('/^((?!amp)[a-z]{2,3})(?=\/)\/(.*)$/', $page_url, $matches);
 			if(count($matches)) {
 				$_COOKIE['language'] = $matches[1];
+				$_SESSION['userLanguage'] = $matches[1];
 				$page_url = str_replace('.html', '', trim($matches[2], '/'));
 			}
 

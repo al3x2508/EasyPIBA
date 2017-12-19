@@ -79,7 +79,7 @@ class Controller {
 			}
 			else {
 				$module_routes = new Model('module_routes');
-				$module_routes->where(array('(`url` = \'' . $url . '\' AND `type` = 0)' => 1, '(\'' . $url . '\' REGEXP `url` AND `type` = 1)' => 1));
+				$module_routes->where(array('(`url` = \'' . str_replace('.html', '', $url) . '\' AND `type` = 0)' => 1, '(\'' . str_replace('.html', '', $url) . '\' REGEXP `url` AND `type` = 1)' => 1));
 				$module_routes->limit(1);
 				$module_routes = $module_routes->get('OR');
 				if(count($module_routes)) {
@@ -134,14 +134,16 @@ class Controller {
 		$module_routes = $module_routes->get();
 		foreach($module_routes AS $module_route) {
 			if($module_route->menu_position !== 2) {
-				$menuParent = (empty($module_route->menu_parent))?0:$module_route->menu_parent;
-				if($menuParent === 0) $module_route->menu_order += count($array_pages);
-				if(!array_key_exists($menuParent, $array_menu)) $array_menu[$menuParent] = array();
-				$pag = array('url' => _FOLDER_URL_ . $langUrl . $module_route->url, 'menu_text' => $module_route->menu_text, 'submenu_text' => $module_route->submenu_text, 'menu_parent' => $menuParent);
-				//If page url is the same as the current url set link class as active
-				if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url) $pag['classes'] = 'active';
-				$array_menu[$menuParent][$module_route->menu_order] = $pag;
-				ksort($array_menu[$menuParent]);
+				if($userLanguage == _DEFAULT_LANGUAGE_) {
+					$menuParent = (empty($module_route->menu_parent)) ? 0 : $module_route->menu_parent;
+					if($menuParent === 0) $module_route->menu_order += count($array_pages);
+					if(!array_key_exists($menuParent, $array_menu)) $array_menu[$menuParent] = array();
+					$pag = array('url' => _FOLDER_URL_ . $langUrl . $module_route->url, 'menu_text' => $module_route->menu_text, 'submenu_text' => $module_route->submenu_text, 'menu_parent' => $menuParent);
+					//If page url is the same as the current url set link class as active
+					if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url) $pag['classes'] = 'active';
+					$array_menu[$menuParent][$module_route->menu_order] = $pag;
+					ksort($array_menu[$menuParent]);
+				}
 			}
 			else {
 				$menuParent = (empty($module_route->menu_parent))?0:$module_route->menu_parent;
