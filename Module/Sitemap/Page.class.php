@@ -13,44 +13,32 @@ class Page {
 		xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-			http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-		<url>
-			<loc>' . $siteUrl . '</loc>
-			<changefreq>weekly</changefreq>
-			<priority>1.00</priority>
-		</url>
-		<url>
-			<loc>' . $siteUrl . 'login</loc>
-			<changefreq>weekly</changefreq>
-			<priority>1.00</priority>
-		</url>
-		<url>
-			<loc>' . $siteUrl . 'password_reset</loc>
-			<changefreq>weekly</changefreq>
-			<priority>1.00</priority>
-		</url>
-		<url>
-			<loc>' . $siteUrl . 'testimonials</loc>
-			<changefreq>weekly</changefreq>
-			<priority>1.00</priority>
-		</url>
-		<url>
-			<loc>' . $siteUrl . 'news/</loc>
-			<changefreq>daily</changefreq>
-			<priority>1.00</priority>
-		</url>' . PHP_EOL;
+			http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">' . PHP_EOL;
 		$pages = new Model('pages');
 		$pages->visible = 1;
-		$pages->order('menu_parent ASC, menu_order ASC');
+		$pages->order('language ASC, menu_parent ASC, menu_order ASC');
 		$pages = $pages->get();
 		foreach($pages AS $page) {
-			if(!empty($page->url)) $return .= '		<url>
-			<loc>' . $siteUrl . $page->url . '</loc>
+			$langUrl = ($page->language == _DEFAULT_LANGUAGE_) ? '' : $page->language . '/';
+			$return .= '		<url>
+			<loc>' . $siteUrl . $langUrl . $page->url . '</loc>
+			<changefreq>monthly</changefreq>
+			<priority>0.90</priority>
+		</url>' . PHP_EOL;
+		}
+		$module_routes = new Model('module_routes');
+		$module_routes->type = 0;
+		$module_routes->mustBeLoggedIn = 0;
+		$module_routes = $module_routes->get();
+		foreach($module_routes AS $route) {
+			$return .= '		<url>
+			<loc>' . $siteUrl . $route->url . '</loc>
 			<changefreq>monthly</changefreq>
 			<priority>0.90</priority>
 		</url>' . PHP_EOL;
 		}
 		$news = new Model('news');
+		$news->status = 1;
 		$news->order('date_published DESC');
 		$news = $news->get();
 		foreach($news AS $n) {
@@ -62,6 +50,7 @@ class Page {
 		</url>' . PHP_EOL;
 		}
 		$testimonials = new Model('testimonials');
+		$testimonials->status = 1;
 		$testimonials->order('id DESC');
 		$testimonials = $testimonials->get();
 		foreach($testimonials AS $testimonial) {
