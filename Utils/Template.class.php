@@ -429,7 +429,7 @@ class Template {
 		else {
 			$buffer = str_ireplace(
 				['<img','<video','/video>','<audio','/audio>'],
-				['<amp-img layout="responsive"','<amp-video','/amp-video>','<amp-audio','/amp-audio>'],
+				['<amp-img','<amp-video','/amp-video>','<amp-audio','/amp-audio>'],
 				$buffer
 			);
 			$buffer = preg_replace_callback('/<amp-img(.*?)( ?\/)?>/', array($this, 'ampsize'), $buffer);
