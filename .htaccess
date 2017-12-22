@@ -4,6 +4,14 @@ RewriteEngine On
 #Uncomment next 2 lines if you want to have always redirect with www subdomain
 #RewriteCond %{HTTP_HOST} !^www\.
 #RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^css/main.css Utils/scripts.php [L]
+RewriteRule ^js/jquery.min.js vendor/components/jquery/jquery.min.js [L]
+RewriteRule ^js/jquery-ui.min.js vendor/components/jqueryui/jquery-ui.min.js [L]
+RewriteRule ^css/(.*)$ assets/css/$1 [NC,L]
+RewriteRule ^js/(.*)$ assets/js/$1 [NC,L]
+RewriteRule ^fonts/(.*)$ assets/fonts/$1 [NC,L]
+RewriteRule ^img/(.*)$ assets/img/$1 [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^logout$ index.php?logout=true [L]
@@ -11,7 +19,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^scripts.js Utils/scripts.php [L]
 RewriteRule ^scripts.css Utils/scripts.php [L]
-RewriteRule ^css/main.css Utils/scripts.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php [L]

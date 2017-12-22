@@ -1,8 +1,8 @@
 <?php
 namespace Controller;
-require(dirname(dirname(__FILE__)) . '/PHPMailer/PHPMailerAutoload.php');
-require(dirname(dirname(__FILE__)) . '/PHPMailer/class.smtp.php');
-class Mail extends \PHPMailer {
+use PHPMailer\PHPMailer\PHPMailer;
+
+class Mail extends PHPMailer  {
 	public function __construct() {
 		$this->isSMTP();
 		$this->SMTPDebug = 0;

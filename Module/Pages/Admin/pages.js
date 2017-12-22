@@ -27,7 +27,8 @@ function loadData(aoData) {
 	if($("#menutextf").val()!='') filters.filters['menu_text'] = $("#menutextf").val();
 	return filters;
 }
-$(window).on('load', function () {
+$(document).ready(function() {
+	CKEDITOR.plugins.addExternal('imageuploader', adminfolder + 'plugins/imageuploader/');
 	CKEDITOR.replace('edcontent', {
 		allowedContent: true,
 		extraPlugins: 'imageuploader,justify'

@@ -257,7 +257,6 @@ class Template {
 			}
 			if(!property_exists($this, 'css')) $this->css = array();
 			if(!$this->isAmp) {
-				$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css';
 				$this->css[] = 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css';
 				$menuRight = '<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-' . ($currentLanguage['flag'] == 'en' ? 'us' : $currentLanguage['flag']) . '"></span> ' . $currentLanguage['native'] . '</button>
@@ -278,9 +277,9 @@ class Template {
 
 		//Set the main javascripts
 		if(!$this->isAmp) {
-			$mainJavascripts = 'jquery.min.js,bootstrap.min.js,main.js';
+			$mainJavascripts = 'jquery.min.js,tether.min.js,bootstrap.min.js,main.js';
 			loadJs($mainJavascripts, $this->from_cache, false);
-			$this->MAIN_JAVASCRIPTS = '<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
+			$this->MAIN_JAVASCRIPTS = '<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'cache/js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
 		}
 
 		//Set the content values to replace inside html template
@@ -298,7 +297,7 @@ class Template {
 			$js = array();
 			$replacement = '';
 			foreach($this->js AS $fjs) {
-				if(strpos($fjs, '//') !== false) $replacement .= '		<script defer type="text/javascript" src="' . $fjs . '"></script>' . PHP_EOL;
+				if(strpos($fjs, '//') !== false) $replacement .= '		<script defer="defer" type="text/javascript" src="' . $fjs . '"></script>' . PHP_EOL;
 			}
 			foreach($this->js AS $fjs) {
 				if(strpos($fjs, '//') === false) $js[] = $fjs;
@@ -307,7 +306,7 @@ class Template {
 				$scripts = implode(",", $js);
 				loadJs($scripts, $this->from_cache);
 				$replacement .= /** @lang text */
-					'		<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
+					'		<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'cache/js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
 			}
 			$pos = strripos($this->template, "</script>");
 			$this->template = substr_replace($this->template, "\n" . $replacement, $pos + 9, 0);
@@ -330,7 +329,7 @@ class Template {
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 			if(!empty($scripts)) {
 				loadCss($scripts, $this->from_cache, false);
-				$cssLR = '<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'css/' . md5($scripts) . '.css" id="cssdeferred" />';
+				$cssLR = '<link rel="stylesheet" type="text/css" href="' . _FOLDER_URL_ . 'cache/css/' . md5($scripts) . '.css" id="cssdeferred" />';
 			}
 		}
 		if(!$this->isAmp) $footer = /** @lang text */

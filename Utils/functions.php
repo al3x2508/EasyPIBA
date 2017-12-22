@@ -69,7 +69,6 @@ namespace Utils {
 		 */
 		public static function setUserLanguage($language) {
 			$_SESSION['userLanguage'] = $language;
-			echo $_SESSION['userLanguage']; exit;
 			return setcookie('language', $language, time() + 60 * 60 * 24 * 30);
 		}
 
@@ -323,6 +322,7 @@ namespace Utils {
 	}
 }
 namespace {
+	require dirname(__DIR__) . '/vendor/autoload.php';
 	//Uncomment these lines if you want to redirect user to https from http and / or with www. prefix
 	/*$protocol = (@$_SERVER["HTTPS"] == "on")?"https://":"http://";
 	if (isset($_SERVER['HTTP_HOST']) && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.' && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'cne.') {

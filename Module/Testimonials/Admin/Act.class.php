@@ -3,7 +3,7 @@ namespace Module\Testimonials\Admin;
 use Controller\AdminAct;
 use Controller\AdminController;
 use Model\Model;
-use Utils\PHPThumb\GD;
+use \PHPThumb\GD;
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
 
