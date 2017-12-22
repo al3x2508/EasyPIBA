@@ -5,6 +5,9 @@
 body {
 	font-size: 14px;
 }
+body .user-panel>.info {
+	position: relative;
+}
 .main-header>.navbar {
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;

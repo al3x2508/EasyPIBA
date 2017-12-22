@@ -89,7 +89,7 @@ class Template {
 
 	public function getLinks() {
 		$return = array();
-		$return[] = AdminPage::createLink(array('href' => '/' . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
+		$return[] = AdminPage::createLink(array('href' => _FOLDER_URL_ . basename(dirname(__FILE__)) . '/', 'text' => __('Statistics'), 'class' => 'dashboard'), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
 		$admins_permissions = new Model('admins_permissions');
 		$admins_permissions->admin = AdminController::getCurrentUser()->id;
 		$admins_permissions = $admins_permissions->get();

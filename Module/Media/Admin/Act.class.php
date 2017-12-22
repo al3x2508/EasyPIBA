@@ -3,7 +3,7 @@ namespace Module\Media\Admin;
 use Controller\AdminController;
 use Controller\AdminAct;
 use Model\Model;
-use Utils\PHPThumb\GD;
+use \PHPThumb\GD;
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
 
@@ -108,7 +108,7 @@ class Act extends AdminAct {
 						$path_parts = pathinfo($target_file);
 						$thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
 						$thumb_target_file = $target_dir . $thumb_file_name;
-						$thumb = new \Utils\PHPThumb\GD($target_file);
+						$thumb = new \PHPThumb\GD($target_file);
 						$thumb->resize(100, 100);
 						$thumb->save($thumb_target_file, 'jpg');
 						$targetThumbDir = _FOLDER_URL_ . 'uploads/';

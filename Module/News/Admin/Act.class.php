@@ -4,7 +4,7 @@ use Controller\AdminAct;
 use Controller\AdminController;
 use Model\Model;
 use Module\News\Setup;
-use Utils\PHPThumb\GD;
+use \PHPThumb\GD;
 use Utils\Util;
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');

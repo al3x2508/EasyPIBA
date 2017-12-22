@@ -102,8 +102,6 @@ class Admin {
 				}
 			}
 		}
-		/** Include PHPExcel */
-		require_once(dirname(dirname(dirname(__FILE__))) . '/Utils/PHPExcel.php');
 		$objPHPExcel = new \PHPExcel();
 		//Set document properties
 		$objPHPExcel->getProperties()->setCreator(_APP_NAME_)->setLastModifiedBy(_APP_NAME_)->setTitle("Export " . $this->instanceName)->setSubject("Export " . $this->instanceName)->setDescription("Export " . $this->instanceName)->setKeywords(_APP_NAME_ . "export data " . $this->instanceName)->setCategory(_APP_NAME_ . " " . $this->instanceName);

@@ -13,8 +13,8 @@ class Menu {
 	public function __construct() {
 		$this->title =  __('Edit menu');
 		$this->h1 =  __('Edit menu');
-		$this->js = array('plugins/nestedSortable/jquery.nestedSortable.js','bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../Module/Pages/Admin/menu.js');
-		$this->css = array('bower_components/select2/dist/css/select2.min.css','../Module/Pages/Admin/menu.css');
+		$this->js = array('../assets/js/jquery.nestedSortable.js','../vendor/almasaeed2010/adminlte/bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../Module/Pages/Admin/menu.js');
+		$this->css = array('../vendor/almasaeed2010/adminlte/bower_components/select2/dist/css/select2.min.css','../Module/Pages/Admin/menu.css');
 		$pages = new Model('pages');
 		$pages->groupBy('language');
 		$pages->order('language ASC');

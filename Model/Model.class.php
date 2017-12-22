@@ -373,7 +373,8 @@ namespace Model {
 									$nc = new Model($table);
 									$c->$table = $nc;
 								}
-								$c->$table->$matches[2] = $val;
+								$tc = $matches[2];
+								$c->$table->$tc = $val;
 							}
 							else $c->$key = $val;
 						}

@@ -1,9 +1,9 @@
 <?php
 namespace Utils;
 
-use PHPHtmlParser\Dom;
-use Utils\SabberwormCSS\Property\Selector;
-use Utils\SabberwormCSS\RuleSet\DeclarationBlock;
+use \PHPHtmlParser\Dom;
+use \Sabberworm\CSS\Property\Selector;
+use \Sabberworm\CSS\RuleSet\DeclarationBlock;
 
 class BuildInPageCSS {
 	private $selectors;
@@ -38,32 +38,30 @@ class BuildInPageCSS {
 			$cacheKey = _CACHE_PREFIX_ . 'inpage' . $md5buffer;
 			if(!file_exists($inPageFile)) {
 				if(!$cache || !($inpageCss = $cache->get($cacheKey))) {
-					require_once _APP_DIR_ . 'Utils/PHPHtmlParser/Autoloader.php';
-					require_once _APP_DIR_ . 'Utils/stringEncode/Autoloader.php';
 					$dom = new Dom();
 					$dom->loadStr($buffer, []);
-					$css_contents = file_get_contents(_APP_DIR_ . 'css/main.css');
+					$css_contents = file_get_contents(_APP_DIR_ . 'cache/css/main.css');
 					$inpageCss = '';
-					$oSettings = SabberwormCSS\Settings::create()->withMultibyteSupport(false);
-					$oCssParser = new SabberwormCSS\Parser($css_contents, $oSettings);
+					$oSettings = \Sabberworm\CSS\Settings::create()->withMultibyteSupport(false);
+					$oCssParser = new \Sabberworm\CSS\Parser($css_contents, $oSettings);
 					$cssParsed = $oCssParser->parse();
 					foreach($cssParsed->getContents() as $oItem) {
-						if($oItem instanceof SabberwormCSS\CSSList\KeyFrame) continue;
-						if($oItem instanceof SabberwormCSS\RuleSet\AtRuleSet) continue;
-						if($oItem instanceof SabberwormCSS\RuleSet\DeclarationBlock) {
+						if($oItem instanceof \Sabberworm\CSS\CSSList\KeyFrame) continue;
+						if($oItem instanceof \Sabberworm\CSS\RuleSet\AtRuleSet) continue;
+						if($oItem instanceof \Sabberworm\CSS\RuleSet\DeclarationBlock) {
 							$oBlock = $oItem;
 							$selectors = array();
 							/** @var Selector $oSelector */
 							foreach($oBlock->getSelectors() as $oSelector) $selectors[] = $oSelector->getSelector();
-							if(count($dom->find(implode(",", $selectors))) > 0) $inpageCss .= $oBlock->render(SabberwormCSS\OutputFormat::createCompact());
+							if(count($dom->find(implode(",", $selectors))) > 0) $inpageCss .= $oBlock->render(\Sabberworm\CSS\OutputFormat::createCompact());
 						}
-						if($oItem instanceof SabberwormCSS\CSSList\AtRuleBlockList) {
+						if($oItem instanceof \Sabberworm\CSS\CSSList\AtRuleBlockList) {
 							/** @var DeclarationBlock $oBlock */
 							foreach($oItem->getContents() as $oBlock) {
 								$selectors = array();
 								foreach($oBlock->getSelectors() as $oSelector) $selectors[] = $oSelector->getSelector();
 								if(count($dom->find(implode(",", $selectors))) > 0) {
-									$inpageCss .= $oItem->render(SabberwormCSS\OutputFormat::createCompact());
+									$inpageCss .= $oItem->render(\Sabberworm\CSS\OutputFormat::createCompact());
 									break;
 								}
 							}
