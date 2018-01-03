@@ -5,10 +5,7 @@
 Install EasyPIBA
 In order to install EasyPIBA you need to follow these instructions:
 
-1. Choose one of the following methods:
-   - Download from github using ```git clone https://github.com/al3x2508/EasyPIBA.git .``` or
-   - Download a zip file from https://github.com/al3x2508/EasyPIBA/archive/master.zip and unzip it in your html folder or
-   - Run the following command ```wget -O /tmp/z.$$ https://github.com/al3x2508/EasyPIBA/archive/master.tar.gz && tar xvf /tmp/z.$$ -C /var/www/html/dbf --strip-components 1 && rm /tmp/z.$$```
+1. Run ```composer create-project al3x2508/easypiba```
 2. Go to your url where you have the project, for example http://www.myurl.com/
 3. Go through setup
 4. Delete the setup/ folder from the application folder
