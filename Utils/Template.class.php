@@ -308,7 +308,7 @@ class Template {
 				$scripts = implode(",", $js);
 				loadJs($scripts, $this->from_cache);
 				$replacement .= /** @lang text */
-					'		<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'cache/js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
+					'		<script defer="defer" src="' . _FOLDER_URL_ . 'cache/js/' . md5($scripts) . '.js"></script>' . PHP_EOL;
 			}
 			$pos = strripos($this->template, "</script>");
 			$this->template = substr_replace($this->template, "\n" . $replacement, $pos + 9, 0);

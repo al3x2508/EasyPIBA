@@ -78,7 +78,7 @@ class Template {
 		}
 		if(property_exists($this->page, 'js') && count($this->page->js)) {
 			$replacement = '';
-			foreach($this->page->js AS $script) $replacement .= '		<script type="text/javascript" src="' . $adminFolder . $script . '"></script>' . PHP_EOL;
+			foreach($this->page->js AS $script) $replacement .= '		<script src="' . $adminFolder . $script . '"></script>' . PHP_EOL;
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}

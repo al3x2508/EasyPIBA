@@ -117,7 +117,7 @@ else { ?>
 			<!-- /.login-box-body -->
 		</div>
 		<!-- /.login-box -->
-		<script type="text/javascript" src="<?php echo _FOLDER_URL_; ?>js/jquery.min.js"></script>
+		<script src="<?php echo _FOLDER_URL_; ?>js/jquery.min.js"></script>
 		<script src="<?php echo _FOLDER_URL_; ?>vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	</body>
 </html>
