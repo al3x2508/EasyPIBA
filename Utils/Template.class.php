@@ -281,7 +281,7 @@ class Template {
 		if(!$this->isAmp) {
 			$mainJavascripts = 'jquery.min.js,tether.min.js,bootstrap.min.js,main.js';
 			loadJs($mainJavascripts, $this->from_cache, false);
-			$this->MAIN_JAVASCRIPTS = '<script defer="defer" type="text/javascript" src="' . _FOLDER_URL_ . 'cache/js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
+			$this->MAIN_JAVASCRIPTS = '<script defer="defer" src="' . _FOLDER_URL_ . 'cache/js/' . md5($mainJavascripts) . '.js" id="mainjs" data-appdir="' . _FOLDER_URL_ . '"></script>';
 		}
 
 		//Set the content values to replace inside html template
@@ -299,7 +299,7 @@ class Template {
 			$js = array();
 			$replacement = '';
 			foreach($this->js AS $fjs) {
-				if(strpos($fjs, '//') !== false) $replacement .= '		<script defer="defer" type="text/javascript" src="' . $fjs . '"></script>' . PHP_EOL;
+				if(strpos($fjs, '//') !== false) $replacement .= '		<script defer="defer" src="' . $fjs . '"></script>' . PHP_EOL;
 			}
 			foreach($this->js AS $fjs) {
 				if(strpos($fjs, '//') === false) $js[] = $fjs;
