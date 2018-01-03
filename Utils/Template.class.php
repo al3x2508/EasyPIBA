@@ -216,6 +216,7 @@ class Template {
 			$pages->language = $userLanguage;
 			$pages->visible = 1;
 			$pagesArray = $pages->get();
+			foreach(array_keys($pagesArray) AS $key) unset($pagesArray[$key]['content']);
 			if($this->cache) $this->cache->set($cacheKey, json_encode($pagesArray));
 		}
 		foreach($pagesArray AS $page) {
@@ -248,6 +249,7 @@ class Template {
 			$pages->groupBy('language');
 			$pages->order('language ASC');
 			$pagesArray = $pages->get();
+			foreach(array_keys($pagesArray) AS $key) unset($pagesArray[$key]['content']);
 			if($this->cache) $this->cache->set($cacheKey, json_encode($pagesArray));
 		}
 		if(count($pagesArray) > 1) {
