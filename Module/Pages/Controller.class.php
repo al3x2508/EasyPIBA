@@ -40,12 +40,12 @@ class Controller {
 		}
 		$this->url = $url;
 		$this->language = $language;
-		$cacheKey = _CACHE_PREFIX_ . str_replace('.html', '', $url) . '|' . $language;
+		$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
 		if($cache && $cache->exists($cacheKey)) $page = json_decode($cache->get($cacheKey));
 		else {
 			$page = new Model('pages');
 			$page->language = $language;
-			$page->url = str_replace('.html', '', $url);
+			$page->url = $url;
 			$page->visible = 1;
 			$page = $page->get();
 			if(count($page)) {
@@ -79,7 +79,7 @@ class Controller {
 			}
 			else {
 				$module_routes = new Model('module_routes');
-				$module_routes->where(array('(`url` = \'' . str_replace('.html', '', $url) . '\' AND `type` = 0)' => 1, '(\'' . str_replace('.html', '', $url) . '\' REGEXP `url` AND `type` = 1)' => 1));
+				$module_routes->where(array('(`url` = \'' . $url . '\' AND `type` = 0)' => 1, '(\'' . $url . '\' REGEXP `url` AND `type` = 1)' => 1));
 				$module_routes->limit(1);
 				$module_routes = $module_routes->get('OR');
 				if(count($module_routes)) {
@@ -120,9 +120,9 @@ class Controller {
 		$array_menu = array();
 		foreach($array_pages AS $page) {
 			if(!array_key_exists($page->menu_parent, $array_menu)) $array_menu[$page->menu_parent] = array();
-			$pag = array('id' => $page->id, 'url' => _FOLDER_URL_ . $langUrl . (empty(trim($page->url, '/')) ? $page->url : $page->url . '.html'), 'menu_text' => $page->menu_text, 'submenu_text' => $page->submenu_text, 'menu_parent' => $page->menu_parent);
+			$pag = array('id' => $page->id, 'url' => _FOLDER_URL_ . $langUrl . $page->url, 'menu_text' => $page->menu_text, 'submenu_text' => $page->submenu_text, 'menu_parent' => $page->menu_parent);
 			//If page url is the same as the current url set link class as active
-			if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url . '.html') $pag['classes'] = 'active';
+			if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url) $pag['classes'] = 'active';
 			$array_menu[$page->menu_parent][] = $pag;
 		}
 		$module_routes = new Model('module_routes');

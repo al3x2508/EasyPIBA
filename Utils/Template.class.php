@@ -220,7 +220,7 @@ class Template {
 			if($this->cache) $this->cache->set($cacheKey, json_encode($pagesArray));
 		}
 		foreach($pagesArray AS $page) {
-			if(($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url . '.html') && !empty($page->metaog)) {
+			if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url && !empty($page->metaog)) {
 				$metaog = json_decode($page->metaog, true);
 				$this->template = preg_replace(/** @lang text */
 					'/(\<meta property\=\"og\:title\" content\=\")(.*)(\" \/\>)/', "$1{$metaog['title']}$3", $this->template, 1);

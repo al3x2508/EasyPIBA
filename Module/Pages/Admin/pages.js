@@ -8,8 +8,7 @@ var jsonPage = 'Pages',
 		{ "mData": "title" },
 		{ "mData": "menu_text" },
 		{ "mData": function(e) {
-			var url = (e.url != '' && e.url != '/')?e.url + '.html':e.url;
-			return "<span class=\"actions btn fa fa-folder-open\" data-url=\"/" + url + "\"></span><span class=\"actions btn fa fa-edit\"></span><span class=\"actions btn fa fa-trash-o\"></span>";
+			return "<span class=\"actions btn fa fa-folder-open\" data-url=\"/" + e.url + "\"></span><span class=\"actions btn fa fa-edit\"></span><span class=\"actions btn fa fa-trash-o\"></span>";
 		}}
 	];
 function loadData(aoData) {
