@@ -43,7 +43,7 @@ class Page {
 					$img = _FOLDER_URL_ . 'img/news/' . str_replace('.jpg', '-360x220.jpg', rawurlencode($story->image));
 					$spanimgc = '';
 				}
-				$href = _FOLDER_URL_ . 'news/' . Util::getUrlFromString($story->title) . '.html';
+				$href = _FOLDER_URL_ . 'news/' . Util::getUrlFromString($story->title);
 				if(strlen($story->content) > 200) {
 					$pos = strpos($story->content, ' ', 200);
 					$storyText = substr(strip_tags($story->content), 0, $pos) . '...';
@@ -82,7 +82,7 @@ class Page {
 			$content .= '</div>' . PHP_EOL;
 		}
 		else {
-			$title = str_replace(array('news/', '.html'), '', $currentUrl);
+			$title = str_replace('news/', '', $currentUrl);
 			$news->title = array($title, 'LIKE');
 			$news = $news->get();
 			if(count($news)) {

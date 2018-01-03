@@ -291,7 +291,7 @@ namespace Utils {
 			if(count($matches)) {
 				$_COOKIE['language'] = $matches[1];
 				$_SESSION['userLanguage'] = $matches[1];
-				$page_url = str_replace('.html', '', trim($matches[2], '/'));
+				$page_url = trim($matches[2], '/');
 			}
 
 			return $page_url;

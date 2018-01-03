@@ -49,7 +49,7 @@ class Act extends AdminAct {
 					elseif($key == 'content') $this->fields[$key] = htmlspecialchars_decode($value);
 					elseif($key == 'title') {
 						$this->fields[$key] = $value;
-						$url = 'news/' . Util::getUrlFromString($this->fields['title']) . '.html';
+						$url = 'news/' . Util::getUrlFromString($this->fields['title']);
 						$mR = new Model('module_routes');
 						$mR = $mR->getOneResult('url', $url);
 						if($mR && $mR->modules->name != 'News') return false;
