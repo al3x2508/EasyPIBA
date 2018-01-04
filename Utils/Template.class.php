@@ -440,7 +440,6 @@ class Template {
 
 	public function ampsize($matches) {
 		preg_match('/src\=\"([^\"]*)/', $matches[1], $src);
-		error_log(print_r($src, true));
 		$size = Util::getImageSize($src[1]);
 		return '<amp-img' . $matches[1] . ' width="' . $size[0] . '" height="' . $size[1] . '"></amp-img>';
 	}
