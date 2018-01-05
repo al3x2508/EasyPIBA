@@ -91,7 +91,6 @@ class Act extends AdminAct {
 			$url = $act->url;
 			$language = $act->language;
 			$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
-			unset($act->content);
 			$cache->set($cacheKey, json_encode($act));
 		}
 	}
