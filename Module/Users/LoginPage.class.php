@@ -16,6 +16,7 @@ class LoginPage {
 	public $js = array('login.js', 'validate.min.js');
 	public $css = array('cinput.css');
 	public $visible = true;
+	public $disableAmp = true;
 
 	public function __construct() {
 		$this->content = '';

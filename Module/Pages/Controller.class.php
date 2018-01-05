@@ -35,9 +35,7 @@ class Controller {
 			$this->template = 'amp_template.html';
 			$this->HTML_URL = _FOLDER_URL_ . $url;
 		}
-		else {
-			$this->AMP_URL = _FOLDER_URL_ . 'amp/' . $url;
-		}
+		else $this->AMP_META = '<link rel="amphtml" href="' . _FOLDER_URL_ . 'amp/' . $url . '" />';
 		$this->url = $url;
 		$this->language = $language;
 		$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
@@ -93,6 +91,7 @@ class Controller {
 				}
 			}
 		}
+		if($page&& property_exists($page, 'disableAmp') && $page->disableAmp) $this->AMP_META = '';
 		if($page) foreach(get_object_vars($page) AS $key => $value) $this->$key = $value;
 		else {
 			header('HTTP/1.0 404 Not Found');
