@@ -59,6 +59,42 @@ class Act extends AdminAct {
 		$pages = new Model('pages');
 		$pages->runQuery($sql, $data, false);
 	}
+
+	public function act() {
+		$cache = Util::getCache();
+		if($cache) {
+			if(array_key_exists('id', $this->fields)) {
+				if($this->fields['id'] > 0) {
+					$page = new Model('pages');
+					$page = $page->getOneResult('id', $this->fields['id']);
+					$url = $page->url;
+					$language = $page->language;
+					$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+					if($cache->exists($cacheKey)) $cache->del($cacheKey);
+					$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
+					if($cache->exists($cacheKey)) $cache->del($cacheKey);
+				}
+			}
+			else {
+				$page = new Model('pages');
+				$page = $page->getOneResult('id', $this->fields['delete']);
+				$url = $page->url;
+				$language = $page->language;
+				$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+				if($cache->exists($cacheKey)) $cache->del($cacheKey);
+				$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
+				if($cache->exists($cacheKey)) $cache->del($cacheKey);
+			}
+		}
+		$act = parent::act();
+		if($cache && property_exists($act, 'id')) {
+			$url = $act->url;
+			$language = $act->language;
+			$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+			unset($act->content);
+			$cache->set($cacheKey, json_encode($act));
+		}
+	}
 }
 $pages = new Act();
 if($pages) {
