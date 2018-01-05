@@ -75,15 +75,15 @@ $(function () {
 	}).on('apply.daterangepicker', function(ev, picker) {
 		if(picker.chosenLabel == 'Always') {
 			$(this).val(picker.chosenLabel);
-			if($(this).closest('#data_table').length) table.fnReloadAjax();
+			if($(this).closest('#data_table').length) datatableAjaxReload();
 		}
 		else {
 			$(this).val(picker.startDate.format('DD.MM.YYYY') + ' - ' + picker.endDate.format('DD.MM.YYYY'));
-			if($(this).closest('#data_table').length) table.fnReloadAjax();
+			if($(this).closest('#data_table').length) datatableAjaxReload();
 		}
 	}).on('cancel.daterangepicker', function() {
 		$(this).val('');
-		if($(this).closest('#data_table').length) table.fnReloadAjax();
+		if($(this).closest('#data_table').length) datatableAjaxReload();
 	});
 	$("body").on('click', 'span.fa-trash-o', function (event) {
 		var v = confirm(jsstrings.confirm_delete);
@@ -98,7 +98,7 @@ $(function () {
 			if (typeof jsonPage != 'undefined') {
 				var deleteId = ($(event.target).data('actid')) ? $(event.target).data('actid') : $(event.target).closest('tr').children('td').eq(0).text();
 				$.post(adminfolder + "act/" + jsonPage, {delete: deleteId}, function () {
-					table.fnReloadAjax();
+					datatableAjaxReload();
 				});
 			}
 		}
@@ -276,7 +276,7 @@ $(function () {
 			success: function (data) {
 				if(data != 1 && data != '') alert(data);
 				else {
-					table.fnReloadAjax();
+					datatableAjaxReload();
 					mdl.hide();
 				}
 			},
@@ -311,6 +311,9 @@ $(function () {
 		});
 	});
 	$(".tableFilter").change(function () {
-		table.fnReloadAjax();
+		datatableAjaxReload();
 	});
 });
+function datatableAjaxReload() {
+	table.api().ajax.reload();
+}
