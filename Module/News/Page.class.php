@@ -96,7 +96,7 @@ class Page {
 				if(empty(trim($story->image))) $image = '';
 				else {
 					$image = "<img src='" .  _FOLDER_URL_ . "img/news/" . rawurlencode($story->image) . "' id='imgstory' />";
-					$page->ogimage = _ADDRESS_ . 'img/news/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
+					$page->ogimage = 'news/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
 				}
 				$content = $image . '
 		<article id="content" class="container marginbot40">
