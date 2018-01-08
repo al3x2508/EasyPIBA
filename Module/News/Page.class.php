@@ -18,6 +18,8 @@ class Page {
 		$news = new Model('news');
 		$content = '';
 		if($currentUrl == 'news' || preg_match('/news\/pag\-[\d+]/', $currentUrl)) {
+			//Disable cache for generic news page
+			$page->useCache = false;
 			$pageno = preg_match('/news\/pag\-(\d+)/', $currentUrl, $matches)?$matches[1]:1;
 			$limit = (($pageno - 1) * 6) . ', 6';
 			$content = /** @lang text */
