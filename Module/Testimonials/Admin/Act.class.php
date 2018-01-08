@@ -27,7 +27,7 @@ class Act extends AdminAct {
 							$path_parts = pathinfo($uploaded_file);
 							$fname = $path_parts['filename'];
 							$extension = $path_parts['extension'];
-							$target_dir = _APP_DIR_ . 'img/testimonials/';
+							$target_dir = _APP_DIR_ . 'assets/img/testimonials/';
 							$destination_file = $target_dir . $filename;
 							$thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
 							$thumb_target_file = $upload_dir . $thumb_file_name;

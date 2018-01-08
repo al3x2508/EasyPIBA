@@ -189,7 +189,7 @@ namespace Utils {
 		 * @return bool
 		 */
 		public static function send_email($email, $lastname, $subject = '', $message = '', $isHtml = false, $from = null, $att = null, $bcc_self = false) {
-			$path = _APP_DIR_ . 'img/' . _LOGO_;
+			$path = _APP_DIR_ . 'assets/img/' . _LOGO_;
 			$type = pathinfo($path, PATHINFO_EXTENSION);
 			$data = file_get_contents($path);
 			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
