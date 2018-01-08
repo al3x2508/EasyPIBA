@@ -27,7 +27,6 @@
 
 .sw-theme-dots .sw-toolbar {
     background: #fff;
-    border-radius: 0 !important;
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 0 !important;
@@ -84,7 +83,7 @@
     content: ' ';
     position: absolute;
     bottom: 2px;
-    left: 40%;
+    left: calc(50% - 15px);
     margin-top: 10px;
     display: block;
     border-radius: 50%;
@@ -100,11 +99,11 @@
 .sw-theme-dots > ul.step-anchor > li > a:after {
     content: ' ';
     position: relative;
-    left: 43%;
-    margin-top: 10px;
+    left: calc(50% - 8px);
+    margin-top: 9px;
     display: block;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     background: #f5f5f5;
     border-radius: 50%;
     z-index: 99;

@@ -28,7 +28,7 @@ class Act extends AdminAct {
 						$path_parts = pathinfo($uploaded_file);
 						$pathFilename = $path_parts['filename'];
 						$extension = $path_parts['extension'];
-						$target_dir = _APP_DIR_ . 'img/uploads/';
+						$target_dir = _APP_DIR_ . 'assets/img/uploads/';
 						$destination_file = $target_dir . $filename;
 						$thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
 						$thumb_target_file = $upload_dir . $thumb_file_name;
@@ -48,7 +48,7 @@ class Act extends AdminAct {
 			elseif(array_key_exists('delete', $this->fields)) {
 				$media = $this->entity->getOneResult('id', $this->fields['delete']);
 				$filename = $media->filename;
-				$target_dir = _APP_DIR_ . 'img/uploads/';
+				$target_dir = _APP_DIR_ . 'assets/img/uploads/';
 				$uploaded_file = $target_dir . $filename;
 				$path_parts = pathinfo($uploaded_file);
 				$pathFilename = $path_parts['filename'];

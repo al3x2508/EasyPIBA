@@ -12,8 +12,48 @@
 	<link href="css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css"/>
 	<link href="vendor/almasaeed2010/adminlte/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
 	<style>
+		body {
+			background: #A6C539;
+			color: #809c1b;
+			background: -moz-radial-gradient(center, ellipse cover, #d6deb9 0%, #a6c539 100%);
+			background: -webkit-radial-gradient(center, ellipse cover, #d6deb9 0%,#a6c539 100%);
+			background: radial-gradient(ellipse at center, #d6deb9 0%,#a6c539 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6deb9', endColorstr='#a6c539',GradientType=1 );
+			min-height: 100vh;
+		}
+		h1, footer {
+			color: #FFF;
+			text-shadow: 1px 1px 0 #9fb943;
+		}
+		.sw-theme-dots > ul.step-anchor > li.active > a, .sw-theme-dots > ul.step-anchor > li > a:before {
+			color: #809c1b;
+		}
+		.sw-theme-dots > ul.step-anchor > li.active > a:after {
+			background: #809c1b;;
+		}
+		.sw-theme-dots {
+			border-radius: 1em;
+			-webkit-box-shadow: 0 0 2em #9fb943;
+			-moz-box-shadow: 0 0 2em #9fb943;
+			box-shadow: 0 0 2em #9fb943;
+		}
+		.sw-theme-dots > ul.step-anchor {
+			border-radius: 1em 1em 0 0;
+		}
+		.sw-theme-dots .step-content {
+			padding: 10px 1em;
+		}
+		.sw-theme-dots .sw-toolbar {
+			border-radius: 0 0 1em 1em;
+		}
+		.text-muted {
+			color: #667f0c;
+		}
 		.select2.select2-container {
 			display: block;
+		}
+		footer {
+			margin-top: 1em;
 		}
 	</style>
 </head>
