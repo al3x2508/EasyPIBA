@@ -7,6 +7,7 @@ RewriteEngine On
 RewriteRule ^css/main.css Utils/scripts.php [L]
 RewriteRule ^js/jquery.min.js vendor/components/jquery/jquery.min.js [L]
 RewriteRule ^js/jquery-ui.min.js vendor/components/jqueryui/jquery-ui.min.js [L]
+RewriteRule ^fonts/(fontawesome.*)$ vendor/components/font-awesome/fonts/$1 [NC,L]
 RewriteRule ^css/(.*)$ assets/css/$1 [NC,L]
 RewriteRule ^js/(.*)$ assets/js/$1 [NC,L]
 RewriteRule ^fonts/(.*)$ assets/fonts/$1 [NC,L]
