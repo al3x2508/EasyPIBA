@@ -21,7 +21,7 @@ class Pages {
 			$selected = ($language->code == _DEFAULT_LANGUAGE_)?' selected':'';
 			$languageOptions .= "<option value=\"{$language->code}\"{$selected}>" . $language->name . "</option>";
 		}
-		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js','../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js','../vendor/ckeditor/ckeditor/ckeditor.js','../vendor/almasaeed2010/adminlte/bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','../Module/Pages/Admin/pages.js');
+		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js','../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js','../vendor/ckeditor/ckeditor/ckeditor.js','../vendor/almasaeed2010/adminlte/bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','Module/Pages/Admin/pages.js');
 		$this->css = array('../vendor/almasaeed2010/adminlte/bower_components/select2/dist/css/select2.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css');
 		$this->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Edit pages') . '</h3></div>

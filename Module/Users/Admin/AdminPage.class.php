@@ -11,7 +11,7 @@ class AdminPage extends \Controller\AdminPage {
 		$page->title = __('Users');
 		$page->h1 = __('Users');
 		foreach($countries AS $country) $countriesOptions .= '<option value="' . $country->id . '">' . $country->name . '</option>'.PHP_EOL;
-		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js','../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js','js/jsall.js','../Module/Users/Admin/users.js');
+		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js','../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js','js/jsall.js','Module/Users/Admin/users.js');
 		$page->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css');
 		$page->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Users') . '</h3></div>
