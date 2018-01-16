@@ -437,7 +437,8 @@ namespace Model {
 										$nc = new Model($table);
 										$this->$table = $nc;
 									}
-									$this->$table->$matches[2] = $val;
+									$tc = $matches[2];
+									$this->$table->$tc = $val;
 								}
 							}
 						}
