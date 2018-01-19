@@ -397,12 +397,12 @@ class Template {
 			$this->content = str_replace('#testimonials#', $testimonials, $this->content);
 		}
 		if(isset($footer)) $this->content = str_replace("\t</body>", $footer . "\t</body>", $this->content);
-		if(strpos($this->content, '<option value="">' . __('Country') . '</option>') !== false) {
+		if(strpos($this->content, '<option value="">' . __('Country') . '</option></select>') !== false) {
 			$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
 			$countries = new Model('countries');
 			$countries = $countries->get();
 			foreach($countries AS $country) $countriesOptions .= '	<option value="' . $country->id . '">' . $country->name . '</option>' . PHP_EOL;
-			$this->content = str_replace('<option value="">' . __('Country') . '</option>', $countriesOptions, $this->content);
+			$this->content = str_replace('<option value="">' . __('Country') . '</option>', $countriesOptions . '</select>', $this->content);
 		}
 		return true;
 	}

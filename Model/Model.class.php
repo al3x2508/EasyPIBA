@@ -72,7 +72,7 @@ namespace Model {
 			$this->db = Database::getInstance();
 			if(!$this->db) die('Can not connect to database!');
 			//Set charset to UTF-8
-			if ($this->db->server_version < 50500) @$this->db->set_charset('utf8');
+			@$this->db->set_charset('utf8');
 			//Use the first parameter as the table name
 			$this->tableName = $tableName;
 			//If the second parameter isn't set then get the table schema

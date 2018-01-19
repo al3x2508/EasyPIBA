@@ -108,8 +108,9 @@ class Admin {
 		//Add header line
 		foreach($columnNames AS $index => $columnName) {
 			if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || array_key_exists($columnName, $this->columnsMap)) {
-				$columnName = $this->columnsMap[$columnName];
-				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($index + 65) . '1', $columnName);
+				$columnName = (is_array($this->columnsMap) && array_key_exists($columnName, $this->columnsMap))?$this->columnsMap[$columnName]:$columnName;
+				$colString = \PHPExcel_Cell::stringFromColumnIndex($index);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue($colString . '1', $columnName);
 			}
 		}
 		//Set bold the header line

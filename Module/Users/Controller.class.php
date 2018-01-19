@@ -22,6 +22,7 @@ class Controller {
 
 		$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
 		$countries = new Model('countries');
+		$countries->order('`countries`.`name` ASC');
 		$countries = $countries->get();
 		foreach($countries AS $country) {
 			$selected = ($country->id == fieldValue('country', $values)) ? ' selected' : '';
