@@ -63,7 +63,7 @@ class Act extends AdminAct {
 	public function act() {
 		$cache = Util::getCache();
 		if($cache) {
-			if(array_key_exists('id', $this->fields)) {
+			if(arrayKeyExists('id', $this->fields)) {
 				if($this->fields['id'] > 0) {
 					$page = new Model('pages');
 					$page = $page->getOneResult('id', $this->fields['id']);
@@ -97,6 +97,6 @@ class Act extends AdminAct {
 }
 $pages = new Act();
 if($pages) {
-	if(array_key_exists('id', $_REQUEST) || array_key_exists('delete', $_REQUEST)) return $pages->act();
-	elseif(array_key_exists('menu', $_REQUEST)) return $pages->menu();
+	if(arrayKeyExists('id', $_REQUEST) || arrayKeyExists('delete', $_REQUEST)) return $pages->act();
+	elseif(arrayKeyExists('menu', $_REQUEST)) return $pages->menu();
 }

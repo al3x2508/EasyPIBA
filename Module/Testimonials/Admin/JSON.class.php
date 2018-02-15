@@ -10,12 +10,12 @@ class JSON extends Admin {
 		parent::__construct();
 	}
 	public function get() {
-		if(!array_key_exists('id', $_REQUEST)) {
+		if(!arrayKeyExists('id', $_REQUEST)) {
 			$testimonials = new Model('testimonials');
-			$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['length']:10;
-			$limit = ((array_key_exists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
+			$itemsPerPage = (arrayKeyExists('start', $_REQUEST))?$_REQUEST['length']:10;
+			$limit = ((arrayKeyExists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
 			$countTotal = $testimonials->countItems();
-			if(array_key_exists('filters', $_REQUEST)) {
+			if(arrayKeyExists('filters', $_REQUEST)) {
 				foreach($_REQUEST['filters'] AS $key => $value) {
 					if(in_array($key, array(
 						'name'
@@ -37,7 +37,7 @@ class JSON extends Admin {
 				'aaData'               => $testimonialsArray
 			);
 			$response = json_encode($responseArray);
-			if(array_key_exists('callback', $_GET)) $response = $_GET['callback'] . '(' . $response . ')';
+			if(arrayKeyExists('callback', $_GET)) $response = $_GET['callback'] . '(' . $response . ')';
 			echo $response;
 		}
 		else {

@@ -28,6 +28,7 @@
 			this.element.autocomplete(options).uitooltip({tooltipClass: "ui-state-highlight"});
 			this._on(this.element, {
 				autocompleteselect: function(event, ui) {
+					$(this.element).closest('.form-group').removeClass('has-error').find('.help-block').remove();
 					if(typeof _self.options.callback === "function") _self.options.callback(ui.item.id);
 				},
 				autocompletechange: "_removeIfInvalid"

@@ -14,7 +14,7 @@ class Cache {
 		$this->js = array();
 		$this->css = array();
 		$this->content = '';
-		if(array_key_exists('reread', $_REQUEST)) {
+		if(arrayKeyExists('reread', $_REQUEST)) {
 			require_once _APP_DIR_ . 'admin/modules.php';
 			reread();
 			$this->content .= '<div class="alert alert-success" role="alert"><strong>' . __('Modules reread') . '.</strong></div>';

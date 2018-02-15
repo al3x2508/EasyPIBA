@@ -52,12 +52,12 @@ namespace Utils {
 		 * @return mixed|string
 		 */
 		public static function getUserLanguage($user = false) {
-			if(array_key_exists('language', $_COOKIE)) return $_COOKIE['language'];
+			if(arrayKeyExists('language', $_COOKIE)) return $_COOKIE['language'];
 			if(!$user) $user = Controller::getCurrentUser(false);
 			if($user) {
 				/** @noinspection PhpUndefinedFieldInspection */
 				$accountSettings = json_decode($user->settings, true);
-				if(is_array($accountSettings) && array_key_exists('language', $accountSettings)) return $accountSettings['language'];
+				if(arrayKeyExists('language', $accountSettings)) return $accountSettings['language'];
 			}
 			return _DEFAULT_LANGUAGE_;
 		}
@@ -145,7 +145,7 @@ namespace Utils {
 			if($key == 'CSRFToken') return self::csrfguard_validate_token($_REQUEST['CSRFName'], $value);
 			$rules = array('firstname' => "/^([ \x{00c0}-\x{01ff}a-zA-Z\'\-]{2,20})+$/u", 'lastname' => "/^([ \x{00c0}-\x{01ff}a-zA-Z\'\-]{2,20})+$/u", 'email' => '/^(?:[\w\d-]+\.?)+\@(?:(?:[\w\d]\-?)+\.)+\w{2,4}$/', 'password' => '/^(.){8,30}$/', 'confirmPassword' => '/^(.){8,30}$/', 'country' => '/^([0-9]{1,3})$/', 'message' => '/^(.){10,1000}$/');
 			$v1 = mb_convert_encoding($value, "UTF-8", "auto");
-			if(array_key_exists($key, $rules) && (!preg_match($rules[$key], $v1) || strip_tags($value) != $v1)) return false;
+			if(arrayKeyExists($key, $rules) && (!preg_match($rules[$key], $v1) || strip_tags($value) != $v1)) return false;
 			return true;
 		}
 
@@ -156,7 +156,7 @@ namespace Utils {
 		 * @return bool
 		 */
 		public static function csrfguard_validate_token($unique_form_name, $token_value) {
-			if(!array_key_exists($unique_form_name, $_SESSION)) return false;
+			if(!arrayKeyExists($unique_form_name, $_SESSION)) return false;
 			$token = $_SESSION[$unique_form_name];
 			if($token === false) return false;
 			elseif(\hash_equals($token, $token_value)) $result = true;
@@ -361,7 +361,7 @@ namespace {
 		$_COOKIE["PHPSESSID"] = null;
 		unset($_COOKIE["PHPSESSID"]);
 	}
-	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !array_key_exists('admin', $_SESSION) && isset($_COOKIE['rme' . _CACHE_PREFIX_]) && !array_key_exists('user', $_SESSION)) {
+	if(php_sapi_name() != "cli" && strpos($_SERVER['REQUEST_URI'], '/admin') === false && !arrayKeyExists('admin', $_SESSION) && isset($_COOKIE['rme' . _CACHE_PREFIX_]) && !arrayKeyExists('user', $_SESSION)) {
 		$cookie = $_COOKIE['rme' . _CACHE_PREFIX_];
 		list ($token, $mac) = explode(':', $cookie);
 		if($mac === hash_hmac('sha256', $token, _HASH_KEY_)) {
@@ -369,11 +369,11 @@ namespace {
 			if($userId) $_SESSION['user'] = $userId;
 		}
 	}
-	if(!array_key_exists('userLanguage', $_SESSION)) {
+	if(!arrayKeyExists('userLanguage', $_SESSION)) {
 		$userLanguage = Util::getUserLanguage();
 		$_SESSION['userLanguage'] = $userLanguage;
 	}
-	else if(array_key_exists('language', $_COOKIE) && $_SESSION['userLanguage'] != $_COOKIE['language']) $_SESSION['userLanguage'] = $_COOKIE['language'];
+	else if(arrayKeyExists('language', $_COOKIE) && $_SESSION['userLanguage'] != $_COOKIE['language']) $_SESSION['userLanguage'] = $_COOKIE['language'];
 
 	if(!function_exists('hash_equals')) {
 		function hash_equals($str1, $str2) {
@@ -388,7 +388,7 @@ namespace {
 	}
 	if (php_sapi_name() != "cli") {
 		$page_url = Util::getCurrentUrl();
-		if(array_key_exists('logout', $_GET) || $page_url == 'logout') Controller::logout();
+		if(isset($_GET) && is_array($_GET) && arrayKeyExists('logout', $_GET) || $page_url == 'logout') Controller::logout();
 	}
 	else {
 		global $argv;
@@ -406,4 +406,7 @@ namespace {
 		return $translations->translate($string);
 	}
 
+	function arrayKeyExists($key, $array) {
+		return (isset($array) && is_array($array) && array_key_exists($key, $array));
+	}
 }

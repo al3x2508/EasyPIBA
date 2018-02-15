@@ -20,7 +20,7 @@ class Act extends AdminAct {
 	public function act() {
 		$adminController = new AdminController();
 		if($adminController->checkPermission($this->permission)) {
-			if(array_key_exists('id', $this->fields)) {
+			if(arrayKeyExists('id', $this->fields)) {
 				foreach($this->fields AS $key => $value) {
 					if($key == 'image') {
 						if(!empty(trim(strip_tags($value)))) {

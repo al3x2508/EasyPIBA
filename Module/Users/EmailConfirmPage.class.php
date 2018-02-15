@@ -19,7 +19,7 @@ class EmailConfirmPage {
 		$this->content = '';
 		$this->title = __('Email confirm');
 		$this->description = __('Email confirm');
-		$code = (array_key_exists('code', $_REQUEST) && ctype_alnum($_REQUEST['code'])) ? trim($_REQUEST['code']) : '';
+		$code = (arrayKeyExists('code', $_REQUEST) && ctype_alnum($_REQUEST['code'])) ? trim($_REQUEST['code']) : '';
 		$showForm = false;
 		$codeError = ($code && strlen($code) != 32)?'<div class="alert alert-danger">' . __('Enter the confirmation code') . '</div>':'';
 		$form = '<form action="#" method="post">

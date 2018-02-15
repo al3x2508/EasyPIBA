@@ -224,11 +224,11 @@ namespace Model {
 			$data = array();
 			$param_type = '';
 			//Store the column types into $param_type (eg: `ids`, meaning integer double string)
-			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && array_key_exists($key, $this->schema)) $param_type .= (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) $param_type .= (property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 			$data[] = &$param_type;
 			$cols = array();
 			//Store the values for the columns
-			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && array_key_exists($key, $this->schema)) {
+			foreach(get_object_vars($this) AS $key => $val) if(!in_array($key, self::getIgnoredKeys()) && !is_object($val) && property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) {
 				$cols[] = $key;
 				if($val === '0xNULL') $this->$key = null;
 				$data[] = &$this->$key;
@@ -298,7 +298,7 @@ namespace Model {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : ($val !== null ? $key . ' = ?' : $key . ' IS NULL');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
 					if($val !== null) {
-						$tipData = (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+						$tipData = (property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 						$param_type .= ($key == 'id') ? 'i' : ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 					}
 				}
@@ -309,7 +309,7 @@ namespace Model {
 					$w = ($val == 'complexW')?$key:((is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
 					if($val != 'complexW') {
-						$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && array_key_exists(2, $val))?$val[2]:'s'));
+						$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && arrayKeyExists(2, $val))?$val[2]:'s'));
 						$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 					}
 				}
@@ -428,7 +428,7 @@ namespace Model {
 					while($stmt->fetch()) {
 						/** @var array $row */
 						foreach($row as $key => $val) {
-							if(array_key_exists($key, $this->schema)) $this->$key = $val;
+							if(arrayKeyExists($key, $this->schema)) $this->$key = $val;
 							else {
 								preg_match('/(.+?)(?=\-)\-(.*)/', $key, $matches);
 								if(count($matches)) {
@@ -475,7 +475,7 @@ namespace Model {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : ($val !== null ? $key . ' = ?' : $key . ' IS NULL');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
 					if($val !== null) {
-						$tipData = (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+						$tipData = (property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 						$param_type .= ($key == 'id') ? 'i' : ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 					}
 				}
@@ -484,7 +484,7 @@ namespace Model {
 				foreach($this->where AS $key => $val) {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?';
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && array_key_exists(2, $val))?$val[2]:'s'));
+					$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && arrayKeyExists(2, $val))?$val[2]:'s'));
 					$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 				}
 			}
@@ -557,7 +557,7 @@ namespace Model {
 				$data = array();
 				$param_type = '';
 				$set = '';
-				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) $param_type .= (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) $param_type .= (property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 				$param_type .= 'i';
 				$data[] = &$param_type;
 				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) {
@@ -584,7 +584,7 @@ namespace Model {
 				$data = array();
 				$param_type = '';
 				$set = '';
-				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) $param_type .= (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) $param_type .= (property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 				$data[] = &$param_type;
 				foreach(get_object_vars($this) AS $key => $val) if(!is_a($val, 'Model\Model') && !in_array($key, self::getIgnoredKeys())) {
 					if($this->$key === '0xNULL') $this->$key = null;
@@ -615,7 +615,7 @@ namespace Model {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : ($val !== null ? $key . ' = ?' : $key . ' IS NULL');
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
 					if($val !== null) {
-						$tipData = (property_exists($this, 'schema') && array_key_exists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
+						$tipData = (property_exists($this, 'schema') && arrayKeyExists($key, $this->schema)) ? $this->schema[$key]['param_type'] : (is_numeric($val) ? 'i' : 's');
 						$param_type .= ($key == 'id') ? 'i' : ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 					}
 				}
@@ -625,7 +625,7 @@ namespace Model {
 				foreach($this->where AS $key => $val) {
 					$w = (is_array($val)) ? (($val[1] != 'BETWEEN') ? $key . ' ' . $val[1] . ' ?' : $key . ' BETWEEN ? AND ?') : $key . ' = ?';
 					$where .= ($where == '') ? ' WHERE ' . $w : ' ' . $whereOp . ' ' . $w;
-					$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && array_key_exists(2, $val))?$val[2]:'s'));
+					$tipData = (is_numeric($val) ? 'i' : ((is_array($val) && arrayKeyExists(2, $val))?$val[2]:'s'));
 					$param_type .= ((!is_array($val) || $val[1] != 'BETWEEN') ? $tipData : $tipData . $tipData);
 				}
 			}
@@ -688,6 +688,31 @@ namespace Model {
 			$id = $sel_row->id ? $sel_row->id : 0;
 			$stmt->free_result();
 			return $id;
+		}
+
+		public function checkFields() {
+			$errors = array();
+			foreach($this->schema AS $key => $param) {
+				if(property_exists($this, $key)) {
+					switch ($param['param_type']) {
+						case 's':
+							if(empty($this->$key) && $param['null'] == 'NO') $errors[$key] = 'notNull';
+							break;
+						case 'i':
+							if(filter_var($this->$key, FILTER_VALIDATE_INT) === false) $errors[$key] = 'differentType';
+							break;
+						case 'd':
+							if(filter_var($this->$key, FILTER_VALIDATE_FLOAT) === false) $errors[$key] = 'differentType';
+							break;
+						default:
+							break;
+					}
+				}
+				else {
+					if($param['null'] == 'NO') $errors[$key] = 'notNull';
+				}
+			}
+			return (count($errors) === 0)?false:$errors;
 		}
 
 		/**

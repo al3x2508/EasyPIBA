@@ -17,7 +17,7 @@ class Act extends AdminAct {
 	public function act() {
 		$adminController = new AdminController();
 		if($adminController->checkPermission($this->permission)) {
-			if(array_key_exists('id', $this->fields)) {
+			if(arrayKeyExists('id', $this->fields)) {
 				foreach($this->fields AS $key => $value) {
 					if($key == 'image') {
 						unset($this->fields['image']);
@@ -45,7 +45,7 @@ class Act extends AdminAct {
 				}
 				return parent::act();
 			}
-			elseif(array_key_exists('delete', $this->fields)) {
+			elseif(arrayKeyExists('delete', $this->fields)) {
 				$media = $this->entity->getOneResult('id', $this->fields['delete']);
 				$filename = $media->filename;
 				$target_dir = _APP_DIR_ . 'assets/img/uploads/';
@@ -62,7 +62,7 @@ class Act extends AdminAct {
 				return true;
 			}
 			else {
-				if(isset($_FILES) && array_key_exists('edimage', $_FILES)) {
+				if(isset($_FILES) && arrayKeyExists('edimage', $_FILES)) {
 					if(is_array($_FILES['edimage']['name'])) {
 						$return = array();
 						for($i = 0; $i < count($_FILES['edimage']['name']); $i++) {
@@ -75,7 +75,7 @@ class Act extends AdminAct {
 					}
 					else $error = self::uploadImg($_FILES['edimage']);
 				}
-				elseif(array_key_exists('clearImg', $_POST)) {
+				elseif(arrayKeyExists('clearImg', $_POST)) {
 					$filename = strip_tags($_POST['clearImg']);
 					$target_dir = _APP_DIR_ . 'uploads/';
 					$target_file = $target_dir . $filename;
@@ -129,4 +129,4 @@ class Act extends AdminAct {
 	}
 }
 $media = new Act();
-if($media && array_key_exists('id', $_REQUEST) || array_key_exists('delete', $_REQUEST) || array_key_exists('edimage', $_FILES) || array_key_exists('clearImg', $_REQUEST)) return $media->act();
+if($media && arrayKeyExists('id', $_REQUEST) || arrayKeyExists('delete', $_REQUEST) || arrayKeyExists('edimage', $_FILES) || arrayKeyExists('clearImg', $_REQUEST)) return $media->act();

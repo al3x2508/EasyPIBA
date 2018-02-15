@@ -151,8 +151,8 @@ class Template {
 			if($parent !== 'menu_right' && ($parent === $level)) {
 				foreach($pages AS $page) {
 					//If it has submenu build a dropdown
-					if(array_key_exists('id', $page) && array_key_exists($page['id'], $mArr)) {
-						$cssClasses = (array_key_exists('classes', $page)) ? ' ' . $page['classes'] : '';
+					if(arrayKeyExists('id', $page) && arrayKeyExists($page['id'], $mArr)) {
+						$cssClasses = (arrayKeyExists('classes', $page)) ? ' ' . $page['classes'] : '';
 						$menu .= '<li class="nav-item dropdown' . $cssClasses . '">
 							<a class="nav-link dropdown-toggle" href="#" id="menu' . $page['id'] . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $page['menu_text'] . '</a>
 							<div class="dropdown-menu" aria-labelledby="menu' . $page['id'] . '">
@@ -161,7 +161,7 @@ class Template {
 						</li>';
 					}
 					else {
-						$cssClasses = (array_key_exists('classes', $page)) ? ' ' . $page['classes'] : '';
+						$cssClasses = (arrayKeyExists('classes', $page)) ? ' ' . $page['classes'] : '';
 						if($level === 0) $menu .= '<li class="nav-item' . $cssClasses . '"><a class="nav-link" href="' . $page['url'] . '">' . $page['menu_text'] . '</a></li>';
 						else $menu .= '<a class="dropdown-item" href="' . $page['url'] . '">' . $page['menu_text'] . '</a>';
 					}
@@ -272,7 +272,7 @@ class Template {
 				</div>' . PHP_EOL;
 			}
 		}
-		$menuR = (!$this->isAmp && array_key_exists('menu_right', $array_menu)) ? $this->menu($array_menu['menu_right']) : '';
+		$menuR = (!$this->isAmp && arrayKeyExists('menu_right', $array_menu)) ? $this->menu($array_menu['menu_right']) : '';
 		if(!empty($menuR)) $menuRight .= '<ul class="navbar-nav mr-auto">' . $menuR . '</ul>';
 		$this->menu_right = $menuRight;
 		//End of menu right
