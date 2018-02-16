@@ -22,7 +22,7 @@ class PasswordResetPage {
 		$this->description = __('Password reset');
 		$fields = array();
 		$errors = '';
-		if(array_key_exists('email',$_POST)) {
+		if(arrayKeyExists('email',$_POST)) {
 			$email = strip_tags(htmlspecialchars(stripslashes(trim($_POST['email']))));
 			if(!Util::checkFieldValue('email', $email)) $fields['email'] = __('Enter a valid email address');
 			else {
@@ -52,14 +52,14 @@ class PasswordResetPage {
 				else $fields['email'] = __('No user registered with this email address');
 			}
 		}
-		elseif(array_key_exists('code', $_REQUEST)) {
+		elseif(arrayKeyExists('code', $_REQUEST)) {
 			$fields = array();
 			$checkFields = array('password', 'confirmPassword');
-			if(array_key_exists('password', $_POST)) {
-				foreach($checkFields AS $field) if(array_key_exists($field, $_POST) && !Util::checkFieldValue($field, $_POST[ $field ])) $fields[$field] = 1;
+			if(arrayKeyExists('password', $_POST)) {
+				foreach($checkFields AS $field) if(arrayKeyExists($field, $_POST) && !Util::checkFieldValue($field, $_POST[ $field ])) $fields[$field] = 1;
 				if($_POST['password'] != $_POST['confirmPassword']) $fields['confirmPassword'] = 1;
 			}
-			if(array_key_exists('password', $_POST) && count($fields) == 0) {
+			if(arrayKeyExists('password', $_POST) && count($fields) == 0) {
 				$code = strip_tags(htmlspecialchars(stripslashes(trim($_REQUEST['code']))));
 				$resetModel = new Model('passwords_reset');
 				$resetModel->code = $code;
@@ -76,8 +76,8 @@ class PasswordResetPage {
 				else $errors = '<div class="alert alert-danger">' . __('Code not found') . '</div>';
 			}
 			else {
-				$password = (array_key_exists('password', $fields) && $fields['password'] == 1)?'<div class="alert alert-danger">' . __('Enter a password') . '</div>':'';
-				$confirmPassword = (array_key_exists('confirmPassword', $fields) && $fields['confirmPassword'] == 1)?'<div class="alert alert-danger">' . __('Confirm the password') . '</div>':'';
+				$password = (arrayKeyExists('password', $fields) && $fields['password'] == 1)?'<div class="alert alert-danger">' . __('Enter a password') . '</div>':'';
+				$confirmPassword = (arrayKeyExists('confirmPassword', $fields) && $fields['confirmPassword'] == 1)?'<div class="alert alert-danger">' . __('Confirm the password') . '</div>':'';
 				$this->content = '<div class="row justify-content-md-center mt-4">
 			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 				<div class="alert-placeholder"></div>
@@ -123,7 +123,7 @@ class PasswordResetPage {
 			}
 		}
 		if(empty($this->content)) {
-			$email = array('value' => (array_key_exists('email', $_POST)) ? ' value="' . strip_tags(htmlspecialchars(stripslashes(trim($_POST['email'])))) . '"' : '', 'validation' => (array_key_exists('email', $fields)) ? '<div class="alert alert-danger">' . $fields['email'] . '</div>' : '');
+			$email = array('value' => (arrayKeyExists('email', $_POST)) ? ' value="' . strip_tags(htmlspecialchars(stripslashes(trim($_POST['email'])))) . '"' : '', 'validation' => (arrayKeyExists('email', $fields)) ? '<div class="alert alert-danger">' . $fields['email'] . '</div>' : '');
 			$this->content = '<div class="row justify-content-md-center mt-4">
 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 					' . $errors . '

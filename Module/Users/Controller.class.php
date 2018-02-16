@@ -15,24 +15,25 @@ class Controller {
 	 */
 	public static function getAccountForm($fields, $values, $formId, $button = false, $errors = '') {
 		function fieldValue($field, $values) {
-			if(array_key_exists($field, $_POST)) return strip_tags(htmlspecialchars(stripslashes(trim($_POST[$field]))));
-			if(array_key_exists($field, $values)) return strip_tags(htmlspecialchars(stripslashes(trim($values[$field]))));
+			if(arrayKeyExists($field, $_POST)) return strip_tags(htmlspecialchars(stripslashes(trim($_POST[$field]))));
+			if(arrayKeyExists($field, $values)) return strip_tags(htmlspecialchars(stripslashes(trim($values[$field]))));
 			return false;
 		}
 
 		$countriesOptions = '	<option value="">' . __('Country') . '</option>' . PHP_EOL;
 		$countries = new Model('countries');
+		$countries->order('`countries`.`name` ASC');
 		$countries = $countries->get();
 		foreach($countries AS $country) {
 			$selected = ($country->id == fieldValue('country', $values)) ? ' selected' : '';
 			$countriesOptions .= '	<option value="' . $country->id . '"' . $selected . '>' . $country->name . '</option>' . PHP_EOL;
 		}
-		$firstname = array('value' => (fieldValue('firstname', $values)) ? ' value="' . fieldValue('firstname', $values) . '"' : '', 'validation' => (array_key_exists('firstname', $fields) && $fields['firstname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your firstname') . '</div>' : '');
-		$lastname = array('value' => (fieldValue('lastname', $values)) ? ' value="' . fieldValue('lastname', $values) . '"' : '', 'validation' => (array_key_exists('lastname', $fields) && $fields['lastname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your lastname') . '</div>' : '');
-		$email = array('value' => (fieldValue('email', $values)) ? ' value="' . fieldValue('email', $values) . '"' : '', 'validation' => (array_key_exists('email', $fields) && $fields['email'] == 1) ? '<div class="alert alert-danger">' . __('Enter your email') . '</div>' : '');
-		$country = (array_key_exists('country', $fields) && $fields['country'] == 1) ? '<div class="alert alert-danger">' . __('Select your country') . '</div>' : '';
-		$password = (array_key_exists('password', $fields) && $fields['password'] == 1) ? '<div class="alert alert-danger">' . __('Enter a password') . '</div>' : '';
-		$confirmPassword = (array_key_exists('confirmPassword', $fields) && $fields['confirmPassword'] == 1) ? '<div class="alert alert-danger">' . __('Confirm the password') . '</div>' : '';
+		$firstname = array('value' => (fieldValue('firstname', $values)) ? ' value="' . fieldValue('firstname', $values) . '"' : '', 'validation' => (arrayKeyExists('firstname', $fields) && $fields['firstname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your firstname') . '</div>' : '');
+		$lastname = array('value' => (fieldValue('lastname', $values)) ? ' value="' . fieldValue('lastname', $values) . '"' : '', 'validation' => (arrayKeyExists('lastname', $fields) && $fields['lastname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your lastname') . '</div>' : '');
+		$email = array('value' => (fieldValue('email', $values)) ? ' value="' . fieldValue('email', $values) . '"' : '', 'validation' => (arrayKeyExists('email', $fields) && $fields['email'] == 1) ? '<div class="alert alert-danger">' . __('Enter your email') . '</div>' : '');
+		$country = (arrayKeyExists('country', $fields) && $fields['country'] == 1) ? '<div class="alert alert-danger">' . __('Select your country') . '</div>' : '';
+		$password = (arrayKeyExists('password', $fields) && $fields['password'] == 1) ? '<div class="alert alert-danger">' . __('Enter a password') . '</div>' : '';
+		$confirmPassword = (arrayKeyExists('confirmPassword', $fields) && $fields['confirmPassword'] == 1) ? '<div class="alert alert-danger">' . __('Confirm the password') . '</div>' : '';
 		$content = '<form id="' . $formId . '" method="post" action="#" class="validateform">';
 		if(!empty($errors)) $content .= '<div class="col-lg-12 col-12"><div class="alert alert-danger">' . $errors . '</div></div>' . PHP_EOL;
 		$content .= '<div class="col-lg-12 col-12 mt-5 field form-group">
@@ -88,7 +89,7 @@ class Controller {
 						</div>
 						<div class="col-lg-12 form-group"><em>' . __('Fields marked with') . ' * ' . __('are required') . '.</em></div>' . PHP_EOL;
 		if($button) {
-			$termsConditions = (array_key_exists('termsConditions', $fields) && $fields['termsConditions'] == 1) ? '<div class="alert alert-danger">' . __('You must accept our Terms and conditions') . '</div>' : '';
+			$termsConditions = (arrayKeyExists('termsConditions', $fields) && $fields['termsConditions'] == 1) ? '<div class="alert alert-danger">' . __('You must accept our Terms and conditions') . '</div>' : '';
 			$content .= '<div class="col-lg-12 col-12 field text-center">
 							<input type="checkbox" name="termsConditions" id="termsConditions" /><label for="termsConditions">' . sprintf(__('I have read and agree to the %s'), '<a href="terms-conditions.html">' . __('Terms and Conditions') . '</a>') . '</label>
 							' . $termsConditions . '
@@ -110,7 +111,7 @@ class Controller {
 	 * @return Model|bool
 	 */
 	public static function getCurrentUser($returnId = true) {
-		if(array_key_exists('user', $_SESSION)) {
+		if(arrayKeyExists('user', $_SESSION)) {
 			if($returnId) return $_SESSION['user'];
 			else {
 				$user = new Model('users');
@@ -131,7 +132,7 @@ class Controller {
 		if(!$user) $user = self::getCurrentUser(false);
 		if($user) {
 			$accountSettings = json_decode($user->settings, true);
-			if(is_array($accountSettings) && array_key_exists($setting, $accountSettings)) return $accountSettings[$setting];
+			if(is_array($accountSettings) && arrayKeyExists($setting, $accountSettings)) return $accountSettings[$setting];
 		}
 		return null;
 	}
@@ -191,7 +192,7 @@ class Controller {
 			$message = /** @lang text */
 				"<h2>" . __("Welcome") . ", {$user->firstname}!</h2>
 				<h3>" . __("Step") . " 1. " . __("Activate your account") . "!</h3>
-				<p>" . __("Activate your account") . " {$email} " . __("by clicking this link") . ": <a href=\"{$activationLink}?key={$code}\">{$activationLink}?key={$code}</a></p>";
+				<p>" . __("Activate your account") . " {$email} " . __("by clicking this link") . ": <a href=\"{$activationLink}?code={$code}\">{$activationLink}?code={$code}</a></p>";
 			Util::send_email($email, $name, __('Activate your account'), $message, true);
 			return true;
 		}
@@ -229,7 +230,7 @@ class Controller {
 	 */
 	public static function logout() {
 		if(isset($_SESSION)) {
-			if(array_key_exists('user', $_SESSION)) {
+			if(arrayKeyExists('user', $_SESSION)) {
 				$cookie = new Model('cookies');
 				$cookie->__set('user', $_SESSION['user'])->delete();
 				unset($_SESSION);

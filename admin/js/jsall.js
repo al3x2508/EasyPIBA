@@ -5,7 +5,9 @@ var jsstrings = {},
 	currentPage = 0,
 	saveButton,
 	folder = '',
-	adminfolder = '';
+	adminfolder = '',
+	_confirmDelete = $('<div></div>'),
+	_messagePopup = $('<div></div>');;
 $(function () {
 	folder = $("#mainjs").data('appdir');
 	adminfolder = $("#mainjs").data('admindir');
@@ -46,19 +48,65 @@ $(function () {
 						"success": fnCallback
 					})
 				},
-				"aoColumns": aoColumns
+				"aoColumns": aoColumns,
+				"responsive": {
+					"details": {
+						"display": $.fn.dataTable.Responsive.display.childRowImmediate,
+						"type": ''
+					}
+				}
 			};
 			if (typeof jslang != 'undefined') dataTableOptions.oLanguage = jsstrings.datatables;
 			if(typeof dtSort != 'undefined') {
 				dataTableOptions.order = dtSort;
 				dataTableOptions.bSort = true;
 			}
-			table = dataTable.dataTable(dataTableOptions);
-			dataTable.on('page.dt', function () {
-				var info = dataTable.DataTable().page.info();
+			if(typeof aoColumnDefs != 'undefined') {
+				dataTableOptions.aoColumnDefs = aoColumnDefs;
+			}
+			table = dataTable.DataTable(dataTableOptions);
+			table.on('page.dt', function () {
+				var info = table.page.info();
 				currentPage = info.page;
 			});
+			if (typeof responsiveResize != 'undefined') table.on('responsive-resize', function () {
+				responsiveResize();
+			});
 			$.fn.dataTable.ext.errMode = 'none';
+
+			if(typeof delAction !== 'undefined') {
+				delAction = jsstrings[delAction];
+				_confirmDelete.addClass('modal fade').attr('id', 'confirm_delete').attr('role', 'dialog').attr('aria-hidden', 'true').on('show.bs.modal', function (e) {
+					$(this).find('.btn-ok').data('actid', $(e.relatedTarget));
+				});
+				_confirmDelete.append($('<div></div>').addClass('modal-dialog').append(
+					$('<div></div>').addClass('modal-content').append(
+						$('<div></div>').addClass('modal-header').append($('<button></button>').addClass('close').attr('data-dismiss', 'modal').attr('aria-hidden', 'true').html('&times;')).append($('<h4></h4>').addClass('modal-title').attr('id', 'myModalLabel').text(jsstrings.confirm_delete))
+					)
+						.append(
+							$('<div></div>').addClass('modal-body').append($('<p></p>').text(delAction)).append($('<p></p>').text(jsstrings.confirm_proceed))
+						)
+						.append(
+							$('<div></div>').addClass('modal-footer').append($('<button></button>').addClass('btn btn-default').attr('data-dismiss', 'modal').text(jsstrings.cancel)).append($('<button></button>').addClass('btn btn-danger btn-ok').text(jsstrings.delete).click(function () {
+									proceedDelete($(this).data('actid'));
+								})
+							)
+						)));
+				$('body').append(_confirmDelete);
+			}
+			_messagePopup.addClass('modal fade').attr('role', 'dialog').attr('aria-hidden', 'true')
+				.append($('<div></div>').addClass('modal-dialog').append(
+					$('<div></div>').addClass('modal-content').append(
+						$('<div></div>').addClass('modal-header').append($('<button></button>').addClass('close').attr('data-dismiss', 'modal').attr('aria-hidden', 'true').html('&times;')).append($('<h4></h4>').addClass('modal-title'))
+					)
+						.append(
+							$('<div></div>').addClass('modal-body').append($('<p></p>'))
+						)
+						.append(
+							$('<div></div>').addClass('modal-footer').append($('<button></button>').addClass('btn btn-ok').attr('data-dismiss', 'modal').text(jsstrings.ok)
+							)
+						)));
+			$('body').append(_messagePopup);
 		}
 	}
 	$(".drpicker").daterangepicker({
@@ -85,24 +133,7 @@ $(function () {
 		$(this).val('');
 		if($(this).closest('#data_table').length) datatableAjaxReload();
 	});
-	$("body").on('click', 'span.fa-trash-o', function (event) {
-		var v = confirm(jsstrings.confirm_delete);
-		if (v == false) {
-			if (event.stopPropagation) {
-				event.stopPropagation();
-				event.preventDefault();
-			}
-			else if (window.event) return false;
-		}
-		else {
-			if (typeof jsonPage != 'undefined') {
-				var deleteId = ($(event.target).data('actid')) ? $(event.target).data('actid') : $(event.target).closest('tr').children('td').eq(0).text();
-				$.post(adminfolder + "act/" + jsonPage, {delete: deleteId}, function () {
-					datatableAjaxReload();
-				});
-			}
-		}
-	}).on('click', '#add', function () {
+	$("body").on('click', '#add', function () {
 		if (typeof CKEDITOR != 'undefined') CKEDITOR.instances.edcontent.setData('');
 		$("#edtable").find(":input").each(function () {
 			var name = $(this).attr("name");
@@ -120,7 +151,7 @@ $(function () {
 				}
 			}
 		});
-		saveButton.data("actid", 0).closest('.modal').show().find('.modal-title').eq(0).text(jsstrings.buttonAdd);
+		saveButton.data("actid", 0).closest('.modal').modal('show').find('.modal-title').eq(0).text(jsstrings.buttonAdd);
 		$('#imagePreview').attr('src', folder + 'img/' + $('#imagePreview').data('folder') + '/' + $('#imagePreview').data('default'));
 		$('#edimage').data('imgname', '');
 	}).on('click', '.btn-export', function () {
@@ -189,6 +220,9 @@ $(function () {
 									elm.combobox().data('ui-autocomplete').selectedItem.id = data[key];
 									elm.val(data[data['schema'][key]['table_reference']]['name']);
 								}
+								else if (elm.hasClass('datetimepicker')) {
+									elm.data("DateTimePicker").date(value);
+								}
 							}
 							else CKEDITOR.instances.edcontent.setData(value);
 						}
@@ -199,7 +233,7 @@ $(function () {
 					console.log(thrownError);
 				}
 			});
-			saveButton.data("actid", actid).closest('.modal').show().find('.modal-title').eq(0).text(jsstrings.buttonEdit);
+			saveButton.data("actid", actid).closest('.modal').modal('show').find('.modal-title').eq(0).text(jsstrings.buttonEdit);
 		}
 	});
 	$(window).on('keyup', function (e) {
@@ -209,13 +243,13 @@ $(function () {
 				$.post(adminfolder + 'act/Media', {clearImg: filename});
 			});
 			saveButton.data("actid", 0);
-			$('.modal').hide();
+			$('.modal, .modal-backdrop').modal('hide');
 		}
 	});
 	$('[data-dismiss="modal"]').click(function () {
 		var mdldlg = $(this).closest('.modal'),
 			sc = $("#customsave");
-		mdldlg.hide();
+		mdldlg.modal('hide');
 		if (!sc.length || sc.data("actid") == 0) {
 			var eimg = mdldlg.find("#edimage");
 			if (eimg.length > 0 && eimg.data('imgname') != '') $.post(adminfolder + 'act/Media', {clearImg: eimg.data('imgname')});
@@ -274,10 +308,33 @@ $(function () {
 			data: data,
 			dataType: 'text',
 			success: function (data) {
-				if(data != 1 && data != '') alert(data);
+				if(data != 1 && data != '') {
+					try {
+						var json = JSON.parse(data);
+						if (typeof(json.type) !== 'undefined') displayMessage(json.type, json.message);
+						else if (typeof(json.message) !== 'undefined') displayMessage('warning', json.message);
+						else if (typeof(json.error) === 'object') {
+							$.each(json.error, function (key, value) {
+								var elm = $("#ed" + key),
+									frmg = elm.closest('.form-group'),
+									spn = $("<span></span>"),
+									errText = jsstrings[value];
+								spn.addClass('help-block').text(errText);
+								if(frmg.find('.help-block').length == 0) frmg.addClass('has-error').append(spn);
+								elm.change(function() {
+									frmg.removeClass('has-error');
+									spn.remove();
+								});
+							});
+						}
+					}
+					catch(e) {
+						displayMessage('warning', data);
+					}
+				}
 				else {
 					datatableAjaxReload();
-					mdl.hide();
+					mdl.modal('hide');
 				}
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
@@ -315,5 +372,22 @@ $(function () {
 	});
 });
 function datatableAjaxReload() {
-	table.api().ajax.reload();
+	if(typeof table.api !== 'undefined') table.api().ajax.reload();
+	else table.ajax.reload();
+}
+function proceedDelete(e) {
+	if (typeof jsonPage != 'undefined') {
+		var deleteId = (e.data('actid'))?e.data('actid'):e.closest('tr').children('td').eq(0).text();
+		$.post(adminfolder + "act/" + jsonPage, {delete: deleteId}, function () {
+			datatableAjaxReload();
+			$('.modal, .modal-backdrop').modal('hide');
+		});
+	}
+}
+function displayMessage(type, message) {
+	var mh = _messagePopup.find('.modal-header').eq(0),
+		mtxt = _messagePopup.find('.modal-body').eq(0).find('p').eq(0);
+	mh.removeClass('alert-success alert-danger alert-warning alert-info').addClass('alert-' + type).find('h4').eq(0).text(type.replace(/(\b\w)/gi,function(m){return m.toUpperCase();}));
+	mtxt.html(message);
+	_messagePopup.modal('show');
 }

@@ -89,7 +89,7 @@ function loadCss($css, $fromCache = true, $return = true, $saveFileName = '') {
 	}
 	return ($return)?$buffer:true;
 }
-if(array_key_exists('js', $_GET)) {
+if(arrayKeyExists('js', $_GET)) {
 	header("content-type: text/javascript");
 	header('Cache-Control: public');
 	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));
@@ -97,7 +97,7 @@ if(array_key_exists('js', $_GET)) {
 	echo $buffer;
 	exit;
 }
-elseif(array_key_exists('css', $_GET)) {
+elseif(arrayKeyExists('css', $_GET)) {
 	header("content-type: text/css");
 	header('Cache-Control: public');
 	header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 2592000));

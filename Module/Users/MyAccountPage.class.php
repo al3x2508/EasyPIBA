@@ -25,11 +25,11 @@ class MyAccountPage {
 			$this->content = '';
 			$fields = array();
 			$message = '';
-			if(array_key_exists('firstname', $_POST) && array_key_exists('email', $_POST)) {
+			if(arrayKeyExists('email', $_POST)) {
 				$checkFields = array('firstname', 'lastname', 'email', 'country', 'CSRFToken');
 				foreach($checkFields AS $field) {
-					if(!array_key_exists($field, $_POST)) $fields[$field] = 1;
-					else if(array_key_exists($field, $_POST) && !Util::checkFieldValue($field, $_POST[$field])) $fields[$field] = 1;
+					if(!arrayKeyExists($field, $_POST)) $fields[$field] = 1;
+					else if(arrayKeyExists($field, $_POST) && !Util::checkFieldValue($field, $_POST[$field])) $fields[$field] = 1;
 				}
 				if(count($fields) == 0) {
 					$email = strtolower(strip_tags($_POST['email']));
@@ -54,7 +54,7 @@ class MyAccountPage {
 								$user->status = 0;
 								Controller::sendActivationEmail($user);
 							}
-							if(array_key_exists('country', $_POST) && $_POST['country'] != 0) $user->country = $_POST['country'];
+							if(arrayKeyExists('country', $_POST) && $_POST['country'] != 0) $user->country = $_POST['country'];
 							if(!empty($password)) {
 								$logout = true;
 								$user->password = $bcrypt->hash($password);

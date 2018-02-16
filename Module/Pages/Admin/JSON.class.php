@@ -10,13 +10,13 @@ class JSON extends Admin {
 		parent::__construct();
 	}
 	public function get() {
-		if(!array_key_exists('id', $_REQUEST)) {
+		if(!arrayKeyExists('id', $_REQUEST)) {
 			$pages = new Model('pages');
-			if(!array_key_exists('menu', $_REQUEST)) {
-				$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['length']:10;
-				$limit = ((array_key_exists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
+			if(!arrayKeyExists('menu', $_REQUEST)) {
+				$itemsPerPage = (arrayKeyExists('start', $_REQUEST))?$_REQUEST['length']:10;
+				$limit = ((arrayKeyExists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
 				$countTotal = $pages->countItems();
-				if(array_key_exists('filters', $_REQUEST)) {
+				if(arrayKeyExists('filters', $_REQUEST)) {
 					foreach($_REQUEST['filters'] AS $key => $value) {
 						if(in_array($key, array(
 							'url',
@@ -49,7 +49,7 @@ class JSON extends Admin {
 				$arrayResponse = $pages;
 			}
 			$response = json_encode($arrayResponse);
-			if(array_key_exists('callback', $_GET)) $response = $_GET['callback'] . '(' . $response . ')';
+			if(arrayKeyExists('callback', $_GET)) $response = $_GET['callback'] . '(' . $response . ')';
 			echo $response;
 		}
 		else {

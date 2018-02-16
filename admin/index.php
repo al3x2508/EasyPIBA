@@ -4,7 +4,7 @@ use Controller\AdminController;
 
 require_once(dirname(dirname(__FILE__)) . '/Utils/functions.php');
 $message = '';
-if(array_key_exists('username',$_POST) && array_key_exists('password',$_POST)) {
+if(arrayKeyExists('username',$_POST) && arrayKeyExists('password',$_POST)) {
 	$checkAuth = AdminController::checkAuth($_POST['username'], $_POST['password']);
 	if(is_array($checkAuth)) $message = $checkAuth["message"];
 }

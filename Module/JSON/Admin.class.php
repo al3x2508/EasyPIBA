@@ -14,10 +14,10 @@ class Admin {
 	public function __construct() {
 		$adminController = new AdminController();
 		if($adminController->checkPermission($this->permission) == false) die(__('You do not have permissions for this'));
-		if(!array_key_exists('export', $_REQUEST)) header('Content-Type: application/json');
+		if(!arrayKeyExists('export', $_REQUEST)) header('Content-Type: application/json');
 	}
 	public function output() {
-		if(array_key_exists('export', $_REQUEST)) {
+		if(arrayKeyExists('export', $_REQUEST)) {
 			ini_set('memory_limit', -1);
 			error_reporting(E_ALL);
 			ini_set('display_errors', true);
@@ -62,10 +62,10 @@ class Admin {
 			exit;
 		}
 		else {
-			if(array_key_exists('secho', $_REQUEST)) {
+			if(arrayKeyExists('secho', $_REQUEST)) {
 				$entities = array();
 				foreach($this->data AS $entity) {
-					if(array_key_exists('password', $entity)) unset($entity->password);
+					if(arrayKeyExists('password', $entity)) unset($entity->password);
 					$entities[] = $entity;
 				}
 				$response = json_encode(array(
@@ -77,7 +77,7 @@ class Admin {
 			}
 			else $response = json_encode($this->data);
 		}
-		if(array_key_exists('callback', $_REQUEST)) $response = $_REQUEST['callback'] . '(' . $response . ')';
+		if(arrayKeyExists('callback', $_REQUEST)) $response = $_REQUEST['callback'] . '(' . $response . ')';
 		echo $response;
 	}
 	public function excelExport() {
@@ -86,7 +86,7 @@ class Admin {
 		foreach($this->data AS $entity) {
 			foreach(get_object_vars($entity) AS $key => $value) {
 				if(!is_array($value) && !is_object($value)) {
-					if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || array_key_exists($key, $this->columnsMap)) {
+					if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || arrayKeyExists($key, $this->columnsMap)) {
 						$data[$key] = $value;
 						if(!in_array($key, $columnNames)) $columnNames[] = $key;
 					}
@@ -94,7 +94,7 @@ class Admin {
 				elseif(is_object($value)) foreach(get_object_vars($value) AS $key2 => $value2) {
 					if(!is_array($value2) && !is_object($value2)) {
 						$columnName = $key . '.' . $key2;
-						if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || array_key_exists($columnName, $this->columnsMap)) {
+						if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || arrayKeyExists($columnName, $this->columnsMap)) {
 							$data[$columnName] = $value2;
 							if(!in_array($columnName, $columnNames)) $columnNames[] = $columnName;
 						}
@@ -107,9 +107,10 @@ class Admin {
 		$objPHPExcel->getProperties()->setCreator(_APP_NAME_)->setLastModifiedBy(_APP_NAME_)->setTitle("Export " . $this->instanceName)->setSubject("Export " . $this->instanceName)->setDescription("Export " . $this->instanceName)->setKeywords(_APP_NAME_ . "export data " . $this->instanceName)->setCategory(_APP_NAME_ . " " . $this->instanceName);
 		//Add header line
 		foreach($columnNames AS $index => $columnName) {
-			if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || array_key_exists($columnName, $this->columnsMap)) {
-				$columnName = $this->columnsMap[$columnName];
-				$objPHPExcel->setActiveSheetIndex(0)->setCellValue(chr($index + 65) . '1', $columnName);
+			if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || arrayKeyExists($columnName, $this->columnsMap)) {
+				$columnName = (is_array($this->columnsMap) && arrayKeyExists($columnName, $this->columnsMap))?$this->columnsMap[$columnName]:$columnName;
+				$colString = \PHPExcel_Cell::stringFromColumnIndex($index);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue($colString . '1', $columnName);
 			}
 		}
 		//Set bold the header line

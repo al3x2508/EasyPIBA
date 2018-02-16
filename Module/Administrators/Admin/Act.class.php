@@ -15,12 +15,12 @@ class Act extends AdminAct {
 		foreach($_POST AS $key => $value) {
 			if(!in_array($key, array('password', 'permission'))) $this->fields[$key] = $value;
 			elseif($key == 'password' && strlen($value) > 5) $this->fields['password'] = $bcrypt->hash($_REQUEST['password']);
-			if(array_key_exists('id', $_POST) && ($_POST['id'] > 0)) {
+			if(arrayKeyExists('id', $_POST) && ($_POST['id'] > 0)) {
 				$permissions->admin = $_POST['id'];
 				$permissions->delete();
 			}
 		}
-		if(array_key_exists('id', $_POST)) {
+		if(arrayKeyExists('id', $_POST)) {
 			foreach($_POST['permission'] AS $permissionId => $hasAccess) {
 				if($hasAccess) {
 					$permissions->admin = $_POST['id'];

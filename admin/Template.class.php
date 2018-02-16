@@ -72,13 +72,19 @@ class Template {
 		}
 		if(property_exists($this->page, 'css') && count($this->page->css)) {
 			$replacement = '';
-			foreach($this->page->css AS $script) $replacement .= '		<link rel="stylesheet" href="' . $adminFolder . $script . '" />' . PHP_EOL;
+			foreach($this->page->css AS $script) {
+				$scriptFolder = (strpos($script, 'Module/') !== 0)?$adminFolder:_FOLDER_URL_;
+				$replacement .= '		<link rel="stylesheet" href="' . $scriptFolder . $script . '" />' . PHP_EOL;
+			}
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}
 		if(property_exists($this->page, 'js') && count($this->page->js)) {
 			$replacement = '';
-			foreach($this->page->js AS $script) $replacement .= '		<script src="' . $adminFolder . $script . '"></script>' . PHP_EOL;
+			foreach($this->page->js AS $script) {
+				$scriptFolder = (strpos($script, 'Module/') !== 0)?$adminFolder:_FOLDER_URL_;
+				$replacement .= '		<script src="' . $scriptFolder . $script . '"></script>' . PHP_EOL;
+			}
 			$pos = strripos($this->template, "\t</body>");
 			$this->template = substr_replace($this->template, $replacement, $pos, 0);
 		}

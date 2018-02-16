@@ -5,7 +5,7 @@ use Utils\Bcrypt;
 
 class AdminController {
 	public static function getCurrentUser() {
-		if(array_key_exists('admin', $_SESSION)) {
+		if(arrayKeyExists('admin', $_SESSION)) {
 			$admin = new Model('admins');
 			$admin = $admin->getOneResult('id', $_SESSION['admin']);
 			return $admin;

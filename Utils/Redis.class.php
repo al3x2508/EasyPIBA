@@ -247,8 +247,8 @@ class Redis {
 		$value = $this->_serialize($value);
 		if (is_array($optionArrayOrExpiration) &&
 			count($optionArrayOrExpiration) > 0) {
-			$ex = array_key_exists('ex', $optionArrayOrExpiration);
-			$px = array_key_exists('px', $optionArrayOrExpiration);
+			$ex = arrayKeyExists('ex', $optionArrayOrExpiration);
+			$px = arrayKeyExists('px', $optionArrayOrExpiration);
 			$nx = in_array('nx', $optionArrayOrExpiration, true);
 			$xx = in_array('xx', $optionArrayOrExpiration, true);
 			if ($nx && $xx) {
@@ -1606,9 +1606,9 @@ class Redis {
 
 		$flen = strlen($format);
 		for ($i = 0; $i < $flen; $i++) {
-			if (!array_key_exists($i, $args)) {
+			if (!arrayKeyExists($i, $args)) {
 				if (isset($func['defaults']) AND
-					array_key_exists($i, $func['defaults'])) {
+					arrayKeyExists($i, $func['defaults'])) {
 					$args[$i] = $func['defaults'][$i];
 				} else {
 					trigger_error(

@@ -13,7 +13,7 @@ class LoginPage {
 	public $ogimage = '';
 	public $h1 = '';
 	public $breadcrumbs = array();
-	public $js = array('login.js', 'validate.min.js');
+	public $js = array('Module/Users/login.js', 'validate.min.js');
 	public $css = array('cinput.css');
 	public $visible = true;
 	public $disableAmp = true;
@@ -23,7 +23,7 @@ class LoginPage {
 		$login_errors = array();
 		$register_errors = '';
 		//Check login
-		if(array_key_exists('email', $_POST) && array_key_exists('password', $_POST) && !array_key_exists('confirmPassword', $_POST) && array_key_exists('CSRFName', $_POST) && array_key_exists('CSRFToken', $_POST)) {
+		if(arrayKeyExists('email', $_POST) && arrayKeyExists('password', $_POST) && !arrayKeyExists('confirmPassword', $_POST) && arrayKeyExists('CSRFName', $_POST) && arrayKeyExists('CSRFToken', $_POST)) {
 			if(Util::csrfguard_validate_token($_POST['CSRFName'], $_POST['CSRFToken'])) {
 				$bcrypt = new Bcrypt(10);
 				$user = new Model('users');
@@ -41,9 +41,9 @@ class LoginPage {
 						if($isGood) {
 							unset($user->password);
 							$_SESSION['user'] = $userId;
-							if(array_key_exists('remember', $_POST)) Controller::storeCookie($userId);
+							if(arrayKeyExists('remember', $_POST)) Controller::storeCookie($userId);
 							$redirectUrl = _DEFAULT_REDIRECT_;
-							$location = (array_key_exists('ref', $_SESSION)) ? $_SESSION['ref'] : $redirectUrl;
+							$location = (arrayKeyExists('ref', $_SESSION)) ? $_SESSION['ref'] : $redirectUrl;
 							header("Location: {$location}");
 							exit;
 						}
@@ -66,12 +66,12 @@ class LoginPage {
 		//Display login / register page
 		$fields = array();
 		//Check if register form was submited
-		if(array_key_exists('lastname', $_POST) && array_key_exists('email', $_POST)) {
+		if(arrayKeyExists('lastname', $_POST) && arrayKeyExists('email', $_POST)) {
 			//Check register fields
 			$checkFields = array('lastname', 'firstname', 'email', 'country', 'password', 'confirmPassword', 'termsConditions', 'CSRFToken');
 			foreach($checkFields AS $field) {
-				if(!array_key_exists($field, $_POST)) $fields[$field] = 1;
-				else if(array_key_exists($field, $_POST) && !Util::checkFieldValue($field, $_POST[$field])) $fields[$field] = 1;
+				if(!arrayKeyExists($field, $_POST)) $fields[$field] = 1;
+				else if(arrayKeyExists($field, $_POST) && !Util::checkFieldValue($field, $_POST[$field])) $fields[$field] = 1;
 			}
 			if(count($fields) == 0) {
 				$email = strtolower(strip_tags($_POST['email']));
@@ -95,7 +95,7 @@ class LoginPage {
 						$user->country = $country;
 						$user->status = 0;
 						$user->password = $bcrypt->hash($password);
-						$user->newsletter = (array_key_exists('subscribe', $_POST)) ? 1 : 0;
+						$user->newsletter = (arrayKeyExists('subscribe', $_POST)) ? 1 : 0;
 						$user = $user->create();
 						Controller::sendActivationEmail($user);
 						$this->content .= /** @lang text */
@@ -139,7 +139,7 @@ class LoginPage {
 				}
 			}
 		}
-		$emailValue = (array_key_exists('email', $_POST))?' value="' . $_POST['email'] . '"':'';
+		$emailValue = (arrayKeyExists('email', $_POST))?' value="' . $_POST['email'] . '"':'';
 		$this->content .= '<div class="row justify-content-md-center mt-4">			
 			<div class="col-md-6">
 			<div class="panel panel-login">

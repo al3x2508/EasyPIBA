@@ -10,9 +10,9 @@ class Act extends AdminAct {
 	public function __construct() {
 		$this->permission = 'Edit users';
 		$this->entity = new Model('users');
-		if(!array_key_exists('delete', $_POST)) {
+		if(!arrayKeyExists('delete', $_POST)) {
 			$bcrypt = new Bcrypt(10);
-			if(array_key_exists('password', $_POST) && $_POST['password'] != $_POST['confirmPassword']) return false;
+			if(arrayKeyExists('password', $_POST) && $_POST['password'] != $_POST['confirmPassword']) return false;
 			foreach($_POST AS $key => $value) {
 				if(!in_array($key, array('password', 'confirmPassword'))) $this->fields[$key] = $value;
 				elseif($key == 'password' && strlen($value) > 5) $this->fields['password'] = $bcrypt->hash($_REQUEST['password']);

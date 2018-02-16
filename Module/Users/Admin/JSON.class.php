@@ -22,12 +22,12 @@ class JSON extends Admin {
 		parent::__construct();
 	}
 	public function get() {
-		if(!array_key_exists('id', $_REQUEST)) {
-			$itemsPerPage = (array_key_exists('start', $_REQUEST))?$_REQUEST['length']:10;
-			$limit = ((array_key_exists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
+		if(!arrayKeyExists('id', $_REQUEST)) {
+			$itemsPerPage = (arrayKeyExists('start', $_REQUEST))?$_REQUEST['length']:10;
+			$limit = ((arrayKeyExists('start', $_REQUEST))?$_REQUEST['start']:0) . ', ' . $itemsPerPage;
 			$users = new Model('users');
-			if(!array_key_exists('cRecords', $_REQUEST)) $this->countTotal = $users->countItems();
-			if(array_key_exists('filters', $_REQUEST)) {
+			if(!arrayKeyExists('cRecords', $_REQUEST)) $this->countTotal = $users->countItems();
+			if(arrayKeyExists('filters', $_REQUEST)) {
 				$where = array();
 				foreach($_REQUEST['filters'] AS $key => $value) {
 					if(in_array($key, array(
@@ -46,7 +46,7 @@ class JSON extends Admin {
 				}
 				if(count($where)) $users->where($where);
 			}
-			if(!array_key_exists('cRecords', $_REQUEST)) $this->countFiltered = $users->countItems();
+			if(!arrayKeyExists('cRecords', $_REQUEST)) $this->countFiltered = $users->countItems();
 			else {
 				$users->addCustomField('SUM(IF(status = 1, 1, 0)) AS confirmed');
 				$users->addCustomField('COUNT(*) AS totalRecords');
@@ -55,11 +55,11 @@ class JSON extends Admin {
 				parent::output();
 				exit;
 			}
-			if(!array_key_exists('export', $_REQUEST)) $users->limit($limit);
+			if(!arrayKeyExists('export', $_REQUEST)) $users->limit($limit);
 			$ops = $users->get('AND', true);
 			$this->data = $ops;
 			$users = array();
-			if(!array_key_exists('secho', $_REQUEST)) {
+			if(!arrayKeyExists('secho', $_REQUEST)) {
 				foreach($ops AS $user) $users['#' . $user->id] = $user->firstname . ' ' . $user->lastname;
 				$this->data = $users;
 			}

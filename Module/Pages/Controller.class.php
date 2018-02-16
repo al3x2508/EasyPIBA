@@ -118,7 +118,7 @@ class Controller {
 		$array_pages = $pages->get();
 		$array_menu = array();
 		foreach($array_pages AS $page) {
-			if(!array_key_exists($page->menu_parent, $array_menu)) $array_menu[$page->menu_parent] = array();
+			if(!arrayKeyExists($page->menu_parent, $array_menu)) $array_menu[$page->menu_parent] = array();
 			$pag = array('id' => $page->id, 'url' => _FOLDER_URL_ . $langUrl . $page->url, 'menu_text' => $page->menu_text, 'submenu_text' => $page->submenu_text, 'menu_parent' => $page->menu_parent);
 			//If page url is the same as the current url set link class as active
 			if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $page->url) $pag['classes'] = 'active';
@@ -136,7 +136,7 @@ class Controller {
 				if($userLanguage == _DEFAULT_LANGUAGE_) {
 					$menuParent = (empty($module_route->menu_parent)) ? 0 : $module_route->menu_parent;
 					if($menuParent === 0) $module_route->menu_order += count($array_pages);
-					if(!array_key_exists($menuParent, $array_menu)) $array_menu[$menuParent] = array();
+					if(!arrayKeyExists($menuParent, $array_menu)) $array_menu[$menuParent] = array();
 					$pag = array('url' => _FOLDER_URL_ . $langUrl . $module_route->url, 'menu_text' => $module_route->menu_text, 'submenu_text' => $module_route->submenu_text, 'menu_parent' => $menuParent);
 					//If page url is the same as the current url set link class as active
 					if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url) $pag['classes'] = 'active';
@@ -146,8 +146,8 @@ class Controller {
 			}
 			else {
 				$menuParent = (empty($module_route->menu_parent))?0:$module_route->menu_parent;
-				if(!array_key_exists('menu_right', $array_menu)) $array_menu['menu_right'] = array();
-				if(!array_key_exists($menuParent, $array_menu['menu_right'])) $array_menu['menu_right'][$menuParent] = array();
+				if(!arrayKeyExists('menu_right', $array_menu)) $array_menu['menu_right'] = array();
+				if(!arrayKeyExists($menuParent, $array_menu['menu_right'])) $array_menu['menu_right'][$menuParent] = array();
 				$pag = array('url' => _FOLDER_URL_ . $langUrl . $module_route->url, 'menu_text' => $module_route->menu_text, 'submenu_text' => $module_route->submenu_text, 'menu_parent' => $menuParent);
 				$pag['id'] = $module_route->url;
 				//If page url is the same as the current url set link class as active

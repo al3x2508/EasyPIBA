@@ -23,15 +23,23 @@ abstract class AdminAct {
 	public function act($where = false) {
 		$adminController = new AdminController();
 		if($adminController->checkPermission($this->permission)) {
-			if($where || array_key_exists('id', $this->fields)) {
+			if($where || arrayKeyExists('id', $this->fields)) {
 				foreach($this->fields AS $key => $value) $this->entity->$key = $value;
-				if($where || (array_key_exists('id', $this->fields) && $this->fields['id'] > 0)) {
+				if($where || (arrayKeyExists('id', $this->fields) && $this->fields['id'] > 0)) {
 					if($this->entity->update($where)) return $this->entity;
 					else return false;
 				}
-				else return $this->entity->create();
+				else {
+					if($ret = $this->entity->checkFields()) {
+						if(is_array($ret)) {
+							echo json_encode(array('error' => $ret));
+							return false;
+						}
+					}
+					return $this->entity->create();
+				}
 			}
-			elseif(array_key_exists('delete', $this->fields)) {
+			elseif(arrayKeyExists('delete', $this->fields)) {
 				$this->entity->id = $this->fields['delete'];
 				return $this->entity->delete();
 			}
