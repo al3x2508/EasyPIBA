@@ -13,8 +13,8 @@ class Admins {
 	public function __construct() {
 		$this->title = __('Edit administrators');
 		$this->h1 = __('Edit administrators');
-		$this->js = array('../../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js', '../../vendor/drmonty/datatables-responsive/js/responsive.bootstrap.min.js','../vendor/almasaeed2010/adminlte/plugins/iCheck/icheck.min.js','js/jsall.js','Module/Administrators/Admin/administrators.js');
-		$this->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../../vendor/drmonty/datatables-responsive/css/responsive.bootstrap.min.css', '../vendor/almasaeed2010/adminlte/plugins/iCheck/all.css');
+		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js' ,'../vendor/almasaeed2010/adminlte/plugins/iCheck/icheck.min.js','js/jsall.js','Module/Administrators/Admin/administrators.js');
+		$this->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css', '../vendor/almasaeed2010/adminlte/plugins/iCheck/all.css');
 		$htmlPerms = '';
 		$permissions = new Model('permissions');
 		$permissions = $permissions->get();
