@@ -32,7 +32,8 @@
 	"components/font-awesome": ">=4.0.0",
 	"ckeditor/ckeditor": "4.*",
 	"ckeditor/imageuploader": "4.1.8",
-	"datatables/datatables": ">=1.10.11"
+	"datatables/datatables": ">=1.10.11",
+	"drmonty/datatables-responsive": ">=2.0.0"
   },
   "repositories": [
 	{
