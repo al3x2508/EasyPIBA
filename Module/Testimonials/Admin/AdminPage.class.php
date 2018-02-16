@@ -6,7 +6,7 @@ class AdminPage extends \Controller\AdminPage {
 		$page = new \stdClass();
 		$page->title = __('Testimonials');
 		$page->h1 = __('Testimonials');
-		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js','../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js','../vendor/ckeditor/ckeditor/ckeditor.js','js/jsall.js','Module/Testimonials/Admin/testimonials.js');
+		$page->js = array('../../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../../vendor/datatables/datatables/media/js/dataTables.responsive.min.js', '../../vendor/datatables/datatables/media/js/responsive.bootstrap.min.js','../vendor/ckeditor/ckeditor/ckeditor.js','js/jsall.js','Module/Testimonials/Admin/testimonials.js');
 		$page->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css');
 		$page->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Testimonials') . '</h3></div>
