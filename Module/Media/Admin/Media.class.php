@@ -12,7 +12,7 @@ class Media {
 		$this->title = __('Media');
 		$this->h1 = __('Media');
 		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js' ,'js/jsall.js','Module/Media/Admin/media.js');
-		$this->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css');
+		$this->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css');
 		$this->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Media') . '</h3></div>
 	<div class="box-body">
