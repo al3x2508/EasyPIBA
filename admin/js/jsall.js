@@ -7,12 +7,13 @@ var jsstrings = {},
 	folder = '',
 	adminfolder = '',
 	_confirmDelete = $('<div></div>'),
-	_messagePopup = $('<div></div>');;
+	_messagePopup = $('<div></div>');
 $(function () {
 	folder = $("#mainjs").data('appdir');
 	adminfolder = $("#mainjs").data('admindir');
 	$(".sidebar-toggle").click(function() {
-		$('body').toggleClass('sidebar-collapse');
+		if($(window).width() > 767) $('body').toggleClass('sidebar-collapse');
+		else $('body').toggleClass('sidebar-open');
 	});
 	if ($("#save").length > 0) saveButton = $("#save");
 	else saveButton = $("#customSave");
