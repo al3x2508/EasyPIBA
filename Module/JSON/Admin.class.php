@@ -1,6 +1,11 @@
 <?php
 namespace Module\JSON;
 use Controller\AdminController;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
 class Admin {
 	public $columnsMap;
 	public $instanceName;
@@ -102,14 +107,14 @@ class Admin {
 				}
 			}
 		}
-		$objPHPExcel = new \PHPExcel();
+		$objPHPExcel = new Spreadsheet();
 		//Set document properties
 		$objPHPExcel->getProperties()->setCreator(_APP_NAME_)->setLastModifiedBy(_APP_NAME_)->setTitle("Export " . $this->instanceName)->setSubject("Export " . $this->instanceName)->setDescription("Export " . $this->instanceName)->setKeywords(_APP_NAME_ . "export data " . $this->instanceName)->setCategory(_APP_NAME_ . " " . $this->instanceName);
 		//Add header line
 		foreach($columnNames AS $index => $columnName) {
 			if((!isset($this->columnsMap) || !is_array($this->columnsMap) || (count($this->columnsMap) == 0)) || arrayKeyExists($columnName, $this->columnsMap)) {
 				$columnName = (is_array($this->columnsMap) && arrayKeyExists($columnName, $this->columnsMap))?$this->columnsMap[$columnName]:$columnName;
-				$colString = \PHPExcel_Cell::stringFromColumnIndex($index);
+				$colString = Coordinate::stringFromColumnIndex($index);
 				$objPHPExcel->setActiveSheetIndex(0)->setCellValue($colString . '1', $columnName);
 			}
 		}
@@ -119,7 +124,7 @@ class Admin {
 		$objPHPExcel->getActiveSheet()->setAutoFilter($objPHPExcel->getActiveSheet()->calculateWorksheetDimension());
 		$objPHPExcel->getActiveSheet()->fromArray((array) $data, NULL, 'A2');
 		//Set to repeat the first row and the page in landscape mode
-		$objPHPExcel->getActiveSheet()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 1)->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+		$objPHPExcel->getActiveSheet()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 1)->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
 		//Rename the worksheet
 		$objPHPExcel->getActiveSheet()->setTitle('Export ' . $this->instanceName);
 		//Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -133,7 +138,7 @@ class Admin {
 		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
 		header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 		header('Pragma: public'); // HTTP/1.0
-		$objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+		$objWriter = IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		return $objWriter;
 	}
 }
