@@ -295,7 +295,7 @@ class Template {
 		$this->template = str_replace('{breadcrumbs}', $this->breadcrumbs, $this->template);
 
 		//Add javascripts in page
-		if(count($this->js) > 0) {
+		if(count($this->js) > 0 && !$this->isAmp) {
 			$js = array();
 			$replacement = '';
 			foreach($this->js AS $fjs) {
