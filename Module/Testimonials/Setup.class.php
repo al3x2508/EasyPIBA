@@ -6,6 +6,6 @@ class Setup extends \Module\Setup {
 		parent::__construct();
 		$this->registerFrontendUrl(array('url' => 'testimonials', 'type' => 0, 'menu_position' => 0));
 		$this->registerFrontendUrl(array('url' => '^testimonial([0-9]+)\.html$', 'type' => 1, 'menu_position' => 0));
-		$this->registerBackendUrl(array('permission' => 'Edit testimonials', 'url' => 'testimonials', 'menu_text' => 'Testimonials', 'menu_class' => 'comment-o'));
+		$this->registerBackendUrl(array('permission' => 'Edit testimonials', 'url' => 'testimonials', 'menu_text' => 'Testimonials', 'menu_class' => 'fas fa-comment'));
 	}
 }

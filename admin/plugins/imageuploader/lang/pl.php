@@ -16,6 +16,7 @@ $panelsettings4 = "Ustawienia:";
 $panelsettings5 = "Ukryj rozszerzenie";
 $panelsettings6 = "Pokarz rozszerzenie";
 $panelsettings7 = "Hasło:";
+$panelsettings8 = "Wyloguj";
 $panelsettings9 = "Wyłącz hasło";
 $panelsettings10 = "Lubisz naszą wtyczkę?";
 $panelsettings11 = "Kupuj z nami na kawę!";
@@ -81,7 +82,7 @@ $loginsite5 = "Zaloguj się";
 
 $createaccount1 = "Proszę utworzyć nowe (lokalne) konto, aby uniemożliwić innym osobom przeglądanie i porządkowanie zdjęć.";
 $createaccount2 = "W jaki sposób można wyłączyć ochronę hasłem? (link zewnętrzny)";
-$createaccount3 = "Domyślny folder wysyłania jest <b>plugins/imageuploader/uploads</b>. Możesz zmienić to w ustawieniach panelu.";
+$createaccount3 = "Domyślny folder wysyłania jest <b>ckeditor/plugins/imageuploader/uploads</b>. Możesz zmienić to w ustawieniach panelu.";
 
 $langpanel1 = "Prosę wybrać język:";
 $langpanel2 = "Aktualnie wybrany:";

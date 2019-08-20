@@ -13,7 +13,7 @@ class PasswordResetPage {
 	public $h1 = '';
 	public $breadcrumbs = array();
 	public $js = array();
-	public $css = array('cinput.css');
+	public $css = array();
 	public $visible = true;
 
 	public function __construct() {
@@ -47,7 +47,7 @@ class PasswordResetPage {
 				<p> '. __('To reset your password click the link below') . ':</p>
 				<p><a href="' . $resetLink . '">' . $resetLink . '</a></p>';
 					Util::send_email($email, $name, __('Password reset'), $message, true);
-					$this->content = '<div class="col-lg-12"><h3>' . __('An email with password reset instructions have been sent to you.') . '</h3></div>';
+					$this->content = '<div class="col-12"><h3>' . __('An email with password reset instructions have been sent to you.') . '</h3></div>';
 				}
 				else $fields['email'] = __('No user registered with this email address');
 			}
@@ -70,46 +70,49 @@ class PasswordResetPage {
 					$resetModel[0]->delete();
 					$bcrypt = new Bcrypt(10);
 					$user->password = $bcrypt->hash(strip_tags(htmlspecialchars(stripslashes(trim($_POST['password'])))));
+					Controller::logUserActivity('Password reseted');
 					$user->update();
-					$this->content = '<div class="col-lg-12"><h2>' . __('Your password has been updated') . '</h2></div>';
+					$this->content = '<div class="col-12"><h2>' . __('Your password has been updated') . '</h2></div>';
 				}
 				else $errors = '<div class="alert alert-danger">' . __('Code not found') . '</div>';
 			}
 			else {
 				$password = (arrayKeyExists('password', $fields) && $fields['password'] == 1)?'<div class="alert alert-danger">' . __('Enter a password') . '</div>':'';
 				$confirmPassword = (arrayKeyExists('confirmPassword', $fields) && $fields['confirmPassword'] == 1)?'<div class="alert alert-danger">' . __('Confirm the password') . '</div>':'';
-				$this->content = '<div class="row justify-content-md-center mt-4">
-			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
+				$this->content = '<div class="row justify-content-md-center my-4">
+			<div class="col-12 col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 				<div class="alert-placeholder"></div>
 				<div class="panel panel-login">
-					<div class="panel-heading"><div class="row"><div class="col-12 text-center"><h2><b>' . __('Change your password') . '</b></h2></div></div><hr /></div>
-					<div class="panel-body">
+					<div class="panel-heading container"><div class="row"><div class="col-12 text-center"><h2><b>' . __('Change your password') . '</b></h2></div></div><hr /></div>
+					<div class="panel-body container">
 						<div class="row">
-							<div class="col-lg-12">
+							<div class="col-12">
 								<form action="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" method="post" autocomplete="off" class="validateform">
 									<input type="hidden" name="code" value="' . strip_tags(htmlspecialchars(stripslashes(trim($_REQUEST['code'])))) . '" />
-									<div class="col-lg-12 col-12 mt-5 field form-group">
-										<div class="input input-hoshi">
-											<input type="password" name="password" id="password" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" required />
-											<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password" data-ex="' . __('8 characters minimum') . '">
-												<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('New password') . '</span>
+									<div class="col-12 mt-5 field form-group">
+										<div class="input-group">
+											<input type="password" name="password" id="password" class="form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" required />
+											<label class="control-label" for="password" data-ex="' . __('8 characters minimum') . '">
+												<i class="fas fa-eye-slash"></i> * ' . __('New password') . '
 											</label>
+											<i class="bar"></i>
 											' . $password . '
 										</div>
 									</div>
-									<div class="col-lg-12 col-12 mt-5 field form-group">
-										<div class="input input-hoshi">
-											<input type="password" name="confirmPassword" id="confirmPassword" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" required />
-											<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
-												<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Confirm new password') . '</span>
+									<div class="col-12 mt-5 field form-group">
+										<div class="input-group">
+											<input type="password" name="confirmPassword" id="confirmPassword" class="form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" required />
+											<label class="control-label" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
+												<i class="fas fa-eye-slash"></i> * ' . __('Confirm new password') . '
 											</label>
+											<i class="bar"></i>
 											' . $confirmPassword . '
 										</div>
 									</div>
-									<div class="col-lg-12 col-12 field form-group">
-										<div class="row justify-content-sm-center">
-											<div class="col-sm-6">
-												<input type="submit" class="form-control btn btn-login" value="' . __('Change password') . '" />
+									<div class="col-12 mb-3">
+                                            <div class="d-flex justify-content-sm-center">
+                                                <div class="col-sm-6">
+												<input type="submit" class="form-control btn btn-outline-primary" value="' . __('Change password') . '" />
 											</div>
 										</div>
 									</div>
@@ -124,28 +127,29 @@ class PasswordResetPage {
 		}
 		if(empty($this->content)) {
 			$email = array('value' => (arrayKeyExists('email', $_POST)) ? ' value="' . strip_tags(htmlspecialchars(stripslashes(trim($_POST['email'])))) . '"' : '', 'validation' => (arrayKeyExists('email', $fields)) ? '<div class="alert alert-danger">' . $fields['email'] . '</div>' : '');
-			$this->content = '<div class="row justify-content-md-center mt-4">
-				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
+			$this->content = '<div class="row justify-content-md-center my-4">
+				<div class="col-12 col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 					' . $errors . '
 					<div class="panel panel-login">
 						<div class="panel-heading"><div class="row"><div class="col-12 text-center"><h2><b>' . __('Password reset') . '</b></h2></div></div><hr /></div>
 						<div class="panel-body">
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-12">
 									<form action="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" method="post" class="validateform">
-										<div class="col-lg-12 col-12 mt-5 field form-group">
-											<div class="input input-hoshi">
-												<input type="email" name="email" id="email" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
-												<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="email" data-ex="eg: john.smith@yahoo.com">
-													<span class="input__label-content input__label-content-hoshi"><i class="fa fa-envelope-o"></i> * ' . __('Email') . '</span>
+										<div class="col-12 mt-5 field form-group">
+											<div class="input-group">
+												<input type="email" name="email" id="email" class="form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
+												<label class="control-label" for="email" data-ex="eg: john.smith@yahoo.com">
+													<i class="fas fa-envelope"></i> * ' . __('Email') . '
 												</label>
+												<i class="bar"></i>
 												' . $email['validation'] . '
 											</div>
 										</div>
-										<div class="col-lg-12 col-12 field form-group">
-											<div class="row justify-content-sm-center">
-												<div class="col-sm-6">
-													<input type="submit" class="form-control btn btn-login" value="' . __('Send code') . '" />
+										<div class="col-12 mb-3">
+                                            <div class="d-flex justify-content-sm-center">
+                                                <div class="col-sm-6">
+													<input type="submit" class="form-control btn btn-outline-primary" value="' . __('Send code') . '" />
 												</div>
 											</div>
 										</div>

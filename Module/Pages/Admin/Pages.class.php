@@ -1,6 +1,7 @@
 <?php
 namespace Module\Pages\Admin;
 use Model\Model;
+use Utils\Util;
 
 class Pages {
 	/**
@@ -16,76 +17,117 @@ class Pages {
 		$languages = new Model('languages');
 		$languages->order('name ASC');
 		$languages = $languages->get();
-		$languageOptions = '';
+		$languageOptions = [0 => __('Any')];
 		foreach($languages AS $language) {
-			$selected = ($language->code == _DEFAULT_LANGUAGE_)?' selected':'';
-			$languageOptions .= "<option value=\"{$language->code}\"{$selected}>" . $language->name . "</option>";
+			$selected = ($language->code == _DEFAULT_LANGUAGE_);
+			$languageOptions[$language->code] = [$language->name, $selected];
 		}
-		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js' ,'../vendor/ckeditor/ckeditor/ckeditor.js','../vendor/almasaeed2010/adminlte/bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','Module/Pages/Admin/pages.js');
-		$this->css = array('../vendor/almasaeed2010/adminlte/bower_components/select2/dist/css/select2.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css');
+		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', '../vendor/ckeditor/ckeditor/ckeditor.js', '../vendor/ckeditor/ckeditor/plugins/codesnippetgeshi/plugin.js', 'js/jsall.js', 'Module/Pages/Admin/pages.js');
+		$this->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css');
 		$this->content = '<div class="box">
-	<div class="box-header"><h3 class="box-title">' . __('Edit pages') . '</h3></div>
-	<div class="box-body">
-		<table id="data_table" class="table table-bordered table-hover">
-			<thead>
-				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" /></th><th>' . __('URL') . '<br /><input type="text" id="urlf" class="tableFilter form-control" /></th><th>' . __('Language') . '<br /><select class="form-control select2" id="languagef"><option value="0">' . __('Any') . '</option>' . $languageOptions . '</select></th><th>' . __('Title') . '<br /><input type="text" id="titlef" class="tableFilter form-control" /></th><th>' . __('Menu text') . '<br /><input type="text" id="menutextf" class="tableFilter form-control" /></th><th>' . __('Actions') . '</th></tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+	<div class="box-header">
+		<div class="row">
+			<div class="col-md-9"><h3 class="box-title">' . __('Edit pages') . '</h3></div>
+			<div class="col-md-3">
+				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+			</div>
+		</div>
 	</div>
-	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-12">
+				<table id="data_table" class="table table-borderless table-hover table-sm w-100">
+					<thead class="thead-light">
+						<tr><th data-filtertype="text" data-filterid="idf">#</th><th data-filtertype="text" data-filterid="urlf">' . __('URL') . '</th><th data-filtertype="select" data-filterid="languagef" data-options=\'' . json_encode($languageOptions, JSON_FORCE_OBJECT) . '\'>' . __('Language') . '</th><th data-filtertype="text" data-filterid="titlef">' . __('Title') . '</th><th data-filtertype="text" data-filterid="menutextf">' . __('Menu text') . '</th><th>' . __('Actions') . '</th></tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="btn-toolbar">
+			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add page') . '</button>
+		</div>
+	</div>
 </div>
-<div id="ppEdit" class="modal dialog">
-	<div class="modal-dialog" style="width: 80vw;">
+<div id="ppEdit" class="modal dialog fade">
+	<div class="modal-dialog modal-lg" style="width: 80vw; max-width: 80vw;">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title">' . __('Edit pages') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
 					<span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title">' . __('Edit pages') . '</h4>
 			</div>
 			<div class="modal-body" id="edtable">
 				<div class="form-group">
-					<label for="edlanguage">' . __('Language') . '</label>
-					<select class="form-control select2" id="edlanguage" name="edlanguage">' . $languageOptions . '</select>
-                </div>
+					<div class="input-group">
+						<select class="form-control" id="edlanguage" name="edlanguage">' . Util::arrayToOptions($languageOptions) . '</select>
+						<label for="edlanguage" class="control-label">' . __('Language') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
 				<div class="form-group">
-					<label for="edurl">' . __('URL') . '</label>
-					<input type="text" class="form-control" id="edurl" name="edurl" placeholder="' . __('URL') . '" />
-                </div>
+					<div class="input-group">
+						<input type="text" class="form-control" id="edurl" name="edurl" required />
+						<label for="edurl" class="control-label">' . __('URL') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edtitle">' . __('Title') . '</label>
-					<input type="text" class="form-control" id="edtitle" name="edtitle" placeholder="' . __('Title') . '" />
-                </div>
+                    <div class="input-group">
+						<input type="text" class="form-control" id="edtitle" name="edtitle" required />
+						<label for="edtitle" class="control-label">' . __('Title') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="eddescription">' . __('Description') . '</label>
-					<input type="text" class="form-control" id="eddescription" name="eddescription" placeholder="' . __('Description') . '" />
-                </div>
+                    <div class="input-group">
+						<input type="text" class="form-control" id="eddescription" name="eddescription" required />
+						<label for="eddescription" class="control-label">' . __('Description') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edh1">' . __('H1') . '</label>
-					<input type="text" class="form-control" id="edh1" name="edh1" placeholder="' . __('H1') . '" />
-                </div>
+                    <div class="input-group">
+						<input type="text" class="form-control" id="edh1" name="edh1" />
+						<label for="edh1" class="control-label">' . __('H1') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edmenu_text">' . __('Menu text') . '</label>
-					<input type="text" class="form-control" id="edmenu_text" name="edmenu_text" placeholder="' . __('Menu text') . '" />
-                </div>
+                    <div class="input-group">
+						<input type="text" class="form-control" id="edmenu_text" name="edmenu_text" />
+						<label for="edmenu_text" class="control-label">' . __('Menu text') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edsubmenu_text">' . __('Submenu text') . '</label>
-					<input type="text" class="form-control" id="edsubmenu_text" name="edsubmenu_text" placeholder="' . __('Submenu text') . '" />
-                </div>
+                    <div class="input-group">
+						<input type="text" class="form-control" id="edsubmenu_text" name="edsubmenu_text" />
+						<label for="edsubmenu_text" class="control-label">' . __('Submenu text') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edvisible">' . __('Visible') . '</label>
-					<input type="checkbox" id="edvisible" name="edvisible" />
-                </div>
+                    <div class="custom-control custom-checkbox">
+						<input type="checkbox" id="edvisible" name="edvisible" class="custom-control-input" checked />
+						<label for="edvisible" class="custom-control-label">' . __('Visible') . '</label>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edcontent">' . __('Content') . '</label>
-					<textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300" placeholder="' . __('Content') . '"></textarea>
-                </div>
+                    <div class="input-group">
+						<textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300" ></textarea>
+						<label for="edcontent" class="control-label">' . __('Content') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
-				<button type="button" class="btn btn-primary" id="save">' . __('Save') . '</button>
+				<button type="button" class="btn btn-outline-primary" id="save">' . __('Save') . '</button>
 			</div>
 		</div>
 	</div>

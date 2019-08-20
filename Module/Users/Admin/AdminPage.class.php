@@ -1,91 +1,142 @@
 <?php
+
 namespace Module\Users\Admin;
+
 use Model\Model;
+use Utils\Util;
 
 class AdminPage extends \Controller\AdminPage {
 	public function output() {
 		$page = new \stdClass();
-		$countriesOptions = '';
+		$countriesOptions = [0 => __('Any')];
 		$countries = new Model('countries');
 		$countries = $countries->get();
 		$page->title = __('Users');
-		$page->h1 = __('Users');
-		foreach($countries AS $country) $countriesOptions .= '<option value="' . $country->id . '">' . $country->name . '</option>'.PHP_EOL;
-		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js' ,'js/jsall.js','Module/Users/Admin/users.js');
-		$page->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css');
+		foreach ($countries AS $country) $countriesOptions[$country->id] = $country->name;
+		$statusOptions = array(-1 => __('Any'), 0 => __('Not confirmed'), 1 => __('Confirmed'), 2 => __('Blocked'));
+		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', 'js/jsall.js', 'Module/Users/Admin/users.js');
+		$page->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css');
 		$page->content = '<div class="box">
-	<div class="box-header"><h3 class="box-title">' . __('Users') . '</h3></div>
-	<div class="box-body">
-		<table id="data_table" class="table table-bordered table-hover">
-			<thead>
-				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" size="2"></th><th>' . __('Firstname') . '<br /><input type="text" size="10" id="firstnamef" class="tableFilter ui-autocomplete-input form-control" autocomplete="off"></th><th>' . __('Lastname') . '<br /><input type="text" size="10" id="lastnamef" class="tableFilter form-control" /></th><th>' . __('Country') . '<br /><select id="countryf" class="tableFilter form-control"><option value="0">' . __('Any') . '</option>' . $countriesOptions . '</select></th><th>' . __('Email') . '<br /><input type="text" id="emailf" class="tableFilter form-control"></th><th>' . __('Status') . '<br /><select id="statusf" class="tableFilter form-control"><option value="-1">' . __('Any') . '</option><option value="0">' . __('Not confirmed') . '</option><option value="1">' . __('Confirmed') . '</option><option value="2">' . __('Blocked') . '</option></select></th><th>' . __('Actions') . '</th></tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+	<div class="box-header">
+		<div class="row">
+			<div class="col-md-9"><h3 class="box-title">' . __('Users') . '</h3></div>
+			<div class="col-md-3">
+				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+			</div>
+		</div>
 	</div>
-	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
-	<button class="btn btn-primary btn-export">Excel</button>
-	<button class="btn btn-primary btn-export">PDF</button>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-12">
+				<table id="data_table" class="table table-borderless table-hover table-sm w-100">
+					<thead class="thead-light">
+						<tr><th data-filtertype="text" data-filterid="idf">#</th><th data-filtertype="text" data-filterid="firstnamef">' . __('Firstname') . '</th><th data-filtertype="text" data-filterid="lastnamef">' . __('Lastname') . '</th><th data-filtertype="select" data-filterid="countryf" data-options=\'' . json_encode($countriesOptions, JSON_FORCE_OBJECT) . '\'>' . __('Country') . '</th><th data-filtertype="text" data-filterid="emailf">' . __('Email') . '</th><th data-filtertype="select" data-filterid="statusf" data-options=\'' . json_encode($statusOptions, JSON_FORCE_OBJECT) . '\'>' . __('Status') . '</th><th>' . __('Actions') . '</th></tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="btn-toolbar">
+			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add user') . '</button>
+			<button class="btn btn-outline-secondary btn-export btn-sm" data-type="excel"><i class="fas fa-file-excel"></i> ' . __('Export to Excel') . '</button>
+			<button class="btn btn-outline-secondary btn-export btn-sm" data-type="pdf"><i class="fas fa-file-pdf"></i> ' . __('Export to PDF') . '</button>
+		</div>
+	</div>
 </div>
-<div id="ppEdit" class="modal dialog">
-	<div class="modal-dialog">
+<div id="ppEdit" class="modal dialog fade">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title">' . __('Users') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
 					<span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title">' . __('Users') . '</h4>
 			</div>
 			<div class="modal-body" id="edtable">
 				<div class="form-group">
-					<label for="edfirstname">' . __('Firstname') . '</label>
-					<input type="text" class="form-control" id="edfirstname" name="edfirstname" placeholder="' . __('Firstname') . '" />
+					<div class="input-group">
+						<input type="text" class="form-control" id="edfirstname" name="edfirstname" required />
+						<label for="edfirstname" class="control-label">' . __('Firstname') . '</label>
+						<i class="bar"></i>
+					</div>
                 </div>
                 <div class="form-group">
-					<label for="edlastname">' . __('Lastname') . '</label>
-					<input type="text" class="form-control" id="edlastname" name="edlastname" placeholder="' . __('Lastname') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="text" class="form-control" id="edlastname" name="edlastname" required />
+						<label for="edlastname" class="control-label">' . __('Lastname') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edemail">' . __('Email') . '</label>
-					<input type="email" class="form-control" id="edemail" name="edemail" placeholder="' . __('Email') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="email" class="form-control" id="edemail" name="edemail" required />
+						<label for="edemail" class="control-label">' . __('Email') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edphone">' . __('Phone') . '</label>
-					<input type="text" class="form-control" id="edphone" name="edphone" placeholder="' . __('Phone') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="text" class="form-control" id="edphone" name="edphone" />
+						<label for="edphone" class="control-label">' . __('Phone') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edaddress">' . __('Address') . '</label>
-					<textarea id="edaddress" name="edaddress" class="form-control" rows="3" cols="30" placeholder="' . __('Address') . '"></textarea>
-                </div>
+                	<div class="input-group">
+						<textarea id="edaddress" name="edaddress" rows="3" cols="30"></textarea>
+						<label for="edaddress" class="control-label">' . __('Address') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edcity">' . __('City') . '</label>
-					<input type="text" class="form-control" id="edcity" name="edcity" placeholder="' . __('City') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="text" class="form-control" id="edcity" name="edcity" />
+						<label for="edcity" class="control-label">' . __('City') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edstate">' . __('State') . '</label>
-					<input type="text" class="form-control" id="edstate" name="edstate" placeholder="' . __('State') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="text" class="form-control" id="edstate" name="edstate" />
+						<label for="edstate" class="control-label">' . __('State') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edcountry">' . __('Country') . '</label>
-					<select id="edcountry" name="edcountry" class="form-control">' . $countriesOptions . '</select>
-                </div>
+                	<div class="input-group">
+						<select id="edcountry" name="edcountry">' . Util::arrayToOptions($countriesOptions, true) . '</select>
+						<label for="edcountry" class="control-label">' . __('Country') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edstatus">' . __('Status') . '</label>
-					<select id="edstatus" name="edstatus" class="form-control"><option value="1">' . __('Active') . '</option><option value="2">' . __('Blocked') . '</option></select>
-                </div>
+                	<div class="input-group">
+						<select id="edstatus" name="edstatus">' . Util::arrayToOptions($statusOptions, true) . '</select>
+						<label for="edstatus" class="control-label">' . __('Status') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edpassword">' . __('Password') . '</label>
-					<input type="password" class="form-control" id="edpassword" name="edpassword" placeholder="' . __('Password') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="password" class="form-control" id="edpassword" name="edpassword" />
+						<label for="edpassword" class="control-label">' . __('Password') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
                 <div class="form-group">
-					<label for="edconfirmPassword">' . __('Confirm password') . '</label>
-					<input type="password" class="form-control" id="edconfirmPassword" name="edconfirmPassword" placeholder="' . __('Confirm password') . '" />
-                </div>
+                	<div class="input-group">
+						<input type="password" class="form-control" id="edconfirmPassword" name="edconfirmPassword" />
+						<label for="edconfirmPassword" class="control-label">' . __('Confirm password') . '</label>
+						<i class="bar"></i>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
-				<button type="button" class="btn btn-primary" id="save">' . __('Save') . '</button>
+				<button type="button" class="btn btn-outline-primary" id="save">' . __('Save') . '</button>
 			</div>
 		</div>
 	</div>

@@ -1,19 +1,24 @@
 <?php
 namespace Module\Media\Admin;
-class Media {
-	/**
-	 * @param $key
-	 * @param $value
-	 */
-	public function __set($key, $value) {
-		$this->$key = $value;
-	}
-	public function __construct() {
-		$this->title = __('Media');
-		$this->h1 = __('Media');
-		$this->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js' ,'js/jsall.js','Module/Media/Admin/media.js');
-		$this->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css');
-		$this->content = '<div class="box">
+
+class Media
+{
+    public function __construct()
+    {
+        $this->title = __('Media');
+        $this->h1 = __('Media');
+        $this->js = array(
+            '../vendor/datatables/datatables/media/js/jquery.dataTables.min.js',
+            '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.js',
+            '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js',
+            'js/jsall.js',
+            'Module/Media/Admin/media.js'
+        );
+        $this->css = array(
+            '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css',
+            '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css'
+        );
+        $this->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Media') . '</h3></div>
 	<div class="box-body">
 		<table id="data_table" class="table table-bordered table-hover">
@@ -30,10 +35,10 @@ class Media {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title">Media</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
 					<span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title">Media</h4>
 			</div>
 			<div class="modal-body" id="edtable">
 				<form action="" method="post" id="imageUploadForm">
@@ -51,5 +56,14 @@ class Media {
 		</div>
 	</div>
 </div>';
-	}
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function __set($key, $value)
+    {
+        $this->$key = $value;
+    }
 }

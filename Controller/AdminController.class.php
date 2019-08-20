@@ -28,7 +28,7 @@ class AdminController {
 			}
 			else return array("message" => __('Username blocked'));
 		}
-		else return array("message" => __('Username') . " " . $user . " " . _('does not exist'));
+		else return array("message" => __('Username') . " " . $user . " " . __('does not exist'));
 	}
 	public static function checkPermission($permissionName) {
 		$admin = self::getCurrentUser();

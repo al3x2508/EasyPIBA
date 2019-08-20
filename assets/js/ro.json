@@ -1,3 +1,24 @@
 {
-  "enter_email": "Trebuie să introduci adresa de email"
+  "enter_email": "Trebuie să introduci adresa de email",
+  "delete_book": "Ești pe cale să ștergi cartea!!!",
+  "save": "Salvează",
+  "invalid": "Invalid",
+  "firstname": "prenume",
+  "lastname": "nume",
+  "email": "email",
+  "password": "parola",
+  "confirmPassword": "confirmă parola",
+  "country": "țara",
+  "minchars": "minimum %i caractere",
+  "confirm_delete": "Confirmă ștergerea",
+  "confirm_proceed": "Mergi mai departe?",
+  "buttonAdd": "Adaugă",
+  "buttonEdit": "Editează",
+  "novaluereturn": "nu a returnat nicio valoare",
+  "cancel": "Renunță",
+  "delete": "Șterge",
+  "ok": "OK",
+  "differentType": "Elementul are tip diferit decât cel așteptat",
+  "notNull": "Elementul trebuie să aibă o valoare",
+  "overwriteStyle": "Suprascrie stilul"
 }

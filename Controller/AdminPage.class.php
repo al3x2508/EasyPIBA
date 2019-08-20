@@ -57,20 +57,20 @@ abstract class AdminPage {
 		}
 		$class = (count($arrclass)>0)?' class="' . join(" ", $arrclass) . '"':"";
 		$ret = '<li'.$class.'>
-			<a href="' . $href . '"><i class="fa fa-' . $link['class'] . '"></i> <span>' . $link['text'] . '</span>';
-		if(arrayKeyExists('submenu', $link)) $ret .= '<i class="fa fa-angle-left pull-right"></i>';
+			<a href="' . $href . '" title="' . $link['text'] . '"><i class="' . $link['class'] . '"></i> <span>' . $link['text'] . '</span>';
+		if(arrayKeyExists('submenu', $link)) $ret .= '<i class="fas fa-angle-left pull-right"></i>';
 		$ret .= '</a>' . PHP_EOL;
 		if(arrayKeyExists('submenu', $link)) {
 			$submenuClass = '';
 			$hclass = $link['class'];
 			if($link['href'] == $page_name) $submenuClass = ' class="active"';
 			$ret .= '<ul class="treeview-menu">' . PHP_EOL;
-			$ret .= '<li' . $submenuClass . '><a href="' . $link['href'] . '"><i class="fa fa-' . $hclass . '"></i>' . $link['text'] . '</a>' . PHP_EOL;
+			$ret .= '<li' . $submenuClass . '><a href="' . $link['href'] . '" title="' . $link['text'] . '"><i class="' . $hclass . '"></i> ' . $link['text'] . '</a>' . PHP_EOL;
 			foreach($link['submenu'] AS $submenu) {
 				$submenuClass = '';
 				$hclass = arrayKeyExists('class', $submenu)?$submenu['class']:$link['class'];
 				if($submenu['href'] == $page_name) $submenuClass = ' class="active"';
-				$ret .= '<li' . $submenuClass . '><a href="' . $submenu['href'] . '"><i class="fa fa-' . $hclass . '"></i>' . $submenu['text'] . '</a>' . PHP_EOL;
+				$ret .= '<li' . $submenuClass . '><a href="' . $submenu['href'] . '" title="' . $submenu['text'] . '"><i class="' . $hclass . '"></i> ' . $submenu['text'] . '</a>' . PHP_EOL;
 			}
 			$ret .= '</ul>' . PHP_EOL;
 		}

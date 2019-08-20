@@ -1,6 +1,7 @@
 <?php
 namespace Module\Pages\Admin;
 use Model\Model;
+use Utils\Util;
 
 class Menu {
 	/**
@@ -13,37 +14,41 @@ class Menu {
 	public function __construct() {
 		$this->title =  __('Edit menu');
 		$this->h1 =  __('Edit menu');
-		$this->js = array('../assets/js/jquery.nestedSortable.js','../vendor/almasaeed2010/adminlte/bower_components/select2/dist/js/select2.full.min.js','js/jsall.js','Module/Pages/Admin/menu.js');
-		$this->css = array('../vendor/almasaeed2010/adminlte/bower_components/select2/dist/css/select2.min.css','Module/Pages/Admin/menu.css');
-		$pages = new Model('pages');
-		$pages->groupBy('language');
-		$pages->order('language ASC');
-		$pagesArray = $pages->get();
-		$languageOptions = '';
-		if(count($pagesArray) > 1) {
-			foreach($pagesArray AS $page) {
-				$selected = ($page->language == _DEFAULT_LANGUAGE_)?' selected':'';
-				$languageOptions .= "<option value=\"{$page->language}\"{$selected}>" . $page->languages->name . "</option>";
-			}
+		$this->js = array('../assets/js/jquery.nestedSortable.js','js/jsall.js','Module/Pages/Admin/menu.js');
+		$this->css = array('Module/Pages/Admin/menu.css');
+		$languages = new Model('languages');
+		$languages->order('name ASC');
+		$languages = $languages->get();
+		$languageOptions = [0 => __('Any')];
+		foreach($languages AS $language) {
+			$selected = ($language->code == _DEFAULT_LANGUAGE_);
+			$languageOptions[$language->code] = [$language->name, $selected];
 		}
 		$this->content = '<div class="box">
-	<div class="box-body">
+	<div class="box-header">
 		<div class="row">
-			<div class="col-lg-4">
-				' . __('Language') . '<br /><select class="form-control select2" id="languagef">' . $languageOptions . '</select>
+			<div class="col-12 col-md-4">
+				' . __('Language') . '<br /><select class="form-control" id="languagef">' . Util::arrayToOptions($languageOptions) . '</select>
 			</div>
 		</div>
-		<div class="row row-eq-height">
-			<div class="col-lg-6">
-				<ol class="sortable" id="available"></ol>
-			</div>
-			<div class="col-lg-6">
-				<ol class="sortable" id="nestable"></ol>
-			</div>
-		</div>
-		<div class="clearfix"></div>
 	</div>
-	<button id="customSave" class="btn btn-primary">' . __('Save') . '</button>
+	<div class="box-body">
+		<div class="container-fluid">
+			<div class="row row-eq-height">
+				<div class="col-12 col-md-6">
+					<ol class="sortable" id="available"></ol>
+				</div>
+				<div class="col-12 col-md-6">
+					<ol class="sortable" id="nestable"></ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="btn-toolbar">
+			<button id="customSave" class="btn btn-outline-primary">' . __('Save') . '</button>
+		</div>
+	</div>
 </div>';
 	}
 }

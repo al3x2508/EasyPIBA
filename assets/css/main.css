@@ -1,6 +1,12 @@
 body {
 	font-family: Montserrat, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
 }
+a {
+	color: #e29595;
+}
+a:hover {
+	color: #a4e1e2;
+}
 .panel-login {
 	-webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
 	-moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
@@ -115,4 +121,149 @@ body {
 	list-style: disc;
 	margin: 0;
 	padding-left: 2em;
+}
+.form-group {
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	min-height: 2.25rem;
+	margin-top: .2rem;
+	margin-bottom: 2.25rem;
+}
+.form-group .input-group {
+	position: relative;
+	display: block;
+}
+.form-group .input-group {
+	-ms-flex-item-align: end;
+	align-self: flex-end;
+}
+.input-group {
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-align: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+	width: 100%;
+}
+.form-group .input-group input.form-control,
+.form-group .input-group textarea,
+.form-group .input-group select {
+	display: block;
+	background: none;
+	padding: .125rem .125rem .0625rem;
+	font-size: 1rem;
+	border-width: 0;
+	border-color: transparent;
+	line-height: 1.9;
+	width: 100%;
+	-webkit-transition: all .28s ease;
+	transition: all .28s ease;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	height: 2.1rem;
+}
+.form-group .control-label {
+	position: absolute;
+	top: .25rem;
+	left: 0;
+	max-width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	pointer-events: none;
+	padding-left: .125rem;
+	z-index: 1;
+	font-size: 1rem;
+	font-weight: 400;
+	-webkit-transition: all .28s ease;
+	transition: all .28s ease;
+}
+.form-group .control-label,
+.form-group input:invalid.has-value~.control-label {
+	color: #de5050;
+}
+.form-group input[required] + .control-label:after {
+	position: absolute;
+	top: 0;
+	right: -1.2em;
+	width: 1em;
+	height: 1em;
+	content: '*';
+}
+.form-group .bar {
+	position: relative;
+	border-bottom: .0625rem solid #999;
+	display: block;
+}
+.form-group .bar:before {
+	content: "";
+	height: .125rem;
+	width: 0;
+	left: 50%;
+	bottom: -.0625rem;
+	position: absolute;
+	background: #555;
+	-webkit-transition: left .28s ease,width .28s ease;
+	transition: left .28s ease,width .28s ease;
+	z-index: 2;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+	outline: none;
+	border-color: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.form-group.show input~.control-label,
+.form-group input.form-file~.control-label,
+.form-group input.has-value~.control-label,
+.form-group input:focus~.control-label,
+.form-group input:valid~.control-label,
+.form-group select~.control-label,
+.form-group textarea.form-file~.control-label,
+.form-group textarea.has-value~.control-label,
+.form-group textarea:focus~.control-label,
+.form-group textarea:valid~.control-label {
+	font-size: .6rem;
+	color: #4ae387;
+	font-weight: 600;
+	text-transform: uppercase;
+	top: -.6rem;
+	left: 0;
+}
+.form-group input:focus~.bar:before,
+.form-group select:focus~.bar:before,
+.form-group textarea:focus~.bar:before {
+	width: 100%;
+	left: 0;
+}
+.form-group .alert {
+	font-size: .75rem;
+	padding: .35rem;
+}
+footer ul {
+	list-style: none;
+	padding-left: 0;
+}
+footer ul li {
+	display: inline-block;
+}
+@media (min-width: 992px) {
+	#mainNav .nav-link {
+		color: #9c9c9c;
+	}
+	#mainNav .nav-link:hover {
+		color: #555;
+	}
 }

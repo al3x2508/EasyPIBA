@@ -7,11 +7,83 @@ use Utils\Util;
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
 
 class Act extends AdminAct {
-	public function __construct() {
+	public function __construct($id) {
 		$this->permission = 'Edit pages';
 		$this->entity = new Model('pages');
-		$this->fields = $_POST;
-		return true;
+		$act = false;
+		if ($this->hasAccess()) {
+			if(!arrayKeyExists('menu', $_REQUEST)) {
+				if ($id) $this->fields['id'] = $id;
+				if (strtolower($_SERVER['REQUEST_METHOD']) == 'delete') {
+					if ($id) {
+						$this->deleteFromCache();
+						$act = $this->delete();
+					}
+					else $this->sendStatus(false, __('No ID set'));
+				}
+				else {
+					$method = 'patch';
+					if (strtolower($_SERVER['REQUEST_METHOD']) == 'patch') {
+						if ($id) parse_str(file_get_contents('php://input'), $_PATCH);
+						else $this->sendStatus(false, __('No ID set'));
+					}
+					else $method = 'create';
+					foreach ($method == 'patch' ? $_PATCH : $_POST AS $key => $value) $this->fields[$key] = $value;
+					try {
+						$act = call_user_func_array(array($this, $method), array());
+					}
+					catch (\Exception $e) {
+						$this->sendStatus(false, $e->getMessage());
+					}
+				}
+			}
+			else {
+				$act = $this->menu();
+			}
+		}
+		$this->sendStatus($act);
+	}
+
+	public function create() {
+		foreach ($this->fields AS $key => $value) $this->entity->$key = $value;
+		$this->addToCache();
+		return $this->entity->create();
+	}
+
+	public function patch() {
+		$this->deleteFromCache();
+		foreach ($this->fields AS $key => $value) $this->entity->$key = $value;
+		$this->addToCache();
+		return $this->entity->update();
+	}
+
+	public function delete() {
+		$this->entity->id = $this->fields['id'];
+		return $this->entity->delete();
+	}
+
+	private function deleteFromCache() {
+		$cache = Util::getCache();
+		if($cache) {
+			$page = new Model('pages');
+			$page = $page->getOneResult('id', $this->fields['id']);
+			$url = $page->url;
+			$language = $page->language;
+			$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+			if($cache->exists($cacheKey)) $cache->del($cacheKey);
+			$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
+			if($cache->exists($cacheKey)) $cache->del($cacheKey);
+		}
+	}
+
+	private function addToCache() {
+		$cache = Util::getCache();
+		if($cache) {
+			$url = $this->fields['url'];
+			$language = $this->fields['language'];
+			$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
+			$cache->set($cacheKey, json_encode($this->fields));
+		}
 	}
 
 	public function menu() {
@@ -59,44 +131,4 @@ class Act extends AdminAct {
 		$pages = new Model('pages');
 		$pages->runQuery($sql, $data, false);
 	}
-
-	public function act() {
-		$cache = Util::getCache();
-		if($cache) {
-			if(arrayKeyExists('id', $this->fields)) {
-				if($this->fields['id'] > 0) {
-					$page = new Model('pages');
-					$page = $page->getOneResult('id', $this->fields['id']);
-					$url = $page->url;
-					$language = $page->language;
-					$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
-					if($cache->exists($cacheKey)) $cache->del($cacheKey);
-					$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
-					if($cache->exists($cacheKey)) $cache->del($cacheKey);
-				}
-			}
-			else {
-				$page = new Model('pages');
-				$page = $page->getOneResult('id', $this->fields['delete']);
-				$url = $page->url;
-				$language = $page->language;
-				$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
-				if($cache->exists($cacheKey)) $cache->del($cacheKey);
-				$cacheKey = _CACHE_PREFIX_ . 'output|' . $language . '|' . md5($url);
-				if($cache->exists($cacheKey)) $cache->del($cacheKey);
-			}
-		}
-		$act = parent::act();
-		if($cache && property_exists($act, 'id')) {
-			$url = $act->url;
-			$language = $act->language;
-			$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
-			$cache->set($cacheKey, json_encode($act));
-		}
-	}
-}
-$pages = new Act();
-if($pages) {
-	if(arrayKeyExists('id', $_REQUEST) || arrayKeyExists('delete', $_REQUEST)) return $pages->act();
-	elseif(arrayKeyExists('menu', $_REQUEST)) return $pages->menu();
 }

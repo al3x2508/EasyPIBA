@@ -265,7 +265,7 @@ input {
     cursor: pointer;
 }
 
-.editable:hover {
+editable:hover {
     color: #FFFFFF;
     background-color: #F90B6D;
 }
@@ -304,7 +304,7 @@ input {
 }
 
 .folderInfo {
-    padding: 12px;
+    padding 12px;
     margin-right: 1.2%;
     margin-left: 1.2%;
     margin-bottom: 2.4%;

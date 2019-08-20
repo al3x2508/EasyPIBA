@@ -1,65 +1,69 @@
 <?php
-// Including the plugin config file, don't delete the following row!
-require(__DIR__ . '/pluginconfig.php');
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php';
+use Utils\Util;
 
 // checking lang value
-if(isset($_COOKIE['sy_lang'])) {
-	$load_lang_code = $_COOKIE['sy_lang'];
-}
-else {
-	$load_lang_code = "en";
+if (isset($_COOKIE['sy_lang'])) {
+    $load_lang_code = $_COOKIE['sy_lang'];
+} else {
+    $load_lang_code = Util::getUserLanguage();
 }
 
 // including lang files
-switch($load_lang_code) {
-	case "en":
-		require(__DIR__ . '/lang/en.php');
-		break;
-	case "pl":
-		require(__DIR__ . '/lang/pl.php');
-		break;
+switch ($load_lang_code) {
+    case "en":
+        require(__DIR__ . '/lang/en.php');
+        break;
+    case "ro":
+        require(__DIR__ . '/lang/ro.php');
+        break;
+    case "pl":
+        require(__DIR__ . '/lang/pl.php');
+        break;
 }
 
-?>
+// Including the plugin config file, don't delete the following row!
+require_once(__DIR__ . '/pluginconfig.php');
+if (\Module\Users\Controller::getCurrentUser() || \Controller\AdminController::checkPermission('Edit pages')) {
+    ?>
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-	<meta charset="utf-8">
-	<title><?php echo $imagebrowser1; ?> :: Delete</title>
-	<script src="dist/sweetalert.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="<?= $load_lang_code; ?>">
+    <head>
+        <meta charset="utf-8">
+        <title><?php echo $imagebrowser1; ?> :: Delete</title>
+        <script src="dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    </head>
+    <body>
 
-<?php
+    <?php
 
 
-	$imgName = filter_input(INPUT_GET, 'img', FILTER_SANITIZE_STRING);
-	$imgSrc = $useruploadpath . $imgName;
-	// ckeck if file exists
-	if(file_exists($imgSrc)) {
-		// check if file is available to delete
-		if(is_writable($imgSrc)) {
-			// check if file is a sytem file
-			$imgBasepath = pathinfo($imgSrc);
-			$imgBasename = $imgBasepath['basename'];
-			if(!in_array($imgBasename, $sy_icons)) {
-				// check if the selected file is in the upload folder
-				$imgDirname = $imgBasepath['dirname'];
-				$preExamplePath = "$useruploadpath/test.txt";
-				$tmpUserUPath = pathinfo($preExamplePath);
-				$useruploadpathDirname = $tmpUserUPath['dirname'];
-				if($imgDirname == $useruploadpathDirname) {
-					// check if file is an image
-					$a = getimagesize($imgSrc);
-					$image_type = $a[2];
-					if(in_array($image_type, array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_ICO))) {
-						unlink($imgSrc);
-						header('Location: ' . $_SERVER['HTTP_REFERER']);
-					}
-					else {
-						echo '
+    $imgName = filter_input(INPUT_GET, 'img', FILTER_SANITIZE_STRING);
+    $imgSrc = $useruploadpath . $imgName;
+    // ckeck if file exists
+    if (file_exists($imgSrc)) {
+        // check if file is available to delete
+        if (is_writable($imgSrc)) {
+            // check if file is a sytem file
+            $imgBasepath = pathinfo($imgSrc);
+            $imgBasename = $imgBasepath['basename'];
+            if (!in_array($imgBasename, $sy_icons)) {
+                // check if the selected file is in the upload folder
+                $imgDirname = $imgBasepath['dirname'];
+                $preExamplePath = "$useruploadpath/test.txt";
+                $tmpUserUPath = pathinfo($preExamplePath);
+                $useruploadpathDirname = $tmpUserUPath['dirname'];
+                if ($imgDirname == $useruploadpathDirname) {
+                    // check if file is an image
+                    $a = getimagesize($imgSrc);
+                    $image_type = $a[2];
+                    if (in_array($image_type, array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_ICO))) {
+                        unlink($imgSrc);
+                        header('Location: ' . $_SERVER['HTTP_REFERER']);
+                    } else {
+                        echo '
                             <script>
                             swal({
                               title: "' . $dltimageerrors1 . '",
@@ -72,10 +76,9 @@ switch($load_lang_code) {
                             });
                             </script>
                         ';
-					}
-				}
-				else {
-					echo '
+                    }
+                } else {
+                    echo '
                         <script>
                         swal({
                           title: "' . $dltimageerrors1 . '",
@@ -88,10 +91,9 @@ switch($load_lang_code) {
                         });
                         </script>
                     ';
-				}
-			}
-			else {
-				echo '
+                }
+            } else {
+                echo '
                     <script>
                     swal({
                       title: "' . $dltimageerrors1 . '",
@@ -104,10 +106,9 @@ switch($load_lang_code) {
                     });
                     </script>
                 ';
-			}
-		}
-		else {
-			echo '
+            }
+        } else {
+            echo '
                 <script>
                 swal({
                   title: "' . $dltimageerrors1 . '",
@@ -120,10 +121,9 @@ switch($load_lang_code) {
                 });
                 </script>
             ';
-		}
-	}
-	else {
-		echo '
+        }
+    } else {
+        echo '
             <script>
             swal({
               title: "' . $dltimageerrors1 . '",
@@ -136,9 +136,12 @@ switch($load_lang_code) {
             });
             </script>
         ';
-	}
+    }
 
+    ?>
+
+    </body>
+    </html>
+    <?php
+}
 ?>
-
-</body>
-</html>

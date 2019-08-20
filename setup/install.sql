@@ -19,7 +19,7 @@ CREATE TABLE `admins_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `cookies` (
-  `user` varchar(9) NOT NULL,
+  `user` int(5) NOT NULL,
   `token` varchar(255) NOT NULL,
   `expiration_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`token`),
@@ -616,6 +616,9 @@ CREATE TABLE `user_confirm` (
 ALTER TABLE `admins_permissions`
   ADD CONSTRAINT `admins_permissions_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `admins_permissions_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `cookies`
+  ADD CONSTRAINT `cookies_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `countries`
   ADD CONSTRAINT `countries_ibfk_1` FOREIGN KEY (`language_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;

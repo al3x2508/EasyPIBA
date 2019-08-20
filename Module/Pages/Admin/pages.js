@@ -8,9 +8,10 @@ var jsonPage = 'Pages',
 		{ "mData": "title" },
 		{ "mData": "menu_text" },
 		{ "mData": function(e) {
-			return "<span class=\"actions btn fa fa-folder-open\" data-url=\"/" + e.url + "\"></span><span class=\"actions btn fa fa-edit\"></span><span class=\"actions btn fa fa-trash-o\"></span>";
+			return "<span class=\"actions btn btn-outline-primary btn-outline-primary fas fa-folder-open\" data-url=\"/" + e.url + "\"></span><span class=\"actions btn btn-outline-primary btn-outline-primary fas fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-outline-danger fas fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
 		}}
-	];
+	],
+	delAction = 'delete_page';
 function loadData(aoData) {
 	var filters = {};
 	$(aoData).each(function(i, val) {
@@ -30,14 +31,12 @@ $(document).ready(function() {
 	CKEDITOR.plugins.addExternal('imageuploader', adminfolder + 'plugins/imageuploader/');
 	CKEDITOR.replace('edcontent', {
 		allowedContent: true,
-		extraPlugins: 'imageuploader,justify'
+		extraPlugins: 'imageuploader,justify,codesnippetgeshi',
+		codeSnippetGeshi_url: '/admin/plugins/codesnippetgeshi/colorize.php'
 	});
+	CKEDITOR.dtd.$removeEmpty['i'] = false;
+	CKEDITOR.dtd.$removeEmpty['span'] = false;
 	$("body").on('click', 'span.actions', function() {
 		if($(this).hasClass('fa-folder-open')) window.open($(this).data('url'), '_blank');
-	});
-	$('.select2').select2({
-		width: '200px'
-	}).on('select2:select', function () {
-		if($(this).closest('#data_table').length) datatableAjaxReload();
 	});
 });

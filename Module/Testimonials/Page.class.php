@@ -25,7 +25,7 @@ class Page {
 				}
 				else $testimonialText = $testimonial->short;
 				if($index % 2 == 0) $page->content .= '				<div class="row">';
-				$page->content .= '					<article class="col-lg-6">
+				$page->content .= '					<article class="col-12 col-md-6">
 						<header>
 							<h2><a href="/testimonial' . $testimonial->id . '.html" title="' . $testimonial->name . '">' . $testimonial->name . '</a></h2>
 						</header>
@@ -50,7 +50,7 @@ class Page {
 		}
 		$page->content = '<h1>' . $page->h1 . '</h1>
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-12">
 				' . $page->content;
 		$page->content .= '			</div>
 		</div>';

@@ -8,10 +8,11 @@ var jsonPage = 'Users',
 		{ "mData": function (e) {
 			return $('#statusf option[value="' + e.status + '"]').text();
 		} },
-		{ "mData": function() {
-			return "<span class=\"actions btn fa fa-edit\"></span><span class=\"actions btn fa fa-trash-o\"></span>";
+		{ "mData": function(e) {
+			return "<span class=\"actions btn btn-outline-primary btn-outline-primary fas fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-outline-danger fas fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
 		} }
-	];
+	],
+	delAction = 'delete_user';
 function loadData(aoData) {
 	var filters = {};
 	$(aoData).each(function(i, val) {
@@ -25,6 +26,6 @@ function loadData(aoData) {
 	if($("#lastnamef").val()!='') filters.filters['lastname'] = $("#lastnamef").val();
 	if($("#countryf").val()!='0') filters.filters['country'] = $("#countryf").val();
 	if($("#emailf").val()!='') filters.filters['email'] = $("#emailf").val();
-	if($("#statusf").val()!='-1') filters.filters['stare'] = $("#statusf").val();
+	if($("#statusf").val()!='-1') filters.filters['status'] = $("#statusf").val();
 	return filters;
 }

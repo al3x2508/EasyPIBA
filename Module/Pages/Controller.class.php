@@ -18,6 +18,7 @@ class Controller {
 	public $h1 = '';
 	public $breadcrumbs = array();
 	public $sidebar = array();
+	public $rsidebar = false;
 	public $js = array();
 	public $css = array();
 	public $visible = true;
@@ -30,6 +31,7 @@ class Controller {
 	 */
 	public function __construct($url, $language = _DEFAULT_LANGUAGE_) {
 		$cache = Util::getCache();
+		$url = filter_var($url, FILTER_SANITIZE_STRING);
 		if(strpos($url, 'amp/') === 0) {
 			$url = str_replace('amp/', '', $url);
 			$this->template = 'amp_template.html';
@@ -39,7 +41,23 @@ class Controller {
 		$this->url = $url;
 		$this->language = $language;
 		$cacheKey = _CACHE_PREFIX_ . $url . '|' . $language;
-		if($cache && $cache->exists($cacheKey)) $page = json_decode($cache->get($cacheKey));
+		if($cache && $cache->exists($cacheKey)) {
+			$page = json_decode($cache->get($cacheKey));
+			$user = UserController::getCurrentUser(false);
+			if ($user && !$page->forceFrontEnd) {
+				$page->adminName = $user->firstname . ' ' . $user->lastname;
+				$page->myaccountlink = '<a href="' . _FOLDER_URL_ . 'my-account" class="btn btn-sm btn-default btn-flat"><i class="fas fa-user"></i> ' . __('My account') . '</a>';
+				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fas fa-power-off"></i> ' . __('Logout') . '</a>';
+				$page->ADMIN_FOLDER_URL = _FOLDER_URL_ . 'admin1009/';
+				$page->template = '../admin1009/template.html';
+				$page->noMainCss = true;
+			}
+			else {
+				$page->adminName = __('Guest user');
+				$page->myaccountlink = '';
+				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'login" class="btn btn-sm btn-default btn-flat"><i class="fas fa-power-on"></i> ' . __('Login') . '</a>';
+			}
+		}
 		else {
 			$page = new Model('pages');
 			$page->language = $language;
@@ -48,6 +66,7 @@ class Controller {
 			$page = $page->get();
 			if(count($page)) {
 				$page = $page[0];
+				$page->forceFrontEnd = true;
 				if($cache) $cache->set($cacheKey, json_encode($page));
 			}
 			else $page = false;
@@ -67,7 +86,7 @@ class Controller {
 			else $page->css = array();
 		}
 		else {
-			if(strpos($url, 'json/') === 0) {
+			if(strpos($url, 'json') === 0) {
 				echo Page::output();
 				exit;
 			}
@@ -77,17 +96,29 @@ class Controller {
 			}
 			else {
 				$module_routes = new Model('module_routes');
-				$module_routes->where(array('(`url` = \'' . $url . '\' AND `type` = 0)' => 1, '(\'' . $url . '\' REGEXP `url` AND `type` = 1)' => 1));
+				$module_routes->where(array('(`url` = \'' . $module_routes->escape($url) . '\' AND `type` = 0)' => 1, '(\'' . $module_routes->escape($url) . '\' REGEXP `url` AND `type` = 1)' => 1));
 				$module_routes->limit(1);
 				$module_routes = $module_routes->get('OR');
+
 				if(count($module_routes)) {
-					$class = 'Module\\' . $module_routes[0]->modules->name . '\\Page';
-					$class = new $class();
-					if($class && property_exists($class, 'useCache') && $class->useCache && $cache) $page = json_decode($cache->get($cacheKey));
-					if(!$page) {
-						$page = $class->output();
-						if($page && property_exists($page, 'useCache') && $page->useCache && $cache) $cache->set($cacheKey, json_encode($page));
-					}
+
+                    $modules = new Model('modules');
+                    $modules->where(array('(`id` = \'' . $module_routes[0]->module . '\')' => 1));
+                    $modules->limit(1);
+                    $modules = $modules->get();
+
+                    if(count($modules)) {
+                        $class = 'Module\\' . $modules[0]->name . '\\Page';
+                        $class = new $class();
+                        if($class && property_exists($class, 'useCache') && $class->useCache && $cache) {
+                            $page = json_decode($cache->get($cacheKey));
+                        }
+                        if(!$page) {
+                            $page = $class->output();
+                            if($page && property_exists($page, 'useCache') && $page->useCache && $cache) $cache->set($cacheKey, json_encode($page));
+                        }
+                    }
+
 				}
 			}
 		}
@@ -107,7 +138,7 @@ class Controller {
 		}
 	}
 
-	public static function getMenu() {
+	public static function getMenu($forceFrontEnd = false) {
 		$userLanguage = Util::getUserLanguage();
 		$langUrl = ($userLanguage == _DEFAULT_LANGUAGE_) ? '' : $userLanguage . '/';
 		$pages = new Model('pages');
@@ -134,13 +165,27 @@ class Controller {
 		foreach($module_routes AS $module_route) {
 			if($module_route->menu_position !== 2) {
 				if($userLanguage == _DEFAULT_LANGUAGE_) {
-					$menuParent = (empty($module_route->menu_parent)) ? 0 : $module_route->menu_parent;
+					if($forceFrontEnd && $module_route->mustBeLoggedIn) {
+						if(!arrayKeyExists('app', $array_menu[0])) {
+							$array_menu[0]['app'] = array(
+								'id' => 'app',
+								'url' => _FOLDER_URL_ . 'dashboard',
+								'menu_text' => __('App'),
+								'submenu_text' => __('Dashboard'),
+								'menu_parent' => 0
+							);
+						}
+						$menuParent = 'app';
+					}
+					else $menuParent = (empty($module_route->menu_parent)) ? 0 : $module_route->menu_parent;
 					if($menuParent === 0) $module_route->menu_order += count($array_pages);
 					if(!arrayKeyExists($menuParent, $array_menu)) $array_menu[$menuParent] = array();
-					$pag = array('url' => _FOLDER_URL_ . $langUrl . $module_route->url, 'menu_text' => $module_route->menu_text, 'submenu_text' => $module_route->submenu_text, 'menu_parent' => $menuParent);
-					//If page url is the same as the current url set link class as active
-					if($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url) $pag['classes'] = 'active';
-					$array_menu[$menuParent][$module_route->menu_order] = $pag;
+					if($module_route->url != 'dashboard') {
+						$pag = array('url' => _FOLDER_URL_ . $langUrl . $module_route->url, 'menu_text' => $module_route->menu_text, 'submenu_text' => $module_route->submenu_text, 'menu_parent' => $menuParent);
+						//If page url is the same as the current url set link class as active
+						if ($_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url || $_SERVER['REQUEST_URI'] == _FOLDER_URL_ . $langUrl . $module_route->url) $pag['classes'] = 'active';
+						$array_menu[$menuParent][$module_route->menu_order] = $pag;
+					}
 					ksort($array_menu[$menuParent]);
 				}
 			}

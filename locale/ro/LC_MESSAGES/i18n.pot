@@ -1,0 +1,990 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-22 10:18+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Module/Media/Admin/Media.class.php:12 Module/Media/Admin/Media.class.php:13
+#: Module/Media/Admin/Media.class.php:17 admin/media.php:2 admin/media.php:6
+msgid "Media"
+msgstr "Media"
+
+#: Module/Media/Admin/Media.class.php:21 admin/media.php:10
+msgid "Filename"
+msgstr "Fișier"
+
+#: Module/Media/Admin/Media.class.php:21 admin/media.php:10
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: Module/Media/Admin/Media.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Blog/Admin/AdminPage.class.php:25
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/News/Admin/AdminPage.class.php:25
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Pages/Admin/Pages.class.php:31
+#: Module/Categories/Admin/AdminPage.class.php:16
+#: Module/Orders/Admin/AdminPage.class.php:16
+#: Module/Products/Admin/AdminPage.class.php:24 admin/media.php:10
+msgid "Actions"
+msgstr "Acțiuni"
+
+#: Module/Media/Admin/Media.class.php:27
+#: Module/Users/Admin/AdminPage.class.php:27
+#: Module/Blog/Admin/AdminPage.class.php:32
+#: Module/Testimonials/Admin/AdminPage.class.php:22
+#: Module/News/Admin/AdminPage.class.php:31
+#: Module/Administrators/Admin/Admins.class.php:47
+#: Module/Pages/Admin/Pages.class.php:37
+#: Module/Categories/Admin/AdminPage.class.php:22
+#: Module/Orders/Admin/AdminPage.class.php:22
+#: Module/Products/Admin/AdminPage.class.php:30 admin/media.php:16
+msgid "Add"
+msgstr "Adaugă"
+
+#: Module/Media/Admin/Media.class.php:33 Module/Media/Admin/Media.class.php:48
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:87
+#: Module/Blog/Admin/AdminPage.class.php:38
+#: Module/Blog/Admin/AdminPage.class.php:69
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/Testimonials/Admin/AdminPage.class.php:63
+#: Module/News/Admin/AdminPage.class.php:37
+#: Module/News/Admin/AdminPage.class.php:68
+#: Module/Administrators/Admin/Admins.class.php:53
+#: Module/Administrators/Admin/Admins.class.php:78
+#: Module/Pages/Admin/Pages.class.php:43 Module/Pages/Admin/Pages.class.php:87
+#: Module/Categories/Admin/AdminPage.class.php:30
+#: Module/Categories/Admin/AdminPage.class.php:46
+#: Module/Orders/Admin/AdminPage.class.php:30
+#: Module/Orders/Admin/AdminPage.class.php:60
+#: Module/Products/Admin/AdminPage.class.php:38
+#: Module/Products/Admin/AdminPage.class.php:83 admin/media.php:22
+#: admin/media.php:37
+msgid "Close"
+msgstr "Închide"
+
+#: Module/Media/Admin/Media.class.php:41 Module/Media/Admin/Media.class.php:42
+#: Module/Blog/Admin/AdminPage.class.php:58
+#: Module/Blog/Admin/AdminPage.class.php:59
+#: Module/Testimonials/Admin/AdminPage.class.php:52
+#: Module/Testimonials/Admin/AdminPage.class.php:53
+#: Module/News/Admin/AdminPage.class.php:57
+#: Module/News/Admin/AdminPage.class.php:58 admin/media.php:30
+#: admin/media.php:31
+msgid "Image"
+msgstr "Imagine"
+
+#: Module/Media/Admin/Media.class.php:49
+#: Module/Users/Admin/AdminPage.class.php:88
+#: Module/Blog/Admin/AdminPage.class.php:70
+#: Module/Testimonials/Admin/AdminPage.class.php:64
+#: Module/News/Admin/AdminPage.class.php:69
+#: Module/Administrators/Admin/Admins.class.php:79
+#: Module/Pages/Admin/Menu.class.php:46 Module/Pages/Admin/Pages.class.php:88
+#: Module/Categories/Admin/AdminPage.class.php:47
+#: Module/Orders/Admin/AdminPage.class.php:61
+#: Module/Products/Admin/AdminPage.class.php:84 admin/media.php:38
+msgid "Save"
+msgstr "Salvează"
+
+#: Module/Media/Admin/Act.class.php:89
+msgid "No uploaded file"
+msgstr "Niciun fișier încărcat"
+
+#: Module/Media/Admin/Act.class.php:121
+msgid "Error uploading"
+msgstr "Eroare la încărcare"
+
+#: Module/Media/Admin/Act.class.php:123 Module/Media/Admin/Act.class.php:125
+msgid "File is not an image"
+msgstr "Fișierul nu este o imagine"
+
+#: Module/Media/Admin/Act.class.php:127
+msgid "Max upload 5MB"
+msgstr ""
+
+#: Module/JSON/Admin.class.php:16
+msgid "You do not have permissions for this"
+msgstr ""
+
+#: Module/JSON/Admin.class.php:27
+msgid "This example should only be run from a Web Browser"
+msgstr ""
+
+#: Module/JSON/Admin.class.php:52
+msgid "Error processing"
+msgstr ""
+
+#: Module/JSON/Page.class.php:14
+msgid "Confirmation code was sent to your email address"
+msgstr ""
+
+#: Module/JSON/Page.class.php:15
+msgid "Your account is already confirmed"
+msgstr ""
+
+#: Module/JSON/Page.class.php:17
+msgid "No account registered with this email address"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:20
+#: Module/Users/EmailConfirmPage.class.php:21
+#: Module/Users/EmailConfirmPage.class.php:47
+msgid "Email confirm"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:24
+msgid "Enter the confirmation code"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:29
+#: Module/Users/Controller.class.php:40 Module/Users/Controller.class.php:49
+#: Module/Users/Controller.class.php:73
+#: Module/Users/PasswordResetPage.class.php:93
+#, php-format
+msgid "Enter at least %s characters"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:30
+msgid "32 characters code"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:31
+msgid "Confirmation code"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:39
+msgid "Confirm"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:60
+msgid "Your email has been confirmed"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:61
+#, php-format
+msgid "You can login now %s"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:61
+msgid "here"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:63
+msgid "Your account is blocked!"
+msgstr ""
+
+#: Module/Users/EmailConfirmPage.class.php:67
+msgid "Code is invalid or already confirmed"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:22
+#: Module/Users/MyAccountPage.class.php:23
+#: Module/Users/MyAccountPage.class.php:79
+msgid "My account"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:66
+#: Module/Users/Controller.class.php:35
+#: Module/Users/PasswordResetPage.class.php:80
+msgid "Confirm the password"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:70 Module/Users/LoginPage.class.php:80
+msgid "There is another user registered with this email address"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:72
+#: Module/Users/LoginPage.class.php:113
+msgid "You did not filled the following inputs"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:87
+#: Module/Users/Controller.class.php:42 Module/Users/Admin/JSON.class.php:11
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:42
+#: Module/Users/Admin/AdminPage.class.php:43
+msgid "Firstname"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:89
+#: Module/Users/Controller.class.php:51 Module/Users/Admin/JSON.class.php:12
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:46
+#: Module/Users/Admin/AdminPage.class.php:47
+msgid "Lastname"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:91
+#: Module/Users/Controller.class.php:60 Module/Users/LoginPage.class.php:165
+#: Module/Users/Admin/JSON.class.php:13
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:50
+#: Module/Users/Admin/AdminPage.class.php:51
+#: Module/Users/PasswordResetPage.class.php:140
+msgid "Email"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:93
+#: Module/Users/Controller.class.php:23 Module/Users/Admin/JSON.class.php:18
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:70 Utils/Template.class.php:390
+#: Utils/Template.class.php:394
+msgid "Country"
+msgstr ""
+
+#: Module/Users/MyAccountPage.class.php:108
+msgid "Edit"
+msgstr ""
+
+#: Module/Users/Controller.class.php:30
+msgid "Enter your firstname"
+msgstr ""
+
+#: Module/Users/Controller.class.php:31
+msgid "Enter your lastname"
+msgstr ""
+
+#: Module/Users/Controller.class.php:32 Module/Users/Controller.class.php:58
+#: Module/Users/LoginPage.class.php:163
+#: Module/Users/PasswordResetPage.class.php:138
+msgid "Enter your email"
+msgstr ""
+
+#: Module/Users/Controller.class.php:33
+msgid "Select your country"
+msgstr ""
+
+#: Module/Users/Controller.class.php:34
+#: Module/Users/PasswordResetPage.class.php:79
+msgid "Enter a password"
+msgstr ""
+
+#: Module/Users/Controller.class.php:74 Module/Users/Controller.class.php:83
+#: Module/Users/PasswordResetPage.class.php:94
+#: Module/Users/PasswordResetPage.class.php:103
+msgid "8 characters minimum"
+msgstr ""
+
+#: Module/Users/Controller.class.php:75 Module/Users/LoginPage.class.php:173
+#: Module/Users/Admin/AdminPage.class.php:78
+#: Module/Users/Admin/AdminPage.class.php:79
+#: Module/Administrators/Admin/Admins.class.php:68
+#: Module/Administrators/Admin/Admins.class.php:69 admin/index.php:106
+msgid "Password"
+msgstr ""
+
+#: Module/Users/Controller.class.php:82 Module/Users/Controller.class.php:84
+#: Module/Users/Admin/AdminPage.class.php:82
+#: Module/Users/Admin/AdminPage.class.php:83
+#: Module/Users/PasswordResetPage.class.php:102
+msgid "Confirm password"
+msgstr ""
+
+#: Module/Users/Controller.class.php:89
+msgid "Fields marked with"
+msgstr ""
+
+#: Module/Users/Controller.class.php:89
+msgid "are required"
+msgstr ""
+
+#: Module/Users/Controller.class.php:91
+msgid "You must accept our Terms and conditions"
+msgstr ""
+
+#: Module/Users/Controller.class.php:93
+#, php-format
+msgid "I have read and agree to the %s"
+msgstr ""
+
+#: Module/Users/Controller.class.php:93
+msgid "Terms and Conditions"
+msgstr ""
+
+#: Module/Users/Controller.class.php:185
+msgid "Welcome"
+msgstr ""
+
+#: Module/Users/Controller.class.php:186
+msgid "Step"
+msgstr ""
+
+#: Module/Users/Controller.class.php:186 Module/Users/Controller.class.php:187
+#: Module/Users/Controller.class.php:188
+msgid "Activate your account"
+msgstr ""
+
+#: Module/Users/Controller.class.php:187
+msgid "by clicking this link"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:35
+msgid "You did not confirmed your account"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:35
+msgid "Your account is blocked"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:51 Controller/AdminController.class.php:26
+msgid "Incorrect password"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:57
+msgid "No user registered with these info"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:62
+msgid "Invalid token"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:104
+msgid "You will be redirected to confirm your email in 1 second"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:107
+msgid "Password not confirmed"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:117
+msgid "lastname"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:120
+msgid "firstname"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:123
+msgid "email address"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:126
+msgid "country"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:129
+msgid "password"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:132
+msgid "password confirm"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:135
+msgid "terms and conditions"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:148 admin/index.php:76 admin/index.php:112
+msgid "Login"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:151 Module/Users/LoginPage.class.php:199
+msgid "Register"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:179
+msgid "Remember me"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:184
+msgid "Log in"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:192
+msgid "Forgot Password?"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:193
+msgid "Resend email confirmation"
+msgstr ""
+
+#: Module/Users/LoginPage.class.php:206 Module/Users/LoginPage.class.php:207
+msgid "Login | "
+msgstr ""
+
+#: Module/Users/Admin/JSON.class.php:14
+#: Module/Users/Admin/AdminPage.class.php:54
+#: Module/Users/Admin/AdminPage.class.php:55
+msgid "Phone"
+msgstr ""
+
+#: Module/Users/Admin/JSON.class.php:15
+#: Module/Users/Admin/AdminPage.class.php:58
+#: Module/Users/Admin/AdminPage.class.php:59
+msgid "Address"
+msgstr ""
+
+#: Module/Users/Admin/JSON.class.php:16
+#: Module/Users/Admin/AdminPage.class.php:62
+#: Module/Users/Admin/AdminPage.class.php:63
+msgid "City"
+msgstr ""
+
+#: Module/Users/Admin/JSON.class.php:17
+#: Module/Users/Admin/AdminPage.class.php:66
+#: Module/Users/Admin/AdminPage.class.php:67
+msgid "State"
+msgstr ""
+
+#: Module/Users/Admin/JSON.class.php:19 Module/Orders/Admin/JSON.class.php:14
+msgid "Status ID"
+msgstr ""
+
+#: Module/Users/Admin/JSON.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:11
+#: Module/Users/Admin/AdminPage.class.php:12
+#: Module/Users/Admin/AdminPage.class.php:17
+#: Module/Users/Admin/AdminPage.class.php:38 admin/index.php:50
+msgid "Users"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Blog/Admin/AdminPage.class.php:24
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/News/Admin/AdminPage.class.php:25
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Pages/Admin/Pages.class.php:31
+msgid "Any"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:74
+#: Module/Blog/Admin/AdminPage.class.php:24
+#: Module/Blog/Admin/AdminPage.class.php:64
+#: Module/Testimonials/Admin/AdminPage.class.php:58
+#: Module/News/Admin/AdminPage.class.php:25
+#: Module/News/Admin/AdminPage.class.php:63
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:72
+#: Module/Orders/Admin/AdminPage.class.php:41
+msgid "Status"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.class.php:21
+msgid "Not confirmed"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.class.php:21
+msgid "Confirmed"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:75
+#: Module/Blog/Admin/AdminPage.class.php:65
+#: Module/Testimonials/Admin/AdminPage.class.php:59
+#: Module/News/Admin/AdminPage.class.php:64
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:73
+msgid "Blocked"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.class.php:75
+#: Module/Blog/Admin/AdminPage.class.php:65
+#: Module/Testimonials/Admin/AdminPage.class.php:59
+#: Module/News/Admin/AdminPage.class.php:64
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:73
+msgid "Active"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:21
+#: Module/Users/PasswordResetPage.class.php:22
+#: Module/Users/PasswordResetPage.class.php:49
+#: Module/Users/PasswordResetPage.class.php:131
+msgid "Password reset"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:27
+msgid "Enter a valid email address"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:46
+msgid "Hi"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:47
+msgid "To reset your password click the link below"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:50
+msgid "An email with password reset instructions have been sent to you."
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:52
+msgid "No user registered with this email address"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:74
+msgid "Your password has been updated"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:76
+msgid "Code not found"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:85
+msgid "Change your password"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:95
+msgid "New password"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:104
+msgid "Confirm new password"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:112
+msgid "Change password"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.class.php:148
+msgid "Send code"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:8
+#: Module/Blog/Admin/AdminPage.class.php:9
+#: Module/Blog/Admin/AdminPage.class.php:15
+msgid "Edit posts"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:21
+#: Module/Blog/Admin/AdminPage.class.php:45
+#: Module/Blog/Admin/AdminPage.class.php:46
+#: Module/News/Admin/AdminPage.class.php:25
+#: Module/News/Admin/AdminPage.class.php:48
+#: Module/News/Admin/AdminPage.class.php:49
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:58
+#: Module/Pages/Admin/Pages.class.php:59
+msgid "Title"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:22
+#: Module/News/Admin/AdminPage.class.php:25
+msgid "Author"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:23
+msgid "Updated on"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:24
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/News/Admin/AdminPage.class.php:25
+msgid "Hidden"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:24
+#: Module/News/Admin/AdminPage.class.php:25
+msgid "Published"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:41
+msgid "Edit post"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:49
+#: Module/Blog/Admin/AdminPage.class.php:50
+#: Module/Testimonials/Admin/AdminPage.class.php:47
+#: Module/Testimonials/Admin/AdminPage.class.php:48
+#: Module/News/Admin/AdminPage.class.php:52
+#: Module/News/Admin/AdminPage.class.php:53
+#: Module/Pages/Admin/Pages.class.php:82 Module/Pages/Admin/Pages.class.php:83
+msgid "Content"
+msgstr ""
+
+#: Module/Blog/Admin/AdminPage.class.php:53
+#: Module/Blog/Admin/AdminPage.class.php:54
+#: Module/Pages/Admin/Pages.class.php:62 Module/Pages/Admin/Pages.class.php:63
+#: Module/Products/Admin/JSON.class.php:16
+#: Module/Products/Admin/AdminPage.class.php:53
+#: Module/Products/Admin/AdminPage.class.php:54
+msgid "Description"
+msgstr ""
+
+#: Module/Blog/Page.class.php:20 Module/Blog/Page.class.php:21
+#: Module/Blog/Page.class.php:22
+msgid "Blog"
+msgstr ""
+
+#: Module/Blog/Page.class.php:94 Module/News/Page.class.php:66
+msgid "read more"
+msgstr ""
+
+#: Module/Blog/Page.class.php:104 Module/News/Page.class.php:72
+msgid "Newer"
+msgstr ""
+
+#: Module/Blog/Page.class.php:106 Module/News/Page.class.php:73
+msgid "Older"
+msgstr ""
+
+#: Module/EasyPIBA/Page.class.php:24
+msgid "Getting started"
+msgstr ""
+
+#: Module/EasyPIBA/Page.class.php:26
+msgid "Create your first module"
+msgstr ""
+
+#: Module/Testimonials/Admin/AdminPage.class.php:7
+#: Module/Testimonials/Admin/AdminPage.class.php:8
+#: Module/Testimonials/Admin/AdminPage.class.php:12
+#: Module/Testimonials/Admin/AdminPage.class.php:31
+#: Module/Testimonials/Page.class.php:10 Module/Testimonials/Page.class.php:11
+#: Module/Testimonials/Page.class.php:12
+msgid "Testimonials"
+msgstr ""
+
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Testimonials/Admin/AdminPage.class.php:35
+#: Module/Testimonials/Admin/AdminPage.class.php:36
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:60
+#: Module/Administrators/Admin/Admins.class.php:61
+#: Module/Categories/Admin/AdminPage.class.php:16
+#: Module/Products/Admin/AdminPage.class.php:24
+msgid "Name"
+msgstr ""
+
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Testimonials/Admin/AdminPage.class.php:39
+#: Module/Testimonials/Admin/AdminPage.class.php:40
+msgid "Company"
+msgstr ""
+
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Testimonials/Admin/AdminPage.class.php:43
+#: Module/Testimonials/Admin/AdminPage.class.php:44
+msgid "Short text"
+msgstr ""
+
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Pages/Admin/Pages.class.php:78
+msgid "Visible"
+msgstr ""
+
+#: Module/Testimonials/Page.class.php:34
+msgid "Read more"
+msgstr ""
+
+#: Module/Testimonials/Page.class.php:45
+msgid "Testimonial"
+msgstr ""
+
+#: Module/News/Admin/AdminPage.class.php:8
+#: Module/News/Admin/AdminPage.class.php:9
+#: Module/News/Admin/AdminPage.class.php:21
+#: Module/News/Admin/AdminPage.class.php:40
+msgid "Edit news"
+msgstr ""
+
+#: Module/News/Admin/AdminPage.class.php:25
+#: Module/News/Admin/AdminPage.class.php:44
+#: Module/Pages/Admin/Menu.class.php:33 Module/Pages/Admin/Pages.class.php:31
+#: Module/Pages/Admin/Pages.class.php:50
+msgid "Language"
+msgstr ""
+
+#: Module/News/Admin/AdminPage.class.php:25
+msgid "Date"
+msgstr ""
+
+#: Module/News/Page.class.php:10 Module/News/Page.class.php:11
+#: Module/News/Page.class.php:12
+msgid "news"
+msgstr ""
+
+#: Module/News/Page.class.php:25
+msgid "News"
+msgstr ""
+
+#: Module/Administrators/Admin/Modules.class.php:12
+#: Module/Administrators/Admin/Modules.class.php:13
+msgid "Modules"
+msgstr ""
+
+#: Module/Administrators/Admin/Modules.class.php:20
+msgid "Modules reread"
+msgstr ""
+
+#: Module/Administrators/Admin/Modules.class.php:22
+msgid "Reread modules"
+msgstr ""
+
+#: Module/Administrators/Admin/Admins.class.php:14
+#: Module/Administrators/Admin/Admins.class.php:15
+#: Module/Administrators/Admin/Admins.class.php:37
+msgid "Edit administrators"
+msgstr ""
+
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:64
+#: Module/Administrators/Admin/Admins.class.php:65
+#: Controller/AdminController.class.php:30 admin/index.php:102
+msgid "Username"
+msgstr ""
+
+#: Module/Administrators/Admin/Admins.class.php:56
+msgid "Edit administrator"
+msgstr ""
+
+#: Module/Demo/Page.class.php:368 Module/Demo/Page.class.php:369
+#: Module/Demo/Page.class.php:370
+msgid "Demo"
+msgstr ""
+
+#: Module/Pages/Controller.class.php:79 Module/Pages/Controller.class.php:85
+#: Module/Pages/Controller.class.php:86
+msgid "Page not found"
+msgstr "Pagina nu a fost găsită"
+
+#: Module/Pages/Controller.class.php:79
+msgid "Error 404"
+msgstr ""
+
+#: Module/Pages/Controller.class.php:81
+msgid ""
+"The page you requested could not be found, either contact your webmaster or "
+"try again. Use your browsers <strong>Back</strong> button to navigate to the "
+"page you have previously come from."
+msgstr ""
+
+#: Module/Pages/Controller.class.php:82
+msgid "Or you could just press this neat little button"
+msgstr ""
+
+#: Module/Pages/Controller.class.php:83
+msgid "Take Me Home"
+msgstr ""
+
+#: Module/Pages/Admin/Menu.class.php:14 Module/Pages/Admin/Menu.class.php:15
+msgid "Edit menu"
+msgstr ""
+
+#: Module/Pages/Admin/Pages.class.php:14 Module/Pages/Admin/Pages.class.php:15
+#: Module/Pages/Admin/Pages.class.php:27 Module/Pages/Admin/Pages.class.php:46
+msgid "Edit pages"
+msgstr ""
+
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:54
+#: Module/Pages/Admin/Pages.class.php:55
+#: Module/Products/Admin/AdminPage.class.php:65
+#: Module/Products/Admin/AdminPage.class.php:66
+msgid "URL"
+msgstr ""
+
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:70
+#: Module/Pages/Admin/Pages.class.php:71
+msgid "Menu text"
+msgstr ""
+
+#: Module/Pages/Admin/Pages.class.php:66 Module/Pages/Admin/Pages.class.php:67
+msgid "H1"
+msgstr ""
+
+#: Module/Pages/Admin/Pages.class.php:74 Module/Pages/Admin/Pages.class.php:75
+msgid "Submenu text"
+msgstr ""
+
+#: Module/Categories/Admin/JSON.class.php:14
+#: Module/Categories/Admin/AdminPage.class.php:16
+#: Module/Categories/Admin/AdminPage.class.php:37
+#: Module/Categories/Admin/AdminPage.class.php:38
+msgid "Parent category"
+msgstr ""
+
+#: Module/Categories/Admin/JSON.class.php:15
+#: Module/Categories/Admin/AdminPage.class.php:41
+#: Module/Categories/Admin/AdminPage.class.php:42
+msgid "Category name"
+msgstr ""
+
+#: Module/Categories/Admin/JSON.class.php:16
+#: Module/Categories/Admin/AdminPage.class.php:16
+#: Module/Products/Admin/JSON.class.php:19
+msgid "Date created"
+msgstr ""
+
+#: Module/Categories/Admin/JSON.class.php:17
+#: Module/Categories/Admin/AdminPage.class.php:16
+#: Module/Orders/Admin/JSON.class.php:18
+#: Module/Products/Admin/JSON.class.php:20
+msgid "Date updated"
+msgstr ""
+
+#: Module/Categories/Admin/JSON.class.php:20
+#: Module/Products/Admin/AdminPage.class.php:69
+msgid "Categories"
+msgstr ""
+
+#: Module/Categories/Admin/AdminPage.class.php:7
+#: Module/Categories/Admin/AdminPage.class.php:8
+msgid "Edit categories"
+msgstr ""
+
+#: Module/Orders/Admin/JSON.class.php:15
+msgid "Customer ID"
+msgstr ""
+
+#: Module/Orders/Admin/JSON.class.php:16
+#: Module/Orders/Admin/AdminPage.class.php:16
+#: Module/Orders/Admin/AdminPage.class.php:37
+#: Module/Orders/Admin/AdminPage.class.php:38
+msgid "Customer name"
+msgstr ""
+
+#: Module/Orders/Admin/JSON.class.php:17
+msgid "Order date"
+msgstr ""
+
+#: Module/Orders/Admin/JSON.class.php:21
+#: Module/Orders/Admin/AdminPage.class.php:7
+#: Module/Orders/Admin/AdminPage.class.php:8
+msgid "Orders"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:16
+#: Module/Orders/Admin/AdminPage.class.php:42
+msgid "Created"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:16
+msgid "Updated"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:42
+msgid "Processing"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:42
+msgid "Delivery in progress"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:42
+msgid "Completed"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:42
+msgid "Canceled"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:42
+msgid "Refunded"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:49
+#: Module/Products/Admin/JSON.class.php:14
+#: Module/Products/Admin/AdminPage.class.php:45
+#: Module/Products/Admin/AdminPage.class.php:46
+msgid "Product name"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:50
+msgid "Product price"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:51
+msgid "Product quantity"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:56
+msgid "Add row"
+msgstr ""
+
+#: Module/Orders/Admin/AdminPage.class.php:56
+msgid "Delete row"
+msgstr ""
+
+#: Module/Products/Admin/JSON.class.php:15
+#: Module/Products/Admin/AdminPage.class.php:24
+#: Module/Products/Admin/AdminPage.class.php:49
+#: Module/Products/Admin/AdminPage.class.php:50
+msgid "SKU"
+msgstr ""
+
+#: Module/Products/Admin/JSON.class.php:17
+#: Module/Products/Admin/AdminPage.class.php:24
+#: Module/Products/Admin/AdminPage.class.php:57
+#: Module/Products/Admin/AdminPage.class.php:58
+msgid "Price"
+msgstr ""
+
+#: Module/Products/Admin/JSON.class.php:18
+#: Module/Products/Admin/AdminPage.class.php:61
+#: Module/Products/Admin/AdminPage.class.php:62
+msgid "Stock"
+msgstr ""
+
+#: Module/Products/Admin/JSON.class.php:23
+msgid "Products"
+msgstr ""
+
+#: Module/Products/Admin/AdminPage.class.php:8
+#: Module/Products/Admin/AdminPage.class.php:9
+msgid "Edit products"
+msgstr ""
+
+#: Module/Products/Page.class.php:74
+msgid "Quantity"
+msgstr ""
+
+#: Module/Products/Page.class.php:81
+msgid "Add to cart"
+msgstr ""
+
+#: Controller/AdminController.class.php:28
+msgid "Username blocked"
+msgstr ""
+
+#: Controller/AdminController.class.php:30
+msgid "does not exist"
+msgstr ""
+
+#: admin/index.php:17
+msgid "Admin login"
+msgstr ""
+
+#: admin/index.php:52
+msgid "total users"
+msgstr ""
+
+#: admin/index.php:55
+msgid "confirmed users"
+msgstr ""
+
+#: admin/index.php:59 admin/index.php:60 admin/Template.class.php:92
+msgid "Statistics"
+msgstr ""
+
+#: admin/Template.class.php:58
+msgid "Logout"
+msgstr ""
+
+#: Model/Model.class.php:590 Model/Model.class.php:667
+msgid "No where statement"
+msgstr ""
+
+#: Utils/Template.class.php:372
+msgid "read full text"
+msgstr ""
+
+#: Utils/functions.php:308
+msgid "This site is currently down for maintenance and should be back soon."
+msgstr ""

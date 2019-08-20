@@ -15,8 +15,8 @@ class Controller {
 	 */
 	public static function getAccountForm($fields, $values, $formId, $button = false, $errors = '') {
 		function fieldValue($field, $values) {
-			if(arrayKeyExists($field, $_POST)) return strip_tags(htmlspecialchars(stripslashes(trim($_POST[$field]))));
-			if(arrayKeyExists($field, $values)) return strip_tags(htmlspecialchars(stripslashes(trim($values[$field]))));
+			if(arrayKeyExists($field, $_POST)) return trim($_POST[$field]);
+			if(arrayKeyExists($field, $values)) return trim($values[$field]);
 			return false;
 		}
 
@@ -30,79 +30,106 @@ class Controller {
 		}
 		$firstname = array('value' => (fieldValue('firstname', $values)) ? ' value="' . fieldValue('firstname', $values) . '"' : '', 'validation' => (arrayKeyExists('firstname', $fields) && $fields['firstname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your firstname') . '</div>' : '');
 		$lastname = array('value' => (fieldValue('lastname', $values)) ? ' value="' . fieldValue('lastname', $values) . '"' : '', 'validation' => (arrayKeyExists('lastname', $fields) && $fields['lastname'] == 1) ? '<div class="alert alert-danger">' . __('Enter your lastname') . '</div>' : '');
-		$email = array('value' => (fieldValue('email', $values)) ? ' value="' . fieldValue('email', $values) . '"' : '', 'validation' => (arrayKeyExists('email', $fields) && $fields['email'] == 1) ? '<div class="alert alert-danger">' . __('Enter your email') . '</div>' : '');
 		$country = (arrayKeyExists('country', $fields) && $fields['country'] == 1) ? '<div class="alert alert-danger">' . __('Select your country') . '</div>' : '';
-		$password = (arrayKeyExists('password', $fields) && $fields['password'] == 1) ? '<div class="alert alert-danger">' . __('Enter a password') . '</div>' : '';
-		$confirmPassword = (arrayKeyExists('confirmPassword', $fields) && $fields['confirmPassword'] == 1) ? '<div class="alert alert-danger">' . __('Confirm the password') . '</div>' : '';
+		$subscribe = (fieldValue('subscribe', $values)) ? ' checked' : '';
 		$content = '<form id="' . $formId . '" method="post" action="#" class="validateform">';
-		if(!empty($errors)) $content .= '<div class="col-lg-12 col-12"><div class="alert alert-danger">' . $errors . '</div></div>' . PHP_EOL;
-		$content .= '<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="text" name="firstname" id="firstname" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $firstname['value'] . ' pattern=".{2,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="firstname" data-ex="eg: John">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * ' . __('Firstname') . '</span>
+		if(!empty($errors)) $content .= '<div class="col-12"><div class="alert alert-danger">' . $errors . '</div></div>' . PHP_EOL;
+		if($formId == 'myaccount') {
+			$emailField = '<div class="col-12 field">' . __('Email') . ': ' . $values['email'] . '</div><span></span>';
+			$passwordFields = '';
+		}
+		else {
+			$email = array('value' => (fieldValue('email', $values)) ? ' value="' . fieldValue('email', $values) . '"' : '', 'validation' => (arrayKeyExists('email', $fields) && $fields['email'] == 1) ? '<div class="alert alert-danger">' . __('Enter your email') . '</div>' : '');
+			$password = (arrayKeyExists('password', $fields) && $fields['password'] == 1) ? '<div class="alert alert-danger">' . __('Enter a password') . '</div>' : '';
+			$confirmPassword = (arrayKeyExists('confirmPassword', $fields) && $fields['confirmPassword'] == 1) ? '<div class="alert alert-danger">' . __('Confirm the password') . '</div>' : '';
+			$emailField = '<div class="col-12 mt-5 field form-group">
+							<div class="input-group">
+								<input type="email" name="email" id="email" class="form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" autocomplete="off" required />
+								<label class="control-label" for="email" data-ex="eg: john.smith@yahoo.com">
+									<i class="fas fa-envelope"></i> * ' . __('Email') . '
 								</label>
-								' . $firstname['validation'] . '
-							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="text" name="lastname" id="lastname" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $lastname['value'] . ' pattern=".{2,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="lastname" data-ex="eg: Smith">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-user"></i> * ' . __('Lastname') . '</span>
-								</label>
-								' . $lastname['validation'] . '
-							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="email" name="email" id="email" class="input__field input__field-hoshi form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="email" data-ex="eg: john.smith@yahoo.com">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-envelope-o"></i> * ' . __('Email') . '</span>
-								</label>
+								<i class="bar"></i>
 								' . $email['validation'] . '
 							</div>
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<select name="country" id="country" class="form-control" required>
-								' . $countriesOptions . '
-							</select>
-							' . $country . '
-						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="password" name="password" id="password" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="password" data-ex="' . __('8 characters minimum') . '">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Password') . '</span>
+						</div>';
+			$passwordFields = '<div class="col-12 mt-5 field form-group">
+							<div class="input-group">
+								<input type="password" name="password" id="password" class="form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" autocomplete="new-password" required />
+								<label class="control-label" for="password" data-ex="' . __('8 characters minimum') . '">
+									<i class="fas fa-eye-slash"></i> * ' . __('Password') . '
 								</label>
+								<i class="bar"></i>
 								' . $password . '
 							</div>
 						</div>
-						<div class="col-lg-12 col-12 mt-5 field form-group">
-							<div class="input input-hoshi">
-								<input type="password" name="confirmPassword" id="confirmPassword" class="input__field input__field-hoshi form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" required />
-								<label class="input__label input__label-hoshi input__label-hoshi-color-1" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
-									<span class="input__label-content input__label-content-hoshi"><i class="fa fa-eye-slash"></i> * ' . __('Confirm password') . '</span>
+						<div class="col-12 mt-5 field form-group">
+							<div class="input-group">
+								<input type="password" name="confirmPassword" id="confirmPassword" class="form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" autocomplete="new-password" required />
+								<label class="control-label" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
+									<i class="fas fa-eye-slash"></i> * ' . __('Confirm password') . '
 								</label>
+								<i class="bar"></i>
 								' . $confirmPassword . '
 							</div>
+						</div>';
+		}
+		$content .= '<div class="col-12 mt-5 field form-group">
+							<div class="input-group">
+								<input type="text" name="firstname" id="firstname" class="form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $firstname['value'] . ' pattern=".{2,}" required />
+								<label class="control-label" for="firstname" data-ex="eg: John">
+									<i class="fas fa-user"></i> * ' . __('Firstname') . '
+								</label>
+								<i class="bar"></i>
+								' . $firstname['validation'] . '
+							</div>
 						</div>
-						<div class="col-lg-12 form-group"><em>' . __('Fields marked with') . ' * ' . __('are required') . '.</em></div>' . PHP_EOL;
+						<div class="col-12 mt-5 field form-group">
+							<div class="input-group">
+								<input type="text" name="lastname" id="lastname" class="form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $lastname['value'] . ' pattern=".{2,}" required />
+								<label class="control-label" for="lastname" data-ex="eg: Smith">
+									<i class="fas fa-user"></i> * ' . __('Lastname') . '
+								</label>
+								<i class="bar"></i>
+								' . $lastname['validation'] . '
+							</div>
+						</div>
+						' . $emailField . '
+						<div class="col-12 mt-5 field form-group">
+						    <div class="input-group">
+                                <select name="country" id="country" class="form-control" required>
+                                    ' . $countriesOptions . '
+                                </select>
+                                <label for="country" class="control-label">' . __('Country') . '</label>
+                                <i class="bar"></i>
+							    ' . $country . '
+							</div>
+						</div>';
+		$content .= $passwordFields . '
+						<div class="col-12 mb-0 field form-group">
+                            <div class="custom-control custom-checkbox">
+							    <input type="checkbox" class="custom-control-input" name="subscribe" id="subscribe"' . $subscribe . ' />
+							    <label for="subscribe" class="custom-control-label">' . __('Subscribe to newsletter') . '</label>
+							</div>
+						</div>' . PHP_EOL;
 		if($button) {
 			$termsConditions = (arrayKeyExists('termsConditions', $fields) && $fields['termsConditions'] == 1) ? '<div class="alert alert-danger">' . __('You must accept our Terms and conditions') . '</div>' : '';
-			$content .= '<div class="col-lg-12 col-12 field text-center">
-							<input type="checkbox" name="termsConditions" id="termsConditions" /><label for="termsConditions">' . sprintf(__('I have read and agree to the %s'), '<a href="terms-conditions.html">' . __('Terms and Conditions') . '</a>') . '</label>
-							' . $termsConditions . '
+			$content .= '<div class="col-12 mb-0 field form-group">
+                            <div class="custom-control custom-checkbox">
+							    <input type="checkbox" class="custom-control-input" name="termsConditions" id="termsConditions" />
+							    <label for="termsConditions" class="custom-control-label">' . sprintf(__('I have read and agree to the %s'), '<a href="' . _FOLDER_URL_ . 'terms-conditions">' . __('Terms and Conditions') . '</a>') . '</label>
+							    ' . $termsConditions . '
+							</div>
 						</div>
-						<div class="col-lg-12 col-12 field form-group">
-							<div class="row justify-content-sm-center">
+						<div class="col-12 mb-3">
+							<div class="d-flex justify-content-sm-center">
 								<div class="col-sm-6">
-									<input type="submit" class="form-control btn btn-login" value="' . __($button) . '" />
+									<input type="submit" class="form-control btn btn-outline-primary" value="' . __($button) . '" />
 								</div>
 							</div>
 						</div>' . PHP_EOL;
 		}
-		$content .= '				</form>';
+		$content .= '				    <div class="col-12 form-group"><em>' . __('Fields marked with') . ' * ' . __('are required') . '.</em></div>
+				</form>';
 		return $content;
 	}
 
@@ -225,19 +252,32 @@ class Controller {
 		$cookie->create();
 	}
 
+	public static function deleteUser($userId) {
+		$user = new Model('users');
+		$user = $user->getOneResult('id', $userId);
+		return $user->delete();
+	}
+
 	/**
 	 * Logout user
 	 */
-	public static function logout() {
+	public static function logout($redirect = true, $exit = true) {
+		Controller::logUserActivity('User logout');
 		if(isset($_SESSION)) {
 			if(arrayKeyExists('user', $_SESSION)) {
 				$cookie = new Model('cookies');
 				$cookie->__set('user', $_SESSION['user'])->delete();
-				unset($_SESSION);
-				session_destroy();
 			}
-			header("Location: " . _FOLDER_URL_);
+			session_unset();
+			session_destroy();
+			if(session_status() == PHP_SESSION_ACTIVE) session_regenerate_id(true);
+			if($redirect) header("Location: " . _FOLDER_URL_);
 		}
-		exit;
+		if($exit) exit;
+	}
+
+	public static function logUserActivity($message, $act = false)
+	{
+
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Module\Testimonials\Admin;
 
 class AdminPage extends \Controller\AdminPage {
@@ -6,62 +7,96 @@ class AdminPage extends \Controller\AdminPage {
 		$page = new \stdClass();
 		$page->title = __('Testimonials');
 		$page->h1 = __('Testimonials');
-		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap.js', '../vendor/drmonty/datatables-responsive/js/dataTables.responsive.min.js' ,'../vendor/ckeditor/ckeditor/ckeditor.js','js/jsall.js','Module/Testimonials/Admin/testimonials.js');
-		$page->css = array('../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css');
+		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', '../vendor/ckeditor/ckeditor/ckeditor.js', 'js/jsall.js', 'Module/Testimonials/Admin/testimonials.js');
+		$page->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css');
+		$statusOptions = array(-1 => __('Any'), 0 => __('Hidden'), 1 => __('Visible'));
 		$page->content = '<div class="box">
-	<div class="box-header"><h3 class="box-title">' . __('Testimonials') . '</h3></div>
-	<div class="box-body">
-		<table id="data_table" class="table table-bordered table-hover">
-			<thead>
-				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" size="2"></th><th>' . __('Name') . '<br /><input type="text" size="10" id="namef" class="tableFilter form-control" /></th><th>' . __('Company') . '</th><th>' . __('Short text') . '</th><th>Status<br /><select id="statusf" class="tableFilter form-control"><option value="-1">' . __('Any') . '</option><option value="0">' . __('Hidden') . '</option><option value="1">' . __('Visible') . '</option></select></th><th>' . __('Actions') . '</th></tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+	<div class="box-header">
+		<div class="row">
+			<div class="col-md-9"><h3 class="box-title">' . __('Testimonials') . '</h3></div>
+			<div class="col-md-3">
+				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+			</div>
+		</div>
 	</div>
-	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-12">
+				<table id="data_table" class="table table-borderless table-hover table-sm w-100">
+					<thead class="thead-light">
+						<tr><th data-filtertype="text" data-filterid="idf">#</th><th data-filtertype="text" data-filterid="namef">' . __('Name') . '</th><th>' . __('Company') . '</th><th>' . __('Short text') . '</th><th data-filtertype="select" data-filterid="statusf" data-options=\'' . json_encode($statusOptions, JSON_FORCE_OBJECT) . '\'>Status</th><th>' . __('Actions') . '</th></tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<div class="btn-toolbar">
+			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add testimonial') . '</button>
+		</div>
+	</div>
 </div>
-<div id="ppEdit" class="modal dialog">
-	<div class="modal-dialog" style="width: 80vw;">
+<div id="ppEdit" class="modal dialog fade">
+	<div class="modal-dialog modal-lg" style="width: 80vw; max-width: 80vw;">
 		<div class="modal-content">
 			<div class="modal-header">
+				<h4 class="modal-title">' . __('Testimonials') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
 					<span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title">' . __('Testimonials') . '</h4>
 			</div>
 			<div class="modal-body" id="edtable">
 				<div class="form-group">
-					<label for="edname">' . __('Name') . '</label>
-					<input type="text" class="form-control" id="edname" name="edname" placeholder="' . __('Name') . '" />
+					<div class="input-group">
+						<input type="text" class="form-control" id="edname" name="edname" required />
+						<label for="edname" class="control-label">' . __('Name') . '</label>
+						<i class="bar"></i>
+					</div>
                 </div>
                 <div class="form-group">
-					<label for="edcompany">' . __('Company') . '</label>
-					<input type="text" class="form-control" id="edcompany" name="edcompany" placeholder="' . __('Company') . '" />
+					<div class="input-group">
+						<input type="text" class="form-control" id="edcompany" name="edcompany" />
+						<label for="edcompany" class="control-label">' . __('Company') . '</label>
+						<i class="bar"></i>
+					</div>
                 </div>
                 <div class="form-group">
-					<label for="edshort">' . __('Short text') . '</label>
-					<textarea id="edshort" name="edshort" class="form-control" rows="3" cols="30" placeholder="' . __('Short text') . '"></textarea>
+					<div class="input-group">
+						<textarea id="edshort" name="edshort" class="form-control" rows="3" cols="30" required></textarea>
+						<label for="edshort" class="control-label">' . __('Short text') . '</label>
+						<i class="bar"></i>
+					</div>
                 </div>
                 <div class="form-group">
-					<label for="edcontent">' . __('Content') . '</label>
-					<textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300" placeholder="' . __('Content') . '"></textarea>
+					<div class="input-group">
+						<textarea id="edcontent" name="edcontent" class="form-control" rows="20" cols="300" required></textarea>
+						<label for="edcontent" class="control-label">' . __('Content') . '</label>
+						<i class="bar"></i>
+					</div>
                 </div>
                 <form action="" method="post" id="imageUploadForm">
 					<div class="form-group">
-						<label for="edimage">' . __('Image') . '</label>
-						<input type="file" class="form-control" id="edimage" name="edimage" placeholder="' . __('Image') . '" />
-						<img id="imagePreview" src="" data-default="default.jpg" data-folder="testimonials" />
+						<div class="input-group">
+							<input type="file" class="form-control" id="edimage" name="edimage" />
+							<label for="edimage" class="control-label">' . __('Image') . '</label>
+							<i class="bar"></i>
+							<img id="imagePreview" src="" data-default="default.jpg" data-folder="testimonials" />
+						</div>
 					</div>
 				</form>
                 <div class="form-group">
-					<label for="edstatus">' . __('Status') . '</label>
-					<select id="edstatus" name="edstatus" class="form-control"><option value="1">' . __('Active') . '</option><option value="2">' . __('Blocked') . '</option></select>
+					<div class="input-group">
+						<select id="edstatus" name="edstatus" class="form-control"><option value="1" selected>' . __('Active') . '</option><option value="2">' . __('Blocked') . '</option></select>
+						<label for="edstatus" class="control-label">' . __('Status') . '</label>
+						<i class="bar"></i>
+					</div>
                 </div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
-				<button type="button" class="btn btn-primary" id="save">' . __('Save') . '</button>
+				<button type="button" class="btn btn-outline-primary" id="save">' . __('Save') . '</button>
 			</div>
 		</div>
 	</div>

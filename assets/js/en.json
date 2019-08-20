@@ -14,13 +14,24 @@
   "buttonAdd": "Add",
   "buttonEdit": "Edit",
   "novaluereturn": "did not returned any value",
-  "delete_portfolio": "You are about to delete the portfolio. All the associated wallets, addresses and transactions will also be deleted!!!",
-  "delete_wallet": "You are about to delete the wallet. All the associated addresses and transactions will also be deleted!!!",
-  "delete_address": "You are about to delete the transaction. All the associated transactions will also be deleted!!!",
-  "delete_transaction": "You are about to delete the transaction.",
+  "delete_account": "You are about to delete your account!!!",
   "cancel": "Cancel",
+  "add": "Add",
+  "edit": "Edit",
+  "copy": "Copy",
   "delete": "Delete",
   "ok": "OK",
   "differentType": "Element has different type than expected",
-  "notNull": "Element must have a value"
+  "notNull": "Element must have a value",
+  "invalidField": "Invalid field",
+  "message": {
+    "sent": "Your message has been sent",
+    "error": "Your message could not been sent"
+  },
+  "copied_to_clipboard": "Copied to clipboard",
+  "checkaddresses": "Please enter a valid email address",
+  "successAlertTitle": "Success",
+  "dangerAlertTitle": "Error",
+  "warningAlertTitle": "Warning",
+  "infoAlertTitle": "Info"
 }

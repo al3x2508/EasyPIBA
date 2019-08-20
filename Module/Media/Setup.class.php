@@ -1,8 +1,10 @@
 <?php
 namespace Module\Media;
 
-class Setup {
-	public function __construct() {
-		return true;
-	}
+class Setup
+{
+    public function __construct()
+    {
+        return true;
+    }
 }

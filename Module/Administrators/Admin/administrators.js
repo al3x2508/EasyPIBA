@@ -1,4 +1,15 @@
-var jsonPage = 'Administrators';
+var jsonPage = 'Administrators',
+	aoColumns = [
+		{ "mData": "id" },
+		{ "mData": "name" },
+		{ "mData": "username" },
+		{ "mData": function (e) {
+			return $('#statusf option[value="' + e.status + '"]').text();
+		} },
+		{ "mData": function() {
+			return "<span class=\"actions btn btn-outline-primary btn-outline-primary fas fa-edit\" title=\"" + jsstrings.edit + "\"></span>";
+		} }
+	];
 function loadData(aoData) {
 	var filters = {};
 	$(aoData).each(function (i, val) {
@@ -15,15 +26,9 @@ function loadData(aoData) {
 }
 function dataEdit(data) {
 	$('[name="edpermission[]"]').each(function () {
-		$(this).prop('checked', false).iCheck('update');
+		$(this).prop('checked', false);
 	});
 	$.each(data.access, function (index, value) {
-		$('[name="edpermission[' + value.permission + ']"]').prop('checked', true).iCheck('update');
+		$('[name="edpermission[' + value.permission + ']"]').prop('checked', true);
 	});
 }
-$(function () {
-	$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-		checkboxClass: 'icheckbox_minimal-blue',
-		radioClass: 'iradio_minimal-blue'
-	});
-});
