@@ -216,7 +216,7 @@ namespace Model {
         }
 
         public function addCustomJoin($join) {
-            $this->customJoins[] = $join;
+            $this->customJoins = array_merge($this->customJoins, $join);
         }
 
         public function addCustomSqlJoin($join) {
@@ -813,11 +813,7 @@ namespace Model {
             else {
                 if ($useResult) {
                     $result = $this->db->query($sql, MYSQLI_USE_RESULT);
-                    debug($sql);
-                    debug($data);
                     while ($obj = $result->fetch_assoc()) $ret[] = $obj;
-                    debug('done ret');
-
                     return $ret;
                 }
                 else $this->db->query($sql);

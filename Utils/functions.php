@@ -309,13 +309,16 @@ namespace Utils {
             }
             $html = '';
             foreach ($arr AS $key => $value) {
-                $selected = '';
+                $additionalAtts = '';
                 if(is_array($value)) {
                     $text = $value[0];
-                    if($value[1]) $selected = ' selected';
+                    if(arrayKeyExists(1, $value)) {
+                        if($value[1] == 'selected') $additionalAtts = ' selected';
+                        else $additionalAtts = $value[1];
+                    }
                 }
                 else $text = $value;
-                $html .= "<option value=\"{$key}\"{$selected}>{$text}</option>" . PHP_EOL;
+                $html .= "<option value=\"{$key}\"{$additionalAtts}>{$text}</option>" . PHP_EOL;
             }
             return $html;
         }

@@ -92,7 +92,7 @@ class Pages {
 				</div>
                 <div class="form-group">
                     <div class="input-group">
-						<input type="text" class="form-control" id="edh1" name="edh1" />
+						<input type="text" class="form-control" id="edh1" name="edh1" required />
 						<label for="edh1" class="control-label">' . __('H1') . '</label>
 						<i class="bar"></i>
 					</div>

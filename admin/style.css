@@ -223,12 +223,13 @@ body .control-sidebar {
 .form-group textarea.form-file~.control-label,
 .form-group textarea.has-value~.control-label,
 .form-group textarea:focus~.control-label,
-.form-group textarea:valid~.control-label {
+.form-group textarea:valid~.control-label,
+.form-group .bts_dropdown~.control-label {
     font-size: .6rem;
     color: #4ae387;
     font-weight: 600;
     text-transform: uppercase;
-    top: -.6rem;
+    top: -1rem;
     left: 0;
 }
 .form-group input:focus~.bar:before,
