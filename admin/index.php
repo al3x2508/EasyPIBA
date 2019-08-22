@@ -5,12 +5,9 @@ $stime = microtime();
 $stime = explode(' ', $stime);
 $stime = $stime[1] + $stime[0];
 require_once(dirname(dirname(__FILE__)) . '/Utils/functions.php');
-$message = '';
+$message = [];
 if (arrayKeyExists('username', $_POST) && arrayKeyExists('password', $_POST)) {
-    $checkAuth = AdminController::checkAuth($_POST['username'], $_POST['password']);
-    if (is_array($checkAuth)) {
-        $message = $checkAuth["message"];
-    }
+    $message = AdminController::checkAuth($_POST['username'], $_POST['password']);
 }
 if (isset($_GET['logout'])) {
     unset($_SESSION);
@@ -18,8 +15,8 @@ if (isset($_GET['logout'])) {
     header('Location: ' . _FOLDER_URL_ . basename(dirname(__FILE__)) . '/');
     exit;
 }
-if (!AdminController::getCurrentUser() && empty($message)) {
-    $message = __('Admin login');
+if (!AdminController::getCurrentUser() && !count($message)) {
+    $message = ['message' => __('Admin login'), 'class' => ''];
 }
 if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUser()) {
     $filename = trim(ltrim($page_url, basename(dirname(__FILE__))), '/');
@@ -84,8 +81,8 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="<?php echo _FOLDER_URL_; ?>css/main.css">
         <!-- Theme style -->
-        <link rel="stylesheet"
-              href="<?php echo _FOLDER_URL_; ?>vendor/almasaeed2010/adminlte/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="<?php echo _FOLDER_URL_; ?>vendor/almasaeed2010/adminlte/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="<?php echo _FOLDER_URL_; ?>vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,43 +90,106 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+            .d-gradient {
+                position: relative;
+                margin: 0;
+                background-color: #342069;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+            }
+            .d-gradient:after {
+                background-color: rgba(28, 234, 222, 0.8);
+                background: linear-gradient(-45deg, rgba(187, 26, 222, 0.8) 0%, rgba(28, 234, 222, 0.8) 100%);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: block;
+                content: "";
+                top: 0;
+                left: 0;
+                z-index: 0;
+            }
+            .login-box {
+                z-index: 1;
+                -webkit-box-shadow: 0 4px 70px -18px #707070;
+                box-shadow: 0 4px 70px -18px #707070;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+            }
+            .login-box:hover {
+                -webkit-box-shadow: 0 4px 70px -18px #000;
+                box-shadow: 0 4px 70px -18px #000;
+            }
+            .login-logo {
+                margin-bottom: 0;
+                -webkit-border-radius: 10px 10px 0 0;
+                -moz-border-radius: 10px 10px 0 0;
+                border-radius: 10px 10px 0 0;
+            }
+            .login-logo a {
+                color: #f8f8f8;
+            }
+            .login-logo a:hover {
+                text-decoration: none;
+            }
+            .login-box-body {
+                -webkit-border-radius: 0 0 10px 10px;
+                -moz-border-radius: 0 0 10px 10px;
+                border-radius: 0 0 10px 10px;
+            }
+        </style>
     </head>
-    <body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="/"><?php echo _APP_NAME_; ?></a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-            <p class="login-box-msg"><?= $message; ?></p>
+    <body>
+        <div class="vh-100 d-flex align-items-center col justify-content-center d-gradient">
+            <div class="login-box">
+                <div class="login-logo">
+                    <a href="/"><?php echo _APP_NAME_; ?></a>
+                </div>
+                <!-- /.login-logo -->
+                <div class="login-box-body">
+                    <p class="login-box-msg pb-0 mb-3<?php if(!arrayKeyExists('class', $message)) echo " alert-warning" ?>"><?= $message['message']; ?></p>
 
-            <form action="" method="post">
-                <div class="form-group has-feedback">
-                    <input type="text" name="username" class="form-control"
-                           placeholder="<?php echo __('Username'); ?>"/>
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" name="username" id="username" class="form-control" required />
+                                <label for="username" class="control-label"><?php echo __('Username'); ?></label>
+                                <i class="bar"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" name="password" id="password" class="form-control" required />
+                                <label for="password" class="control-label"><?php echo __('Password'); ?></label>
+                                <i class="bar"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-lg-6 col-6">
+                                <button type="submit" class="btn btn-outline-primary btn-sm"><?php echo __('Login'); ?></button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group has-feedback">
-                    <input type="password" name="password" class="form-control"
-                           placeholder="<?php echo __('Password'); ?>"/>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <!-- /.col -->
-                    <div class="col-lg-6 col-6">
-                        <button type="submit"
-                                class="btn btn-primary btn-block btn-flat"><?php echo __('Login'); ?></button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
+                <!-- /.login-box-body -->
+            </div>
+            <!-- /.login-box -->
         </div>
-        <!-- /.login-box-body -->
-    </div>
-    <!-- /.login-box -->
     <script src="<?php echo _FOLDER_URL_; ?>js/jquery.min.js"></script>
-    <script
-        src="<?php echo _FOLDER_URL_; ?>vendor/almasaeed2010/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo _FOLDER_URL_; ?>js/tether.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="<?php echo _FOLDER_URL_; ?>vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $("#username").focus();
+        });
+    </script>
     </body>
     </html>
     <?php
