@@ -20,7 +20,7 @@ var jsonPage = 'News',
         },
         {
             "mData": function (e) {
-                return "<span class=\"actions btn btn-outline-primary btn-outline-primary fas fa-edit\"></span><span class=\"actions btn btn-outline-danger fas fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
+                return "<span class=\"actions btn btn-outline-primary fas fa-edit\"></span><span class=\"actions btn btn-outline-danger fas fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
             }
         }
     ],
