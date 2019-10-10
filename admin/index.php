@@ -112,17 +112,14 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
             }
             .login-box {
                 z-index: 1;
-                -webkit-box-shadow: 0 4px 70px -18px #707070;
-                box-shadow: 0 4px 70px -18px #707070;
+                border: 1px solid rgba(255, 255, 255, .4);
                 -webkit-border-radius: 10px;
                 -moz-border-radius: 10px;
                 border-radius: 10px;
-                transition: all 0.5s;
-                -webkit-transition: all 0.5s;
             }
-            .login-box:hover {
-                -webkit-box-shadow: 0 4px 70px -18px #000;
-                box-shadow: 0 4px 70px -18px #000;
+            .login-box-body {
+                background: transparent;
+                color: #f8f8f8;
             }
             .login-logo {
                 margin-bottom: 0;
@@ -140,6 +137,18 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
                 -webkit-border-radius: 0 0 10px 10px;
                 -moz-border-radius: 0 0 10px 10px;
                 border-radius: 0 0 10px 10px;
+            }
+            .login-box-body input:hover,
+            .login-box-body input:focus {
+                outline: none;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+                border-color: #ccc;
+            }
+            .d-gradient .login-box-body input:hover,
+            .d-gradient .login-box-body input:focus {
+                border-color: rgba(255, 255, 255, .6);
             }
         </style>
     </head>
@@ -168,12 +177,10 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
                                 <i class="bar"></i>
                             </div>
                         </div>
-                        <div class="row">
-                            <!-- /.col -->
-                            <div class="col-lg-6 col-6">
-                                <button type="submit" class="btn btn-outline-primary btn-sm"><?php echo __('Login'); ?></button>
+                        <div class="d-flex justify-content-sm-center">
+                            <div class="col-sm-6">
+                                <input type="submit" class="form-control btn btn-outline-primary" value="<?php echo __('Login'); ?>" />
                             </div>
-                            <!-- /.col -->
                         </div>
                     </form>
                 </div>

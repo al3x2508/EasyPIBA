@@ -19,6 +19,7 @@ class LoginPage
     public $css = array();
     public $visible = true;
     public $disableAmp = true;
+    public $gradient = ' d-gradient';
 
     public function __construct()
     {
@@ -187,7 +188,6 @@ class LoginPage
 								<a href="#" id="register-form-link">' . __('Register') . '</a>
 							</div>
 							</div>
-							<hr>
 						</div>
 						<div class="panel-body container">
 							<div class="row">

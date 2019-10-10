@@ -15,6 +15,7 @@ class PasswordResetPage {
 	public $js = array();
 	public $css = array();
 	public $visible = true;
+    public $gradient = ' d-gradient';
 
 	public function __construct() {
 		$this->content = '';
@@ -131,7 +132,7 @@ class PasswordResetPage {
 				<div class="col-12 col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 					' . $errors . '
 					<div class="panel panel-login">
-						<div class="panel-heading"><div class="row"><div class="col-12 text-center"><h2><b>' . __('Password reset') . '</b></h2></div></div><hr /></div>
+						<div class="panel-heading"><div class="row"><div class="col-12 text-center"><h5><b>' . __('Password reset') . '</b></h5></div></div><hr /></div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-12">

@@ -599,14 +599,14 @@ CREATE TABLE `users` (
   `password` varchar(64) NOT NULL,
   `status` tinyint(1) DEFAULT '0',
   `settings` text,
-  `cookie` varchar(255) DEFAULT '',
- `cookie_expire` timestamp NULL DEFAULT NULL,
- `last_login` datetime DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_login` timestamp NULL DEFAULT NULL,
+  `comments` text,
+  `newsletter` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `country` (`country`),
-  KEY `status` (`status`),
-  KEY `cookie` (`cookie`),
+  KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE `user_confirm` (

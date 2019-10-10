@@ -50,6 +50,10 @@ class Template
      */
     private $sidebar = '';
     /**
+     * @var string
+     */
+    private $gradient = '';
+    /**
      * @var bool
      */
     private $menu = false;
