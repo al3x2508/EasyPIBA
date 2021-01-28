@@ -39,7 +39,7 @@ class Cache {
 //            $this->content .= '<div class="alert alert-success" role="alert"><strong>' . __('Clear APC cache ') . '.</strong></div>';
 
             $cache = Util::getCache();
-            if($cache !== null) {
+            if($cache) {
                 $cache->flush();
             }
             $this->content .= '<div class="alert alert-success" role="alert"><strong>' . __('Clear all cache data') . '.</strong></div>';

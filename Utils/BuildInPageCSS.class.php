@@ -1,9 +1,20 @@
 <?php
 namespace Utils;
 
+use DomDocument;
+use DOMElement;
+use DOMNode;
+use DomXPath;
 use PHPHtmlParser\Dom;
+use Sabberworm\CSS\CSSList\AtRuleBlockList;
+use Sabberworm\CSS\CSSList\KeyFrame;
+use Sabberworm\CSS\OutputFormat;
+use Sabberworm\CSS\Parser;
+use Sabberworm\CSS\Parsing\OutputException;
 use Sabberworm\CSS\Property\Selector;
+use Sabberworm\CSS\RuleSet\AtRuleSet;
 use Sabberworm\CSS\RuleSet\DeclarationBlock;
+use Sabberworm\CSS\Settings;
 
 class BuildInPageCSS
 {
@@ -15,16 +26,16 @@ class BuildInPageCSS
         if ($cache) {
             $cacheKey = _CACHE_PREFIX_ . 'output|' . $md5url;
             $buffer = $cache->get($cacheKey);
-            $dom = new \DomDocument();
+            $dom = new DomDocument();
             $dom->loadHTML($buffer);
-            $xpath = new \DomXPath($dom);
+            $xpath = new DomXPath($dom);
             $children = $dom->childNodes;
             $elementsWithIds = $xpath->query("//*[@id]");
             $elementsWithClasses = $xpath->query("//*[@class]");
             foreach ($children AS $child) {
                 $this->setNodeNames($child);
             }
-            /** @var \DOMElement $element */
+            /** @var DOMElement $element */
             foreach ($elementsWithIds as $element) {
                 $selector = '#' . $element->getAttribute('id');
                 if (!in_array($selector, $this->selectors)) {
@@ -50,17 +61,17 @@ class BuildInPageCSS
                     $dom->loadStr($buffer, []);
                     $css_contents = file_get_contents(_APP_DIR_ . 'cache/css/main.css');
                     $inpageCss = '';
-                    $oSettings = \Sabberworm\CSS\Settings::create()->withMultibyteSupport(false);
-                    $oCssParser = new \Sabberworm\CSS\Parser($css_contents, $oSettings);
+                    $oSettings = Settings::create()->withMultibyteSupport(false);
+                    $oCssParser = new Parser($css_contents, $oSettings);
                     $cssParsed = $oCssParser->parse();
                     foreach ($cssParsed->getContents() as $oItem) {
-                        if ($oItem instanceof \Sabberworm\CSS\CSSList\KeyFrame) {
+                        if ($oItem instanceof KeyFrame) {
                             continue;
                         }
-                        if ($oItem instanceof \Sabberworm\CSS\RuleSet\AtRuleSet) {
+                        if ($oItem instanceof AtRuleSet) {
                             continue;
                         }
-                        if ($oItem instanceof \Sabberworm\CSS\RuleSet\DeclarationBlock) {
+                        if ($oItem instanceof DeclarationBlock) {
                             $oBlock = $oItem;
                             $selectors = array();
                             /** @var Selector $oSelector */
@@ -68,10 +79,14 @@ class BuildInPageCSS
                                 $selectors[] = $oSelector->getSelector();
                             }
                             if (count($dom->find(implode(",", $selectors))) > 0) {
-                                $inpageCss .= $oBlock->render(\Sabberworm\CSS\OutputFormat::createCompact());
-                            }
+								try {
+									$inpageCss .= $oBlock->render(OutputFormat::createCompact());
+								}
+								catch (OutputException $e) {
+								}
+							}
                         }
-                        if ($oItem instanceof \Sabberworm\CSS\CSSList\AtRuleBlockList) {
+                        if ($oItem instanceof AtRuleBlockList) {
                             /** @var DeclarationBlock $oBlock */
                             foreach ($oItem->getContents() as $oBlock) {
                                 $selectors = array();
@@ -79,8 +94,12 @@ class BuildInPageCSS
                                     $selectors[] = $oSelector->getSelector();
                                 }
                                 if (count($dom->find(implode(",", $selectors))) > 0) {
-                                    $inpageCss .= $oItem->render(\Sabberworm\CSS\OutputFormat::createCompact());
-                                    break;
+									try {
+										$inpageCss .= $oItem->render(OutputFormat::createCompact());
+									}
+									catch (OutputException $e) {
+									}
+									break;
                                 }
                             }
                         }
@@ -103,7 +122,7 @@ class BuildInPageCSS
     }
 
     /**
-     * @param \DOMNode $node
+     * @param DOMNode $node
      */
     private function setNodeNames($node)
     {

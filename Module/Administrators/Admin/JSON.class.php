@@ -29,7 +29,7 @@ class JSON extends Admin {
 			if(arrayKeyExists('secho', $_REQUEST)) $response = json_encode(array('sEcho' => $_REQUEST['secho'], 'iTotalRecords' => $countTotal, 'iTotalDisplayRecords' => $countFiltered, 'aaData' => $admins));
 			else {
 				$adminsArray = array();
-				foreach($admins AS $admin) $adminsArray['#' . $admin->id] = $admin->name;
+				foreach($admins AS $admin) $adminsArray[] = ['value' => $admin->id, 'text' => $admin->name];
 				$response = json_encode($adminsArray);
 			}
 			if(arrayKeyExists('callback', $_GET)) $response = $_GET['callback'] . '(' . $response . ')';

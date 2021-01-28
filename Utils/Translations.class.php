@@ -1,5 +1,6 @@
 <?php
 namespace Utils;
+use Gettext\Translation;
 
 require_once(_APP_DIR_ . 'locale/gettext.php');
 require_once(_APP_DIR_ . 'locale/streams.php');

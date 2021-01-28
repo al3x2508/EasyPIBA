@@ -24,15 +24,15 @@ class Menu {
 			$selected = ($language->code == _DEFAULT_LANGUAGE_);
 			$languageOptions[$language->code] = [$language->name, $selected];
 		}
-		$this->content = '<div class="box">
-	<div class="box-header">
+		$this->content = '<div class="card">
+	<div class="card-header">
 		<div class="row">
 			<div class="col-12 col-md-4">
 				' . __('Language') . '<br /><select class="form-control" id="languagef">' . Util::arrayToOptions($languageOptions) . '</select>
 			</div>
 		</div>
 	</div>
-	<div class="box-body">
+	<div class="card-body">
 		<div class="container-fluid">
 			<div class="row row-eq-height">
 				<div class="col-12 col-md-6">
@@ -44,9 +44,9 @@ class Menu {
 			</div>
 		</div>
 	</div>
-	<div class="box-footer">
+	<div class="card-footer">
 		<div class="btn-toolbar">
-			<button id="customSave" class="btn btn-outline-primary">' . __('Save') . '</button>
+			<button id="customSave" class="btn btn-primary">' . __('Save') . '</button>
 		</div>
 	</div>
 </div>';

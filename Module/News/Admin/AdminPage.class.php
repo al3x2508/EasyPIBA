@@ -20,14 +20,14 @@ class AdminPage extends \Controller\AdminPage
             $languageOptions[$language->code] = [$language->name, $selected];
         }
         $statusOptions = [-1 => __('Any'), 0 => __('Hidden'), 1 => __('Published')];
-        $page->js = array('js/combobox.js','../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', '../vendor/ckeditor/ckeditor/ckeditor.js', 'js/jsall.js', 'Module/News/Admin/news.js');
+        $page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', '../vendor/ckeditor/ckeditor/ckeditor.js', 'js/jsall.js', '../assets/js/bootstrap-autocomplete.min.js', 'Module/News/Admin/news.js');
         $page->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css');
         $page->content = '<div class="box">
 	<div class="box-header">
 	    <div class="row">
 			<div class="col-md-9"><h3 class="box-title">' . __('Edit news') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fal fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
@@ -46,7 +46,7 @@ class AdminPage extends \Controller\AdminPage
 	</div>
 	<div class="box-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add news') . '</button>
+			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add news') . '</button>
 		</div>
 	</div>
 </div>

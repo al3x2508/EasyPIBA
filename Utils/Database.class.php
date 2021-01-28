@@ -1,11 +1,13 @@
 <?php
 namespace Utils;
 
+use mysqli;
+
 /**
  * Class Database
  * @package Utils
  */
-class Database extends \mysqli
+class Database extends mysqli
 {
     /**
      * @var Database|null
@@ -32,5 +34,10 @@ class Database extends \mysqli
             return null;
         }
         return self::$instance;
+    }
+
+    public function close() {
+        parent::close();
+        self::$instance = null;
     }
 }

@@ -7,7 +7,7 @@ var jsonPage = 'Administrators',
 			return $('#statusf option[value="' + e.status + '"]').text();
 		} },
 		{ "mData": function() {
-			return "<span class=\"actions btn btn-outline-primary fas fa-edit\" title=\"" + jsstrings.edit + "\"></span>";
+			return "<span class=\"actions btn btn-outline-primary fal fa-edit\" title=\"" + jsstrings.edit + "\"></span>";
 		} }
 	];
 function loadData(aoData) {

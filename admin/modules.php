@@ -1,8 +1,11 @@
 <?php
+
+use Model\Model;
+
 function reread()
 {
     require_once dirname(dirname(__FILE__)) . '/Utils/functions.php';
-    $modules = new \Model\Model('modules');
+    $modules = new Model('modules');
     //This where is necessary, because otherwise without a where parameter the delete() call will not complete to prevent data erasing by mistake
     $modules->where(array('id' => array(0, ' > ', 'i')));
     $modules->delete();

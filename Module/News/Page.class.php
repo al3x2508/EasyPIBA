@@ -2,6 +2,7 @@
 namespace Module\News;
 
 use Model\Model;
+use Utils\Template;
 use Utils\Util;
 
 class Page
@@ -12,29 +13,37 @@ class Page
     {
         $currentUrl = Util::getCurrentUrl();
         $page = new \stdClass();
-        $page->title = _APP_NAME_ . ' ' . __('news');
-        $page->description = _APP_NAME_ . ' ' . __('news');
-        $page->h1 = _APP_NAME_ . ' ' . __('news');
+        $page->title = __('News') . ' ' . _APP_NAME_;
+        $page->description = __('News') . ' ' . _APP_NAME_;
+        $page->h1 = __('News') . ' ' . _APP_NAME_;
         $page->content = '';
         $page->js = array();
-        $page->css = array();
+        $page->css = array('Module/News/stiri.css');
         $page->useCache = true;
         $news = new Model('news');
         $content = '';
-        if ($currentUrl == 'news' || preg_match('/news\/pag\-[\d+]/', $currentUrl)) {
+        if ($currentUrl == 'noutati' || preg_match('/noutati\/pag\-[\d+]/', $currentUrl)) {
             //Disable cache for generic news page
             $page->useCache = false;
-            $pageno = preg_match('/news\/pag\-(\d+)/', $currentUrl, $matches)?$matches[1]:1;
+            $pageno = preg_match('/noutati\/pag\-(\d+)/', $currentUrl, $matches)?$matches[1]:1;
             $limit = (($pageno - 1) * 6) . ', 6';
             $content = /** @lang text */
-                '<div class="container-fluid" id="news">
+                '<div class="container-fluid" id="header-stiri">
 			<div class="row">
-				<div class="col-lg-12 text-center">
-					<h1 class="title">' . __('News') . '</h1>
+				<div class="col-12">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<h1><strong>' . $page->title . '</strong></h1>
+								<span class="spacer spacer-green"></span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container" id="news">' . PHP_EOL;
+		<div class="container-fluid" id="container-stiri">
+		    <div class="container py-5" id="stiri">' . PHP_EOL;
             $news->status = 1;
             $news->order('date_published DESC');
             $totalNews = $news->countItems();
@@ -45,37 +54,33 @@ class Page
                     $img = _FOLDER_URL_ . 'img/' . _LOGO_;
                     $spanimgc = ' noimg';
                 } else {
-                    $img = _FOLDER_URL_ . 'img/news/' . str_replace('.jpg', '-360x220.jpg',
+                    $img = _FOLDER_URL_ . 'img/stiri/' . str_replace('.jpg', '-360x220.jpg',
                             rawurlencode($story->image));
                     $spanimgc = '';
                 }
-                $href = _FOLDER_URL_ . 'news/' . Util::getUrlFromString($story->title);
-                if (strlen($story->content) > 200) {
-                    $pos = strpos($story->content, ' ', 200);
-                    $storyText = substr(strip_tags($story->content), 0, $pos) . '...';
-                } else {
-                    $storyText = $story->content;
-                }
+                $href = _FOLDER_URL_ . 'noutati/' . Util::getUrlFromString($story->title) . '.html';
+                $storyText = Template::shortText($story->content);
                 if ($index % 3 == 0) {
-                    $content .= '				<div class="row">';
+                    $content .= '				<div class="row mb-3">';
                 }
                 $content .= '<article class="col-lg-4">
-						<header>
-							<h2>
-								<a href="' . $href . '" title="' . htmlentities($story->title) . '">
-									<span class="imgstory' . $spanimgc . '">
-										<img src="' . $img . '" alt="' . htmlentities($story->title) . '" />
-									</span>
-									' . $story->title . '
-								</a>
-							</h2>
-							<p><time datetime="' . $story->date_published . '">' . date('d.m.Y',
-                        strtotime($story->date_published)) . '</time></p><br />
-						</header>
-						<div class="content">
-							' . $storyText . '
-						</div>
-						<a href="' . $href . '" class="readmore">&gt;&gt; ' . __('read more') . '</a>
+                        <div class="drop-shadow p-0">
+                            <header>
+                                <h2>
+                                    <a href="' . $href . '" title="' . htmlentities($story->title) . '">
+                                        <span class="imgstire noimg' . $spanimgc . '">
+                                            <img src="' . $img . '" alt="' . htmlentities($story->title) . '" />
+                                        </span>
+                                        <span class="titlu">' . $story->title . '</span>
+                                    </a>
+                                </h2>
+                                <p><time datetime="' . $story->date_published . '">' . date('d.m.Y',
+                            strtotime($story->date_published)) . '</time></p>
+                            </header>
+                            <div class="content">
+                                ' . $storyText . '
+                            </div>
+                        </div>
 					</article>' . PHP_EOL;
                 if ($index % 3 == 2) {
                     $content .= '				</div>' . PHP_EOL;
@@ -85,17 +90,18 @@ class Page
                 $content .= '</div>';
             }
             if ($totalNews > 6) {
-                $butBack = ($pageno > 1)?'<li class="previous"><a href="' . _FOLDER_URL_ . 'news/pag-' . ($pageno - 1) . '">' . __('Newer') . ' <span aria-hidden="true">&larr;</span></a></li>' . PHP_EOL:'';
-                $butForward = ($pageno < ceil($totalNews / 6))?'<li class="next"><a href="' . _FOLDER_URL_ . 'news/pag-' . ($pageno + 1) . '">' . __('Older') . ' <span aria-hidden="true">&rarr;</span></a></li>' . PHP_EOL:'';
+                $butBack = ($pageno > 1)?'<li class="previous"><a href="' . _FOLDER_URL_ . 'noutati/pag-' . ($pageno - 1) . '">' . __('Newer') . ' <span aria-hidden="true">&larr;</span></a></li>' . PHP_EOL:'';
+                $butForward = ($pageno < ceil($totalNews / 6))?'<li class="next"><a href="' . _FOLDER_URL_ . 'noutati/pag-' . ($pageno + 1) . '">' . __('Older') . ' <span aria-hidden="true">&rarr;</span></a></li>' . PHP_EOL:'';
                 $content .= '<nav>
 			<ul class="pager">
 				' . $butBack . $butForward . '
 			</ul>
 		</nav>' . PHP_EOL;
             }
-            $content .= '</div>' . PHP_EOL;
+            $content .= '</div>
+                </div>' . PHP_EOL;
         } else {
-            $title = str_replace('news/', '', $currentUrl);
+            $title = str_replace(array('noutati/', '.html'), '', $currentUrl);
             $news->title = array($title, 'LIKE');
             $news = $news->get();
             if (count($news)) {
@@ -107,8 +113,8 @@ class Page
                 if (empty(trim($story->image))) {
                     $image = '';
                 } else {
-                    $image = "<img src='" . _FOLDER_URL_ . "img/news/" . rawurlencode($story->image) . "' id='imgstory' />";
-                    $page->ogimage = 'news/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
+                    $image = "<img src='" . _FOLDER_URL_ . "img/stiri/" . rawurlencode($story->image) . "' id='imgstory' />";
+                    $page->ogimage = 'stiri/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
                 }
                 $content = $image . '
 		<article id="content" class="container marginbot40">

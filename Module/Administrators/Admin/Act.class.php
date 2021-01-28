@@ -31,7 +31,7 @@ class Act extends AdminAct {
                 }
                 foreach ($method == 'patch'?$_PATCH:$_POST AS $key => $value) {
                     if (!in_array($key, array('password', 'permission'))) $this->fields[$key] = $value;
-                    elseif ($key == 'password' && strlen($value) > 5) $this->fields['password'] = $bcrypt->hash($_REQUEST['password']);
+                    elseif ($key == 'password' && strlen($value) > 5) $this->fields[$key] = $bcrypt->hash($value);
                 }
                 if($method == 'patch') {
                     $permissions->admin = $id;

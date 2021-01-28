@@ -9,21 +9,21 @@ $(function() {
 					if (val.menu_order == 0) {
 						$('#available').append(
 							$("<li></li>").attr("id", "list_" + val.id).data("id", val.id).append(
-								$("<div></div>").append($("<span></span>").addClass("disclose").append($("<span></span>"))).append(document.createTextNode(val.menu_text))
+								$("<div></div>").append($("<span></span>").addClass("disclose").append($("<span></span>"))).html(val.menu_text)
 							)
 						)
 					}
 					else {
 						if(val.menu_parent == 0) $('#nestable').append(
 							$("<li></li>").attr("id", "list_" + val.id).data("id", val.id).append(
-								$("<div></div>").append($("<span></span>").addClass("disclose").append($("<span></span>"))).append(document.createTextNode(val.menu_text))
+								$("<div></div>").append($("<span></span>").addClass("disclose").append($("<span></span>"))).html(val.menu_text)
 							)
 						);
 						else {
 							if($('#list_' + val.menu_parent).children('ol').length == 0) $('#list_' + val.menu_parent).append($('<ol></ol>'));
 							$('#list_' + val.menu_parent).children('ol').eq(0).append(
 								$("<li></li>").attr("id", "list_" + val.id).data("id", val.id).append(
-									$("<div></div>").append($("<span></span>").addClass("disclose").append($("<span></span>"))).append(document.createTextNode(val.menu_text))
+									$("<div></div>").append($("<span></span>").addClass("disclose").append($("<span></span>"))).html(val.menu_text)
 								)
 							);
 						}

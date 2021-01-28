@@ -8,7 +8,7 @@ var jsonPage = 'Pages',
 		{ "mData": "title" },
 		{ "mData": "menu_text" },
 		{ "mData": function(e) {
-			return "<span class=\"actions btn btn-outline-primary fas fa-folder-open\" data-url=\"/" + e.url + "\"></span><span class=\"actions btn btn-outline-primary fas fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-outline-danger fas fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
+			return "<span class=\"actions btn btn-sm btn-outline-primary fal fa-folder-open\" data-url=\"" + folder + e.url + "\"></span><span class=\"actions btn btn-sm btn-outline-primary fal fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-sm btn-outline-danger fal fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
 		}}
 	],
 	delAction = 'delete_page';
@@ -29,10 +29,16 @@ function loadData(aoData) {
 }
 $(document).ready(function() {
 	CKEDITOR.plugins.addExternal('imageuploader', adminfolder + 'plugins/imageuploader/');
+	CKEDITOR.plugins.add('maincss', {
+		beforeInit: function( editor ) {
+			editor.addContentsCss( folder + 'css/main.css' );
+		}
+	});
 	CKEDITOR.replace('edcontent', {
 		allowedContent: true,
-		extraPlugins: 'imageuploader,justify,codesnippetgeshi',
-		codeSnippetGeshi_url: '/admin/plugins/codesnippetgeshi/colorize.php'
+		extraPlugins: 'imageuploader,justify,maincss',
+		fillEmptyBlocks: false,
+		height: 560
 	});
 	CKEDITOR.dtd.$removeEmpty['i'] = false;
 	CKEDITOR.dtd.$removeEmpty['span'] = false;

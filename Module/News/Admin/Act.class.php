@@ -70,7 +70,7 @@ class Act extends AdminAct
         //We have to delete the URL for the post
         $oldPostValues = new Model('news');
         $oldPostValues = $oldPostValues->getOneResult('id', $this->fields['id']);
-        $oldUrl = 'news/' . Util::getUrlFromString($oldPostValues->title);
+        $oldUrl = 'noutati/' . Util::getUrlFromString($oldPostValues->title) . '.html';
         $mR = new Model('module_routes');
         $mR = $mR->getOneResult('url', $oldUrl);
         if ($mR && $mR->modules->name == 'News') {
@@ -89,7 +89,7 @@ class Act extends AdminAct
                 $path_parts = pathinfo($uploaded_file);
                 $fname = $path_parts['filename'];
                 $extension = $path_parts['extension'];
-                $target_dir = _APP_DIR_ . 'assets/img/news/';
+                $target_dir = _APP_DIR_ . 'assets/img/stiri/';
                 $destination_file = $target_dir . $filename;
                 $thumb_file_name = 'thumb' . $path_parts['filename'] . '.jpg';
                 $thumb_target_file = $upload_dir . $thumb_file_name;
@@ -119,7 +119,7 @@ class Act extends AdminAct
             $oldPostValues = new Model('news');
             $oldPostValues = $oldPostValues->getOneResult('id', $this->fields['id']);
             if($oldPostValues->title != $this->fields['title']) {
-                $oldUrl = 'news/' . Util::getUrlFromString($oldPostValues->title);
+                $oldUrl = 'noutati/' . Util::getUrlFromString($oldPostValues->title) . '.html';
                 $mR = new Model('module_routes');
                 $mR = $mR->getOneResult('url', $oldUrl);
                 if ($mR && $mR->modules->name == 'News') {
@@ -127,7 +127,7 @@ class Act extends AdminAct
                 }
             }
         }
-        $url = 'news/' . Util::getUrlFromString($this->fields['title']);
+        $url = 'noutati/' . Util::getUrlFromString($this->fields['title']) . '.html';
         $mR = new Model('module_routes');
         $mR = $mR->getOneResult('url', $url);
         if(!$mR) {

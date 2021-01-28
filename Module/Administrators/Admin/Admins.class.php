@@ -36,7 +36,7 @@ class Admins {
 		<div class="row">
 			<div class="col-md-9"><h3 class="box-title">' . __('Edit administrators') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fal fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,7 @@ class Admins {
 	</div>
 	<div class="box-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add admin') . '</button>
+			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add admin') . '</button>
 		</div>
 	</div>
 </div>

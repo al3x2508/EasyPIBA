@@ -188,6 +188,7 @@ class LoginPage
 								<a href="#" id="register-form-link">' . __('Register') . '</a>
 							</div>
 							</div>
+							<hr>
 						</div>
 						<div class="panel-body container">
 							<div class="row">
@@ -201,7 +202,7 @@ class LoginPage
 											<div class="input-group">
 												<input type="email" name="email" id="email-login" class="form-control"' . $emailValue . ' data-rule="maxlen:2" data-msg="' . __('Enter your email') . '" pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
 												<label class="control-label" for="email-login" data-ex="eg: john.smith@yahoo.com">
-													<i class="fas fa-envelope"></i> ' . __('Email') . '
+													<i class="fal fa-envelope"></i> ' . __('Email') . '
 												</label>
 												<i class="bar"></i>
 											</div>
@@ -210,7 +211,7 @@ class LoginPage
 											<div class="input-group">
 												<input type="password" name="password" id="password-login" class="form-control" data-rule="maxlen:8" pattern=".{8,}" required />
 												<label class="control-label" for="password-login">
-													<i class="fas fa-eye-slash"></i> * ' . __('Password') . '
+													<i class="fal fa-eye-slash"></i> * ' . __('Password') . '
 												</label>
 												<i class="bar"></i>
 											</div>
@@ -229,14 +230,8 @@ class LoginPage
 											</div>
 										</div>
 										<div class="col-12 field form-group">
-											<div class="row">
-												<div class="col-12">
-													<div class="text-center">
-														<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" class="forgot-password">' . __('Forgot Password?') . '</a> | 
-														<a href="#" class="forgot-password" id="resend">' . __('Resend email confirmation') . '</a>
-													</div>
-												</div>
-											</div>
+											<a href="' . _ADDRESS_ . _FOLDER_URL_ . 'password_reset" class="forgot-password">' . __('Forgot Password?') . '</a> | 
+											<a href="#" class="forgot-password" id="resend">' . __('Resend email confirmation') . '</a>
 										</div>
 									</form>';
         $this->content .= Controller::getAccountForm($fields, array(), 'register-form', __('Register'),

@@ -57,9 +57,9 @@ class Template
         $this->$key = $value;
     }
 
-    public function output($scripts = array(), $styles = array(), $stime)
+    public function output($stime)
     {
-        $this->loadTemplate($scripts, $styles);
+        $this->loadTemplate();
         $ftime = microtime();
         $ftime = explode(' ', $ftime);
         $ftime = $ftime[1] + $ftime[0];
@@ -68,7 +68,7 @@ class Template
         echo $this->template;
     }
 
-    public function loadTemplate($scripts, $styles)
+    public function loadTemplate()
     {
         if (!file_exists($this->filename) || is_dir($this->filename)) {
             die("Error loading template ({$this->filename}).");
@@ -80,7 +80,7 @@ class Template
         $userLanguage = Util::getUserLanguage();
         $this->LANGUAGE = $userLanguage;
         $this->myaccountlink = '';
-        $this->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fas fa-power-off"></i> ' . __('Logout') . '</a>';
+        $this->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fal fa-power-off"></i> ' . __('Logout') . '</a>';
         $this->loading_time_string = __('Loading time');
         foreach (get_object_vars($this) AS $key => $value) {
             if (!is_object($value) && !is_array($value)) {
@@ -96,28 +96,6 @@ class Template
                     }
                 }
             }
-        }
-        if (count($scripts)) {
-            foreach ($scripts AS $k => $script) {
-                if (strpos($script, '/cachedassets/') === 0) {
-                    $script = _FOLDER_URL_ . 'uploads/h5p/' . $script;
-                } else {
-                    $script = '../js/' . $script;
-                }
-                $scripts[$k] = $script;
-            }
-            $this->page->js = (property_exists($this->page, 'js'))?array_merge($this->page->js, $scripts):$scripts;
-        }
-        if (count($styles)) {
-            foreach ($styles AS $k => $style) {
-                if (strpos($style, '/cachedassets/') === 0) {
-                    $style = _FOLDER_URL_ . 'uploads/h5p/' . $style;
-                } else {
-                    $style = '../css/' . $style;
-                }
-                $styles[$k] = $style;
-            }
-            $this->page->css = (property_exists($this->page, 'css'))?array_merge($this->page->css, $styles):$styles;
         }
         if (property_exists($this->page, 'css') && count($this->page->css)) {
             $replacement = '';
@@ -150,7 +128,7 @@ class Template
         $return[] = AdminPage::createLink(array(
             'href' => _FOLDER_URL_ . basename(dirname(__FILE__)) . '/',
             'text' => __('Statistics'),
-            'class' => 'fas fa-tachometer-alt'
+            'class' => 'fal fa-tachometer-alt'
         ), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
         $admins_permissions = new Model('admins_permissions');
         $admins_permissions->admin = AdminController::getCurrentUser()->id;

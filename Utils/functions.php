@@ -1,9 +1,13 @@
 <?php
+
 namespace Utils {
 
     use Controller\Mail;
+    use finfo;
     use Model\Model;
     use Module\Users\Controller;
+    use PHPMailer\PHPMailer\Exception;
+    use function hash_equals;
 
     if (!defined("_FOLDER_URL_")) {
         require_once(dirname(__FILE__) . '/config.php');
@@ -36,6 +40,8 @@ namespace Utils {
      * DO NOT MODIFY HTML Templates directory
      */
     define("_TEMPLATE_DIR_", _APP_DIR_ . 'templates/');
+
+    define("FPDF_FONTPATH", _APP_DIR_ . 'assets/fonts/');
 
     /**
      * Class Util
@@ -109,6 +115,7 @@ namespace Utils {
          */
         public static function getUrlFromString($string)
         {
+            setlocale(LC_ALL, "en_US.utf8");
             $characters = array(
                 "-",
                 "$",
@@ -130,7 +137,7 @@ namespace Utils {
                 "!"
             );
             $url = str_replace($characters, "_", strtolower($string));
-            $url = iconv('utf-8', 'us-ascii//TRANSLIT', $url);
+            $url = iconv('utf-8', 'ASCII//TRANSLIT', $url);
             $url = strtolower($url);
             $url = preg_replace('/[^_\w]+/', '_', $url);
             return strtolower($url);
@@ -223,7 +230,7 @@ namespace Utils {
             $token = $_SESSION[$unique_form_name];
             if ($token === false) {
                 return false;
-            } elseif (\hash_equals($token, $token_value)) {
+            } elseif (hash_equals($token, $token_value)) {
                 $result = true;
             } else {
                 $result = false;
@@ -280,21 +287,47 @@ namespace Utils {
                 $html = str_replace('{content}', $message, $html);
             }
             $mail = new Mail();
-            $mail->addAddress($email, $lastname);
-            $mail->setFrom(_MAIL_FROM_, _MAIL_NAME_);
+            try {
+                $mail->addAddress($email, $lastname);
+                $mail->setFrom(_MAIL_FROM_, _MAIL_NAME_);
+            } catch (Exception $e) {
+                debug($e->getMessage());
+            }
             if (!is_null($from)) {
                 $mail->addCustomHeader("Sender", "\"{$from['lastname']}\" <{$from['email']}>");
-                $mail->addReplyTo($from['email'], $from['lastname']);
+                try {
+                    $mail->addReplyTo($from['email'], $from['lastname']);
+                } catch (Exception $e) {
+                    debug($e->getMessage());
+                }
             }
             if ($bcc_self) {
-                $mail->addBCC(_MAIL_ADDRESS_, _MAIL_NAME_);
+                try {
+                    $mail->addBCC(_MAIL_ADDRESS_, _MAIL_NAME_);
+                } catch (Exception $e) {
+                    debug($e->getMessage());
+                }
             }
             $mail->Subject = '=?UTF-8?B?' . base64_encode(html_entity_decode($subject)) . '?=';
             $mail->msgHTML($html, dirname(__FILE__));
             if (!is_null($att)) {
-                $mail->addStringAttachment($att->body, $att->filename, 'base64', $att->mime);
+                try {
+                    $mail->addStringAttachment($att->body, $att->filename, 'base64', $att->mime);
+                } catch (Exception $e) {
+                    debug($e->getMessage());
+                }
             }
-            return $mail->send();
+            try {
+                $send = $mail->send();
+                if (!$send) {
+                    debug($mail->ErrorInfo);
+                }
+                return $send;
+            } catch (Exception $e) {
+                debug($mail->ErrorInfo);
+                debug($e->getMessage());
+                return false;
+            }
         }
 
         /**
@@ -303,21 +336,32 @@ namespace Utils {
          */
         public static function arrayToOptions($arr, $removeEmpty = false)
         {
-            if($removeEmpty) {
-                if(arrayKeyExists(-1, $arr)) unset($arr[-1]);
-                if(arrayKeyExists(0, $arr)) unset($arr[0]);
-            }
-            $html = '';
-            foreach ($arr AS $key => $value) {
-                $additionalAtts = '';
-                if(is_array($value)) {
-                    $text = $value[0];
-                    if(arrayKeyExists(1, $value)) {
-                        if($value[1] == 'selected') $additionalAtts = ' selected';
-                        else $additionalAtts = $value[1];
+            if ($removeEmpty) {
+                if (arrayKeyExists(-1, $arr)) {
+                    unset($arr[-1]);
+                }
+                if ($removeEmpty !== '-1') {
+                    if (arrayKeyExists(0, $arr)) {
+                        unset($arr[0]);
                     }
                 }
-                else $text = $value;
+            }
+            $html = '';
+            foreach ($arr as $key => $value) {
+                $additionalAtts = '';
+                if (is_array($value)) {
+                    $text = $value[0];
+                    if (arrayKeyExists(1, $value)) {
+                        if ($value[1] == 'selected') {
+                            $additionalAtts = ' selected';
+                        } else {
+                            $additionalAtts = ' ' . $value[1];
+                        }
+                    }
+                } else {
+                    $text = $value;
+                }
+                /** @var string $additionalAtts */
                 $html .= "<option value=\"{$key}\"{$additionalAtts}>{$text}</option>" . PHP_EOL;
             }
             return $html;
@@ -393,7 +437,7 @@ namespace Utils {
             if ($_FILES[$name]['size'] > 16777200) {
                 return array('ok' => 0, 'error' => 'File is too big (max 2MB)');
             }
-            $file_info = new \finfo(FILEINFO_MIME_TYPE);
+            $file_info = new finfo(FILEINFO_MIME_TYPE);
             if (false === $ext = array_search($file_info->file($_FILES[$name]['tmp_name']), $allowedTypes, true)) {
                 return array(
                     'ok' => 0,
@@ -460,8 +504,8 @@ namespace Utils {
             if ($cache && $buffer = $cache->get(_CACHE_PREFIX_ . 'imgsize' . $md5img) && !empty($buffer)) {
                 return json_decode($buffer, true);
             } else {
-                $size = getimagesize(_APP_DIR_ . $img);
-                if ($cache) {
+                $size = file_exists(_APP_DIR_ . $img)?getimagesize(_APP_DIR_ . $img):false;
+                if ($size && $cache) {
                     $cache->set(_CACHE_PREFIX_ . 'imgsize' . $md5img, json_encode($size));
                 }
                 return $size;
@@ -474,23 +518,27 @@ namespace Utils {
         public static function getCache()
         {
             return false;
-            $cache = \Utils\Memcached::getInstance();
+			$cache = Redis::getInstance();
+            /*$cache = Memcached::getInstance();
             if (!$cache || ($cache && !$cache->isConnected())) {
-                $cache = \Utils\Redis::getInstance();
-            }
+                $cache = Redis::getInstance();
+            }*/
             return $cache;
         }
     }
 }
+
 namespace {
 
     require dirname(__DIR__) . '/vendor/autoload.php';
     //Uncomment these lines if you want to redirect user to https from http and / or with www. prefix
-    $protocol = (@$_SERVER["HTTPS"] == "on")?"https://":"http://";
+    /*$protocol = (@$_SERVER["HTTPS"] == "on")?"https://":"http://";
     if (isset($_SERVER['HTTP_HOST']) && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.' && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'cne.') {
         header('Location: ' . $protocol . 'www.' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI']);
         exit;
-    }
+    }*/
+
+    use Gettext\Loader\MoLoader;
     use Module\Users\Controller;
     use Utils\Translations;
     use Utils\Util;
@@ -500,7 +548,7 @@ namespace {
         $ok = false;
         $userIp = Util::getUserIP();
         $allowedIps = json_decode(Util::getSetting('allowedIps'), true);
-        foreach ($allowedIps AS $allowedIp) {
+        foreach ($allowedIps as $allowedIp) {
             if (strpos($userIp, $allowedIp) !== false) {
                 $ok = true;
             }
@@ -587,9 +635,14 @@ namespace {
      */
     function __($string)
     {
+        /** @var MoLoader $translations */
+        /*$translations = Translations::getInstance();
+        return $translations->loadString($string);*/
         $translations = Translations::getInstance();
         $numargs = func_num_args();
-        if($numargs > 1) return $translations->ngettext(func_get_arg(0), func_get_arg(1), intval(func_get_arg(2)));
+        if ($numargs > 1) {
+            return $translations->ngettext(func_get_arg(0), func_get_arg(1), intval(func_get_arg(2)));
+        }
         return $translations->translate($string);
     }
 

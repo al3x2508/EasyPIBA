@@ -2,10 +2,8 @@
 
 namespace Controller;
 
-use DI;
 use Model\Model;
 use Module\Users\Controller AS UserController;
-use src\Logging\UserLogging;
 
 abstract class AdminAct {
 	/**

@@ -7,19 +7,19 @@ class AdminPage extends \Controller\AdminPage {
 		$page = new \stdClass();
 		$page->title = __('Testimonials');
 		$page->h1 = __('Testimonials');
-		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', '../vendor/ckeditor/ckeditor/ckeditor.js', 'js/jsall.js', 'Module/Testimonials/Admin/testimonials.js');
-		$page->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css');
+		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', '../vendor/ckeditor/ckeditor/ckeditor.js', 'js/jsall.js', 'Module/Products/Admin/dropzone.js', 'Module/Testimonials/Admin/testimonials.js');
+		$page->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css', 'Module/Products/Admin/dropzone.css', 'Module/Products/Admin/builder.css');
 		$statusOptions = array(-1 => __('Any'), 0 => __('Hidden'), 1 => __('Visible'));
-		$page->content = '<div class="box">
-	<div class="box-header">
+		$page->content = '<div class="card">
+	<div class="card-header">
 		<div class="row">
-			<div class="col-md-9"><h3 class="box-title">' . __('Testimonials') . '</h3></div>
+			<div class="col-md-9"><h3 class="card-title">' . __('Testimonials') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fal fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
-	<div class="box-body">
+	<div class="card-body">
 		<div class="row">
 			<div class="col-12">
 				<table id="data_table" class="table table-borderless table-hover table-sm w-100">
@@ -32,9 +32,9 @@ class AdminPage extends \Controller\AdminPage {
 			</div>
 		</div>
 	</div>
-	<div class="box-footer">
+	<div class="card-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add testimonial') . '</button>
+			<button id="add" class="btn btn-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add testimonial') . '</button>
 		</div>
 	</div>
 </div>
@@ -44,7 +44,7 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-header">
 				<h4 class="modal-title">' . __('Testimonials') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
-					<span aria-hidden="true">×</span>
+					<i class="fal fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body" id="edtable">
@@ -76,16 +76,13 @@ class AdminPage extends \Controller\AdminPage {
 						<i class="bar"></i>
 					</div>
                 </div>
-                <form action="" method="post" id="imageUploadForm">
-					<div class="form-group">
-						<div class="input-group">
-							<input type="file" class="form-control" id="edimage" name="edimage" />
-							<label for="edimage" class="control-label">' . __('Image') . '</label>
-							<i class="bar"></i>
-							<img id="imagePreview" src="" data-default="default.jpg" data-folder="testimonials" />
-						</div>
-					</div>
-				</form>
+                <div class="mb-5">
+    				<a href="#galleryModal" data-toggle="modal" data-target="#galleryModal" class="control-label">
+    				    <img src="' . _FOLDER_URL_ . 'img/' . _LOGO_ . '" id="imagePreview" alt="Imagine articol" data-folder="testimonials" data-default="' . _LOGO_ . '" height="100" />
+    				    <input type="hidden" name="edimage" id="edimage" value="" />
+                    </a>
+					<i class="bar"></i>
+                </div>
                 <div class="form-group">
 					<div class="input-group">
 						<select id="edstatus" name="edstatus" class="form-control"><option value="1" selected>' . __('Active') . '</option><option value="2">' . __('Blocked') . '</option></select>
@@ -97,6 +94,62 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
 				<button type="button" class="btn btn-outline-primary" id="save">' . __('Save') . '</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="galleryModal">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">' . ('Image gallery') . '</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fal fa-times"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<form action="" class="dropzone dz-clickable" id="gallery-dropzone">
+								<div class="dz-message d-flex flex-column">
+									<i class="fal fa-cloud-upload text-muted"></i>
+									Drag &amp; Drop here or click
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="gallery" class="container-fluid mt-4">
+					<div class="row">
+						
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary">' . ('Close') . '</button>
+				<button type="button" class="btn btn-primary" disabled>' . ('Use image') . '</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade p-0" tabindex="-1" role="dialog" id="galleryview">
+	<div class="modal-dialog modal-full m-0" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fal fa-times"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<img src="" />
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

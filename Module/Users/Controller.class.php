@@ -46,7 +46,7 @@ class Controller {
 							<div class="input-group">
 								<input type="email" name="email" id="email" class="form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" autocomplete="off" required />
 								<label class="control-label" for="email" data-ex="eg: john.smith@yahoo.com">
-									<i class="fas fa-envelope"></i> * ' . __('Email') . '
+									<i class="fal fa-envelope"></i> * ' . __('Email') . '
 								</label>
 								<i class="bar"></i>
 								' . $email['validation'] . '
@@ -56,7 +56,7 @@ class Controller {
 							<div class="input-group">
 								<input type="password" name="password" id="password" class="form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" autocomplete="new-password" required />
 								<label class="control-label" for="password" data-ex="' . __('8 characters minimum') . '">
-									<i class="fas fa-eye-slash"></i> * ' . __('Password') . '
+									<i class="fal fa-eye-slash"></i> * ' . __('Password') . '
 								</label>
 								<i class="bar"></i>
 								' . $password . '
@@ -66,7 +66,7 @@ class Controller {
 							<div class="input-group">
 								<input type="password" name="confirmPassword" id="confirmPassword" class="form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" autocomplete="new-password" required />
 								<label class="control-label" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
-									<i class="fas fa-eye-slash"></i> * ' . __('Confirm password') . '
+									<i class="fal fa-eye-slash"></i> * ' . __('Confirm password') . '
 								</label>
 								<i class="bar"></i>
 								' . $confirmPassword . '
@@ -77,7 +77,7 @@ class Controller {
 							<div class="input-group">
 								<input type="text" name="firstname" id="firstname" class="form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $firstname['value'] . ' pattern=".{2,}" required />
 								<label class="control-label" for="firstname" data-ex="eg: John">
-									<i class="fas fa-user"></i> * ' . __('Firstname') . '
+									<i class="fal fa-user"></i> * ' . __('Firstname') . '
 								</label>
 								<i class="bar"></i>
 								' . $firstname['validation'] . '
@@ -87,7 +87,7 @@ class Controller {
 							<div class="input-group">
 								<input type="text" name="lastname" id="lastname" class="form-control" data-rule="maxlen:2" data-msg="' . sprintf(__('Enter at least %s characters'), '2') . '"' . $lastname['value'] . ' pattern=".{2,}" required />
 								<label class="control-label" for="lastname" data-ex="eg: Smith">
-									<i class="fas fa-user"></i> * ' . __('Lastname') . '
+									<i class="fal fa-user"></i> * ' . __('Lastname') . '
 								</label>
 								<i class="bar"></i>
 								' . $lastname['validation'] . '
@@ -96,27 +96,26 @@ class Controller {
 						' . $emailField . '
 						<div class="col-12 mt-5 field form-group">
 						    <div class="input-group">
-                                <select name="country" id="country" class="form-control" required>
+                                <select name="country" id="country" class="form-control select2" required>
                                     ' . $countriesOptions . '
                                 </select>
                                 <label for="country" class="control-label">' . __('Country') . '</label>
-                                <i class="bar"></i>
 							    ' . $country . '
 							</div>
 						</div>';
 		$content .= $passwordFields . '
 						<div class="col-12 mb-0 field form-group">
-                            <div class="custom-control custom-checkbox">
-							    <input type="checkbox" class="custom-control-input" name="subscribe" id="subscribe"' . $subscribe . ' />
-							    <label for="subscribe" class="custom-control-label">' . __('Subscribe to newsletter') . '</label>
+                            <div class="input-group">
+							    <input type="checkbox" name="subscribe" id="subscribe"' . $subscribe . ' data-bootstrap-switch />
+							    <label for="subscribe">' . __('Subscribe to newsletter') . '</label>
 							</div>
 						</div>' . PHP_EOL;
 		if($button) {
 			$termsConditions = (arrayKeyExists('termsConditions', $fields) && $fields['termsConditions'] == 1) ? '<div class="alert alert-danger">' . __('You must accept our Terms and conditions') . '</div>' : '';
 			$content .= '<div class="col-12 mb-0 field form-group">
-                            <div class="custom-control custom-checkbox">
-							    <input type="checkbox" class="custom-control-input" name="termsConditions" id="termsConditions" />
-							    <label for="termsConditions" class="custom-control-label">' . sprintf(__('I have read and agree to the %s'), '<a href="' . _FOLDER_URL_ . 'terms-conditions">' . __('Terms and Conditions') . '</a>') . '</label>
+                            <div class="input-group">
+							    <input type="checkbox" name="termsConditions" id="termsConditions" data-bootstrap-switch />
+							    <label for="termsConditions">' . sprintf(__('I have read and agree to the %s'), '<a href="' . _FOLDER_URL_ . 'terms-conditions">' . __('Terms and Conditions') . '</a>') . '</label>
 							    ' . $termsConditions . '
 							</div>
 						</div>

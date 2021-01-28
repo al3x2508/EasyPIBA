@@ -20,7 +20,7 @@ var jsonPage = 'News',
         },
         {
             "mData": function (e) {
-                return "<span class=\"actions btn btn-outline-primary fas fa-edit\"></span><span class=\"actions btn btn-outline-danger fas fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
+                return "<span class=\"actions btn btn-outline-primary fal fa-edit\"></span><span class=\"actions btn btn-outline-danger fal fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
             }
         }
     ],
@@ -29,30 +29,28 @@ $(function () {
     $.widget.bridge('uitooltip', $.ui.tooltip);
     CKEDITOR.replace('edcontent', {
         allowedContent: true,
-        extraPlugins: 'justify'
+        extraPlugins: 'justify',
+        contentsCss: '/css/main.css',
+        height: 500
     });
-    $(".autocomplete-author").combobox({
-        source: function (request, response) {
-            var data = {};
-            data.filters = {};
-            data.filters.name = request.term;
-            $.ajax({
-                type: 'POST',
-                url: 'json/Administrators',
-                data: data,
-                jsonp: "callback",
-                dataType: "jsonp",
-                success: function (data) {
-                    response($.map(data, function (el, index) {
-                        var iddata = index.substring(1);
-                        return {
-                            value: el,
-                            id: iddata
-                        };
-                    }));
-                }
-            });
+    $(".autocomplete-author").autoComplete({
+        resolver: 'custom',
+        events: {
+            search: function (qry, callback, origJQElement) {
+                var data = {};
+                data.filters = {};
+                data.filters.name = qry;
+                $.ajax({
+                    type: 'POST',
+                    url: 'json/Administrators',
+                    data: data,
+                    dataType: "json",
+                }).done(function (res) {
+                    callback(res);
+                });
+            }
         },
+        noResultsText: 'Niciun autor găsit',
         minLength: 3
     });
 });
@@ -67,7 +65,7 @@ function loadData(aoData) {
     if ($("#idf").val() != '') filters.filters['id'] = $("#idf").val();
     if ($("#languagef").val() != '0') filters.filters['language'] = $("#languagef").val();
     if ($("#titlef").val() != '') filters.filters['title'] = $("#titlef").val();
-    if ($("#authorf").data('ui-autocomplete') && $("#authorf").data('ui-autocomplete').hasOwnProperty('selectedItem') && $("#authorf").data('ui-autocomplete').selectedItem) filters.filters['admin'] = $("#authorf").data('ui-autocomplete').selectedItem.id;
+    if ($("#authorf").data('autoComplete')._selectedItem) filters.filters['admin'] = $("#authorf").data('autoComplete')._selectedItem.value;
     if ($("#statusf").val() != '-1') filters.filters['status'] = $("#statusf").val();
     return filters;
 }

@@ -4,7 +4,7 @@ use Utils\Util;
 
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
 $adminController = new \Controller\AdminController();
-if (!$adminController->checkPermission('Edit pages') && !\Module\Users\Controller::getCurrentUser()) {
+if (!$adminController->checkPermission('Edit pages')) {
     exit;
 }
 global $foldershistory, $usersiteroot, $useruploadfolder, $useruploadpath, $file_style, $load_lang_code;
@@ -146,11 +146,6 @@ $foldershistory = array();
 $usersiteroot = _APP_DIR_;
 $useruploadfolder = "uploads";
 $useruploadpath = $usersiteroot . "$useruploadfolder/";
-$userId = \Module\Users\Controller::getCurrentUser(true);
-if(!AdminController::getCurrentUser() && $userId) {
-    $useruploadfolder .= '/' . $userId;
-    $useruploadpath .= $userId . '/';
-    if(!file_exists($useruploadpath)) mkdir($useruploadpath);
-}
+
 $foldershistory[] = $useruploadfolder;
 
