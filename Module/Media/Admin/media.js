@@ -17,7 +17,7 @@ var jsonPage = 'Media',
         },
         {
             "mData": function (e) {
-                return !e.thumbfolder?"<span class=\"actions btn btn-sm btn-outline-danger fal fa-trash\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>":'';
+                return !e.thumbfolder?"<span class=\"actions btn btn-sm btn-outline-danger fa fa-trash\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>":'';
             }
         }
     ],

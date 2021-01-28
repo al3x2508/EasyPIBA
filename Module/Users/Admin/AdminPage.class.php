@@ -21,7 +21,7 @@ class AdminPage extends \Controller\AdminPage {
 		<div class="row">
 			<div class="col-md-9"><h3 class="card-title">' . __('Users') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fal fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fa fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
@@ -40,9 +40,9 @@ class AdminPage extends \Controller\AdminPage {
 	</div>
 	<div class="card-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add user') . '</button>
-			<button class="btn btn-secondary btn-export btn-sm" data-type="excel"><i class="fal fa-file-excel"></i> ' . __('Export to Excel') . '</button>
-			<button class="btn btn-secondary btn-export btn-sm" data-type="pdf"><i class="fal fa-file-pdf"></i> ' . __('Export to PDF') . '</button>
+			<button id="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> ' . __('Add user') . '</button>
+			<button class="btn btn-secondary btn-export btn-sm" data-type="excel"><i class="fa fa-file-excel"></i> ' . __('Export to Excel') . '</button>
+			<button class="btn btn-secondary btn-export btn-sm" data-type="pdf"><i class="fa fa-file-pdf"></i> ' . __('Export to PDF') . '</button>
 		</div>
 	</div>
 </div>
@@ -52,7 +52,7 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-header">
 				<h4 class="modal-title">' . __('Users') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
-					<i class="fal fa-times"></i>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body" id="edtable">

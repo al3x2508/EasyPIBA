@@ -8,7 +8,7 @@ var jsonPage = 'Testimonials',
 			return $('#statusf option[value="' + e.status + '"]').text();
 		} },
 		{ "mData": function() {
-			return "<span class=\"actions btn btn-sm btn-outline-primary fal fa-edit\" title=\"" + jsstrings.edit + "\"></span>";
+			return "<span class=\"actions btn btn-sm btn-outline-primary fa fa-edit\" title=\"" + jsstrings.edit + "\"></span>";
 		} }
 	];
 Dropzone.autoDiscover = false;
@@ -24,9 +24,9 @@ $(function() {
 			"\t\t\t\t\t\t\t<div class=\"img-thumbnail\">\n" +
 			"\t\t\t\t\t\t\t\t<a href=\"#\">\n" +
 			"\t\t\t\t\t\t\t\t\t<img src=\"#\" class=\"img-fluid\" />\n" +
-			"\t\t\t\t\t\t\t\t\t<i class=\"fal fa-search-plus\"></i>\n" +
+			"\t\t\t\t\t\t\t\t\t<i class=\"fa fa-search-plus\"></i>\n" +
 			"\t\t\t\t\t\t\t\t</a>\n" +
-			"\t\t\t\t\t\t\t\t<span class=\"dz-remove btn btn-outline-danger fal fa-trash\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>" +
+			"\t\t\t\t\t\t\t\t<span class=\"dz-remove btn btn-outline-danger fa fa-trash\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>" +
 			"\t\t\t\t\t\t\t</div>\n" +
 			"\t\t\t\t\t\t</div>",
 		previewsContainer: $('#gallery').children('.row').eq(0)[0],
@@ -104,10 +104,10 @@ function loadGalleryImages() {
 								$("<a></a>").attr("href", folder + "uploads/" + v.filename).data('folder', (v.thumbfolder || "uploads/")).data('filename', v.filename).append(
 									$("<img />").attr("src", folder + (v.thumbfolder || "uploads/") + v.filename).addClass("img-fluid").data('id', v.id)
 								).append(
-									$("<i></i>").addClass("fal fa-search-plus")
+									$("<i></i>").addClass("fa fa-search-plus")
 								)
 							).append(
-								$("<span></span>").addClass("dz-remove btn btn-outline-danger fal fa-trash").attr("data-toggle", "modal").attr("data-target", "#confirm_delete").data("actid", v.id).data('page', 'Media')
+								$("<span></span>").addClass("dz-remove btn btn-outline-danger fa fa-trash").attr("data-toggle", "modal").attr("data-target", "#confirm_delete").data("actid", v.id).data('page', 'Media')
 							)
 						)
 					)

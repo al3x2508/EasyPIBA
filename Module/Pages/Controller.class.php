@@ -46,8 +46,8 @@ class Controller {
 			$user = UserController::getCurrentUser(false);
 			if ($user && !$page->forceFrontEnd) {
 				$page->adminName = $user->firstname . ' ' . $user->lastname;
-				$page->myaccountlink = '<a href="' . _FOLDER_URL_ . 'my-account" class="btn btn-sm btn-default btn-flat"><i class="fal fa-user"></i> ' . __('My account') . '</a>';
-				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fal fa-power-off"></i> ' . __('Logout') . '</a>';
+				$page->myaccountlink = '<a href="' . _FOLDER_URL_ . 'my-account" class="btn btn-sm btn-default btn-flat"><i class="fa fa-user"></i> ' . __('My account') . '</a>';
+				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fa fa-power-off"></i> ' . __('Logout') . '</a>';
 				$page->ADMIN_FOLDER_URL = _FOLDER_URL_ . 'admin1009/';
 				$page->template = '../admin1009/template.html';
 				$page->noMainCss = true;
@@ -55,7 +55,7 @@ class Controller {
 			else {
 				$page->adminName = __('Guest user');
 				$page->myaccountlink = '';
-				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'login" class="btn btn-sm btn-default btn-flat"><i class="fal fa-power-on"></i> ' . __('Login') . '</a>';
+				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'login" class="btn btn-sm btn-default btn-flat"><i class="fa fa-power-on"></i> ' . __('Login') . '</a>';
 			}
 		}
 		else {

@@ -15,7 +15,7 @@ class AdminPage extends \Controller\AdminPage {
 		<div class="row">
 			<div class="col-md-9"><h3 class="card-title">' . __('Testimonials') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fal fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fa fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
@@ -34,7 +34,7 @@ class AdminPage extends \Controller\AdminPage {
 	</div>
 	<div class="card-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add testimonial') . '</button>
+			<button id="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> ' . __('Add testimonial') . '</button>
 		</div>
 	</div>
 </div>
@@ -44,7 +44,7 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-header">
 				<h4 class="modal-title">' . __('Testimonials') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
-					<i class="fal fa-times"></i>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body" id="edtable">
@@ -104,7 +104,7 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-header">
 				<h5 class="modal-title">' . ('Image gallery') . '</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<i class="fal fa-times"></i>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body">
@@ -113,7 +113,7 @@ class AdminPage extends \Controller\AdminPage {
 						<div class="col-12">
 							<form action="" class="dropzone dz-clickable" id="gallery-dropzone">
 								<div class="dz-message d-flex flex-column">
-									<i class="fal fa-cloud-upload text-muted"></i>
+									<i class="fa fa-cloud-upload text-muted"></i>
 									Drag &amp; Drop here or click
 								</div>
 							</form>
@@ -139,7 +139,7 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-header">
 				<h5 class="modal-title"></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<i class="fal fa-times"></i>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body">

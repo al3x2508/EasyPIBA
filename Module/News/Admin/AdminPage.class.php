@@ -27,7 +27,7 @@ class AdminPage extends \Controller\AdminPage
 	    <div class="row">
 			<div class="col-md-9"><h3 class="box-title">' . __('Edit news') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fal fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fa fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
@@ -46,7 +46,7 @@ class AdminPage extends \Controller\AdminPage
 	</div>
 	<div class="box-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add news') . '</button>
+			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus"></i> ' . __('Add news') . '</button>
 		</div>
 	</div>
 </div>

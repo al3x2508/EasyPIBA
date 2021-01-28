@@ -80,7 +80,7 @@ class Template
         $userLanguage = Util::getUserLanguage();
         $this->LANGUAGE = $userLanguage;
         $this->myaccountlink = '';
-        $this->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fal fa-power-off"></i> ' . __('Logout') . '</a>';
+        $this->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fa fa-power-off"></i> ' . __('Logout') . '</a>';
         $this->loading_time_string = __('Loading time');
         foreach (get_object_vars($this) AS $key => $value) {
             if (!is_object($value) && !is_array($value)) {
@@ -128,7 +128,7 @@ class Template
         $return[] = AdminPage::createLink(array(
             'href' => _FOLDER_URL_ . basename(dirname(__FILE__)) . '/',
             'text' => __('Statistics'),
-            'class' => 'fal fa-tachometer-alt'
+            'class' => 'fa fa-tachometer-alt'
         ), empty($this->currentUrl)?'/' . basename(dirname(__FILE__)) . '/':$this->currentUrl);
         $admins_permissions = new Model('admins_permissions');
         $admins_permissions->admin = AdminController::getCurrentUser()->id;
@@ -147,13 +147,13 @@ class Template
                     $menuArray[$moduleURL->url] = array(
                         'href' => $moduleURL->url,
                         'text' => __($moduleURL->menu_text),
-                        'class' => $moduleURL->menu_class
+                        'class' => 'fa fa-' . $moduleURL->menu_class
                     );
                 } else {
                     $menuArray[$moduleURL->menu_parent]['submenu'][] = array(
                         'href' => $moduleURL->url,
                         'text' => __($moduleURL->menu_text),
-                        'class' => $moduleURL->menu_class
+                        'class' => 'fa fa-' . $moduleURL->menu_class
                     );
                 }
             }

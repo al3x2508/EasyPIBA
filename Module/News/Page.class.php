@@ -18,7 +18,7 @@ class Page
         $page->h1 = __('News') . ' ' . _APP_NAME_;
         $page->content = '';
         $page->js = array();
-        $page->css = array('Module/News/stiri.css');
+        $page->css = array('Module/News/news.css');
         $page->useCache = true;
         $news = new Model('news');
         $content = '';
@@ -28,7 +28,7 @@ class Page
             $pageno = preg_match('/noutati\/pag\-(\d+)/', $currentUrl, $matches)?$matches[1]:1;
             $limit = (($pageno - 1) * 6) . ', 6';
             $content = /** @lang text */
-                '<div class="container-fluid" id="header-stiri">
+                '<div class="container-fluid" id="header-news">
 			<div class="row">
 				<div class="col-12">
 					<div class="container">
@@ -42,8 +42,8 @@ class Page
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid" id="container-stiri">
-		    <div class="container py-5" id="stiri">' . PHP_EOL;
+		<div class="container-fluid" id="container-news">
+		    <div class="container py-5" id="news">' . PHP_EOL;
             $news->status = 1;
             $news->order('date_published DESC');
             $totalNews = $news->countItems();
@@ -54,7 +54,7 @@ class Page
                     $img = _FOLDER_URL_ . 'img/' . _LOGO_;
                     $spanimgc = ' noimg';
                 } else {
-                    $img = _FOLDER_URL_ . 'img/stiri/' . str_replace('.jpg', '-360x220.jpg',
+                    $img = _FOLDER_URL_ . 'img/news/' . str_replace('.jpg', '-360x220.jpg',
                             rawurlencode($story->image));
                     $spanimgc = '';
                 }
@@ -113,8 +113,8 @@ class Page
                 if (empty(trim($story->image))) {
                     $image = '';
                 } else {
-                    $image = "<img src='" . _FOLDER_URL_ . "img/stiri/" . rawurlencode($story->image) . "' id='imgstory' />";
-                    $page->ogimage = 'stiri/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
+                    $image = "<img src='" . _FOLDER_URL_ . "img/news/" . rawurlencode($story->image) . "' id='imgstory' />";
+                    $page->ogimage = 'news/' . str_replace('.jpg', '-720x220.jpg', rawurlencode($story->image));
                 }
                 $content = $image . '
 		<article id="content" class="container marginbot40">

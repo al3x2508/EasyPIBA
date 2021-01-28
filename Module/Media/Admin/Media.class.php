@@ -32,7 +32,7 @@ class Media
 	</div>
 	<div class="card-footer">
 	    <div class="btn-toolbar">
-			<button id="add" class="btn btn-primary btn-sm"><i class="fal fa-plus"></i> ' . __('Add media') . '</button>
+			<button id="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> ' . __('Add media') . '</button>
 		</div>
 	</div>
 </div>
@@ -42,7 +42,7 @@ class Media
 			<div class="modal-header">
 				<h4 class="modal-title">Media</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
-					<i class="fal fa-times"></i>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body" id="edtable">

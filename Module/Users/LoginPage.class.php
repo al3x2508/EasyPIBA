@@ -202,7 +202,7 @@ class LoginPage
 											<div class="input-group">
 												<input type="email" name="email" id="email-login" class="form-control"' . $emailValue . ' data-rule="maxlen:2" data-msg="' . __('Enter your email') . '" pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
 												<label class="control-label" for="email-login" data-ex="eg: john.smith@yahoo.com">
-													<i class="fal fa-envelope"></i> ' . __('Email') . '
+													<i class="fa fa-envelope"></i> ' . __('Email') . '
 												</label>
 												<i class="bar"></i>
 											</div>
@@ -211,7 +211,7 @@ class LoginPage
 											<div class="input-group">
 												<input type="password" name="password" id="password-login" class="form-control" data-rule="maxlen:8" pattern=".{8,}" required />
 												<label class="control-label" for="password-login">
-													<i class="fal fa-eye-slash"></i> * ' . __('Password') . '
+													<i class="fa fa-eye-slash"></i> * ' . __('Password') . '
 												</label>
 												<i class="bar"></i>
 											</div>

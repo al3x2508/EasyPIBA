@@ -24,7 +24,7 @@ class Setup extends \Module\Setup
             'permission' => 'Edit news',
             'url' => 'news',
             'menu_text' => 'News',
-            'menu_class' => 'fal fa-newspaper'
+            'menu_class' => 'newspaper'
         ));
 
         $news = new Model('news');

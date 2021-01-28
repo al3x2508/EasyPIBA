@@ -8,7 +8,7 @@ var jsonPage = 'Pages',
 		{ "mData": "title" },
 		{ "mData": "menu_text" },
 		{ "mData": function(e) {
-			return "<span class=\"actions btn btn-sm btn-outline-primary fal fa-folder-open\" data-url=\"" + folder + e.url + "\"></span><span class=\"actions btn btn-sm btn-outline-primary fal fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-sm btn-outline-danger fal fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
+			return "<span class=\"actions btn btn-sm btn-outline-primary fa fa-folder-open\" data-url=\"" + folder + e.url + "\"></span><span class=\"actions btn btn-sm btn-outline-primary fa fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-sm btn-outline-danger fa fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
 		}}
 	],
 	delAction = 'delete_page';
