@@ -23,7 +23,7 @@ $(function () {
             };
             $.ajax({
                 type: "POST",
-                url: "json",
+                url: "json/",
                 data: data,
                 dataType: "json",
                 success: function (data) {
@@ -31,8 +31,7 @@ $(function () {
                     if (data.hasOwnProperty('redirect')) window.location.href = data.redirect;
                 }
             });
-        }
-        else {
+        } else {
             alert(jsstrings.enter_email);
             emailField.focus();
         }

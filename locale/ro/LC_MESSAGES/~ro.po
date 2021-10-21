@@ -1,0 +1,1294 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-01 09:43+0300\n"
+"PO-Revision-Date: 2019-03-29 17:02+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+
+#: admin/index.php:31
+msgid "Admin login"
+msgstr "Autentificare administrator"
+
+#: admin/index.php:78 Module/Users/Admin/AdminPage.php:16
+#: Module/Users/Admin/AdminPage.php:35 Module/Users/Admin/AdminPage.php:82
+#: Module/Users/Admin/JSON.php:30
+msgid "Users"
+msgstr "Utilizatori"
+
+#: admin/index.php:80
+msgid "total users"
+msgstr "total utilizatori"
+
+#: admin/index.php:83
+msgid "confirmed users"
+msgstr "utilizatori confirmați"
+
+#: admin/index.php:89 admin/index.php:90 admin/Template.php:147
+msgid "Statistics"
+msgstr "Statisitici"
+
+#: admin/Template.php:77
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: admin/Template.php:91 Module/Pages/Controller.php:57
+#: Module/Users/MyAccountPage.php:34
+msgid "Logout"
+msgstr "Deconectare"
+
+#: admin/Template.php:93 Utils/Template.php:330
+msgid "Loading time"
+msgstr "Timp încărcare"
+
+#: Controller/AdminAct.php:43 Controller/AdminAct.php:51
+#: Controller/AdminAct.php:110 Controller/AdminAct.php:126
+msgid "No ID set"
+msgstr ""
+
+#: Controller/AdminAct.php:91
+msgid "Error creating the entity"
+msgstr ""
+
+#: Controller/AdminAct.php:107
+#, fuzzy
+msgid "Error updating the entity"
+msgstr "Eroare la încărcare"
+
+#: Controller/AdminAct.php:123
+msgid "Error deleting the entity"
+msgstr ""
+
+#: Controller/AdminController.php:33 Module/Users/LoginPage.php:66
+msgid "Incorrect password"
+msgstr "Parolă incorectă"
+
+#: Controller/AdminController.php:36
+msgid "Username blocked"
+msgstr "Nume utilizator blocat"
+
+#: Controller/AdminController.php:39 Module/Administrators/Admin/Admins.php:77
+#: Module/Administrators/Admin/Admins.php:133
+#: cache/templates/de/de7fbfabcd3b0d15883537249788b1d7488b9e77c74f2fb0cd4d3c4d3928ad97.php:183
+msgid "Username"
+msgstr "Nume utilizator"
+
+#: Controller/AdminController.php:39
+msgid "does not exist"
+msgstr "nu există"
+
+#: Controller/AdminController.php:42
+msgid "Webserver error"
+msgstr ""
+
+#: Model/Model.php:742 Model/Model.php:810
+msgid "No where statement"
+msgstr "Niciun statement where"
+
+#: Module/Administrators/Admin/Admins.php:12
+#: Module/Administrators/Admin/Admins.php:13
+#: Module/Administrators/Admin/Admins.php:63
+msgid "Edit administrators"
+msgstr "Editează administratori"
+
+#: Module/Administrators/Admin/Admins.php:55 Module/Media/Admin/Media.php:10
+#: Module/Pages/Admin/Menu.php:19 Module/Pages/Admin/Pages.php:17
+#: Module/Users/Admin/AdminPage.php:13 Module/Users/Admin/AdminPage.php:20
+msgid "Any"
+msgstr "Oricare"
+
+#: Module/Administrators/Admin/Admins.php:56
+#: Module/Administrators/Admin/Admins.php:148
+#: Module/Users/Admin/AdminPage.php:20
+msgid "Blocked"
+msgstr "Blocat"
+
+#: Module/Administrators/Admin/Admins.php:57
+#: Module/Administrators/Admin/Admins.php:147
+msgid "Active"
+msgstr "Activ"
+
+#: Module/Administrators/Admin/Admins.php:65 Module/Media/Admin/Media.php:37
+#: Module/Pages/Admin/Pages.php:39 Module/Users/Admin/AdminPage.php:37
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:48
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:48
+msgid "Filters"
+msgstr ""
+
+#: Module/Administrators/Admin/Admins.php:75
+#: Module/Administrators/Admin/Admins.php:126
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:66
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:66
+msgid "Name"
+msgstr "Nume"
+
+#: Module/Administrators/Admin/Admins.php:81
+#: Module/Administrators/Admin/Admins.php:149
+#: Module/Users/Admin/AdminPage.php:58 Module/Users/Admin/AdminPage.php:147
+msgid "Status"
+msgstr "Stare"
+
+#: Module/Administrators/Admin/Admins.php:81 Module/Media/Admin/Media.php:54
+#: Module/Pages/Admin/Pages.php:56 Module/Users/Admin/AdminPage.php:58
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:70
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:70
+msgid "Actions"
+msgstr "Acțiuni"
+
+#: Module/Administrators/Admin/Admins.php:91
+#, fuzzy
+msgid "Add admin"
+msgstr "Adaugă"
+
+#: Module/Administrators/Admin/Admins.php:99
+msgid "Edit administrator"
+msgstr "Editează administrator"
+
+#: Module/Administrators/Admin/Admins.php:100
+#: Module/Administrators/Admin/Admins.php:156 Module/Media/Admin/Media.php:74
+#: Module/Media/Admin/Media.php:90 Module/Pages/Admin/Pages.php:76
+#: Module/Pages/Admin/Pages.php:146 Module/Users/Admin/AdminPage.php:83
+#: Module/Users/Admin/AdminPage.php:160
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:106
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:118
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:106
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:118
+msgid "Close"
+msgstr "Închide"
+
+#: Module/Administrators/Admin/Admins.php:110
+msgid "Branch"
+msgstr ""
+
+#: Module/Administrators/Admin/Admins.php:119
+msgid "Department"
+msgstr ""
+
+#: Module/Administrators/Admin/Admins.php:140
+#: Module/Users/Admin/AdminPage.php:154 Module/Users/Controller.php:122
+#: Module/Users/LoginPage.php:229 Module/Users/MyAccountPage.php:196
+#: cache/templates/de/de7fbfabcd3b0d15883537249788b1d7488b9e77c74f2fb0cd4d3c4d3928ad97.php:193
+msgid "Password"
+msgstr "Parola"
+
+#: Module/Administrators/Admin/Admins.php:157 Module/Media/Admin/Media.php:91
+#: Module/Pages/Admin/Menu.php:48 Module/Pages/Admin/Pages.php:147
+#: Module/Users/Admin/AdminPage.php:161
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:122
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:122
+msgid "Save"
+msgstr "Salvează"
+
+#: Module/Administrators/Admin/Cache.php:11
+#: Module/Administrators/Admin/Cache.php:12
+msgid "Cache"
+msgstr "Cache"
+
+#: Module/Administrators/Admin/Cache.php:21
+msgid "Modules reread"
+msgstr "Recitire module"
+
+#: Module/Administrators/Admin/Cache.php:35
+msgid "Remove JS and CSS from cache dir"
+msgstr ""
+
+#: Module/Administrators/Admin/Cache.php:47
+msgid "Clear all cache data"
+msgstr ""
+
+#: Module/Administrators/Admin/Cache.php:51
+msgid "Reread modules"
+msgstr "Recitire module"
+
+#: Module/JSON/Admin.php:41
+msgid "You do not have permissions for this"
+msgstr "Nu ai permisiuni pentru această acțiune"
+
+#: Module/JSON/Admin.php:104
+msgid "This example should only be run from a Web Browser"
+msgstr "Acest exemplu trebuie rulat într-un browser web"
+
+#: Module/JSON/Admin.php:129
+msgid "Error processing"
+msgstr "Eroare la procesare"
+
+#: Module/JSON/Page.php:21
+msgid "Confirmation code was sent to your email address"
+msgstr "Codul de confirmare a fost trimis pe adresa de email"
+
+#: Module/JSON/Page.php:25
+msgid "Your account is already confirmed"
+msgstr "Contul tău este deja confirmat"
+
+#: Module/JSON/Page.php:28
+msgid "No account registered with this email address"
+msgstr "Niciun cont înregistrat cu această adresă de email"
+
+#: Module/Media/Admin/Act.php:148
+#, fuzzy
+msgid "You don't have permission to delete this file"
+msgstr "Nu ai permisiuni pentru această acțiune"
+
+#: Module/Media/Admin/Act.php:170
+msgid "Nothing to delete"
+msgstr ""
+
+#: Module/Media/Admin/Act.php:174
+msgid "No uploaded file"
+msgstr "Niciun fișier încărcat"
+
+#: Module/Media/Admin/Act.php:230 Module/Media/Admin/Act.php:245
+#: Module/Media/Admin/Act.php:257 Module/Media/Admin/Act.php:371
+msgid "Error uploading"
+msgstr "Eroare la încărcare"
+
+#: Module/Media/Admin/Act.php:233
+msgid "File is not an image"
+msgstr "Fișierul nu este o imagine"
+
+#: Module/Media/Admin/Act.php:260
+#, fuzzy
+msgid "File is not a media > "
+msgstr "Fișierul nu este o imagine"
+
+#: Module/Media/Admin/Act.php:264 Module/Media/Admin/Act.php:374
+#, php-format
+msgid "Max upload %s"
+msgstr "Încărcare maximă de %s"
+
+#: Module/Media/Admin/Media.php:11 Module/Media/Admin/Media.php:81
+#: Module/Media/Admin/Media.php:83
+msgid "Image"
+msgstr "Imagine"
+
+#: Module/Media/Admin/Media.php:12
+msgid "Video"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:13
+msgid "Audio"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:14
+msgid "Word"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:15
+msgid "PowerPoint"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:16
+msgid "PDF"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:17
+msgid "Text"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:19 Module/Media/Admin/Media.php:20
+#: Module/Media/Admin/Media.php:35
+msgid "Media"
+msgstr "Media"
+
+#: Module/Media/Admin/Media.php:48
+msgid "Filename"
+msgstr "Nume fișier"
+
+#: Module/Media/Admin/Media.php:49
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: Module/Media/Admin/Media.php:53
+msgid "Type"
+msgstr ""
+
+#: Module/Media/Admin/Media.php:65
+#, fuzzy
+msgid "Add media"
+msgstr "Adaugă"
+
+#: Module/Pages/Admin/Menu.php:12 Module/Pages/Admin/Menu.php:13
+msgid "Edit menu"
+msgstr "Editează meniu"
+
+#: Module/Pages/Admin/Menu.php:28 Module/Pages/Admin/Pages.php:53
+#: Module/Pages/Admin/Pages.php:88
+msgid "Language"
+msgstr "Limbă"
+
+#: Module/Pages/Admin/Pages.php:12 Module/Pages/Admin/Pages.php:13
+#: Module/Pages/Admin/Pages.php:37 Module/Pages/Admin/Pages.php:75
+msgid "Edit pages"
+msgstr "Editează pagini"
+
+#: Module/Pages/Admin/Pages.php:49 Module/Pages/Admin/Pages.php:95
+msgid "URL"
+msgstr "URL"
+
+#: Module/Pages/Admin/Pages.php:54 Module/Pages/Admin/Pages.php:102
+msgid "Title"
+msgstr "Titlu"
+
+#: Module/Pages/Admin/Pages.php:55 Module/Pages/Admin/Pages.php:116
+msgid "Menu text"
+msgstr "Text meniu"
+
+#: Module/Pages/Admin/Pages.php:67
+#, fuzzy
+msgid "Add page"
+msgstr "Editează pagini"
+
+#: Module/Pages/Admin/Pages.php:109
+msgid "Description"
+msgstr "Descriere"
+
+#: Module/Pages/Admin/Pages.php:123
+msgid "Submenu text"
+msgstr "Text submeniu"
+
+#: Module/Pages/Admin/Pages.php:130
+msgid "Visible"
+msgstr "Vizibil"
+
+#: Module/Pages/Admin/Pages.php:138
+msgid "Content"
+msgstr "Conținut"
+
+#: Module/Pages/Controller.php:54 Module/Users/MyAccountPage.php:31
+#: Module/Users/MyAccountPage.php:37 Module/Users/MyAccountPage.php:38
+#: Module/Users/MyAccountPage.php:156
+msgid "My account"
+msgstr "Contul meu"
+
+#: Module/Pages/Controller.php:63
+msgid "Guest user"
+msgstr ""
+
+#: Module/Pages/Controller.php:66 Module/Users/LoginPage.php:196
+#: cache/templates/de/de7fbfabcd3b0d15883537249788b1d7488b9e77c74f2fb0cd4d3c4d3928ad97.php:49
+#: cache/templates/de/de7fbfabcd3b0d15883537249788b1d7488b9e77c74f2fb0cd4d3c4d3928ad97.php:203
+msgid "Login"
+msgstr "Autentificare"
+
+#: Module/Pages/Controller.php:154 Module/Pages/Controller.php:164
+#: Module/Pages/Controller.php:165
+msgid "Page not found"
+msgstr "Pagina nu a fost găsită"
+
+#: Module/Pages/Controller.php:154
+msgid "Error 404"
+msgstr "Eroare 404"
+
+#: Module/Pages/Controller.php:157
+msgid ""
+"The page you requested could not be found, either contact your webmaster or "
+"try again. Use your browsers <strong>Back</strong> button to navigate to the "
+"page you have previously come from."
+msgstr ""
+"Pagina accesată nu a fost găsită, poți contacta webmasterul sau să încerci "
+"din nou. Folosește butonul <strong>Înapoi</strong> al browserului pentru a "
+"naviga la pagina de unde ai venit."
+
+#: Module/Pages/Controller.php:159
+msgid "Or you could just press this neat little button"
+msgstr "Sau poți apăsa acest mic buton"
+
+#: Module/Pages/Controller.php:161
+msgid "Take Me Home"
+msgstr "Du-mă acasă"
+
+#: Module/Pages/Controller.php:215
+msgid "App"
+msgstr ""
+
+#: Module/Pages/Controller.php:216
+msgid "Dashboard"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.php:20
+msgid "Not confirmed"
+msgstr "Neconfirmat"
+
+#: Module/Users/Admin/AdminPage.php:20
+msgid "Confirmed"
+msgstr "Confirmat"
+
+#: Module/Users/Admin/AdminPage.php:47 Module/Users/Admin/AdminPage.php:91
+#: Module/Users/Admin/JSON.php:20 Module/Users/Controller.php:150
+#: Module/Users/MyAccountPage.php:164
+msgid "Firstname"
+msgstr "Prenume"
+
+#: Module/Users/Admin/AdminPage.php:49 Module/Users/Admin/AdminPage.php:98
+#: Module/Users/Admin/JSON.php:21 Module/Users/Controller.php:163
+#: Module/Users/MyAccountPage.php:166
+msgid "Lastname"
+msgstr "Nume"
+
+#: Module/Users/Admin/AdminPage.php:53 Module/Users/Admin/AdminPage.php:140
+#: Module/Users/Admin/JSON.php:27 Module/Users/Controller.php:32
+#: Module/Users/Controller.php:175 Module/Users/MyAccountPage.php:170
+#: Utils/Template.php:632 Utils/Template.php:633 Utils/Template.php:640
+msgid "Country"
+msgstr "Țara"
+
+#: Module/Users/Admin/AdminPage.php:54 Module/Users/Admin/AdminPage.php:105
+#: Module/Users/Admin/JSON.php:22 Module/Users/Controller.php:76
+#: Module/Users/Controller.php:109 Module/Users/LoginPage.php:220
+#: Module/Users/MyAccountPage.php:168 Module/Users/PasswordResetPage.php:196
+msgid "Email"
+msgstr "Email"
+
+#: Module/Users/Admin/AdminPage.php:68
+#, fuzzy
+msgid "Add user"
+msgstr "Adaugă"
+
+#: Module/Users/Admin/AdminPage.php:70
+msgid "Export to Excel"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.php:73
+msgid "Export to PDF"
+msgstr ""
+
+#: Module/Users/Admin/AdminPage.php:112 Module/Users/Admin/JSON.php:23
+msgid "Phone"
+msgstr "Telefon"
+
+#: Module/Users/Admin/AdminPage.php:119 Module/Users/Admin/JSON.php:24
+msgid "Address"
+msgstr "Adresa"
+
+#: Module/Users/Admin/AdminPage.php:126 Module/Users/Admin/JSON.php:25
+msgid "City"
+msgstr "Oraș"
+
+#: Module/Users/Admin/AdminPage.php:133 Module/Users/Admin/JSON.php:26
+msgid "State"
+msgstr "Județ"
+
+#: Module/Users/Admin/JSON.php:28
+msgid "Status ID"
+msgstr "ID Status"
+
+#: Module/Users/Controller.php:49
+msgid "Enter your firstname"
+msgstr "Introduceți prenumele"
+
+#: Module/Users/Controller.php:61
+msgid "Enter your lastname"
+msgstr "Introduceti numele"
+
+#: Module/Users/Controller.php:68
+msgid "Select your country"
+msgstr "Selectează țara"
+
+#: Module/Users/Controller.php:88 Module/Users/Controller.php:106
+#: Module/Users/LoginPage.php:217 Module/Users/PasswordResetPage.php:193
+msgid "Enter your email"
+msgstr "Introdu adresa de email"
+
+#: Module/Users/Controller.php:95 Module/Users/PasswordResetPage.php:100
+msgid "Enter a password"
+msgstr "Introdu o parolă"
+
+#: Module/Users/Controller.php:101 Module/Users/MyAccountPage.php:126
+#: Module/Users/PasswordResetPage.php:106
+msgid "Confirm the password"
+msgstr "Confirmă parola"
+
+#: Module/Users/Controller.php:118 Module/Users/Controller.php:146
+#: Module/Users/Controller.php:159 Module/Users/MyAccountPage.php:190
+#: Module/Users/PasswordResetPage.php:125 Module/Users/EmailConfirmPage.php:35
+#, php-format
+msgid "Enter at least %s characters"
+msgstr "Introdu cel puţin %s caractere"
+
+#: Module/Users/Controller.php:121 Module/Users/Controller.php:134
+#: Module/Users/MyAccountPage.php:194 Module/Users/MyAccountPage.php:207
+#: Module/Users/PasswordResetPage.php:129
+#: Module/Users/PasswordResetPage.php:143
+msgid "8 characters minimum"
+msgstr "minimum 8 caractere"
+
+#: Module/Users/Controller.php:131 Module/Users/Controller.php:136
+#: Module/Users/MyAccountPage.php:204 Module/Users/MyAccountPage.php:209
+#: Module/Users/PasswordResetPage.php:140
+msgid "Confirm password"
+msgstr "Confirmă parola"
+
+#: Module/Users/Controller.php:183
+msgid "Subscribe to newsletter"
+msgstr ""
+
+#: Module/Users/Controller.php:191
+msgid "You must accept our Terms and conditions"
+msgstr "Trebuie să fii de acord cu Termenii și condițiile"
+
+#: Module/Users/Controller.php:197
+#, php-format
+msgid "I have read and agree to the %s"
+msgstr "Am citit și sunt de acord cu %s"
+
+#: Module/Users/Controller.php:199
+msgid "Terms and Conditions"
+msgstr "Termeni și condiții"
+
+#: Module/Users/Controller.php:215
+msgid "Fields marked with"
+msgstr "Câmpurile marcate cu"
+
+#: Module/Users/Controller.php:216
+msgid "are required"
+msgstr "sunt necesare"
+
+#: Module/Users/Controller.php:317
+msgid "Welcome"
+msgstr "Bun venit"
+
+#: Module/Users/Controller.php:318
+msgid "Step"
+msgstr "Pas"
+
+#: Module/Users/Controller.php:318 Module/Users/Controller.php:319
+#: Module/Users/Controller.php:322
+msgid "Activate your account"
+msgstr "Activează contul"
+
+#: Module/Users/Controller.php:320
+msgid "by clicking this link"
+msgstr "apăsând acest link"
+
+#: Module/Users/LoginPage.php:44
+msgid "You did not confirmed your account"
+msgstr "Nu ți-ai confirmat contul"
+
+#: Module/Users/LoginPage.php:45
+msgid "Your account is blocked"
+msgstr "Contul tău este blocat"
+
+#: Module/Users/LoginPage.php:71
+msgid "No user registered with these info"
+msgstr "Niciun utilizator înregistrat cu aceste date"
+
+#: Module/Users/LoginPage.php:75
+msgid "Invalid token"
+msgstr "Token invalid"
+
+#: Module/Users/LoginPage.php:108 Module/Users/MyAccountPage.php:71
+msgid "There is another user registered with this email address"
+msgstr "Există un utilizator înregistrat cu această adresă de email"
+
+#: Module/Users/LoginPage.php:152
+msgid "You will be redirected to confirm your email in 1 second"
+msgstr "Vei fi redirecționat către confirmarea emailului într-o secundă"
+
+#: Module/Users/LoginPage.php:155
+msgid "Password not confirmed"
+msgstr "Parola nu este confirmată"
+
+#: Module/Users/LoginPage.php:160 Module/Users/MyAccountPage.php:106
+#: Module/Users/MyAccountPage.php:138
+msgid "You did not filled the following inputs"
+msgstr "Nu ai completat următoarele câmpuri"
+
+#: Module/Users/LoginPage.php:164
+msgid "lastname"
+msgstr "nume"
+
+#: Module/Users/LoginPage.php:167
+msgid "firstname"
+msgstr "prenume"
+
+#: Module/Users/LoginPage.php:170
+msgid "email address"
+msgstr "adresă email"
+
+#: Module/Users/LoginPage.php:173
+msgid "country"
+msgstr "țara"
+
+#: Module/Users/LoginPage.php:176
+msgid "password"
+msgstr "parola"
+
+#: Module/Users/LoginPage.php:179
+msgid "password confirm"
+msgstr "confirmă parola"
+
+#: Module/Users/LoginPage.php:182
+msgid "terms and conditions"
+msgstr "termeni și condiții"
+
+#: Module/Users/LoginPage.php:199 Module/Users/LoginPage.php:264
+msgid "Register"
+msgstr "Înregistrare"
+
+#: Module/Users/LoginPage.php:238
+msgid "Remember me"
+msgstr "Ține-mă minte"
+
+#: Module/Users/LoginPage.php:246
+msgid "Log in"
+msgstr "Autentificare"
+
+#: Module/Users/LoginPage.php:253
+msgid "Forgot Password?"
+msgstr "Ai uitat parola?"
+
+#: Module/Users/LoginPage.php:256
+msgid "Resend email confirmation"
+msgstr "Retrimite email confirmare"
+
+#: Module/Users/LoginPage.php:274 Module/Users/LoginPage.php:275
+msgid "Login | "
+msgstr "Autentificare | "
+
+#: Module/Users/MyAccountPage.php:222
+msgid "Edit"
+msgstr "Editează"
+
+#: Module/Users/MyAccountPage.php:227 Module/Users/PasswordResetPage.php:155
+msgid "Change password"
+msgstr "Schimbă parola"
+
+#: Module/Users/MyAccountPage.php:230 Module/Users/MyAccountPage.php:253
+msgid "Delete"
+msgstr "Șterge"
+
+#: Module/Users/MyAccountPage.php:244
+#, fuzzy
+msgid "Confirm delete"
+msgstr "Confirmat"
+
+#: Module/Users/MyAccountPage.php:248
+#, fuzzy
+msgid "You are about to delete your account."
+msgstr "Nu ți-ai confirmat contul"
+
+#: Module/Users/MyAccountPage.php:249
+msgid "Do you want to proceed?"
+msgstr ""
+
+#: Module/Users/MyAccountPage.php:252
+msgid "Cancel"
+msgstr ""
+
+#: Module/Users/PasswordResetPage.php:25 Module/Users/PasswordResetPage.php:26
+#: Module/Users/PasswordResetPage.php:55 Module/Users/PasswordResetPage.php:184
+msgid "Password reset"
+msgstr "Resetare parola"
+
+#: Module/Users/PasswordResetPage.php:32
+msgid "Enter a valid email address"
+msgstr "Introdu o adresă de email validă"
+
+#: Module/Users/PasswordResetPage.php:52
+msgid "Hi"
+msgstr "Salut"
+
+#: Module/Users/PasswordResetPage.php:53
+msgid "To reset your password click the link below"
+msgstr "Pentru resetarea parolei apasă link-ul următor"
+
+#: Module/Users/PasswordResetPage.php:57
+msgid "An email with password reset instructions have been sent to you."
+msgstr ""
+"Un email cu instrucțiuni pentru resetarea parolei a fost trimis către tine."
+
+#: Module/Users/PasswordResetPage.php:60
+msgid "No user registered with this email address"
+msgstr "Niciun cont înregistrat cu această adresă de email"
+
+#: Module/Users/PasswordResetPage.php:91
+msgid "Your password has been updated"
+msgstr "Parola ta a fost schimbată"
+
+#: Module/Users/PasswordResetPage.php:93
+msgid "Code not found"
+msgstr "Codul nu a fost găsit"
+
+#: Module/Users/PasswordResetPage.php:113
+msgid "Change your password"
+msgstr "Schimbați-vă parola"
+
+#: Module/Users/PasswordResetPage.php:131
+msgid "New password"
+msgstr "Parolă nouă"
+
+#: Module/Users/PasswordResetPage.php:145
+msgid "Confirm new password"
+msgstr "Confirmă parola nouă"
+
+#: Module/Users/PasswordResetPage.php:206
+msgid "Send code"
+msgstr "Trimite codul"
+
+#: Module/Users/EmailConfirmPage.php:23 Module/Users/EmailConfirmPage.php:24
+#: Module/Users/EmailConfirmPage.php:58
+msgid "Email confirm"
+msgstr "Confirmare email"
+
+#: Module/Users/EmailConfirmPage.php:28
+msgid "Enter the confirmation code"
+msgstr "Introdu codul de confirmare"
+
+#: Module/Users/EmailConfirmPage.php:39
+msgid "32 characters code"
+msgstr "Cod de 32 caractere"
+
+#: Module/Users/EmailConfirmPage.php:41
+msgid "Confirmation code"
+msgstr "Cod de confirmare"
+
+#: Module/Users/EmailConfirmPage.php:49
+msgid "Confirm"
+msgstr "Confirmă"
+
+#: Module/Users/EmailConfirmPage.php:75
+msgid "Your email has been confirmed"
+msgstr "Emailul tău a fost confirmat"
+
+#: Module/Users/EmailConfirmPage.php:77
+#, php-format
+msgid "You can login now %s"
+msgstr "Te poți autentifica acum %s"
+
+#: Module/Users/EmailConfirmPage.php:78
+msgid "here"
+msgstr "aici"
+
+#: Module/Users/EmailConfirmPage.php:81
+msgid "Your account is blocked!"
+msgstr "Contul tău este blocat!"
+
+#: Module/Users/EmailConfirmPage.php:88
+msgid "Code is invalid or already confirmed"
+msgstr "Codul este invalid sau deja confirmat"
+
+#: Utils/Util.php:587
+msgid "This site is currently down for maintenance and should be back soon."
+msgstr ""
+"Site-ul este oprit pentru mentenanță și va fi disponibil din nou curând."
+
+#: Utils/Template.php:246
+msgid " seconds"
+msgstr ""
+
+#: Utils/Template.php:686
+msgid "Wizard"
+msgstr "Wizard"
+
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:62
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:62
+msgid "VAT identification number"
+msgstr ""
+
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:87
+#, fuzzy
+msgid "Add company"
+msgstr "Companie"
+
+#: cache/templates/b6/b66d660e455376b3ca6322fec503654c66e55e18e5053884e8551885c5a87266.php:102
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:102
+msgid "Credits"
+msgstr ""
+
+#: cache/templates/a3/a3fd59ea79889f2498bb3d63999ae92c66e5dd373f8980aa8882df1625c6e978.php:87
+#, fuzzy
+msgid "Add credit"
+msgstr "Adaugă"
+
+#, fuzzy
+#~ msgid "Companies"
+#~ msgstr "Companie"
+
+#~ msgid "Testimonials"
+#~ msgstr "Păreri"
+
+#~ msgid "Read more"
+#~ msgstr "Citește mai mult"
+
+#~ msgid "Testimonial"
+#~ msgstr "Părere"
+
+#, fuzzy
+#~ msgid "Wrong password confirm"
+#~ msgstr "confirmă parola"
+
+#~ msgid "Hidden"
+#~ msgstr "Ascuns"
+
+#~ msgid "Published"
+#~ msgstr "Publicat"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Editează pagini"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#, fuzzy
+#~ msgid "Updated on"
+#~ msgstr "Actualizează"
+
+#, fuzzy
+#~ msgid "Edit post"
+#~ msgstr "Editează pagini"
+
+#~ msgid "Newer"
+#~ msgstr "Mai noi"
+
+#~ msgid "Older"
+#~ msgstr "Mai vechi"
+
+#~ msgid "Short text"
+#~ msgstr "Text scurt"
+
+#, fuzzy
+#~ msgid "Add testimonial"
+#~ msgstr "Părere"
+
+#~ msgid "Edit news"
+#~ msgstr "Editează știri"
+
+#~ msgid "Date"
+#~ msgstr "Dată"
+
+#, fuzzy
+#~ msgid "Add news"
+#~ msgstr "Adaugă"
+
+#~ msgid "News"
+#~ msgstr "Știri"
+
+#, fuzzy
+#~ msgid "Date updated"
+#~ msgstr "Ultima actualizare"
+
+#, fuzzy
+#~ msgid "Edit ranges"
+#~ msgstr "Editează pagini"
+
+#, fuzzy
+#~ msgid "Edit categories"
+#~ msgstr "Editează pagini"
+
+#, fuzzy
+#~ msgid "Edit products"
+#~ msgstr "Editează pagini"
+
+#, fuzzy
+#~ msgid "File"
+#~ msgstr "Nume fișier"
+
+#~ msgid "Container width (mm)"
+#~ msgstr "Lățime container (mm)"
+
+#~ msgid "Add"
+#~ msgstr "Adaugă"
+
+#~ msgid "Cannot find H5P content with slug: %s."
+#~ msgstr "Nu găsesc niciun conținut interactiv cu slug: %s."
+
+#~ msgid "Cannot find H5P content with id: %d."
+#~ msgstr "Nu găsesc niciun conținut interactiv cu id: %d."
+
+#~ msgid "Missing H5P identifier."
+#~ msgstr "Lipsește identificatorul interactivului."
+
+#~ msgid "Insert"
+#~ msgstr "Inserează"
+
+#~ msgid "%s ago"
+#~ msgstr "acum %s"
+
+#~ msgid "%s min"
+#~ msgid_plural "%s mins"
+#~ msgstr[0] "%s min"
+#~ msgstr[1] "%s minute"
+#~ msgstr[2] "%s minute"
+
+#~ msgid "%s hour"
+#~ msgid_plural "%s hours"
+#~ msgstr[0] "%s oră"
+#~ msgstr[1] "%s ore"
+#~ msgstr[2] "%s ore"
+
+#~ msgid "%s day"
+#~ msgid_plural "%s days"
+#~ msgstr[0] "%s zi"
+#~ msgstr[1] "%s zile"
+#~ msgstr[2] "%s zile"
+
+#~ msgid "%s week"
+#~ msgid_plural "%s weeks"
+#~ msgstr[0] "%s săptămână"
+#~ msgstr[1] "%s săptămâni"
+#~ msgstr[2] "%s săptămâni"
+
+#~ msgid "%s month"
+#~ msgid_plural "%s months"
+#~ msgstr[0] "%s lună"
+#~ msgstr[1] "%s luni"
+#~ msgstr[2] "%s luni"
+
+#~ msgid "%s year"
+#~ msgid_plural "%s years"
+#~ msgstr[0] "%s an"
+#~ msgstr[1] "%s ani"
+#~ msgstr[2] "%s ani"
+
+#~ msgid "Upload failed"
+#~ msgstr "Încărcare eșuată"
+
+#~ msgid "Invalid library."
+#~ msgstr "Librărie invalidă."
+
+#~ msgid "No such library."
+#~ msgstr "Nicio astfel de librărie."
+
+#~ msgid "Invalid parameters."
+#~ msgstr "Parametrii invalizi."
+
+#~ msgid "File is not a H5P file"
+#~ msgstr "Acesta nu este un fișier H5P"
+
+#~ msgid "Max upload 5MB"
+#~ msgstr "Încărcare maximă de 5MB"
+
+#~ msgid "Waiting for JavaScript."
+#~ msgstr "Se așteaptă JavaScriptul."
+
+#~ msgid ""
+#~ "Making sure the content type cache is up to date will ensure that you can "
+#~ "view, download and use the latest libraries. This is different from "
+#~ "updating the libraries themselves."
+#~ msgstr ""
+#~ "Asigurându-ne că cache-ul pentru tipul de conținut este actualizat ne "
+#~ "asigură că vei putea vizualiza, descărca și folosi ultimele librării. "
+#~ "Aceasta este diferită de actualizarea librăriilor în sine."
+
+#~ msgid "Upload Libraries"
+#~ msgstr "Încarcă librării"
+
+#~ msgid ""
+#~ "Here you can upload new libraries or upload updates to existing "
+#~ "libraries. Files uploaded here must be in the .h5p file format."
+#~ msgstr ""
+#~ "Aici poți încărca noi librării sau actualizări pentru librăriile "
+#~ "existente. Fișierele încărcate aici trebuie să fie în formatul de fișier ."
+#~ "h5p."
+
+#~ msgid "Only update existing libraries"
+#~ msgstr "Actualizează doar librăriile existente"
+
+#~ msgid "Disable file extension check"
+#~ msgstr "Dezactivează verificarea extensiei de fișier"
+
+#~ msgid ""
+#~ "Warning! This may have security implications as it allows for uploading "
+#~ "php files. That in turn could make it possible for attackers to execute "
+#~ "malicious code on your site. Please make sure you know exactly what "
+#~ "you're uploading."
+#~ msgstr ""
+#~ "Atenție! Ar putea avea implicații de siguranță pentru că permite "
+#~ "încărcarea fișierelor php. Asta înseamnă că oferă posibilitatea "
+#~ "atacatorilor să execute cod rău intenționat pe site. Te rog să te asiguri "
+#~ "că știi exact ce încarci."
+
+#~ msgid "Upload"
+#~ msgstr "Încărcare"
+
+#~ msgid "Installed Libraries"
+#~ msgstr "Librării instalate"
+
+#~ msgid "Waiting for javascript..."
+#~ msgstr "Se așteaptă JavaScriptul."
+
+#~ msgid ""
+#~ "It looks like there are no content types installed. You can get the ones "
+#~ "you want by using the small 'Download' button in the lower left corner on "
+#~ "any example from the <a href=\"%s\" target=\"_blank\">Examples and "
+#~ "Downloads</a> page and then you upload the file here."
+#~ msgstr ""
+#~ "Se pare că nu sunt tipuri de conținut instalate. Le poți avea apasând "
+#~ "butonul 'Descarcă' din colțul stânga jos pe oricare exemplu de la pagina "
+#~ "<a href=\"%s\" target=\"_blank\">Exemple și descărcări</a> și apoi să le "
+#~ "încarci aici."
+
+#~ msgid ""
+#~ "If you need any help you can always file a <a href=\"%s\" target=\"_blank"
+#~ "\">Support Request</a>, check out our <a href=\"%s\" target=\"_blank"
+#~ "\">Forum</a> or join the conversation in the <a href=\"%s\" target="
+#~ "\"_blank\">H5P Community Chat</a>."
+#~ msgstr ""
+#~ "Dacă ai nevoie de ajutor poți <a href=\"%s\" target=\"_blank\">cere "
+#~ "asistență</a>, verifici <a href=\"%s\" target=\"_blank\">Forumul nostru </"
+#~ "a> sau să te alături conversației în <a href=\"%s\" target=\"_blank"
+#~ "\">Chat comunitate H5P</a>."
+
+#~ msgid "Create"
+#~ msgstr "Creare"
+
+#~ msgid "Toggle panel"
+#~ msgstr "Comută panou"
+
+#~ msgid "Display Options"
+#~ msgstr "Opțiuni afișare"
+
+#~ msgid "Display toolbar below content"
+#~ msgstr "Afișează bara de instrumente sub conținut"
+
+#~ msgid "Display Download button"
+#~ msgstr "Afișează butonul de descărcare"
+
+#~ msgid "Display Embed button"
+#~ msgstr "Afișează butonul de încorporare"
+
+#~ msgid "Display Copyright button"
+#~ msgstr "Afișează buton Copyright"
+
+#~ msgid "Tags"
+#~ msgstr "Etichete"
+
+#~ msgid "Separate tags with commas"
+#~ msgstr "Separă etichetele prin virgule"
+
+#~ msgid "No tags"
+#~ msgstr "Fără etichete"
+
+#~ msgid "H5P"
+#~ msgstr "H5P"
+
+#~ msgid "Cannot find library with id"
+#~ msgstr "Nu găsesc librăria cu idul"
+
+#~ msgid "N/A"
+#~ msgstr "Indisponibil"
+
+#~ msgid "View library details"
+#~ msgstr "Vezi detalii librărie"
+
+#~ msgid "Delete library"
+#~ msgstr "Șterge librăria"
+
+#~ msgid "Upgrade library content"
+#~ msgstr "Actualizează conținut librărie"
+
+#~ msgid "Restricted"
+#~ msgstr "Restricționat"
+
+#~ msgid "Contents"
+#~ msgstr "Conținut"
+
+#~ msgid "Contents using it"
+#~ msgstr "Conținuturi care îl folosesc"
+
+#~ msgid "Libraries using it"
+#~ msgstr "Librării care îl folosesc"
+
+#~ msgid ""
+#~ "This Library is used by content or other libraries and can therefore not "
+#~ "be deleted."
+#~ msgstr ""
+#~ "Librăria este folosită de conținut sau alte librării și nu se poate "
+#~ "șterge."
+
+#~ msgid "No content is using this library"
+#~ msgstr "Niciun conținut nu folosește librăria"
+
+#~ msgid "Content using this library"
+#~ msgstr "Conținuturi care folosesc librăria"
+
+#~ msgid "Elements per page"
+#~ msgstr "Elemente per pagină"
+
+#~ msgid "Filter content"
+#~ msgstr "Filtrează conținut"
+
+#~ msgid "Page $x of $y"
+#~ msgstr "Pagina $x din $y"
+
+#~ msgid "Version"
+#~ msgstr "Versiune"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Ecran complet"
+
+#~ msgid "Yes"
+#~ msgstr "Da"
+
+#~ msgid "No"
+#~ msgstr "Nu"
+
+#~ msgid "Content library"
+#~ msgstr "Librărie conținut"
+
+#~ msgid "Used by"
+#~ msgstr "Utilizat de"
+
+#~ msgid "There are no available upgrades for this library."
+#~ msgstr "Nu sunt disponibile actualizări pentru această librărie."
+
+#~ msgid "There's no content instances to upgrade."
+#~ msgstr "Nu există instanțe conținut pentru actualizare."
+
+#~ msgid "You are about to upgrade %s. Please select upgrade version."
+#~ msgstr ""
+#~ "Ești pe cale să actualizezi %s. Te rog selectează versiunea de "
+#~ "actualizare."
+
+#~ msgid "Upgrading to %ver..."
+#~ msgstr "Actualizare la %ver..."
+
+#~ msgid "An error occurred while processing parameters:"
+#~ msgstr "O eroare a apărut la procesarea parametrilor:"
+
+#~ msgid "Could not load data for library %lib."
+#~ msgstr "Nu pot încărca datele pentru librăria %lib."
+
+#~ msgid "Could not upgrade content %id:"
+#~ msgstr "Nu pot actualiza conținutul %id:"
+
+#~ msgid "Could not load upgrades script for %lib."
+#~ msgstr "Nu am putut încărca actualizările pentru %lib."
+
+#~ msgid "Parameters are broken."
+#~ msgstr "Parametrii sunt invalizi."
+
+#~ msgid "Missing required library %lib."
+#~ msgstr "Lipsește librăria necesară %lib."
+
+#~ msgid ""
+#~ "Parameters contain %used while only %supported or earlier are supported."
+#~ msgstr ""
+#~ "Parametrii conțin %used și doar %supported sau mai noi sunt suportați."
+
+#~ msgid "Parameters contain %used which is not supported."
+#~ msgstr "Parametrii conțin %used nu sunt suportați."
+
+#~ msgid "You have successfully upgraded %s."
+#~ msgstr "Ai actualizat cu succes %s."
+
+#~ msgid "Return"
+#~ msgstr "Revenire"
+
+#~ msgid "Upgrade"
+#~ msgstr "Actualizare"
+
+#~ msgid ""
+#~ "Not all content has gotten their cache rebuilt. This is required to be "
+#~ "able to delete libraries, and to display how many contents that uses the "
+#~ "library."
+#~ msgstr ""
+#~ "Nu toate conținuturile au avut cache-ul reconstruit. Acesta este necesar "
+#~ "pentru a putea șterge librăriile și pentru a afișa câte conținuturi "
+#~ "folosesc librăria."
+
+#~ msgid "Rebuild cache"
+#~ msgstr "Reconstruiește cache"
+
+#~ msgid "Error, invalid security token!"
+#~ msgstr "Eroare, token de securitate invalid!"
+
+#~ msgid "Error, missing library!"
+#~ msgstr "Eroare, lipsește librăria!"
+
+#~ msgid "Error, invalid library!"
+#~ msgstr "Eroare, librărie invalidă!"
+
+#~ msgid "Missing %s."
+#~ msgstr "Lipsește %s."
+
+#~ msgid "Are you sure you wish to delete this content?"
+#~ msgstr "Sigur doriți ștergerea acestui conținut?"
+
+#~ msgid "Content type"
+#~ msgstr "Tip conținut"
+
+#~ msgid "Last modified"
+#~ msgstr "Ultima modificare"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "No H5P content available. You must upload or create new content."
+#~ msgstr ""
+#~ "Niciun conținut interactiv disponibil. Trebuie să încarci sau să creezi "
+#~ "conținut nou."
+
+#~ msgid "Loading data."
+#~ msgstr "Se încarcă datele."
+
+#~ msgid "Failed to load data."
+#~ msgstr "Nu se pot încărca datele."
+
+#~ msgid "There's no data available that matches your criteria."
+#~ msgstr "Nu există date care să îndeplinească criteriile tale."
+
+#~ msgid "Page $current of $total"
+#~ msgstr "Pagina $current din $total"
+
+#~ msgid "Next page"
+#~ msgstr "Pagina următoare"
+
+#~ msgid "Previous page"
+#~ msgstr "Pagina anterioară"
+
+#~ msgid "Search"
+#~ msgstr "Căutare"
+
+#~ msgid "Remove"
+#~ msgstr "Elimină"
+
+#~ msgid "Edit books"
+#~ msgstr "Editează cărți"
+
+#~ msgid "H1"
+#~ msgstr "H1"
+
+#~ msgid "Books"
+#~ msgstr "Cărți"
+
+#~ msgid "Edit book"
+#~ msgstr "Editează cartea"
+
+#~ msgid "Page width (mm)"
+#~ msgstr "Lățime pagină (mm)"
+
+#~ msgid "Page height (mm)"
+#~ msgstr "Înălțime pagină (mm)"
+
+#~ msgid "Odd pages left margin (mm)"
+#~ msgstr "Margine stânga pagini impare (mm)"
+
+#~ msgid "Even pages left margin (mm)"
+#~ msgstr "Margine stânga pagini pare (mm)"
+
+#~ msgid "news"
+#~ msgstr "știri"
+
+#~ msgid "read more"
+#~ msgstr "citește mai mult"
+
+#~ msgid "read full text"
+#~ msgstr "citește tot textul"

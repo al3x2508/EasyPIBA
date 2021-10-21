@@ -985,6 +985,6 @@ msgstr ""
 msgid "read full text"
 msgstr ""
 
-#: Utils/functions.php:308
+#: Utils/Util.php:308
 msgid "This site is currently down for maintenance and should be back soon."
 msgstr ""

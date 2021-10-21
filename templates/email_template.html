@@ -1,305 +1,309 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>{title}</title>
-	<style type="text/css">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>{title}</title>
+    <style type="text/css">
 
-		/* Client-specific Styles */
-		#outlook a {
-			padding: 0;
-		}
+        /* Client-specific Styles */
+        #outlook a {
+            padding: 0;
+        }
 
-		/* Force Outlook to provide a "view in browser" menu link. */
-		body {
-			width: 100% !important;
-			-webkit-text-size-adjust: 100%;
-			-ms-text-size-adjust: 100%;
-			margin: 0;
-			padding: 0;
-			font-family: Helvetica, arial, sans-serif;
-		}
+        /* Force Outlook to provide a "view in browser" menu link. */
+        body {
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, arial, sans-serif;
+        }
 
-		#email {
-			margin: 0 auto;
-		}
+        #email {
+            margin: 0 auto;
+        }
 
-		#header {
-			overflow: visible;
-		}
+        #header {
+            overflow: visible;
+        }
 
-		#dgreen {
-			height: 85px;
-			background-color: #83c230;
-		}
+        #dgreen {
+            height: 85px;
+            background-color: #83c230;
+        }
 
-		#elogo {
-			background-color: #6d6e71;
-			line-height: 3.3em;
-			height: 3.3em;
-			margin: 0;
-			font-size: 30px;
-			color: #FFF;
-			position: relative;
-			text-align: left;
-			padding: .5em;
-		}
+        #elogo {
+            background-color: #6d6e71;
+            line-height: 3.3em;
+            height: 3.3em;
+            margin: 0;
+            font-size: 30px;
+            color: #FFF;
+            position: relative;
+            text-align: left;
+            padding: .5em;
+        }
 
-		#elogo > img {
-			width: 3.3em;
-			height: 3.3em;
-			text-align: left;
-			vertical-align: middle;
-		}
+        #elogo > img {
+            width: 3.3em;
+            height: 3.3em;
+            text-align: left;
+            vertical-align: middle;
+        }
 
-		#content {
-			padding: 5em 1em 0 1em;
-			font-size: 16px;
-		}
+        #content {
+            padding: 5em 1em 0 1em;
+            font-size: 16px;
+        }
 
-		#footer {
-			margin-top: .5em;
-			position: relative;
-			font-size: 16px;
-			background-color: #753190;
-			color: #FFF;
-		}
+        #footer {
+            margin-top: .5em;
+            position: relative;
+            font-size: 16px;
+            background-color: #753190;
+            color: #FFF;
+        }
 
-		#footer:before {
-			content: ' ';
-			position: absolute;
-			top: 0;
-			left: 0;
-			display: block;
-			width: 100%;
-			height: 5px;
-			background-color: #ec1a71;
-		}
+        #footer:before {
+            content: ' ';
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 5px;
+            background-color: #ec1a71;
+        }
 
-		#social {
-			font-size: 3em;
-			padding: .5em;
-		}
+        #social {
+            font-size: 3em;
+            padding: .5em;
+        }
 
-		#social .symbol {
-			border: 3px solid #FFF;
-			display: inline-block;
-			height: 1em;
-			width: 1em;
-			padding: .5em;
-			font-size: 16px;
-		}
+        #social .symbol {
+            border: 3px solid #FFF;
+            display: inline-block;
+            height: 1em;
+            width: 1em;
+            padding: .5em;
+            font-size: 16px;
+        }
 
-		#social .symbol > img {
-			width: 1em;
-			height: 1em;
-		}
+        #social .symbol > img {
+            width: 1em;
+            height: 1em;
+        }
 
-		#dates {
-			padding: 0 1.5em 1.5em 1.5em;
-			font-size: 1em;
-		}
+        #dates {
+            padding: 0 1.5em 1.5em 1.5em;
+            font-size: 1em;
+        }
 
-		#copy {
-			padding: .5em;
-			line-height: 1.5em;
-			background-color: #f8941d;
-			font-size: 1.5em;
-			text-align: right;
-		}
+        #copy {
+            padding: .5em;
+            line-height: 1.5em;
+            background-color: #f8941d;
+            font-size: 1.5em;
+            text-align: right;
+        }
 
-		#copy a {
-			color: #fff;
-		}
+        #copy a {
+            color: #fff;
+        }
 
-		/* Prevent Webkit and Windows Mobile platforms from changing default font sizes, while not breaking desktop design. */
-		.ExternalClass {
-			width: 100%;
-		}
+        /* Prevent Webkit and Windows Mobile platforms from changing default font sizes, while not breaking desktop design. */
+        .ExternalClass {
+            width: 100%;
+        }
 
-		/* Force Hotmail to display emails at full width */
-		.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
-			line-height: 100%;
-		}
+        /* Force Hotmail to display emails at full width */
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+            line-height: 100%;
+        }
 
-		/* Force Hotmail to display normal line spacing.*/
-		#backgroundTable {
-			margin: 0;
-			padding: 0;
-			width: 100% !important;
-			line-height: 100% !important;
-		}
+        /* Force Hotmail to display normal line spacing.*/
+        #backgroundTable {
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            line-height: 100% !important;
+        }
 
-		img {
-			outline: none;
-			text-decoration: none;
-			border: none;
-			-ms-interpolation-mode: bicubic;
-		}
+        img {
+            outline: none;
+            text-decoration: none;
+            border: none;
+            -ms-interpolation-mode: bicubic;
+        }
 
-		a img {
-			border: none;
-		}
+        a img {
+            border: none;
+        }
 
-		.image_fix {
-			display: block;
-		}
+        .image_fix {
+            display: block;
+        }
 
-		h1 {
-			text-align: center;
-		}
-		p {
-			margin: 0 !important;
-		}
+        h1 {
+            text-align: center;
+        }
 
-		.nr {
-			text-align: right;
-		}
-		table.bordered, table.bordered th, table.bordered td {
-			border: 1px solid #444;
-		}
-		table td {
-			border-collapse: collapse;
-			padding: 0;
-		}
+        p {
+            margin: 0 !important;
+        }
 
-		table {
-			border-collapse: collapse;
-			mso-table-lspace: 0pt;
-			mso-table-rspace: 0pt;
-		}
-		table.generaltable {
-			width: 100%;
-		}
+        .nr {
+            text-align: right;
+        }
 
-		a {
-			color: #0a8cce;
-			text-decoration: none !important;
-		}
+        table.bordered, table.bordered th, table.bordered td {
+            border: 1px solid #444;
+        }
 
-		/*STYLES*/
-		table[class=full] {
-			width: 100%;
-			clear: both;
-		}
+        table td {
+            border-collapse: collapse;
+            padding: 0;
+        }
 
-		/*IPAD STYLES*/
-		@media only screen and (max-width: 640px) {
-			a[href^="tel"], a[href^="sms"] {
-				text-decoration: none;
-				color: #0a8cce; /* or whatever your want */
-				pointer-events: none;
-				cursor: default;
-			}
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
 
-			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
-				text-decoration: underline;
-				color: #0a8cce !important;
-				pointer-events: auto;
-				cursor: default;
-			}
+        table.generaltable {
+            width: 100%;
+        }
 
-			table[class=devicewidth] {
-				width: 440px !important;
-				text-align: center !important;
-			}
+        a {
+            color: #0a8cce;
+            text-decoration: none !important;
+        }
 
-			table[class=devicewidthinner] {
-				width: 420px !important;
-				text-align: center !important;
-			}
+        /*STYLES*/
+        table[class=full] {
+            width: 100%;
+            clear: both;
+        }
 
-			img[class=banner] {
-				width: 440px !important;
-				height: 220px !important;
-			}
+        /*IPAD STYLES*/
+        @media only screen and (max-width: 640px) {
+            a[href^="tel"], a[href^="sms"] {
+                text-decoration: none;
+                color: #0a8cce; /* or whatever your want */
+                pointer-events: none;
+                cursor: default;
+            }
 
-			img[class=colimg2] {
-				width: 440px !important;
-				height: 220px !important;
-			}
+            .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+                text-decoration: underline;
+                color: #0a8cce !important;
+                pointer-events: auto;
+                cursor: default;
+            }
 
-		}
+            table[class=devicewidth] {
+                width: 440px !important;
+                text-align: center !important;
+            }
 
-		@media only screen and (max-width: 600px) {
-			#email {
-				width: 100%;
-			}
-		}
+            table[class=devicewidthinner] {
+                width: 420px !important;
+                text-align: center !important;
+            }
 
-		@media only screen and (min-width: 600px) {
-			#email {
-				width: 600px;
-			}
-		}
+            img[class=banner] {
+                width: 440px !important;
+                height: 220px !important;
+            }
 
-		/*IPHONE STYLES*/
-		@media only screen and (max-width: 480px) {
-			#elogo {
-				font-size: 20px;
-			}
+            img[class=colimg2] {
+                width: 440px !important;
+                height: 220px !important;
+            }
 
-			a[href^="tel"], a[href^="sms"] {
-				text-decoration: none;
-				color: #0a8cce; /* or whatever your want */
-				pointer-events: none;
-				cursor: default;
-			}
+        }
 
-			.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
-				text-decoration: underline;
-				color: #0a8cce !important;
-				pointer-events: auto;
-				cursor: default;
-			}
+        @media only screen and (max-width: 600px) {
+            #email {
+                width: 100%;
+            }
+        }
 
-			table[class=devicewidth] {
-				width: 280px !important;
-				text-align: center !important;
-			}
+        @media only screen and (min-width: 600px) {
+            #email {
+                width: 600px;
+            }
+        }
 
-			table[class=devicewidthinner] {
-				width: 260px !important;
-				text-align: center !important;
-			}
+        /*IPHONE STYLES*/
+        @media only screen and (max-width: 480px) {
+            #elogo {
+                font-size: 20px;
+            }
 
-			img[class=banner] {
-				width: 280px !important;
-				height: 140px !important;
-			}
+            a[href^="tel"], a[href^="sms"] {
+                text-decoration: none;
+                color: #0a8cce; /* or whatever your want */
+                pointer-events: none;
+                cursor: default;
+            }
 
-			img[class=colimg2] {
-				width: 280px !important;
-				height: 140px !important;
-			}
+            .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+                text-decoration: underline;
+                color: #0a8cce !important;
+                pointer-events: auto;
+                cursor: default;
+            }
 
-			td[class=mobile-hide] {
-				display: none !important;
-			}
+            table[class=devicewidth] {
+                width: 280px !important;
+                text-align: center !important;
+            }
 
-			td[class="padding-bottom25"] {
-				padding-bottom: 25px !important;
-			}
+            table[class=devicewidthinner] {
+                width: 260px !important;
+                text-align: center !important;
+            }
 
-		}
-	</style>
+            img[class=banner] {
+                width: 280px !important;
+                height: 140px !important;
+            }
+
+            img[class=colimg2] {
+                width: 280px !important;
+                height: 140px !important;
+            }
+
+            td[class=mobile-hide] {
+                display: none !important;
+            }
+
+            td[class="padding-bottom25"] {
+                padding-bottom: 25px !important;
+            }
+
+        }
+    </style>
 </head>
 <body>
 <table id="email">
-	<tbody>
-	<tr>
-		<td id="elogo">
-			<img src="{LOGO_BASE64}"
-				 alt="{APP_NAME}"/>
-			{title}
-		</td>
-	</tr>
-	<tr>
-		<td id="content">{content}</td>
-	</tr>
-	</tbody>
+    <tbody>
+    <tr>
+        <td id="elogo">
+            <img alt="{APP_NAME}"
+                 src="{LOGO_BASE64}"/>
+            {title}
+        </td>
+    </tr>
+    <tr>
+        <td id="content">{content}</td>
+    </tr>
+    </tbody>
 </table>
 </body>
 </html>

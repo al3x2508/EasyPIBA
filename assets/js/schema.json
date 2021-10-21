@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "properties": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "city_autocomplete_custom": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string",
+          "maxLength": 5
+        },
+        "streetNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Please enter your birth date."
+    },
+    "firstName": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Please enter your first name"
+    },
+    "secondName": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Please enter your second name"
+    },
+    "vegetarian": {
+      "type": "boolean"
+    },
+    "nationality": {
+      "enum": [
+        "DE",
+        "IT",
+        "JP",
+        "US",
+        "RU",
+        "Other"
+      ],
+      "type": "string"
+    },
+    "provideAddress": {
+      "type": "boolean"
+    },
+    "vegetarianOptions": {
+      "type": "object",
+      "properties": {
+        "vegan": {
+          "type": "boolean"
+        },
+        "favoriteVegetable": {
+          "enum": [
+            "Tomato",
+            "Potato",
+            "Salad",
+            "Aubergine",
+            "Cucumber",
+            "Other"
+          ],
+          "type": "string"
+        },
+        "otherFavoriteVegetable": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

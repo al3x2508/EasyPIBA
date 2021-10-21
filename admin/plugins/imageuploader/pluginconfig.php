@@ -1,21 +1,23 @@
 <?php
-use Controller\AdminController;
-use Utils\Util;
 
-require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php');
+use Util;
+
+require_once(dirname(__FILE__, 4) . '/Utils/Util.php');
 $adminController = new \Controller\AdminController();
-if (!$adminController->checkPermission('Edit pages') && !\Module\Users\Controller::getCurrentUser()) {
+if (!$adminController->checkPermission('Edit pages')) {
     exit;
 }
 global $foldershistory, $usersiteroot, $useruploadfolder, $useruploadpath, $file_style, $load_lang_code;
-if(!isset($load_lang_code)) {
+if (!isset($load_lang_code)) {
     // checking lang value
     if (isset($_COOKIE['sy_lang'])) {
         $load_lang_code = $_COOKIE['sy_lang'];
     } else {
         $load_lang_code = Util::getUserLanguage();
     }
-    if(arrayKeyExists('langCode', $_GET)) $load_lang_code = $_GET['langCode'];
+    if (arrayKeyExists('langCode', $_GET)) {
+        $load_lang_code = $_GET['langCode'];
+    }
 
     // including lang files
     switch ($load_lang_code) {
@@ -146,11 +148,6 @@ $foldershistory = array();
 $usersiteroot = _APP_DIR_;
 $useruploadfolder = "uploads";
 $useruploadpath = $usersiteroot . "$useruploadfolder/";
-$userId = \Module\Users\Controller::getCurrentUser(true);
-if(!AdminController::getCurrentUser() && $userId) {
-    $useruploadfolder .= '/' . $userId;
-    $useruploadpath .= $userId . '/';
-    if(!file_exists($useruploadpath)) mkdir($useruploadpath);
-}
+
 $foldershistory[] = $useruploadfolder;
 

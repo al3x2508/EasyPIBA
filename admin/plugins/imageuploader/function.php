@@ -42,39 +42,72 @@ function loadImages()
 
             if ($file_style == "block") { ?>
                 <div class="fileDiv"
-                     onclick="showEditBar('<?php echo $image_url; ?>','<?php echo $image_height; ?>','<?php echo $count; ?>','<?php echo $image_basename; ?>');"
-                     ondblclick="showImage('<?php echo $image_url; ?>','<?php echo $image_height; ?>','<?php echo $image_basename; ?>');"
-                     data-imgid="<?php echo $count; ?>">
-                    <div class="imgDiv"><img class="fileImg lazy" data-original="<?php echo $image_url; ?>"></div>
+                     onclick="showEditBar('<?php
+                     echo $image_url; ?>','<?php
+                     echo $image_height; ?>','<?php
+                     echo $count; ?>','<?php
+                     echo $image_basename; ?>');"
+                     ondblclick="showImage('<?php
+                     echo $image_url; ?>','<?php
+                     echo $image_height; ?>','<?php
+                     echo $image_basename; ?>');"
+                     data-imgid="<?php
+                     echo $count; ?>">
+                    <div class="imgDiv"><img class="fileImg lazy" data-original="<?php
+                        echo $image_url; ?>"></div>
                     <p class="fileDescription"><span
-                            class="fileMime"><?php echo $image_extension; ?></span> <?php echo $image_filename; ?><?php if ($file_extens == "yes") {
+                                class="fileMime"><?php
+                            echo $image_extension; ?></span> <?php
+                        echo $image_filename; ?><?php
+                        if ($file_extens == "yes") {
                             echo ".$image_extension";
                         } ?></p>
-                    <p class="fileTime"><?php echo date("F d Y H:i", filemtime($image)); ?></p>
-                    <p class="fileTime"><?php echo $filesizetemp; ?> KB</p>
+                    <p class="fileTime"><?php
+                        echo date("F d Y H:i", filemtime($image)); ?></p>
+                    <p class="fileTime"><?php
+                        echo $filesizetemp; ?> KB</p>
                 </div>
-            <?php } elseif ($file_style == "list") { ?>
+            <?php
+            } elseif ($file_style == "list") { ?>
                 <div class="fullWidthFileDiv"
-                     onclick="showEditBar('<?php echo $image_url; ?>','<?php echo $image_height; ?>','<?php echo $count; ?>','<?php echo $image_basename; ?>');"
-                     ondblclick="showImage('<?php echo $image_url; ?>','<?php echo $image_height; ?>','<?php echo $image_basename; ?>');"
-                     data-imgid="<?php echo $count; ?>">
+                     onclick="showEditBar('<?php
+                     echo $image_url; ?>','<?php
+                     echo $image_height; ?>','<?php
+                     echo $count; ?>','<?php
+                     echo $image_basename; ?>');"
+                     ondblclick="showImage('<?php
+                     echo $image_url; ?>','<?php
+                     echo $image_height; ?>','<?php
+                     echo $image_basename; ?>');"
+                     data-imgid="<?php
+                     echo $count; ?>">
                     <div class="fullWidthimgDiv"><img class="fullWidthfileImg lazy"
-                                                      data-original="<?php echo $image_url; ?>"></div>
-                    <p class="fullWidthfileDescription"><?php echo $image_filename; ?><?php if ($file_extens == "yes") {
+                                                      data-original="<?php
+                                                      echo $image_url; ?>"></div>
+                    <p class="fullWidthfileDescription"><?php
+                        echo $image_filename; ?><?php
+                        if ($file_extens == "yes") {
                             echo ".$image_extension";
                         } ?></p>
 
                     <div class="qEditIconsDiv">
                         <img title="Delete File" src="img/cd-icon-qtrash.png" class="qEditIconsImg"
-                             onclick="window.location.href = 'imgdelete.php?img=<?php echo $image_basename; ?>'">
+                             onclick="window.location.href = 'imgdelete.php?img=<?php
+                             echo $image_basename; ?>'">
                     </div>
 
-                    <p class="fullWidthfileTime fullWidthfileMime fullWidthlastChild"><?php echo $image_extension; ?></p>
-                    <p class="fullWidthfileTime"><?php echo $filesizetemp; ?> KB</p>
-                    <p class="fullWidthfileTime fullWidth30percent"><?php echo date("F d Y H:i",
-                            filemtime($image)); ?></p>
+                    <p class="fullWidthfileTime fullWidthfileMime fullWidthlastChild"><?php
+                        echo $image_extension; ?></p>
+                    <p class="fullWidthfileTime"><?php
+                        echo $filesizetemp; ?> KB</p>
+                    <p class="fullWidthfileTime fullWidth30percent"><?php
+                        echo date(
+                            "F d Y H:i",
+                            filemtime($image)
+                        ); ?></p>
                 </div>
-            <?php }
+            <?php
+            }
 
         endfor;
         if ($count == 0) {

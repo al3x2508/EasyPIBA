@@ -1,26 +1,24 @@
 <IfModule mod_rewrite.c>
 Options -Multiviews -Indexes +FollowSymLinks
 RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-RewriteCond %{HTTP_HOST} !^(www)\.
-RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-RewriteRule ^js/login.js$ Module/Users/login.js [L]
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
 RewriteRule ^css/main.css Utils/scripts.php [L]
 RewriteRule ^js/jquery.min.js vendor/components/jquery/jquery.min.js [L]
 RewriteRule ^js/jquery-ui.min.js vendor/components/jqueryui/jquery-ui.min.js [L]
-RewriteRule ^css/font-awesome.css vendor/components/font-awesome/css/all.min.css [L]
-RewriteRule ^fonts/fontawesome/(.*)$ vendor/components/font-awesome/webfonts/$1 [NC,L]
-RewriteRule ^webfonts/(fa-.*)$ vendor/components/font-awesome/webfonts/$1 [NC,L]
+RewriteRule ^css/fontawesome.css node_modules/@fortawesome/fontawesome-pro/css/all.min.css [L]
+RewriteRule ^fonts/fontawesome/(.*)$ node_modules/@fortawesome/fontawesome-pro/webfonts/$1 [NC,L]
+RewriteRule ^webfonts/fa-(.*)$ node_modules/@fortawesome/fontawesome-pro/webfonts/fa-$1 [NC,L]
 RewriteRule ^css/(.*)$ assets/css/$1 [NC,L]
-RewriteRule ^scss/(.*)$ assets/scss/$1 [NC,L]
 RewriteRule ^js/(.*)$ assets/js/$1 [NC,L]
 RewriteRule ^fonts/(.*)$ assets/fonts/$1 [NC,L]
 RewriteRule ^img/(.*)$ assets/img/$1 [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(json|act)/ admin/index.php [L]
+RewriteRule ^/admin/(json|act)/ admin/index.php [L]
 RewriteRule ^logout$ index.php?logout=true [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -1,98 +1,100 @@
 <!DOCTYPE html>
 <html lang="{LANGUAGE}">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <title>{title}</title>
-        {AMP_META}
-        <meta name="description" content="{description}"/>
-        <meta property="og:title" content="{title}"/>
-        <meta property="og:description" content="{description}"/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:url" content="{url}"/>
-        <meta property="og:image" content="{ogimage}"/>
-        <link rel="stylesheet" href="{FOLDER_URL}css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-              rel="stylesheet">
-        {FBAPPID}
-        {GOOGLE_ANALYTICS}
-    </head>
-    <body id="page-top">
-    <div class="vh-100 d-flex col justify-content-center{gradient}">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-                <div class="container">
-                    <a class="navbar-brand js-scroll-trigger" href="{HOME_LINK}"><img src="{LOGO}" height="30"
-                                                                                      alt="{APP_NAME}"/></a>
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                            aria-label="Toggle navigation">Menu<i class="fas fa-bars"></i></button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-                            {menu}
-                        </ul>
-                        <div class="nav navbar-nav navbar-right">
-                            {menu_right}
-                        </div>
-                    </div>
-                </div>
-            </nav>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <title>{title}</title>
+    {AMP_META}
+    <meta content="{description}" name="description"/>
+    <meta content="{title}" property="og:title"/>
+    <meta content="{description}" property="og:description"/>
+    <meta content="website" property="og:type"/>
+    <meta content="{url}" property="og:url"/>
+    <meta content="{ogimage}" property="og:image"/>
+    <link href="{FOLDER_URL}css/fontawesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    {FBAPPID}
+    {GOOGLE_ANALYTICS}
+</head>
+<body id="page-top">
+<div class="vh-100 d-flex col justify-content-center{gradient}">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container">
-                <div class="header clearfix">
-
-                </div>
-                <div class="row">
-                    {sidebar}
-                    <div class="col-{colsize} bd-content">
-                        {content}
+                <a class="navbar-brand js-scroll-trigger" href="{HOME_LINK}"><img alt="{APP_NAME}" height="30"
+                                                                                  src="{LOGO}"/></a>
+                <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" data-toggle="collapse"
+                        type="button">Menu<i class="fas fa-bars"></i></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        {menu}
+                    </ul>
+                    <div class="nav navbar-nav navbar-right">
+                        {menu_right}
                     </div>
                 </div>
             </div>
-            <footer>
-                <div class="footer" id="footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-6">
-                                <h3>Authors</h3>
-                                <ul>
-                                    <li><a href="#">Alexandru-Emilian Glăvan</a></li>
-                                </ul>
-                                <h3>Fund the project</h3>
-                                <ul>
-                                    <li>
-                                        <a href="https://flattr.com/submit/auto?user_id=alexglv&url=https://github.com/al3x2508/EasyPIBA"
-                                           rel="nofollow" target="_blank">Flattr</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <h3>Tweets</h3>
-                                <ul>
-                                    <li><a class="twitter-timeline" href="https://twitter.com/EasyPiba?ref_src=twsrc%5Etfw">Tweets
-                                        by EasyPiba</a>
-                                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-                                <h3>Social</h3>
-                                <ul class="social">
-                                    <li><a href="https://www.facebook.com/easypiba/" rel="nofollow" target="_blank"><i
-                                            class="fab fa-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/EasyPiba" target="_blank"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--/.row-->
-                    </div>
-                    <!--/.container-->
-                </div>
-                <!--/.footer-->
-            </footer>
-        </div>
-    </div>
+        </nav>
+        <div class="container">
+            <div class="header clearfix">
 
-    {MAIN_JAVASCRIPTS}
-    </body>
+            </div>
+            <div class="row">
+                {sidebar}
+                <div class="col-{colsize} bd-content">
+                    {content}
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer" id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-6">
+                            <h3>Authors</h3>
+                            <ul>
+                                <li><a href="#">Alexandru-Emilian Glăvan</a></li>
+                            </ul>
+                            <h3>Fund the project</h3>
+                            <ul>
+                                <li>
+                                    <a href="https://flattr.com/submit/auto?user_id=alexglv&url=https://github.com/al3x2508/EasyPIBA"
+                                       rel="nofollow" target="_blank">Flattr</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <h3>Tweets</h3>
+                            <ul>
+                                <li><a class="twitter-timeline" href="https://twitter.com/EasyPiba?ref_src=twsrc%5Etfw">Tweets
+                                    by EasyPiba</a>
+                                    <script async charset="utf-8"
+                                            src="https://platform.twitter.com/widgets.js"></script>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                            <h3>Social</h3>
+                            <ul class="social">
+                                <li><a href="https://www.facebook.com/easypiba/" rel="nofollow" target="_blank"><i
+                                        class="fab fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/EasyPiba" target="_blank"><i
+                                        class="fab fa-twitter"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                </div>
+                <!--/.container-->
+            </div>
+            <!--/.footer-->
+        </footer>
+    </div>
+</div>
+
+{MAIN_JAVASCRIPTS}
+</body>
 </html>

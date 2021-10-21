@@ -2,58 +2,65 @@
   "name": "al3x2508/easypiba",
   "description": "A lightweight PHP framework, easy to install, easy to learn, easy to develop.",
   "keywords": [
-	"framework",
-	"easypiba"
+    "framework",
+    "easypiba"
   ],
   "license": "MIT",
   "type": "project",
   "authors": [
-	{
-	  "name": "Alexandru Glavan",
-	  "email": "alexandru.glavan@easypiba.com"
-	}
+    {
+      "name": "Alexandru Glavan",
+      "email": "alexandru.glavan@easypiba.com"
+    }
   ],
   "require": {
-	"composer/installers": "~1.0",
-	"php": ">=5.6",
-	"ext-zip": "*",
-	"ext-gd": "*",
-	"tedivm/jshrink": "*",
-	"phpoffice/phpspreadsheet": "*",
-	"paquettg/php-html-parser": "~1.7",
-	"paquettg/string-encode": "*",
-	"masterexploder/phpthumb": "*",
-	"sabberworm/php-css-parser": "*",
-	"phpmailer/phpmailer": "*",
-	"almasaeed2010/adminlte": "*",
-	"twbs/bootstrap": ">=4.0.0",
-	"components/jquery": ">=2.1.0",
-	"components/jqueryui": ">=1.11.1",
-	"components/font-awesome": ">=4.0.0",
-	"ckeditor/ckeditor": "4.*",
-	"ckeditor/imageuploader": "4.1.8",
-	"datatables/datatables": ">=1.10.11",
-	"drmonty/datatables-responsive": ">=2.0.0"
+    "composer/installers": "~1.12.0",
+    "php": ">=7.0",
+    "tedivm/jshrink": "*",
+    "phpoffice/phpspreadsheet": "*",
+    "paquettg/php-html-parser": "~1.7",
+    "paquettg/string-encode": "*",
+    "masterexploder/phpthumb": "dev-master",
+    "sabberworm/php-css-parser": "*",
+    "phpmailer/phpmailer": "*",
+    "almasaeed2010/adminlte": "*",
+    "twbs/bootstrap": ">=5.0.0",
+    "components/jquery": ">=3.1.0",
+    "components/jqueryui": ">=1.11.1",
+    "ckeditor/ckeditor": "4.*",
+    "ckeditor/imageuploader": "4.1.8",
+    "datatables/datatables": ">=1.10.11",
+    "drmonty/datatables-responsive": ">=2.0.0",
+    "twig/twig": ">=3.3.3",
+    "ext-curl": "*",
+    "ext-fileinfo": "*",
+    "ext-gd": "*",
+    "ext-gettext": "*",
+    "ext-iconv": "*",
+    "ext-json": "*",
+    "ext-mysqli": "*",
+    "ext-zip": "*",
+    "ext-dom": "*",
+    "gettext/gettext": "^5.5"
   },
   "repositories": [
-	{
-	  "type": "package",
-	  "package": {
-		"name": "ckeditor/imageuploader",
-		"version": "4.1.8",
-		"extra": {
-		  "installer-name": "ckeditor.imageuploader"
-		},
-		"dist": {
-		  "url": "https://download.ckeditor.com/imageuploader/releases/imageuploader_4.1.8.zip",
-		  "type": "zip"
-		}
-	  }
-	}
-  ],
-  "autoload": {
-	"psr-0": {
-	  "Utils\\": "Utils/"
-	}
-  }
+    {
+      "type": "package",
+      "package": {
+        "name": "ckeditor/imageuploader",
+        "version": "4.1.8",
+        "extra": {
+          "installer-name": "ckeditor.imageuploader"
+        },
+        "dist": {
+          "url": "https://download.ckeditor.com/imageuploader/releases/imageuploader_4.1.8.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:masterexploder/PHPThumb.git"
+    }
+  ]
 }

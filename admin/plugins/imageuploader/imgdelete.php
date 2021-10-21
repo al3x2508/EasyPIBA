@@ -1,6 +1,8 @@
 <?php
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/Utils/functions.php';
-use Utils\Util;
+
+require_once dirname(__FILE__, 4) . '/Utils/Util.php';
+
+use Util;
 
 // checking lang value
 if (isset($_COOKIE['sy_lang'])) {
@@ -24,14 +26,15 @@ switch ($load_lang_code) {
 
 // Including the plugin config file, don't delete the following row!
 require_once(__DIR__ . '/pluginconfig.php');
-if (\Module\Users\Controller::getCurrentUser() || \Controller\AdminController::checkPermission('Edit pages')) {
+if (\Controller\AdminController::checkPermission('Edit pages')) {
     ?>
 
     <!DOCTYPE html>
     <html lang="<?= $load_lang_code; ?>">
     <head>
         <meta charset="utf-8">
-        <title><?php echo $imagebrowser1; ?> :: Delete</title>
+        <title><?php
+            echo $imagebrowser1; ?> :: Delete</title>
         <script src="dist/sweetalert.min.js"></script>
         <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
     </head>
