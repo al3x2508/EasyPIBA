@@ -1,20 +1,27 @@
 <?php
 namespace Utils;
 
+use FileReader;
+use gettext_reader;
+
 require_once(_APP_DIR_ . 'locale/gettext.php');
 require_once(_APP_DIR_ . 'locale/streams.php');
 
-class Translations extends \gettext_reader
+class Translations extends gettext_reader
 {
-    private static $instance = null;
+    private static ?Translations $instance = null;
 
     public function __construct()
     {
-        $streamer = new \FileReader(_LOCALE_DIR_ . '/' . $_SESSION['userLanguage'] . '/LC_MESSAGES/' . $_SESSION['userLanguage'] . '.mo');
-        parent::gettext_reader($streamer);
+        if(file_exists(_LOCALE_DIR_ . '/' . $_SESSION['userLanguage'] . '/LC_MESSAGES/' . $_SESSION['userLanguage'] . '.mo')) {
+            $streamer = new FileReader(_LOCALE_DIR_ . '/' . $_SESSION['userLanguage'] . '/LC_MESSAGES/' . $_SESSION['userLanguage'] . '.mo');
+            parent::gettext_reader($streamer);
+        } else {
+            parent::gettext_reader(false);
+        }
     }
 
-    public static function getInstance()
+    public static function getInstance(): Translations
     {
         if (self::$instance == null) {
             self::$instance = new self();

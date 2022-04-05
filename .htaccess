@@ -1,10 +1,11 @@
 <IfModule mod_rewrite.c>
 Options -Multiviews -Indexes +FollowSymLinks
 RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-RewriteCond %{HTTP_HOST} !^(www)\.
-RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteBase /
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTP_HOST} !^(www)\.
+#RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteRule ^js/login.js$ Module/Users/login.js [L]
 RewriteRule ^css/main.css Utils/scripts.php [L]
 RewriteRule ^js/jquery.min.js vendor/components/jquery/jquery.min.js [L]

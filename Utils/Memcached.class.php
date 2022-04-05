@@ -2,40 +2,34 @@
 
 namespace Utils;
 
+use Exception;
+use Memcached as MemcachedAlias;
+
 /**
  * Class Memcached
  * @package Utils
  */
-class Memcached extends \Memcached
+class Memcached extends MemcachedAlias
 {
-    /**
-     * @var Memcached|null
-     */
-    private static $instance = null;
+    private static ?Memcached $instance = null;
 
     /**
      * Memcached constructor.
      */
     public function __construct()
     {
-        if (extension_loaded('Memcached')) {
-            try {
-                parent::__construct();
-                if ($this->addServer(_MEMCACHE_HOST_, _MEMCACHE_PORT_)) {
-                    return $this;
-                }
-                return false;
-            } catch (\Exception $e) {
-                return false;
+        try {
+            parent::__construct();
+            if ($this->addServer(_MEMCACHE_HOST_, _MEMCACHE_PORT_)) {
+                return $this;
             }
+            return false;
+        } catch (Exception $e) {
+            return false;
         }
-        return false;
     }
 
-    /**
-     * @return Memcached|false
-     */
-    public static function getInstance()
+    public static function getInstance(): ?Memcached
     {
         if (self::$instance == null) {
             self::$instance = new self();
@@ -43,10 +37,7 @@ class Memcached extends \Memcached
         return self::$instance;
     }
 
-    /**
-     * @return bool
-     */
-    public function isConnected()
+    public function isConnected(): bool
     {
         $statuses = $this->getStats();
         return (isset($statuses[_MEMCACHE_HOST_ . ":" . _MEMCACHE_PORT_]) && $statuses[_MEMCACHE_HOST_ . ":" . _MEMCACHE_PORT_]["pid"] > 0);
@@ -54,25 +45,19 @@ class Memcached extends \Memcached
 
     /**
      * Check if an item exists
-     * @param string $key
-     * @return bool
      */
-    public function exists($key)
+    public function exists(string $key): bool
     {
-        if ($this->get($key) && $this->getResultCode() == Memcached::RES_SUCCESS) {
+        if ($this->get($key) && $this->getResultCode() == MemcachedAlias::RES_SUCCESS) {
             return true;
         }
         return false;
     }
 
     /**
-     * Delete an item
-     * @param string $key <p>
-     * The key to be deleted.
-     * </p>
-     * @return bool
+     * Delete an item by its key
      */
-    public function del($key)
+    public function del(string $key): bool
     {
         return $this->delete($key);
     }

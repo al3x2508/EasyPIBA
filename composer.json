@@ -15,25 +15,24 @@
   ],
   "require": {
 	"composer/installers": "~1.0",
-	"php": ">=5.6",
+	"php": ">=7.4",
 	"ext-zip": "*",
 	"ext-gd": "*",
 	"tedivm/jshrink": "*",
 	"phpoffice/phpspreadsheet": "*",
-	"paquettg/php-html-parser": "~1.7",
-	"paquettg/string-encode": "*",
 	"masterexploder/phpthumb": "*",
-	"sabberworm/php-css-parser": "*",
 	"phpmailer/phpmailer": "*",
 	"almasaeed2010/adminlte": "*",
-	"twbs/bootstrap": ">=4.0.0",
+	"twbs/bootstrap": ">=5.0.0",
 	"components/jquery": ">=2.1.0",
 	"components/jqueryui": ">=1.11.1",
-	"components/font-awesome": ">=4.0.0",
+	"components/font-awesome": ">=6.0.0",
 	"ckeditor/ckeditor": "4.*",
 	"ckeditor/imageuploader": "4.1.8",
 	"datatables/datatables": ">=1.10.11",
-	"drmonty/datatables-responsive": ">=2.0.0"
+	"drmonty/datatables-responsive": ">=2.0.0",
+    "ext-json": "*",
+    "ext-mysqli": "*"
   },
   "repositories": [
 	{
@@ -50,10 +49,5 @@
 		}
 	  }
 	}
-  ],
-  "autoload": {
-	"psr-0": {
-	  "Utils\\": "Utils/"
-	}
-  }
+  ]
 }

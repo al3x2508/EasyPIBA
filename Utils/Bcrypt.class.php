@@ -1,15 +1,20 @@
 <?php
 namespace Utils;
 
+use Exception;
+
 class Bcrypt
 {
     private $rounds;
-    private $randomState;
+    private ?string $randomState = null;
 
+    /**
+     * @throws Exception
+     */
     public function __construct($rounds = 12)
     {
         if (CRYPT_BLOWFISH != 1) {
-            throw new \Exception("bcrypt not supported in this installation. See http://php.net/crypt");
+            throw new Exception("bcrypt not supported in this installation. See https://php.net/crypt");
         }
         $this->rounds = $rounds;
     }
@@ -23,25 +28,25 @@ class Bcrypt
         return false;
     }
 
-    private function getSalt()
+    private function getSalt(): string
     {
         $salt = sprintf('$2y$%02d$', $this->rounds);
-        $bytes = $this->getRandomBytes(16);
+        $bytes = $this->getRandomBytes();
         $salt .= $this->encodeBytes($bytes);
         return $salt;
     }
 
-    private function getRandomBytes($count)
+    private function getRandomBytes()
     {
         $bytes = '';
         if (function_exists('openssl_random_pseudo_bytes') && (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')) {
-            $bytes = openssl_random_pseudo_bytes($count);
+            $bytes = openssl_random_pseudo_bytes(16);
         }
         if ($bytes === '' && is_readable('/dev/urandom') && ($hRand = @fopen('/dev/urandom', 'rb')) !== false) {
-            $bytes = fread($hRand, $count);
+            $bytes = fread($hRand, 16);
             fclose($hRand);
         }
-        if (strlen($bytes) < $count) {
+        if (strlen($bytes) < 16) {
             $bytes = '';
             if ($this->randomState === null) {
                 $this->randomState = microtime();
@@ -49,16 +54,16 @@ class Bcrypt
                     $this->randomState .= getmypid();
                 }
             }
-            for ($i = 0; $i < $count; $i += 16) {
+            for ($i = 0; $i < 16; $i += 16) {
                 $this->randomState = md5(microtime() . $this->randomState);
                 $bytes .= (PHP_VERSION >= '5')?md5($this->randomState, true):pack('H*', md5($this->randomState));
             }
-            $bytes = substr($bytes, 0, $count);
+            $bytes = substr($bytes, 0, 16);
         }
         return $bytes;
     }
 
-    private function encodeBytes($input)
+    private function encodeBytes($input): string
     {
         $itoa64 = './ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $output = '';
@@ -83,7 +88,7 @@ class Bcrypt
         return $output;
     }
 
-    public function verify($input, $existingHash)
+    public function verify($input, $existingHash): bool
     {
         $hash = crypt($input, $existingHash);
         return $hash === $existingHash;

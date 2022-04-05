@@ -67,7 +67,6 @@ namespace Utils {
                 $user = Controller::getCurrentUser(false);
             }
             if ($user && property_exists($user, 'id')) {
-                /** @noinspection PhpUndefinedFieldInspection */
                 $accountSettings = json_decode($user->settings, true);
                 if (arrayKeyExists('language', $accountSettings)) {
                     return $accountSettings['language'];
@@ -473,10 +472,12 @@ namespace Utils {
          */
         public static function getCache()
         {
-            return false;
-            $cache = \Utils\Memcached::getInstance();
-            if (!$cache || ($cache && !$cache->isConnected())) {
-                $cache = \Utils\Redis::getInstance();
+            $cache = false;
+            if (extension_loaded('Memcached')) {
+                $cache = Memcached::getInstance();
+            }
+            if (!$cache || !$cache->isConnected()) {
+                $cache = Redis::getInstance();
             }
             return $cache;
         }
@@ -486,11 +487,11 @@ namespace {
 
     require dirname(__DIR__) . '/vendor/autoload.php';
     //Uncomment these lines if you want to redirect user to https from http and / or with www. prefix
-    $protocol = (@$_SERVER["HTTPS"] == "on")?"https://":"http://";
-    if (isset($_SERVER['HTTP_HOST']) && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.' && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'cne.') {
-        header('Location: ' . $protocol . 'www.' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI']);
-        exit;
-    }
+//    $protocol = (@$_SERVER["HTTPS"] == "on")?"https://":"http://";
+//    if (isset($_SERVER['HTTP_HOST']) && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'www.' && substr($_SERVER['HTTP_HOST'], 0, 4) !== 'cne.') {
+//        header('Location: ' . $protocol . 'www.' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI']);
+//        exit;
+//    }
     use Module\Users\Controller;
     use Utils\Translations;
     use Utils\Util;

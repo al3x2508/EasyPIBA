@@ -1,16 +1,15 @@
 <?php
 namespace Utils;
 
+use mysqli;
+
 /**
  * Class Database
  * @package Utils
  */
-class Database extends \mysqli
+class Database extends mysqli
 {
-    /**
-     * @var Database|null
-     */
-    private static $instance = null;
+    private static ?Database $instance = null;
 
     /**
      * Database constructor.
@@ -20,10 +19,7 @@ class Database extends \mysqli
         parent::__construct(_DB_HOST_, _DB_USER_, _DB_PASS_, _DB_NAME_, _DB_PORT_);
     }
 
-    /**
-     * @return Database|null
-     */
-    public static function getInstance()
+    public static function getInstance(): ?Database
     {
         if (self::$instance == null) {
             self::$instance = new self();

@@ -6,9 +6,6 @@ if(php_sapi_name() == "cli") {
 			require_once dirname(__FILE__) . '/admin/modules.php';
 			reread();
 			break;
-		case "buildcss":
-			$buildCss = new \Utils\BuildInPageCSS($argv[2]);
-			break;
 		default:
 			break;
 	}
