@@ -1,0 +1,1333 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-29 16:59+0200\n"
+"PO-Revision-Date: 2019-03-29 17:02+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+
+#: Module/Media/Admin/Media.class.php:8 Module/Media/Admin/Media.class.php:9
+#: Module/Media/Admin/Media.class.php:22
+msgid "Media"
+msgstr "Media"
+
+#: Module/Media/Admin/Media.class.php:26
+msgid "Filename"
+msgstr "Nume fișier"
+
+#: Module/Media/Admin/Media.class.php:26
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: Module/Media/Admin/Media.class.php:26
+#: Module/H5P/Admin/views/new-content.php:26
+#: Module/H5P/Admin/H5PLibraries.class.php:166
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Books/Admin/Books.class.php:37 Module/Books/Page.class.php:47
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/News/Admin/AdminPage.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Pages/Admin/Pages.class.php:39
+msgid "Actions"
+msgstr "Acțiuni"
+
+#: Module/Media/Admin/Media.class.php:32
+#: Module/Users/Admin/AdminPage.class.php:41
+#: Module/Books/Admin/Books.class.php:43 Module/Books/Page.class.php:53
+#: Module/Testimonials/Admin/AdminPage.class.php:34
+#: Module/News/Admin/AdminPage.class.php:47
+#: Module/Administrators/Admin/Admins.class.php:56
+#: Module/Pages/Admin/Pages.class.php:45
+msgid "Add"
+msgstr "Adaugă"
+
+#: Module/Media/Admin/Media.class.php:38 Module/Media/Admin/Media.class.php:53
+#: Module/Users/Admin/AdminPage.class.php:49
+#: Module/Users/Admin/AdminPage.class.php:101
+#: Module/Books/Admin/Books.class.php:50 Module/Books/Admin/Books.class.php:93
+#: Module/Books/Page.class.php:60 Module/Books/Page.class.php:120
+#: Module/Testimonials/Admin/AdminPage.class.php:40
+#: Module/Testimonials/Admin/AdminPage.class.php:75
+#: Module/News/Admin/AdminPage.class.php:53
+#: Module/News/Admin/AdminPage.class.php:84
+#: Module/Administrators/Admin/Admins.class.php:62
+#: Module/Administrators/Admin/Admins.class.php:87
+#: Module/Pages/Admin/Pages.class.php:51 Module/Pages/Admin/Pages.class.php:95
+msgid "Close"
+msgstr "Închide"
+
+#: Module/Media/Admin/Media.class.php:46 Module/Media/Admin/Media.class.php:47
+#: Module/Testimonials/Admin/AdminPage.class.php:64
+#: Module/Testimonials/Admin/AdminPage.class.php:65
+#: Module/News/Admin/AdminPage.class.php:73
+#: Module/News/Admin/AdminPage.class.php:74
+msgid "Image"
+msgstr "Imagine"
+
+#: Module/Media/Admin/Media.class.php:54
+#: Module/Users/Admin/AdminPage.class.php:102
+#: Module/Books/Admin/Books.class.php:94 Module/Books/Page.class.php:121
+#: Module/Testimonials/Admin/AdminPage.class.php:76
+#: Module/News/Admin/AdminPage.class.php:85
+#: Module/Administrators/Admin/Admins.class.php:88
+#: Module/Pages/Admin/Menu.class.php:50 Module/Pages/Admin/Pages.class.php:96
+msgid "Save"
+msgstr "Salvează"
+
+#: Module/Media/Admin/Act.class.php:116 Module/H5P/Admin/Act.class.php:67
+msgid "No uploaded file"
+msgstr "Niciun fișier încărcat"
+
+#: Module/Media/Admin/Act.class.php:161
+msgid "Error uploading"
+msgstr "Eroare la încărcare"
+
+#: Module/Media/Admin/Act.class.php:164 Module/Media/Admin/Act.class.php:167
+msgid "File is not an image"
+msgstr "Fișierul nu este o imagine"
+
+#: Module/Media/Admin/Act.class.php:170
+#, php-format
+msgid "Max upload %s"
+msgstr "Încărcare maximă de %s"
+
+#: Module/JSON/Admin.class.php:26
+msgid "You do not have permissions for this"
+msgstr "Nu ai permisiuni pentru această acțiune"
+
+#: Module/JSON/Admin.class.php:43
+msgid "This example should only be run from a Web Browser"
+msgstr "Acest exemplu trebuie rulat într-un browser web"
+
+#: Module/JSON/Admin.class.php:68
+msgid "Error processing"
+msgstr "Eroare la procesare"
+
+#: Module/JSON/Page.class.php:19
+msgid "Confirmation code was sent to your email address"
+msgstr "Codul de confirmare a fost trimis pe adresa de email"
+
+#: Module/JSON/Page.class.php:23
+msgid "Your account is already confirmed"
+msgstr "Contul tău este deja confirmat"
+
+#: Module/JSON/Page.class.php:26
+msgid "No account registered with this email address"
+msgstr "Niciun cont înregistrat cu această adresă de email"
+
+#: Module/H5P/H5PModule.class.php:1209
+#, php-format
+msgid "Cannot find H5P content with slug: %s."
+msgstr "Nu găsesc niciun conținut interactiv cu slug: %s."
+
+#: Module/H5P/H5PModule.class.php:1209 Module/H5P/H5PModule.class.php:1233
+#, php-format
+msgid "Cannot find H5P content with id: %d."
+msgstr "Nu găsesc niciun conținut interactiv cu id: %d."
+
+#: Module/H5P/H5PModule.class.php:1228
+msgid "Missing H5P identifier."
+msgstr "Lipsește identificatorul interactivului."
+
+#: Module/H5P/Admin/JSON.class.php:177
+msgid "Insert"
+msgstr "Inserează"
+
+#: Module/H5P/Admin/JSON.class.php:206
+#, php-format
+msgid "%s ago"
+msgstr "acum %s"
+
+#: Module/H5P/Admin/JSON.class.php:231
+#, php-format
+msgid "%s min"
+msgid_plural "%s mins"
+msgstr[0] "%s min"
+msgstr[1] "%s minute"
+msgstr[2] "%s minute"
+
+#: Module/H5P/Admin/JSON.class.php:238
+#, php-format
+msgid "%s hour"
+msgid_plural "%s hours"
+msgstr[0] "%s oră"
+msgstr[1] "%s ore"
+msgstr[2] "%s ore"
+
+#: Module/H5P/Admin/JSON.class.php:245
+#, php-format
+msgid "%s day"
+msgid_plural "%s days"
+msgstr[0] "%s zi"
+msgstr[1] "%s zile"
+msgstr[2] "%s zile"
+
+#: Module/H5P/Admin/JSON.class.php:252
+#, php-format
+msgid "%s week"
+msgid_plural "%s weeks"
+msgstr[0] "%s săptămână"
+msgstr[1] "%s săptămâni"
+msgstr[2] "%s săptămâni"
+
+#: Module/H5P/Admin/JSON.class.php:259
+#, php-format
+msgid "%s month"
+msgid_plural "%s months"
+msgstr[0] "%s lună"
+msgstr[1] "%s luni"
+msgstr[2] "%s luni"
+
+#: Module/H5P/Admin/JSON.class.php:266
+#, php-format
+msgid "%s year"
+msgid_plural "%s years"
+msgstr[0] "%s an"
+msgstr[1] "%s ani"
+msgstr[2] "%s ani"
+
+#: Module/H5P/Admin/JSON.class.php:290
+#: Module/H5P/Admin/views/show-content.php:8
+#: Module/Users/MyAccountPage.class.php:131
+msgid "Edit"
+msgstr "Editează"
+
+#: Module/H5P/Admin/Act.class.php:166
+msgid "Upload failed"
+msgstr "Încărcare eșuată"
+
+#: Module/H5P/Admin/Act.class.php:251
+msgid "Invalid library."
+msgstr "Librărie invalidă."
+
+#: Module/H5P/Admin/Act.class.php:258
+msgid "No such library."
+msgstr "Nicio astfel de librărie."
+
+#: Module/H5P/Admin/Act.class.php:268
+msgid "Invalid parameters."
+msgstr "Parametrii invalizi."
+
+#: Module/H5P/Admin/Act.class.php:420
+msgid "File is not a H5P file"
+msgstr "Acesta nu este un fișier H5P"
+
+#: Module/H5P/Admin/Act.class.php:423
+msgid "Max upload 5MB"
+msgstr "Încărcare maximă de 5MB"
+
+#: Module/H5P/Admin/views/contents.php:6
+msgid "Add new"
+msgstr "Adaugă"
+
+#: Module/H5P/Admin/views/contents.php:8
+#: Module/H5P/Admin/views/libraries.php:63
+msgid "Waiting for JavaScript."
+msgstr "Se așteaptă JavaScriptul."
+
+#: Module/H5P/Admin/views/libraries.php:12
+msgid ""
+"Making sure the content type cache is up to date will ensure that you can "
+"view, download and use the latest libraries. This is different from updating "
+"the libraries themselves."
+msgstr ""
+"Asigurându-ne că cache-ul pentru tipul de conținut este actualizat ne "
+"asigură că vei putea vizualiza, descărca și folosi ultimele librării. "
+"Aceasta este diferită de actualizarea librăriilor în sine."
+
+#: Module/H5P/Admin/views/libraries.php:16
+msgid "Last update"
+msgstr "Ultima actualizare"
+
+#: Module/H5P/Admin/views/libraries.php:36
+#: Module/H5P/Admin/views/new-content.php:41
+msgid "Update"
+msgstr "Actualizează"
+
+#: Module/H5P/Admin/views/libraries.php:42
+msgid "Upload Libraries"
+msgstr "Încarcă librării"
+
+#: Module/H5P/Admin/views/libraries.php:46
+msgid ""
+"Here you can upload new libraries or upload updates to existing libraries. "
+"Files uploaded here must be in the .h5p file format."
+msgstr ""
+"Aici poți încărca noi librării sau actualizări pentru librăriile existente. "
+"Fișierele încărcate aici trebuie să fie în formatul de fișier .h5p."
+
+#: Module/H5P/Admin/views/libraries.php:49
+msgid "Only update existing libraries"
+msgstr "Actualizează doar librăriile existente"
+
+#: Module/H5P/Admin/views/libraries.php:52
+msgid "Disable file extension check"
+msgstr "Dezactivează verificarea extensiei de fișier"
+
+#: Module/H5P/Admin/views/libraries.php:53
+msgid ""
+"Warning! This may have security implications as it allows for uploading php "
+"files. That in turn could make it possible for attackers to execute "
+"malicious code on your site. Please make sure you know exactly what you're "
+"uploading."
+msgstr ""
+"Atenție! Ar putea avea implicații de siguranță pentru că permite încărcarea "
+"fișierelor php. Asta înseamnă că oferă posibilitatea atacatorilor să execute "
+"cod rău intenționat pe site. Te rog să te asiguri că știi exact ce încarci."
+
+#: Module/H5P/Admin/views/libraries.php:58
+#: Module/H5P/Admin/views/new-content.php:29
+msgid "Upload"
+msgstr "Încărcare"
+
+#: Module/H5P/Admin/views/libraries.php:62
+msgid "Installed Libraries"
+msgstr "Librării instalate"
+
+#: Module/H5P/Admin/views/new-content.php:12
+msgid "Waiting for javascript..."
+msgstr "Se așteaptă JavaScriptul."
+
+#: Module/H5P/Admin/views/new-content.php:16
+#, php-format
+msgid ""
+"It looks like there are no content types installed. You can get the ones you "
+"want by using the small 'Download' button in the lower left corner on any "
+"example from the <a href=\"%s\" target=\"_blank\">Examples and Downloads</a> "
+"page and then you upload the file here."
+msgstr ""
+"Se pare că nu sunt tipuri de conținut instalate. Le poți avea apasând "
+"butonul 'Descarcă' din colțul stânga jos pe oricare exemplu de la pagina <a "
+"href=\"%s\" target=\"_blank\">Exemple și descărcări</a> și apoi să le "
+"încarci aici."
+
+#: Module/H5P/Admin/views/new-content.php:18
+#, php-format
+msgid ""
+"If you need any help you can always file a <a href=\"%s\" target=\"_blank"
+"\">Support Request</a>, check out our <a href=\"%s\" target=\"_blank"
+"\">Forum</a> or join the conversation in the <a href=\"%s\" target=\"_blank"
+"\">H5P Community Chat</a>."
+msgstr ""
+"Dacă ai nevoie de ajutor poți <a href=\"%s\" target=\"_blank\">cere "
+"asistență</a>, verifici <a href=\"%s\" target=\"_blank\">Forumul nostru </a> "
+"sau să te alături conversației în <a href=\"%s\" target=\"_blank\">Chat "
+"comunitate H5P</a>."
+
+#: Module/H5P/Admin/views/new-content.php:31
+#: Module/H5P/Admin/views/new-content.php:41
+msgid "Create"
+msgstr "Creare"
+
+#: Module/H5P/Admin/views/new-content.php:38
+msgid "Delete"
+msgstr "Șterge"
+
+#: Module/H5P/Admin/views/new-content.php:48
+#: Module/H5P/Admin/views/new-content.php:87
+msgid "Toggle panel"
+msgstr "Comută panou"
+
+#: Module/H5P/Admin/views/new-content.php:49
+msgid "Display Options"
+msgstr "Opțiuni afișare"
+
+#: Module/H5P/Admin/views/new-content.php:55
+msgid "Display toolbar below content"
+msgstr "Afișează bara de instrumente sub conținut"
+
+#: Module/H5P/Admin/views/new-content.php:63
+msgid "Display Download button"
+msgstr "Afișează butonul de descărcare"
+
+#: Module/H5P/Admin/views/new-content.php:70
+msgid "Display Embed button"
+msgstr "Afișează butonul de încorporare"
+
+#: Module/H5P/Admin/views/new-content.php:77
+msgid "Display Copyright button"
+msgstr "Afișează buton Copyright"
+
+#: Module/H5P/Admin/views/new-content.php:88
+#: Module/H5P/Admin/views/show-content.php:16
+#: Module/H5P/Admin/H5PContents.class.php:211
+msgid "Tags"
+msgstr "Etichete"
+
+#: Module/H5P/Admin/views/new-content.php:92
+msgid "Separate tags with commas"
+msgstr "Separă etichetele prin virgule"
+
+#: Module/H5P/Admin/views/show-content.php:19
+msgid "No tags"
+msgstr "Fără etichete"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:39
+#: Module/H5P/Admin/H5PLibraries.class.php:40
+#: Module/H5P/Admin/H5PLibraries.class.php:732
+#: Module/H5P/Admin/H5PContents.class.php:28
+#: Module/H5P/Admin/H5PContents.class.php:29
+#: Module/H5P/Admin/H5PContents.class.php:303 Module/H5P/Page.class.php:16
+#: Module/H5P/Page.class.php:17 Module/H5P/Page.class.php:18
+msgid "H5P"
+msgstr "H5P"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:67
+msgid "Cannot find library with id"
+msgstr "Nu găsesc librăria cu idul"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:104
+#: Module/H5P/Admin/H5PLibraries.class.php:319
+msgid "N/A"
+msgstr "Indisponibil"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:105
+msgid "View library details"
+msgstr "Vezi detalii librărie"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:106
+msgid "Delete library"
+msgstr "Șterge librăria"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:107
+msgid "Upgrade library content"
+msgstr "Actualizează conținut librărie"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:152
+#: Module/H5P/Admin/H5PContents.class.php:197
+#: Module/Books/Admin/Books.class.php:37 Module/Books/Admin/Books.class.php:64
+#: Module/Books/Admin/Books.class.php:65 Module/Books/Page.class.php:47
+#: Module/Books/Page.class.php:68 Module/Books/Page.class.php:70
+#: Module/News/Admin/AdminPage.class.php:41
+#: Module/News/Admin/AdminPage.class.php:64
+#: Module/News/Admin/AdminPage.class.php:65
+#: Module/Pages/Admin/Pages.class.php:39 Module/Pages/Admin/Pages.class.php:66
+#: Module/Pages/Admin/Pages.class.php:67
+msgid "Title"
+msgstr "Titlu"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:153
+msgid "Restricted"
+msgstr "Restricționat"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:155
+msgid "Contents"
+msgstr "Conținut"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:159
+msgid "Contents using it"
+msgstr "Conținuturi care îl folosesc"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:163
+msgid "Libraries using it"
+msgstr "Librării care îl folosesc"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:249
+msgid ""
+"This Library is used by content or other libraries and can therefore not be "
+"deleted."
+msgstr ""
+"Librăria este folosită de conținut sau alte librării și nu se poate șterge."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:284
+msgid "No content is using this library"
+msgstr "Niciun conținut nu folosește librăria"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:285
+msgid "Content using this library"
+msgstr "Conținuturi care folosesc librăria"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:286
+msgid "Elements per page"
+msgstr "Elemente per pagină"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:287
+msgid "Filter content"
+msgstr "Filtrează conținut"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:288
+msgid "Page $x of $y"
+msgstr "Pagina $x din $y"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:316 Module/Books/Page.class.php:104
+#: Module/Books/Page.class.php:107
+msgid "Version"
+msgstr "Versiune"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:317
+msgid "Fullscreen"
+msgstr "Ecran complet"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:317
+#: Module/H5P/Admin/H5PLibraries.class.php:318
+msgid "Yes"
+msgstr "Da"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:317
+#: Module/H5P/Admin/H5PLibraries.class.php:318
+msgid "No"
+msgstr "Nu"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:318
+msgid "Content library"
+msgstr "Librărie conținut"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:319
+msgid "Used by"
+msgstr "Utilizat de"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:359
+msgid "There are no available upgrades for this library."
+msgstr "Nu sunt disponibile actualizări pentru această librărie."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:366
+msgid "There's no content instances to upgrade."
+msgstr "Nu există instanțe conținut pentru actualizare."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:377
+#, php-format
+msgid "You are about to upgrade %s. Please select upgrade version."
+msgstr ""
+"Ești pe cale să actualizezi %s. Te rog selectează versiunea de actualizare."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:378
+msgid "Upgrading to %ver..."
+msgstr "Actualizare la %ver..."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:379
+msgid "An error occurred while processing parameters:"
+msgstr "O eroare a apărut la procesarea parametrilor:"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:380
+msgid "Could not load data for library %lib."
+msgstr "Nu pot încărca datele pentru librăria %lib."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:381
+msgid "Could not upgrade content %id:"
+msgstr "Nu pot actualiza conținutul %id:"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:382
+msgid "Could not load upgrades script for %lib."
+msgstr "Nu am putut încărca actualizările pentru %lib."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:383
+msgid "Parameters are broken."
+msgstr "Parametrii sunt invalizi."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:384
+msgid "Missing required library %lib."
+msgstr "Lipsește librăria necesară %lib."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:385
+#, php-format
+msgid ""
+"Parameters contain %used while only %supported or earlier are supported."
+msgstr "Parametrii conțin %used și doar %supported sau mai noi sunt suportați."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:386
+#, php-format
+msgid "Parameters contain %used which is not supported."
+msgstr "Parametrii conțin %used nu sunt suportați."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:387
+#, php-format
+msgid "You have successfully upgraded %s."
+msgstr "Ai actualizat cu succes %s."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:387
+msgid "Return"
+msgstr "Revenire"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:397
+msgid "Upgrade"
+msgstr "Actualizare"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:473
+msgid ""
+"Not all content has gotten their cache rebuilt. This is required to be able "
+"to delete libraries, and to display how many contents that uses the library."
+msgstr ""
+"Nu toate conținuturile au avut cache-ul reconstruit. Acesta este necesar "
+"pentru a putea șterge librăriile și pentru a afișa câte conținuturi folosesc "
+"librăria."
+
+#: Module/H5P/Admin/H5PLibraries.class.php:475
+msgid "Rebuild cache"
+msgstr "Reconstruiește cache"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:487
+msgid "Error, invalid security token!"
+msgstr "Eroare, token de securitate invalid!"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:493
+#: Module/H5P/Admin/H5PLibraries.class.php:612
+msgid "Error, missing library!"
+msgstr "Eroare, lipsește librăria!"
+
+#: Module/H5P/Admin/H5PLibraries.class.php:505
+#: Module/H5P/Admin/H5PLibraries.class.php:618
+msgid "Error, invalid library!"
+msgstr "Eroare, librărie invalidă!"
+
+#: Module/H5P/Admin/H5PContents.class.php:104
+#, php-format
+msgid "Missing %s."
+msgstr "Lipsește %s."
+
+#: Module/H5P/Admin/H5PContents.class.php:173
+msgid "Are you sure you wish to delete this content?"
+msgstr "Sigur doriți ștergerea acestui conținut?"
+
+#: Module/H5P/Admin/H5PContents.class.php:201
+msgid "Content type"
+msgstr "Tip conținut"
+
+#: Module/H5P/Admin/H5PContents.class.php:206
+#: Module/News/Admin/AdminPage.class.php:41
+msgid "Author"
+msgstr "Autor"
+
+#: Module/H5P/Admin/H5PContents.class.php:216
+msgid "Last modified"
+msgstr "Ultima modificare"
+
+#: Module/H5P/Admin/H5PContents.class.php:220
+msgid "ID"
+msgstr "ID"
+
+#: Module/H5P/Admin/H5PContents.class.php:229
+msgid "No H5P content available. You must upload or create new content."
+msgstr ""
+"Niciun conținut interactiv disponibil. Trebuie să încarci sau să creezi "
+"conținut nou."
+
+#: Module/H5P/Admin/H5PContents.class.php:263
+msgid "Loading data."
+msgstr "Se încarcă datele."
+
+#: Module/H5P/Admin/H5PContents.class.php:264
+msgid "Failed to load data."
+msgstr "Nu se pot încărca datele."
+
+#: Module/H5P/Admin/H5PContents.class.php:265
+msgid "There's no data available that matches your criteria."
+msgstr "Nu există date care să îndeplinească criteriile tale."
+
+#: Module/H5P/Admin/H5PContents.class.php:266
+msgid "Page $current of $total"
+msgstr "Pagina $current din $total"
+
+#: Module/H5P/Admin/H5PContents.class.php:267
+msgid "Next page"
+msgstr "Pagina următoare"
+
+#: Module/H5P/Admin/H5PContents.class.php:268
+msgid "Previous page"
+msgstr "Pagina anterioară"
+
+#: Module/H5P/Admin/H5PContents.class.php:269
+msgid "Search"
+msgstr "Căutare"
+
+#: Module/H5P/Admin/H5PContents.class.php:270
+msgid "Remove"
+msgstr "Elimină"
+
+#: Module/H5P/Page.class.php:26 Module/Users/MyAccountPage.class.php:25
+#: Module/Users/MyAccountPage.class.php:26
+#: Module/Users/MyAccountPage.class.php:102 Module/Books/Page.class.php:25
+msgid "My account"
+msgstr "Contul meu"
+
+#: Module/H5P/Page.class.php:27 Module/Books/Page.class.php:26
+#: admin/Template.class.php:73
+msgid "Logout"
+msgstr "Deconectare"
+
+#: Module/Users/EmailConfirmPage.class.php:22
+#: Module/Users/EmailConfirmPage.class.php:23
+#: Module/Users/EmailConfirmPage.class.php:50
+msgid "Email confirm"
+msgstr "Confirmare email"
+
+#: Module/Users/EmailConfirmPage.class.php:26
+msgid "Enter the confirmation code"
+msgstr "Introdu codul de confirmare"
+
+#: Module/Users/EmailConfirmPage.class.php:31
+#: Module/Users/Controller.class.php:66 Module/Users/Controller.class.php:76
+#: Module/Users/Controller.class.php:101
+#: Module/Users/PasswordResetPage.class.php:106
+#, php-format
+msgid "Enter at least %s characters"
+msgstr "Introdu cel puţin %s caractere"
+
+#: Module/Users/EmailConfirmPage.class.php:33
+msgid "32 characters code"
+msgstr "Cod de 32 caractere"
+
+#: Module/Users/EmailConfirmPage.class.php:34
+msgid "Confirmation code"
+msgstr "Cod de confirmare"
+
+#: Module/Users/EmailConfirmPage.class.php:42
+msgid "Confirm"
+msgstr "Confirmă"
+
+#: Module/Users/EmailConfirmPage.class.php:63
+msgid "Your email has been confirmed"
+msgstr "Emailul tău a fost confirmat"
+
+#: Module/Users/EmailConfirmPage.class.php:64
+#, php-format
+msgid "You can login now %s"
+msgstr "Te poți autentifica acum %s"
+
+#: Module/Users/EmailConfirmPage.class.php:65
+msgid "here"
+msgstr "aici"
+
+#: Module/Users/EmailConfirmPage.class.php:67
+msgid "Your account is blocked!"
+msgstr "Contul tău este blocat!"
+
+#: Module/Users/EmailConfirmPage.class.php:72
+msgid "Code is invalid or already confirmed"
+msgstr "Codul este invalid sau deja confirmat"
+
+#: Module/Users/MyAccountPage.class.php:81 Module/Users/Controller.class.php:59
+#: Module/Users/PasswordResetPage.class.php:93
+msgid "Confirm the password"
+msgstr "Confirmă parola"
+
+#: Module/Users/MyAccountPage.class.php:85 Module/Users/LoginPage.class.php:98
+msgid "There is another user registered with this email address"
+msgstr "Există un utilizator înregistrat cu această adresă de email"
+
+#: Module/Users/MyAccountPage.class.php:88 Module/Users/LoginPage.class.php:133
+msgid "You did not filled the following inputs"
+msgstr "Nu ai completat următoarele câmpuri"
+
+#: Module/Users/MyAccountPage.class.php:110
+#: Module/Users/Controller.class.php:69 Module/Users/Admin/JSON.class.php:16
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:56
+#: Module/Users/Admin/AdminPage.class.php:57
+msgid "Firstname"
+msgstr "Prenume"
+
+#: Module/Users/MyAccountPage.class.php:112
+#: Module/Users/Controller.class.php:79 Module/Users/Admin/JSON.class.php:17
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:60
+#: Module/Users/Admin/AdminPage.class.php:61
+msgid "Lastname"
+msgstr "Nume"
+
+#: Module/Users/MyAccountPage.class.php:114
+#: Module/Users/Controller.class.php:88 Module/Users/LoginPage.class.php:188
+#: Module/Users/Admin/JSON.class.php:18
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:64
+#: Module/Users/Admin/AdminPage.class.php:65
+#: Module/Users/PasswordResetPage.class.php:159
+msgid "Email"
+msgstr "Email"
+
+#: Module/Users/MyAccountPage.class.php:116
+#: Module/Users/Controller.class.php:31 Module/Users/Admin/JSON.class.php:23
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:84 Utils/Template.class.php:528
+#: Utils/Template.class.php:529 Utils/Template.class.php:535
+msgid "Country"
+msgstr "Țara"
+
+#: Module/Users/Controller.class.php:42
+msgid "Enter your firstname"
+msgstr "Introduceți prenumele"
+
+#: Module/Users/Controller.class.php:47
+msgid "Enter your lastname"
+msgstr "Introduceti numele"
+
+#: Module/Users/Controller.class.php:52 Module/Users/Controller.class.php:86
+#: Module/Users/LoginPage.class.php:186
+#: Module/Users/PasswordResetPage.class.php:157
+msgid "Enter your email"
+msgstr "Introdu adresa de email"
+
+#: Module/Users/Controller.class.php:55
+msgid "Select your country"
+msgstr "Selectează țara"
+
+#: Module/Users/Controller.class.php:57
+#: Module/Users/PasswordResetPage.class.php:91
+msgid "Enter a password"
+msgstr "Introdu o parolă"
+
+#: Module/Users/Controller.class.php:103 Module/Users/Controller.class.php:112
+#: Module/Users/PasswordResetPage.class.php:108
+#: Module/Users/PasswordResetPage.class.php:117
+msgid "8 characters minimum"
+msgstr "minimum 8 caractere"
+
+#: Module/Users/Controller.class.php:104 Module/Users/LoginPage.class.php:196
+#: Module/Users/Admin/AdminPage.class.php:92
+#: Module/Users/Admin/AdminPage.class.php:93
+#: Module/Administrators/Admin/Admins.class.php:77
+#: Module/Administrators/Admin/Admins.class.php:78 admin/index.php:109
+msgid "Password"
+msgstr "Parola"
+
+#: Module/Users/Controller.class.php:111 Module/Users/Controller.class.php:113
+#: Module/Users/Admin/AdminPage.class.php:96
+#: Module/Users/Admin/AdminPage.class.php:97
+#: Module/Users/PasswordResetPage.class.php:116
+msgid "Confirm password"
+msgstr "Confirmă parola"
+
+#: Module/Users/Controller.class.php:118
+msgid "Fields marked with"
+msgstr "Câmpurile marcate cu"
+
+#: Module/Users/Controller.class.php:118
+msgid "are required"
+msgstr "sunt necesare"
+
+#: Module/Users/Controller.class.php:121
+msgid "You must accept our Terms and conditions"
+msgstr "Trebuie să fii de acord cu Termenii și condițiile"
+
+#: Module/Users/Controller.class.php:123
+#, php-format
+msgid "I have read and agree to the %s"
+msgstr "Am citit și sunt de acord cu %s"
+
+#: Module/Users/Controller.class.php:124
+msgid "Terms and Conditions"
+msgstr "Termeni și condiții"
+
+#: Module/Users/Controller.class.php:233
+msgid "Welcome"
+msgstr "Bun venit"
+
+#: Module/Users/Controller.class.php:234
+msgid "Step"
+msgstr "Pas"
+
+#: Module/Users/Controller.class.php:234 Module/Users/Controller.class.php:235
+#: Module/Users/Controller.class.php:236
+msgid "Activate your account"
+msgstr "Activează contul"
+
+#: Module/Users/Controller.class.php:235
+msgid "by clicking this link"
+msgstr "apăsând acest link"
+
+#: Module/Users/LoginPage.class.php:40
+msgid "You did not confirmed your account"
+msgstr "Nu ți-ai confirmat contul"
+
+#: Module/Users/LoginPage.class.php:40
+msgid "Your account is blocked"
+msgstr "Contul tău este blocat"
+
+#: Module/Users/LoginPage.class.php:56 Controller/AdminController.class.php:22
+msgid "Incorrect password"
+msgstr "Parolă incorectă"
+
+#: Module/Users/LoginPage.class.php:61
+msgid "No user registered with these info"
+msgstr "Niciun utilizator înregistrat cu aceste date"
+
+#: Module/Users/LoginPage.class.php:65
+msgid "Invalid token"
+msgstr "Token invalid"
+
+#: Module/Users/LoginPage.class.php:126
+msgid "You will be redirected to confirm your email in 1 second"
+msgstr "Vei fi redirecționat către confirmarea emailului într-o secundă"
+
+#: Module/Users/LoginPage.class.php:128
+msgid "Password not confirmed"
+msgstr "Parola nu este confirmată"
+
+#: Module/Users/LoginPage.class.php:137
+msgid "lastname"
+msgstr "nume"
+
+#: Module/Users/LoginPage.class.php:140
+msgid "firstname"
+msgstr "prenume"
+
+#: Module/Users/LoginPage.class.php:143
+msgid "email address"
+msgstr "adresă email"
+
+#: Module/Users/LoginPage.class.php:146
+msgid "country"
+msgstr "țara"
+
+#: Module/Users/LoginPage.class.php:149
+msgid "password"
+msgstr "parola"
+
+#: Module/Users/LoginPage.class.php:152
+msgid "password confirm"
+msgstr "confirmă parola"
+
+#: Module/Users/LoginPage.class.php:155
+msgid "terms and conditions"
+msgstr "termeni și condiții"
+
+#: Module/Users/LoginPage.class.php:168 admin/index.php:77 admin/index.php:116
+msgid "Login"
+msgstr "Autentificare"
+
+#: Module/Users/LoginPage.class.php:171 Module/Users/LoginPage.class.php:222
+msgid "Register"
+msgstr "Înregistrare"
+
+#: Module/Users/LoginPage.class.php:202
+msgid "Remember me"
+msgstr "Ține-mă minte"
+
+#: Module/Users/LoginPage.class.php:207
+msgid "Log in"
+msgstr "Autentificare"
+
+#: Module/Users/LoginPage.class.php:215
+msgid "Forgot Password?"
+msgstr "Ai uitat parola?"
+
+#: Module/Users/LoginPage.class.php:216
+msgid "Resend email confirmation"
+msgstr "Retrimite email confirmare"
+
+#: Module/Users/LoginPage.class.php:230 Module/Users/LoginPage.class.php:231
+msgid "Login | "
+msgstr "Autentificare | "
+
+#: Module/Users/Admin/JSON.class.php:19
+#: Module/Users/Admin/AdminPage.class.php:68
+#: Module/Users/Admin/AdminPage.class.php:69
+msgid "Phone"
+msgstr "Telefon"
+
+#: Module/Users/Admin/JSON.class.php:20
+#: Module/Users/Admin/AdminPage.class.php:72
+#: Module/Users/Admin/AdminPage.class.php:73
+msgid "Address"
+msgstr "Adresa"
+
+#: Module/Users/Admin/JSON.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:76
+#: Module/Users/Admin/AdminPage.class.php:77
+msgid "City"
+msgstr "Oraș"
+
+#: Module/Users/Admin/JSON.class.php:22
+#: Module/Users/Admin/AdminPage.class.php:80
+#: Module/Users/Admin/AdminPage.class.php:81
+msgid "State"
+msgstr "Județ"
+
+#: Module/Users/Admin/JSON.class.php:24
+msgid "Status ID"
+msgstr "ID Status"
+
+#: Module/Users/Admin/JSON.class.php:26
+#: Module/Users/Admin/AdminPage.class.php:14
+#: Module/Users/Admin/AdminPage.class.php:15
+#: Module/Users/Admin/AdminPage.class.php:31
+#: Module/Users/Admin/AdminPage.class.php:52 admin/index.php:50
+msgid "Users"
+msgstr "Utilizatori"
+
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Books/Admin/Books.class.php:37
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/News/Admin/AdminPage.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Pages/Admin/Pages.class.php:39
+msgid "Any"
+msgstr "Oricare"
+
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:88
+#: Module/Testimonials/Admin/AdminPage.class.php:70
+#: Module/News/Admin/AdminPage.class.php:41
+#: Module/News/Admin/AdminPage.class.php:79
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Administrators/Admin/Admins.class.php:81
+msgid "Status"
+msgstr "Stare"
+
+#: Module/Users/Admin/AdminPage.class.php:35
+msgid "Not confirmed"
+msgstr "Neconfirmat"
+
+#: Module/Users/Admin/AdminPage.class.php:35
+msgid "Confirmed"
+msgstr "Confirmat"
+
+#: Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:89
+#: Module/Testimonials/Admin/AdminPage.class.php:71
+#: Module/News/Admin/AdminPage.class.php:80
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Administrators/Admin/Admins.class.php:82
+msgid "Blocked"
+msgstr "Blocat"
+
+#: Module/Users/Admin/AdminPage.class.php:89
+#: Module/Testimonials/Admin/AdminPage.class.php:71
+#: Module/News/Admin/AdminPage.class.php:80
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Administrators/Admin/Admins.class.php:82
+msgid "Active"
+msgstr "Activ"
+
+#: Module/Users/PasswordResetPage.class.php:24
+#: Module/Users/PasswordResetPage.class.php:25
+#: Module/Users/PasswordResetPage.class.php:54
+#: Module/Users/PasswordResetPage.class.php:150
+msgid "Password reset"
+msgstr "Resetare parola"
+
+#: Module/Users/PasswordResetPage.class.php:31
+msgid "Enter a valid email address"
+msgstr "Introdu o adresă de email validă"
+
+#: Module/Users/PasswordResetPage.class.php:51
+msgid "Hi"
+msgstr "Salut"
+
+#: Module/Users/PasswordResetPage.class.php:52
+msgid "To reset your password click the link below"
+msgstr "Pentru resetarea parolei apasă link-ul următor"
+
+#: Module/Users/PasswordResetPage.class.php:55
+msgid "An email with password reset instructions have been sent to you."
+msgstr ""
+"Un email cu instrucțiuni pentru resetarea parolei a fost trimis către tine."
+
+#: Module/Users/PasswordResetPage.class.php:57
+msgid "No user registered with this email address"
+msgstr "Niciun cont înregistrat cu această adresă de email"
+
+#: Module/Users/PasswordResetPage.class.php:85
+msgid "Your password has been updated"
+msgstr "Parola ta a fost schimbată"
+
+#: Module/Users/PasswordResetPage.class.php:87
+msgid "Code not found"
+msgstr "Codul nu a fost găsit"
+
+#: Module/Users/PasswordResetPage.class.php:98
+msgid "Change your password"
+msgstr "Schimbați-vă parola"
+
+#: Module/Users/PasswordResetPage.class.php:109
+msgid "New password"
+msgstr "Parolă nouă"
+
+#: Module/Users/PasswordResetPage.class.php:118
+msgid "Confirm new password"
+msgstr "Confirmă parola nouă"
+
+#: Module/Users/PasswordResetPage.class.php:126
+msgid "Change password"
+msgstr "Schimbă parola"
+
+#: Module/Users/PasswordResetPage.class.php:167
+msgid "Send code"
+msgstr "Trimite codul"
+
+#: Module/Books/Admin/Books.class.php:10 Module/Books/Admin/Books.class.php:11
+#: Module/Books/Admin/Books.class.php:49 Module/Pages/Admin/Pages.class.php:10
+#: Module/Pages/Admin/Pages.class.php:11 Module/Pages/Admin/Pages.class.php:35
+#: Module/Pages/Admin/Pages.class.php:54
+msgid "Edit pages"
+msgstr "Editează pagini"
+
+#: Module/Books/Admin/Books.class.php:33 Module/Books/Page.class.php:43
+msgid "Edit books"
+msgstr "Editează cărți"
+
+#: Module/Books/Admin/Books.class.php:37 Module/Books/Admin/Books.class.php:60
+#: Module/Books/Admin/Books.class.php:61 Module/Pages/Admin/Pages.class.php:39
+#: Module/Pages/Admin/Pages.class.php:62 Module/Pages/Admin/Pages.class.php:63
+msgid "URL"
+msgstr "URL"
+
+#: Module/Books/Admin/Books.class.php:37 Module/Books/Admin/Books.class.php:56
+#: Module/News/Admin/AdminPage.class.php:41
+#: Module/News/Admin/AdminPage.class.php:60
+#: Module/Pages/Admin/Menu.class.php:37 Module/Pages/Admin/Pages.class.php:39
+#: Module/Pages/Admin/Pages.class.php:58
+msgid "Language"
+msgstr "Limbă"
+
+#: Module/Books/Admin/Books.class.php:37 Module/Books/Admin/Books.class.php:76
+#: Module/Books/Admin/Books.class.php:77 Module/Pages/Admin/Pages.class.php:39
+#: Module/Pages/Admin/Pages.class.php:78 Module/Pages/Admin/Pages.class.php:79
+msgid "Menu text"
+msgstr "Text meniu"
+
+#: Module/Books/Admin/Books.class.php:68 Module/Books/Admin/Books.class.php:69
+#: Module/Pages/Admin/Pages.class.php:70 Module/Pages/Admin/Pages.class.php:71
+msgid "Description"
+msgstr "Descriere"
+
+#: Module/Books/Admin/Books.class.php:72 Module/Books/Admin/Books.class.php:73
+#: Module/Pages/Admin/Pages.class.php:74 Module/Pages/Admin/Pages.class.php:75
+msgid "H1"
+msgstr "H1"
+
+#: Module/Books/Admin/Books.class.php:80 Module/Books/Admin/Books.class.php:81
+#: Module/Pages/Admin/Pages.class.php:82 Module/Pages/Admin/Pages.class.php:83
+msgid "Submenu text"
+msgstr "Text submeniu"
+
+#: Module/Books/Admin/Books.class.php:84
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/Pages/Admin/Pages.class.php:86
+msgid "Visible"
+msgstr "Vizibil"
+
+#: Module/Books/Admin/Books.class.php:88 Module/Books/Admin/Books.class.php:89
+#: Module/Books/Page.class.php:114
+#: Module/Testimonials/Admin/AdminPage.class.php:59
+#: Module/Testimonials/Admin/AdminPage.class.php:60
+#: Module/News/Admin/AdminPage.class.php:68
+#: Module/News/Admin/AdminPage.class.php:69
+#: Module/Pages/Admin/Pages.class.php:90 Module/Pages/Admin/Pages.class.php:91
+msgid "Content"
+msgstr "Conținut"
+
+#: Module/Books/Page.class.php:14
+msgid "Books"
+msgstr "Cărți"
+
+#: Module/Books/Page.class.php:59
+msgid "Edit book"
+msgstr "Editează cartea"
+
+#: Module/Books/Page.class.php:74 Module/Books/Page.class.php:76
+msgid "Page width (mm)"
+msgstr "Lățime pagină (mm)"
+
+#: Module/Books/Page.class.php:80 Module/Books/Page.class.php:82
+msgid "Page height (mm)"
+msgstr "Înălțime pagină (mm)"
+
+#: Module/Books/Page.class.php:86 Module/Books/Page.class.php:88
+msgid "Container width (mm)"
+msgstr "Lățime container (mm)"
+
+#: Module/Books/Page.class.php:92 Module/Books/Page.class.php:94
+msgid "Odd pages left margin (mm)"
+msgstr "Margine stânga pagini impare (mm)"
+
+#: Module/Books/Page.class.php:98 Module/Books/Page.class.php:100
+msgid "Even pages left margin (mm)"
+msgstr "Margine stânga pagini pare (mm)"
+
+#: Module/Testimonials/Admin/AdminPage.class.php:9
+#: Module/Testimonials/Admin/AdminPage.class.php:10
+#: Module/Testimonials/Admin/AdminPage.class.php:24
+#: Module/Testimonials/Admin/AdminPage.class.php:43
+#: Module/Testimonials/Page.class.php:13 Module/Testimonials/Page.class.php:14
+#: Module/Testimonials/Page.class.php:15
+msgid "Testimonials"
+msgstr "Păreri"
+
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/Testimonials/Admin/AdminPage.class.php:47
+#: Module/Testimonials/Admin/AdminPage.class.php:48
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Administrators/Admin/Admins.class.php:69
+#: Module/Administrators/Admin/Admins.class.php:70
+msgid "Name"
+msgstr "Nume"
+
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/Testimonials/Admin/AdminPage.class.php:51
+#: Module/Testimonials/Admin/AdminPage.class.php:52
+msgid "Company"
+msgstr "Companie"
+
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/Testimonials/Admin/AdminPage.class.php:55
+#: Module/Testimonials/Admin/AdminPage.class.php:56
+msgid "Short text"
+msgstr "Text scurt"
+
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/News/Admin/AdminPage.class.php:41
+msgid "Hidden"
+msgstr "Ascuns"
+
+#: Module/Testimonials/Page.class.php:40
+msgid "Read more"
+msgstr "Citește mai mult"
+
+#: Module/Testimonials/Page.class.php:52
+msgid "Testimonial"
+msgstr "Părere"
+
+#: Module/News/Admin/AdminPage.class.php:11
+#: Module/News/Admin/AdminPage.class.php:12
+#: Module/News/Admin/AdminPage.class.php:37
+#: Module/News/Admin/AdminPage.class.php:56
+msgid "Edit news"
+msgstr "Editează știri"
+
+#: Module/News/Admin/AdminPage.class.php:41
+msgid "Date"
+msgstr "Dată"
+
+#: Module/News/Admin/AdminPage.class.php:41
+msgid "Published"
+msgstr "Publicat"
+
+#: Module/News/Page.class.php:15 Module/News/Page.class.php:16
+#: Module/News/Page.class.php:17
+msgid "news"
+msgstr "știri"
+
+#: Module/News/Page.class.php:33
+msgid "News"
+msgstr "Știri"
+
+#: Module/News/Page.class.php:78
+msgid "read more"
+msgstr "citește mai mult"
+
+#: Module/News/Page.class.php:88
+msgid "Newer"
+msgstr "Mai noi"
+
+#: Module/News/Page.class.php:89
+msgid "Older"
+msgstr "Mai vechi"
+
+#: Module/Administrators/Admin/Cache.class.php:8
+#: Module/Administrators/Admin/Cache.class.php:9
+msgid "Cache"
+msgstr "Cache"
+
+#: Module/Administrators/Admin/Cache.class.php:16
+msgid "Modules reread"
+msgstr "Recitire module"
+
+#: Module/Administrators/Admin/Cache.class.php:18
+msgid "Reread modules"
+msgstr "Recitire module"
+
+#: Module/Administrators/Admin/Admins.class.php:10
+#: Module/Administrators/Admin/Admins.class.php:11
+#: Module/Administrators/Admin/Admins.class.php:46
+msgid "Edit administrators"
+msgstr "Editează administratori"
+
+#: Module/Administrators/Admin/Admins.class.php:50
+#: Module/Administrators/Admin/Admins.class.php:73
+#: Module/Administrators/Admin/Admins.class.php:74
+#: Controller/AdminController.class.php:28 admin/index.php:104
+msgid "Username"
+msgstr "Nume utilizator"
+
+#: Module/Administrators/Admin/Admins.class.php:65
+msgid "Edit administrator"
+msgstr "Editează administrator"
+
+#: Module/Pages/Controller.class.php:120 Module/Pages/Controller.class.php:126
+#: Module/Pages/Controller.class.php:127
+msgid "Page not found"
+msgstr "Pagina nu a fost găsită"
+
+#: Module/Pages/Controller.class.php:120
+msgid "Error 404"
+msgstr "Eroare 404"
+
+#: Module/Pages/Controller.class.php:122
+msgid ""
+"The page you requested could not be found, either contact your webmaster or "
+"try again. Use your browsers <strong>Back</strong> button to navigate to the "
+"page you have previously come from."
+msgstr ""
+"Pagina accesată nu a fost găsită, poți contacta webmasterul sau să încerci "
+"din nou. Folosește butonul <strong>Înapoi</strong> al browserului pentru a "
+"naviga la pagina de unde ai venit."
+
+#: Module/Pages/Controller.class.php:123
+msgid "Or you could just press this neat little button"
+msgstr "Sau poți apăsa acest mic buton"
+
+#: Module/Pages/Controller.class.php:124
+msgid "Take Me Home"
+msgstr "Du-mă acasă"
+
+#: Module/Pages/Admin/Menu.class.php:10 Module/Pages/Admin/Menu.class.php:11
+msgid "Edit menu"
+msgstr "Editează meniu"
+
+#: Controller/AdminController.class.php:25
+msgid "Username blocked"
+msgstr "Nume utilizator blocat"
+
+#: Controller/AdminController.class.php:28
+msgid "does not exist"
+msgstr "nu există"
+
+#: admin/index.php:20
+msgid "Admin login"
+msgstr "Autentificare administrator"
+
+#: admin/index.php:52
+msgid "total users"
+msgstr "total utilizatori"
+
+#: admin/index.php:55
+msgid "confirmed users"
+msgstr "utilizatori confirmați"
+
+#: admin/index.php:61 admin/index.php:62 admin/Template.class.php:141
+msgid "Statistics"
+msgstr "Statisitici"
+
+#: Model/Model.class.php:779 Model/Model.class.php:871
+msgid "No where statement"
+msgstr "Niciun statement where"
+
+#: Utils/Template.class.php:286
+msgid "Loading time"
+msgstr "Timp încărcare"
+
+#: Utils/Template.class.php:508
+msgid "read full text"
+msgstr "citește tot textul"
+
+#: Utils/Template.class.php:603
+msgid "Wizard"
+msgstr "Wizard"
+
+#: Utils/functions.php:500
+msgid "This site is currently down for maintenance and should be back soon."
+msgstr ""
+"Site-ul este oprit pentru mentenanță și va fi disponibil din nou curând."

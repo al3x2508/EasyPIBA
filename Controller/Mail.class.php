@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail extends PHPMailer
@@ -22,7 +23,12 @@ class Mail extends PHPMailer
         $this->Username = _MAIL_USER_;
         $this->Password = _MAIL_PASS_;
         $this->CharSet = "UTF-8";
-        $this->setFrom(_MAIL_FROM_, _MAIL_NAME_);
-        parent::__construct();
+		try {
+			$this->setFrom(_MAIL_FROM_, _MAIL_NAME_);
+		}
+		catch (Exception $e) {
+		    debug($e->getMessage());
+		}
+		parent::__construct();
     }
 }

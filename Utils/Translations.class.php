@@ -1,5 +1,6 @@
 <?php
 namespace Utils;
+use Gettext\Translation;
 
 use FileReader;
 use gettext_reader;

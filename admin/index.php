@@ -1,6 +1,8 @@
 <?php
 use Controller\AdminController;
+use Controller\AdminPage;
 use Model\Model;
+
 $stime = microtime();
 $stime = explode(' ', $stime);
 $stime = $stime[1] + $stime[0];
@@ -18,7 +20,7 @@ if (isset($_GET['logout'])) {
 if (!AdminController::getCurrentUser() && !count($message)) {
     $message = ['message' => __('Admin login'), 'class' => ''];
 }
-if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUser()) {
+if (AdminController::getCurrentUser()) {
     $filename = trim(ltrim($page_url, basename(dirname(__FILE__))), '/');
     if(!empty($filename) && strpos($filename, 'json/') === 0) {
         $filename = str_replace('json/', '', $filename);
@@ -38,7 +40,7 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
         $templateFile = (isset($templateFile))?$templateFile:'template.html';
         $template = new Template($templateFile, $admin->name, $filename);
         $content = '';
-        $adminPage = \Controller\AdminPage::getCurrentModule($filename);
+        $adminPage = AdminPage::getCurrentModule($filename);
         if ($adminPage) {
             $adminPageOutput = $adminPage->output($filename);
             $template->page = $adminPageOutput;
@@ -68,7 +70,7 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
                 $template->page = $page;
             }
         }
-        $template->output($enqScripts, $enqStyles, $stime);
+        $template->output($stime);
     }
 } else { ?>
     <!DOCTYPE html>
@@ -146,6 +148,11 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
                 box-shadow: none;
                 border-color: #ccc;
             }
+			.d-gradient .login-box-body input {
+				background-color: transparent;
+				border-radius: 0;
+				width: 100%;
+			}
             .d-gradient .login-box-body input:hover,
             .d-gradient .login-box-body input:focus {
                 border-color: rgba(255, 255, 255, .6);
@@ -178,7 +185,7 @@ if (AdminController::getCurrentUser() || \Module\Users\Controller::getCurrentUse
                             </div>
                         </div>
                         <div class="d-flex justify-content-sm-center">
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 <input type="submit" class="form-control btn btn-outline-primary" value="<?php echo __('Login'); ?>" />
                             </div>
                         </div>

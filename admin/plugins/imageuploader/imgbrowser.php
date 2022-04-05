@@ -39,7 +39,7 @@ require_once(__DIR__ . '/function.php');
 // Including the check_permission file, don't delete the following row!
 require(__DIR__ . '/check_permission.php');
 
-if (\Module\Users\Controller::getCurrentUser() || \Controller\AdminController::checkPermission('Edit pages')) {
+if (\Controller\AdminController::checkPermission('Edit pages')) {
 
     ?>
 

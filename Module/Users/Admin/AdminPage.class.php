@@ -16,16 +16,16 @@ class AdminPage extends \Controller\AdminPage {
 		$statusOptions = array(-1 => __('Any'), 0 => __('Not confirmed'), 1 => __('Confirmed'), 2 => __('Blocked'));
 		$page->js = array('../vendor/datatables/datatables/media/js/jquery.dataTables.min.js', '../vendor/datatables/datatables/media/js/dataTables.bootstrap4.min.js', 'js/jsall.js', 'Module/Users/Admin/users.js');
 		$page->css = array('../vendor/datatables/datatables/media/css/jquery.dataTables.min.css', '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css', 'dataTables.fontawesome.css');
-		$page->content = '<div class="box">
-	<div class="box-header">
+		$page->content = '<div class="card">
+	<div class="card-header">
 		<div class="row">
-			<div class="col-md-9"><h3 class="box-title">' . __('Users') . '</h3></div>
+			<div class="col-md-9"><h3 class="card-title">' . __('Users') . '</h3></div>
 			<div class="col-md-3">
-				<a href="#" class="filter-datatable"><i class="fas fa-search"></i>' . __('Filters') . '</a>
+				<a href="#" class="filter-datatable"><i class="fa fa-search"></i>' . __('Filters') . '</a>
 			</div>
 		</div>
 	</div>
-	<div class="box-body">
+	<div class="card-body">
 		<div class="row">
 			<div class="col-12">
 				<table id="data_table" class="table table-borderless table-hover table-sm w-100">
@@ -38,11 +38,11 @@ class AdminPage extends \Controller\AdminPage {
 			</div>
 		</div>
 	</div>
-	<div class="box-footer">
+	<div class="card-footer">
 		<div class="btn-toolbar">
-			<button id="add" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i> ' . __('Add user') . '</button>
-			<button class="btn btn-outline-secondary btn-export btn-sm" data-type="excel"><i class="fas fa-file-excel"></i> ' . __('Export to Excel') . '</button>
-			<button class="btn btn-outline-secondary btn-export btn-sm" data-type="pdf"><i class="fas fa-file-pdf"></i> ' . __('Export to PDF') . '</button>
+			<button id="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> ' . __('Add user') . '</button>
+			<button class="btn btn-secondary btn-export btn-sm" data-type="excel"><i class="fa fa-file-excel"></i> ' . __('Export to Excel') . '</button>
+			<button class="btn btn-secondary btn-export btn-sm" data-type="pdf"><i class="fa fa-file-pdf"></i> ' . __('Export to PDF') . '</button>
 		</div>
 	</div>
 </div>
@@ -52,7 +52,7 @@ class AdminPage extends \Controller\AdminPage {
 			<div class="modal-header">
 				<h4 class="modal-title">' . __('Users') . '</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
-					<span aria-hidden="true">×</span>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body" id="edtable">

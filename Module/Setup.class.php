@@ -40,6 +40,7 @@ abstract class Setup
         $mR->menu_order = arrayKeyExists('menu_order', $url)?$url['menu_order']:0;
         //Menu parent: the URL for the parent menu (eg: news, if we want to show the link under the News menu)
         $mR->menu_parent = arrayKeyExists('menu_parent', $url)?$url['menu_parent']:'';
+        $mR->menu_class = arrayKeyExists('menu_class', $url)?$url['menu_class']:'';
         $mR->create();
     }
 

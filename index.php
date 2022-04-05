@@ -1,4 +1,7 @@
 <?php
+$stime = microtime();
+$stime = explode(' ', $stime);
+$stime = $stime[1] + $stime[0];
 //Check if config file exists, if not then run setup
 $configFile = sprintf("%s/Utils/config.php", dirname(__FILE__));
 if(!file_exists($configFile)) {

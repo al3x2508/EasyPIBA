@@ -58,7 +58,7 @@ abstract class AdminPage {
 		$class = (count($arrclass)>0)?' class="' . join(" ", $arrclass) . '"':"";
 		$ret = '<li'.$class.'>
 			<a href="' . $href . '" title="' . $link['text'] . '"><i class="' . $link['class'] . '"></i> <span>' . $link['text'] . '</span>';
-		if(arrayKeyExists('submenu', $link)) $ret .= '<i class="fas fa-angle-left pull-right"></i>';
+		if(arrayKeyExists('submenu', $link)) $ret .= '<i class="fa fa-angle-left pull-right"></i>';
 		$ret .= '</a>' . PHP_EOL;
 		if(arrayKeyExists('submenu', $link)) {
 			$submenuClass = '';

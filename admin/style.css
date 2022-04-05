@@ -206,6 +206,31 @@ body .main-sidebar, body .control-sidebar {
     -moz-box-shadow: none;
     box-shadow: none;
 }
+.modal-full {
+    min-width: 100%;
+    margin: 0;
+}
+.modal-full .modal-content {
+    min-height: 100vh;
+    border: none;
+    border-radius: 0;
+}
+.modal-full .modal-content .modal-header {
+    padding: .5rem 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.modal-full .modal-content .modal-body {
+    padding: 0 1rem;
+}
+.modal .navbar-light {
+    background-color: unset;
+}
+.modal .form-group input:focus,
+.modal .form-group select:focus,
+.modal .form-group textarea:focus {
+    border-color: #47affc;
+}
 .form-group.show input~.control-label, .form-group input.form-file~.control-label, .form-group input.has-value~.control-label, .form-group input:focus~.control-label, .form-group input:valid~.control-label, .form-group select~.control-label, .form-group textarea.form-file~.control-label, .form-group textarea.has-value~.control-label, .form-group textarea:focus~.control-label, .form-group textarea:valid~.control-label, .form-group .bts_dropdown~.control-label {
     font-size: .6rem;
     color: #4ae387;
@@ -377,8 +402,11 @@ table.dataTable.table-sm.dtr-inline.collapsed > tbody > tr[role="row"] > td:firs
 }
 
 #edtable {
-    max-height: 70vh;
+    max-height: calc(100% - 40px);
     overflow: auto;
+}
+#edtable.overflow-visible {
+    overflow: visible;
 }
 
 #dropdownMenuButton {
@@ -414,23 +442,6 @@ table.dataTable.table-sm.dtr-inline.collapsed > tbody > tr[role="row"] > td:firs
 
 .img-flag {
     height: 1em;
-}
-
-.ui-autocomplete.ui-front {
-    z-index: 2000;
-}
-
-.ui-autocomplete .ui-menu-item span, .ui-autocomplete .ui-menu-item em {
-    font-size: .8em;
-    color: #3c8dbc;
-}
-
-.ui-autocomplete .ui-menu-item.ui-state-focus span, .ui-autocomplete .ui-menu-item em {
-    color: #000000;
-}
-
-.ui-autocomplete .ui-menu-item em {
-    float: right;
 }
 
 #imagePreview {
@@ -479,6 +490,7 @@ table.dataTable.table-sm.dtr-inline.collapsed > tbody > tr[role="row"] > td:firs
 
 .sidebar-menu li a .fal {
     width: 20px;
+    text-align: center;
 }
 
 .content .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -534,7 +546,63 @@ table.dataTable.table-sm.dtr-inline.collapsed > tbody > tr[role="row"] > td:firs
     line-height: 60px;
     color: #fff;
 }
-
+.modal-header .close {
+    padding: 10px 13px !important;
+    cursor: default !important;
+    font-size: 1rem;
+}
+.modal-header .close:hover {
+    background-color: #e81123;
+    color: #fff;
+}
+.modal-header.modal-header-light {
+    background: #fff;
+    padding: 0 !important;
+}
+.modal-header.modal-header-light .close {
+    color: #000;
+    opacity: 1;
+    text-shadow: none;
+    margin: 0;
+    padding: 3px 14px !important;
+}
+.modal-header.modal-header-light .close:hover {
+    color: #fff;
+}
+.modal-header.modal-header-light .navbar-expand-lg .navbar-nav .nav-link {
+    color: #000;
+    cursor: default;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: 2px 7px;
+}
+.modal-header.modal-header-light .navbar-expand-lg .navbar-nav .nav-link:hover,
+.modal-header.modal-header-light .navbar-expand-lg .navbar-nav .nav-link:focus {
+    background-color: rgba(153, 209, 255, .5);
+    border-color: #99d1ff;
+    box-shadow: none;
+}
+.modal-header.modal-header-light .navbar-expand-lg .navbar-nav .dropdown-toggle::after {
+    display: none;
+    border: none;
+}
+.modal-header.modal-header-light .dropdown-menu {
+    margin: 0;
+    border-radius: 0;
+    border: 1px solid #cccccc;
+    background-color: #f2f2f2;
+    padding: 0;
+}
+.modal-header.modal-header-light .dropdown-menu .dropdown-divider {
+    border-top: 1px solid #d7d7d7;
+    margin: 0.2rem 0.5rem;
+}
+.modal-header.modal-header-light .dropdown-item {
+    cursor: default;
+}
+.modal-header.modal-header-light .dropdown-item:hover {
+    background-color: #90c8f6;
+}
 .modal .messageStatus {
     display: none;
 }
@@ -709,8 +777,10 @@ table.dataTable.table-sm.dtr-inline.collapsed > tbody > tr[role="row"] > td:firs
     color: #4ae387;
     border-color: #4ae387;
 }
-.btn.btn-primary, .btn.btn-secondary, .btn.btn-danger, .btn.btn-warning, .btn.btn-info, .btn.btn-success {
+.btn.btn-primary, .btn.btn-secondary, .btn.btn-danger, .btn.btn-info, .btn.btn-success {
     color: #fff;
+}
+.btn.btn-primary, .btn.btn-secondary, .btn.btn-danger, .btn.btn-warning, .btn.btn-info, .btn.btn-success {
     border: none
 }
 .btn.btn-primary, .medium-editor-toolbar .medium-editor-action {
@@ -836,20 +906,17 @@ table.dataTable.table-sm.dtr-inline.collapsed > tbody > tr[role="row"] > td:firs
     border-color: #f7cc36;
 }
 .btn.btn-warning {
-    color: #fff;
-    background-color: #f7cc36
+    background-color: #f7cc36;
 }
 .btn.btn-warning:hover, .btn.btn-outline-warning:hover {
-    color: #fff;
     background-color: #f9d867;
-    -webkit-box-shadow: 0 4px 10px 1px rgba(249, 216, 103, 0.5);
-    box-shadow: 0 4px 10px 1px rgba(249, 216, 103, 0.5);
+    -webkit-box-shadow: 0 4px 10px 1px rgba(168, 143, 57, .5);
+    box-shadow: 0 4px 10px 1px rgba(168, 143, 57, .5);
 }
 .btn.btn-warning.active, .btn.btn-warning:active, .btn.btn-outline-warning.active, .btn.btn-outline-warning:active, .btn.btn-warning:not([disabled]):not(.disabled).active, .btn.btn-warning:not([disabled]):not(.disabled):active, .btn.btn-outline-warning:not([disabled]):not(.disabled).active, .btn.btn-outline-warning:not([disabled]):not(.disabled):active {
     background-color: #d8aa09;
     -webkit-box-shadow: 0 4px 10px 1px rgba(216, 170, 9, 0.5);
     box-shadow: 0 4px 10px 1px rgba(216, 170, 9, 0.5);
-    color: #fff
 }
 .btn.btn-warning.active:focus, .btn.btn-warning:active:focus, .btn.btn-warning:not([disabled]):not(.disabled).active:focus, .btn.btn-warning:not([disabled]):not(.disabled):active:focus, .btn.btn-outline-warning.active:focus, .btn.btn-outline-warning:active:focus, .btn.btn-outline-warning:not([disabled]):not(.disabled).active:focus, .btn.btn-outline-warning:not([disabled]):not(.disabled):active:focus {
     -webkit-box-shadow: 0 4px 10px 1px rgba(247, 204, 54, 0.5);

@@ -15,7 +15,6 @@ class PasswordResetPage {
 	public $js = array();
 	public $css = array();
 	public $visible = true;
-    public $gradient = ' d-gradient';
 
 	public function __construct() {
 		$this->content = '';
@@ -94,7 +93,7 @@ class PasswordResetPage {
 										<div class="input-group">
 											<input type="password" name="password" id="password" class="form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'), '8') . '" pattern=".{8,}" required />
 											<label class="control-label" for="password" data-ex="' . __('8 characters minimum') . '">
-												<i class="fas fa-eye-slash"></i> * ' . __('New password') . '
+												<i class="fa fa-eye-slash"></i> * ' . __('New password') . '
 											</label>
 											<i class="bar"></i>
 											' . $password . '
@@ -104,7 +103,7 @@ class PasswordResetPage {
 										<div class="input-group">
 											<input type="password" name="confirmPassword" id="confirmPassword" class="form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" required />
 											<label class="control-label" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
-												<i class="fas fa-eye-slash"></i> * ' . __('Confirm new password') . '
+												<i class="fa fa-eye-slash"></i> * ' . __('Confirm new password') . '
 											</label>
 											<i class="bar"></i>
 											' . $confirmPassword . '
@@ -132,7 +131,7 @@ class PasswordResetPage {
 				<div class="col-12 col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 					' . $errors . '
 					<div class="panel panel-login">
-						<div class="panel-heading"><div class="row"><div class="col-12 text-center"><h5><b>' . __('Password reset') . '</b></h5></div></div><hr /></div>
+						<div class="panel-heading"><div class="row"><div class="col-12 text-center"><h2><b>' . __('Password reset') . '</b></h2></div></div><hr /></div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-12">
@@ -141,7 +140,7 @@ class PasswordResetPage {
 											<div class="input-group">
 												<input type="email" name="email" id="email" class="form-control" data-rule="maxlen:2" data-msg="' . __('Enter your email') . '"' . $email['value'] . ' pattern="^(?:[\w\d-]+.?)+@(?:(?:[\w\d]-?)+.)+\w{2,4}$" required />
 												<label class="control-label" for="email" data-ex="eg: john.smith@yahoo.com">
-													<i class="fas fa-envelope"></i> * ' . __('Email') . '
+													<i class="fa fa-envelope"></i> * ' . __('Email') . '
 												</label>
 												<i class="bar"></i>
 												' . $email['validation'] . '

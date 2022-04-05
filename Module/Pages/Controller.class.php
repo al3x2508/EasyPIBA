@@ -15,13 +15,13 @@ class Controller {
 	public $content = false;
 	public $description = '';
 	public $ogimage = '';
-	public $h1 = '';
 	public $breadcrumbs = array();
 	public $sidebar = array();
 	public $rsidebar = false;
 	public $js = array();
 	public $css = array();
 	public $visible = true;
+	public $darkHeader = true;
 	public $template = 'template.html';
 
 	/**
@@ -46,8 +46,8 @@ class Controller {
 			$user = UserController::getCurrentUser(false);
 			if ($user && !$page->forceFrontEnd) {
 				$page->adminName = $user->firstname . ' ' . $user->lastname;
-				$page->myaccountlink = '<a href="' . _FOLDER_URL_ . 'my-account" class="btn btn-sm btn-default btn-flat"><i class="fas fa-user"></i> ' . __('My account') . '</a>';
-				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fas fa-power-off"></i> ' . __('Logout') . '</a>';
+				$page->myaccountlink = '<a href="' . _FOLDER_URL_ . 'my-account" class="btn btn-sm btn-default btn-flat"><i class="fa fa-user"></i> ' . __('My account') . '</a>';
+				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fa fa-power-off"></i> ' . __('Logout') . '</a>';
 				$page->ADMIN_FOLDER_URL = _FOLDER_URL_ . 'admin1009/';
 				$page->template = '../admin1009/template.html';
 				$page->noMainCss = true;
@@ -55,7 +55,7 @@ class Controller {
 			else {
 				$page->adminName = __('Guest user');
 				$page->myaccountlink = '';
-				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'login" class="btn btn-sm btn-default btn-flat"><i class="fas fa-power-on"></i> ' . __('Login') . '</a>';
+				$page->logoutlink = '<a href="' . _FOLDER_URL_ . 'login" class="btn btn-sm btn-default btn-flat"><i class="fa fa-power-on"></i> ' . __('Login') . '</a>';
 			}
 		}
 		else {
@@ -131,7 +131,7 @@ class Controller {
 					<br />
 					<p>' . __('The page you requested could not be found, either contact your webmaster or try again. Use your browsers <strong>Back</strong> button to navigate to the page you have previously come from.') . '</p>
 					<p><strong>' . __('Or you could just press this neat little button') . ':</strong></p>
-					<a href="' . _ADDRESS_ . '" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> ' . __('Take Me Home') . '</a>
+					<a href="' . _ADDRESS_ . _FOLDER_URL_ . '" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> ' . __('Take Me Home') . '</a>
 				</div>';
 			$this->title = __('Page not found');
 			$this->description = __('Page not found');

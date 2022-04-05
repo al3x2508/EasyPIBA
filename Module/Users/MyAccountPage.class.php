@@ -28,11 +28,10 @@ class MyAccountPage
         if ($user) {
             $this->adminName = $user->firstname . ' ' . $user->lastname;
             $this->myaccountlink = '<a href="' . _FOLDER_URL_ . 'my-account" class="btn btn-sm btn-default btn-flat">' . __('My account') . '</a>';
-            $this->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fas fa-power-off"></i> ' . __('Logout') . '</a>';
+            $this->logoutlink = '<a href="' . _FOLDER_URL_ . 'logout" class="btn btn-sm btn-default btn-flat"><i class="fa fa-power-off"></i> ' . __('Logout') . '</a>';
             $this->ADMIN_FOLDER_URL = _ADMIN_FOLDER_;
             $this->title = __('My account');
             $this->description = __('My account');
-            $this->h1 = '';
             $this->content = '';
             $fields = array();
             $message = '';
@@ -135,7 +134,7 @@ class MyAccountPage
             $this->content .= '<div class="row justify-content-md-center my-4">
 				<div class="col-12 col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 					<div class="panel panel-login">
-						<div class="panel-heading container"><div class="row"><div class="col-12 text-center"><h2><b><i class="fas fa-user"></i> ' . __('My account') . '</b></h2></div></div><hr /></div>
+						<div class="panel-heading container"><div class="row"><div class="col-12 text-center"><h2><b><i class="fa fa-user"></i> ' . __('My account') . '</b></h2></div></div><hr /></div>
 						<div class="panel-body container">
 							<div class="row">
 								<div class="col-12">' . PHP_EOL . $alert . '
@@ -166,7 +165,7 @@ class MyAccountPage
 													<input type="password" name="password" id="password" class="form-control" data-rule="maxlen:8" data-msg="' . sprintf(__('Enter at least %s characters'),
                     '8') . '" pattern=".{8,}" autocomplete="new-password" required />
 													<label class="control-label" for="password" data-ex="' . __('8 characters minimum') . '">
-														<i class="fas fa-eye-slash"></i> * ' . __('Password') . '
+														<i class="fa fa-eye-slash"></i> * ' . __('Password') . '
 													</label>
 													<i class="bar"></i>
 												</div>
@@ -175,7 +174,7 @@ class MyAccountPage
 												<div class="input-group">
 													<input type="password" name="confirmPassword" id="confirmPassword" class="form-control" data-rule="maxlen:8" data-msg="' . __('Confirm password') . '" pattern=".{8,}" autocomplete="new-password" required />
 													<label class="control-label" for="confirmPassword" data-ex="' . __('8 characters minimum') . '">
-														<i class="fas fa-eye-slash"></i> * ' . __('Confirm password') . '
+														<i class="fa fa-eye-slash"></i> * ' . __('Confirm password') . '
 													</label>
 													<i class="bar"></i>
 												</div>

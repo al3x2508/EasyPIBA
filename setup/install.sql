@@ -534,11 +534,10 @@ CREATE TABLE `news` (
 
 CREATE TABLE `pages` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT  '',
   `language` varchar(3) DEFAULT 'en',
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `h1` varchar(255) NOT NULL,
   `content` mediumtext NOT NULL,
   `js` varchar(255) DEFAULT '',
   `css` varchar(255) DEFAULT '',

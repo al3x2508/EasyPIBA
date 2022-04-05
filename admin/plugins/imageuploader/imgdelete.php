@@ -24,7 +24,7 @@ switch ($load_lang_code) {
 
 // Including the plugin config file, don't delete the following row!
 require_once(__DIR__ . '/pluginconfig.php');
-if (\Module\Users\Controller::getCurrentUser() || \Controller\AdminController::checkPermission('Edit pages')) {
+if (\Controller\AdminController::checkPermission('Edit pages')) {
     ?>
 
     <!DOCTYPE html>

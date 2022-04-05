@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 14:18+0200\n"
-"PO-Revision-Date: 2021-01-12 14:26+0200\n"
+"PO-Revision-Date: 2019-03-29 17:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.0.4\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
 
@@ -46,8 +46,9 @@ msgid "Actions"
 msgstr "Acțiuni"
 
 #: Module/Media/Admin/Media.class.php:35
+#, fuzzy
 msgid "Add media"
-msgstr "Adaugă fișier media"
+msgstr "Adaugă"
 
 #: Module/Media/Admin/Media.class.php:44 Module/Media/Admin/Media.class.php:58
 #: Module/Users/Admin/AdminPage.class.php:54
@@ -104,18 +105,19 @@ msgstr "Salvează"
 #: Module/Attributes/Admin/Act.class.php:38 Controller/AdminAct.class.php:54
 #: Controller/AdminAct.class.php:64
 msgid "No ID set"
-msgstr "Niciun ID setat"
+msgstr ""
 
 #: Module/Media/Admin/Act.class.php:155
+#, fuzzy
 msgid "You don't have permission to delete this file"
-msgstr "Nu ai permisiuni pentru ștergerea fișierului"
+msgstr "Nu ai permisiuni pentru această acțiune"
 
 #: Module/Media/Admin/Act.class.php:177 Module/Products/Admin/Act.class.php:78
 #: Module/Products/Admin/Act.class.php:82
 #: Module/Products/Admin/Act.class.php:95
 #: Module/Products/Admin/Act.class.php:99
 msgid "Nothing to delete"
-msgstr "Nimic de șters"
+msgstr ""
 
 #: Module/Media/Admin/Act.class.php:181
 msgid "No uploaded file"
@@ -131,8 +133,9 @@ msgid "File is not an image"
 msgstr "Fișierul nu este o imagine"
 
 #: Module/Media/Admin/Act.class.php:356
+#, fuzzy
 msgid "File is not a media > "
-msgstr "Nu este un fișier media > "
+msgstr "Fișierul nu este o imagine"
 
 #: Module/Media/Admin/Act.class.php:359 Module/Media/Admin/Act.class.php:390
 #, php-format
@@ -165,11 +168,11 @@ msgstr "Oricare"
 
 #: Module/Media/Page.class.php:40
 msgid "Video"
-msgstr "Video"
+msgstr ""
 
 #: Module/Media/Page.class.php:40
 msgid "Audio"
-msgstr "Audio"
+msgstr ""
 
 #: Module/JSON/Admin.class.php:26
 msgid "You do not have permissions for this"
@@ -333,21 +336,23 @@ msgid "Delete"
 msgstr "Șterge"
 
 #: Module/Users/MyAccountPage.class.php:206
+#, fuzzy
 msgid "Confirm delete"
-msgstr "Confirmare ștergere"
+msgstr "Confirmat"
 
 #: Module/Users/MyAccountPage.class.php:210
+#, fuzzy
 msgid "You are about to delete your account."
-msgstr "Ești pe cale să-ți ștergi contul."
+msgstr "Nu ți-ai confirmat contul"
 
 #: Module/Users/MyAccountPage.class.php:211
 msgid "Do you want to proceed?"
-msgstr "Vrei să procedezi?"
+msgstr ""
 
 #: Module/Users/MyAccountPage.class.php:214
 #: Module/Products/Admin/AdminPage.class.php:70
 msgid "Cancel"
-msgstr "Renunță"
+msgstr ""
 
 #: Module/Users/Controller.class.php:31
 msgid "Enter your firstname"
@@ -374,7 +379,7 @@ msgstr "Introdu o parolă"
 
 #: Module/Users/Controller.class.php:110
 msgid "Subscribe to newsletter"
-msgstr "Abonează-te la newsletter"
+msgstr ""
 
 #: Module/Users/Controller.class.php:114
 msgid "You must accept our Terms and conditions"
@@ -555,7 +560,7 @@ msgstr "Blocat"
 #: Module/Categories/Admin/AdminPage.class.php:16
 #: Module/Products/Admin/AdminPage.class.php:54
 msgid "Filters"
-msgstr "Filtre"
+msgstr ""
 
 #: Module/Users/Admin/AdminPage.class.php:33
 #: Module/Users/Admin/AdminPage.class.php:118
@@ -570,24 +575,26 @@ msgid "Status"
 msgstr "Stare"
 
 #: Module/Users/Admin/AdminPage.class.php:43
+#, fuzzy
 msgid "Add user"
-msgstr "Adaugă utilizator"
+msgstr "Adaugă"
 
 #: Module/Users/Admin/AdminPage.class.php:44
 #: Module/ProductRanges/Admin/AdminPage.class.php:36
 #: Module/Categories/Admin/AdminPage.class.php:36
 msgid "Export to Excel"
-msgstr "Exportă la Excel"
+msgstr ""
 
 #: Module/Users/Admin/AdminPage.class.php:45
 #: Module/ProductRanges/Admin/AdminPage.class.php:37
 #: Module/Categories/Admin/AdminPage.class.php:37
 msgid "Export to PDF"
-msgstr "Exportă la PDF"
+msgstr ""
 
 #: Module/Users/Admin/Act.class.php:32
+#, fuzzy
 msgid "Wrong password confirm"
-msgstr "Parola confirmată greșit"
+msgstr "confirmă parola"
 
 #: Module/Users/PasswordResetPage.class.php:21
 #: Module/Users/PasswordResetPage.class.php:22
@@ -655,8 +662,9 @@ msgstr "Publicat"
 #: Module/Blog/Admin/AdminPage.class.php:11
 #: Module/Blog/Admin/AdminPage.class.php:12
 #: Module/Blog/Admin/AdminPage.class.php:18
+#, fuzzy
 msgid "Edit posts"
-msgstr "Editează articole"
+msgstr "Editează pagini"
 
 #: Module/Blog/Admin/AdminPage.class.php:29
 #: Module/Blog/Admin/AdminPage.class.php:56
@@ -673,16 +681,18 @@ msgid "Author"
 msgstr "Autor"
 
 #: Module/Blog/Admin/AdminPage.class.php:29
+#, fuzzy
 msgid "Updated on"
-msgstr "Actualizat la"
+msgstr "Actualizează"
 
 #: Module/Blog/Admin/AdminPage.class.php:39
 msgid "Add post"
-msgstr "Adaugă articol"
+msgstr ""
 
 #: Module/Blog/Admin/AdminPage.class.php:47
+#, fuzzy
 msgid "Edit post"
-msgstr "Editează articol"
+msgstr "Editează pagini"
 
 #: Module/Blog/Admin/AdminPage.class.php:63
 #: Module/Testimonials/Admin/AdminPage.class.php:75
@@ -701,7 +711,7 @@ msgstr "Descriere"
 #: Module/Blog/Page.class.php:27 Module/Blog/Page.class.php:28
 #: Module/Blog/Page.class.php:29
 msgid "Blog"
-msgstr "Blog"
+msgstr ""
 
 #: Module/Blog/Page.class.php:143 Module/News/Page.class.php:93
 msgid "Newer"
@@ -745,8 +755,9 @@ msgid "Short text"
 msgstr "Text scurt"
 
 #: Module/Testimonials/Admin/AdminPage.class.php:37
+#, fuzzy
 msgid "Add testimonial"
-msgstr "Adaugă testimonial"
+msgstr "Părere"
 
 #: Module/Testimonials/Admin/AdminPage.class.php:88
 #: Module/Administrators/Admin/Admins.class.php:31
@@ -781,8 +792,9 @@ msgid "Date"
 msgstr "Dată"
 
 #: Module/News/Admin/AdminPage.class.php:49
+#, fuzzy
 msgid "Add news"
-msgstr "Adaugă știri"
+msgstr "Adaugă"
 
 #: Module/News/Page.class.php:16 Module/News/Page.class.php:17
 #: Module/News/Page.class.php:18
@@ -791,39 +803,41 @@ msgstr "Știri"
 
 #: Module/ProductRanges/Admin/JSON.class.php:14
 msgid "Products range name"
-msgstr "Nume gamă"
+msgstr ""
 
 #: Module/ProductRanges/Admin/JSON.class.php:15
 #: Module/Categories/Admin/JSON.class.php:17
 #: Module/Categories/Admin/AdminPage.class.php:25
 #: Module/Products/Admin/JSON.class.php:20
 msgid "Date created"
-msgstr "Data creării"
+msgstr ""
 
 #: Module/ProductRanges/Admin/JSON.class.php:16
 #: Module/Categories/Admin/JSON.class.php:18
 #: Module/Categories/Admin/AdminPage.class.php:25
 #: Module/Products/Admin/JSON.class.php:21
+#, fuzzy
 msgid "Date updated"
-msgstr "Data actualizării"
+msgstr "Ultima actualizare"
 
 #: Module/ProductRanges/Admin/JSON.class.php:19
 msgid "Products ranges"
-msgstr "Game produse"
+msgstr ""
 
 #: Module/ProductRanges/Admin/AdminPage.class.php:7
 #: Module/ProductRanges/Admin/AdminPage.class.php:8
 #: Module/ProductRanges/Admin/AdminPage.class.php:14
+#, fuzzy
 msgid "Edit ranges"
-msgstr "Editează game de produs"
+msgstr "Editează pagini"
 
 #: Module/ProductRanges/Admin/AdminPage.class.php:35
 msgid "Add products range"
-msgstr "Adaugă gamă de produse"
+msgstr ""
 
 #: Module/ProductRanges/Admin/AdminPage.class.php:54
 msgid "Range name"
-msgstr "Nume gamă"
+msgstr ""
 
 #: Module/Administrators/Admin/Cache.class.php:14
 #: Module/Administrators/Admin/Cache.class.php:15
@@ -836,11 +850,11 @@ msgstr "Recitire module"
 
 #: Module/Administrators/Admin/Cache.class.php:35
 msgid "Remove JS and CSS from cache dir"
-msgstr "Șterge fișierele JS și CSS din directorul de cache"
+msgstr ""
 
 #: Module/Administrators/Admin/Cache.class.php:45
 msgid "Clear all cache data"
-msgstr "Șterge cache-ul"
+msgstr ""
 
 #: Module/Administrators/Admin/Cache.class.php:48
 msgid "Reread modules"
@@ -859,8 +873,9 @@ msgid "Username"
 msgstr "Nume utilizator"
 
 #: Module/Administrators/Admin/Admins.class.php:58
+#, fuzzy
 msgid "Add admin"
-msgstr "Adaugă administrator"
+msgstr "Adaugă"
 
 #: Module/Administrators/Admin/Admins.class.php:66
 msgid "Edit administrator"
@@ -868,7 +883,7 @@ msgstr "Editează administrator"
 
 #: Module/Pages/Controller.class.php:56
 msgid "Guest user"
-msgstr "Vizitator"
+msgstr ""
 
 #: Module/Pages/Controller.class.php:130 Module/Pages/Controller.class.php:136
 #: Module/Pages/Controller.class.php:137
@@ -899,11 +914,11 @@ msgstr "Du-mă acasă"
 
 #: Module/Pages/Controller.class.php:173
 msgid "App"
-msgstr "Aplicație"
+msgstr ""
 
 #: Module/Pages/Controller.class.php:174
 msgid "Dashboard"
-msgstr "Panou de bord"
+msgstr ""
 
 #: Module/Pages/Admin/Menu.class.php:15 Module/Pages/Admin/Menu.class.php:16
 msgid "Edit menu"
@@ -923,8 +938,9 @@ msgid "Menu text"
 msgstr "Text meniu"
 
 #: Module/Pages/Admin/Pages.class.php:51
+#, fuzzy
 msgid "Add page"
-msgstr "Adaugă pagină"
+msgstr "Editează pagini"
 
 #: Module/Pages/Admin/Pages.class.php:105
 msgid "Submenu text"
@@ -934,94 +950,97 @@ msgstr "Text submeniu"
 #: Module/Categories/Admin/AdminPage.class.php:25
 #: Module/Categories/Admin/AdminPage.class.php:54
 msgid "Products range"
-msgstr "Gamă de produse"
+msgstr ""
 
 #: Module/Categories/Admin/JSON.class.php:15
 #: Module/Categories/Admin/AdminPage.class.php:25
 #: Module/Categories/Admin/AdminPage.class.php:61
 msgid "Parent category"
-msgstr "Categoria părinte"
+msgstr ""
 
 #: Module/Categories/Admin/JSON.class.php:16
 #: Module/Categories/Admin/AdminPage.class.php:68
 msgid "Category name"
-msgstr "Nume categorie"
+msgstr ""
 
 #: Module/Categories/Admin/JSON.class.php:21
 msgid "Categories"
-msgstr "Categorii"
+msgstr ""
 
 #: Module/Categories/Admin/AdminPage.class.php:7
 #: Module/Categories/Admin/AdminPage.class.php:8
 #: Module/Categories/Admin/AdminPage.class.php:14
+#, fuzzy
 msgid "Edit categories"
-msgstr "Editează categorii"
+msgstr "Editează pagini"
 
 #: Module/Categories/Admin/AdminPage.class.php:35
 msgid "Add category"
-msgstr "Adaugă categorie"
+msgstr ""
 
 #: Module/Products/Admin/JSON.class.php:15
 msgid "Product name"
-msgstr "Nume produs"
+msgstr ""
 
 #: Module/Products/Admin/JSON.class.php:16
 msgid "SKU"
-msgstr "SKU"
+msgstr ""
 
 #: Module/Products/Admin/JSON.class.php:18
 msgid "Price"
-msgstr "Preț"
+msgstr ""
 
 #: Module/Products/Admin/JSON.class.php:19
 msgid "Stock"
-msgstr "Stoc"
+msgstr ""
 
 #: Module/Products/Admin/JSON.class.php:24
 msgid "Products"
-msgstr "Produse"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:12
 #: Module/Products/Admin/AdminPage.class.php:13
 #: Module/Products/Admin/AdminPage.class.php:53
+#, fuzzy
 msgid "Edit products"
-msgstr "Editează produse"
+msgstr "Editează pagini"
 
 #: Module/Products/Admin/AdminPage.class.php:57
 msgid "Import EPUB"
-msgstr "Importă EPUB"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:58
+#, fuzzy
 msgid "File"
-msgstr "Fișier"
+msgstr "Nume fișier"
 
 #: Module/Products/Admin/AdminPage.class.php:59
 msgid "Settings"
-msgstr "Setări"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:60
 msgid "Template"
-msgstr "Șablon"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:63
 msgid "Grid system"
-msgstr "Sistem gridual"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:64
 msgid "Boxes"
-msgstr "Cutii"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:66
 msgid "Save changes"
-msgstr "Salvează schimbări"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:68
 msgid "Do you want to save your changes?"
-msgstr "Vrei să salvezi schimbările?"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:69
 msgid "Don't Save"
-msgstr "Nu salva"
+msgstr ""
 
 #: Module/Products/Admin/AdminPage.class.php:71
 msgid "Container width (mm)"
@@ -1029,19 +1048,20 @@ msgstr "Lățime container (mm)"
 
 #: Module/Products/Admin/AdminPage.class.php:72
 msgid "Set background"
-msgstr "Setează fundal"
+msgstr ""
 
 #: Controller/AdminAct.class.php:44
 msgid "Error creating the entity"
-msgstr "Eroare la crearea entității"
+msgstr ""
 
 #: Controller/AdminAct.class.php:52
+#, fuzzy
 msgid "Error updating the entity"
-msgstr "Eroare la actualizarea entității"
+msgstr "Eroare la încărcare"
 
 #: Controller/AdminAct.class.php:62
 msgid "Error deleting the entity"
-msgstr "Eroare la ștergerea entității"
+msgstr ""
 
 #: Controller/AdminController.class.php:30
 msgid "Username blocked"
@@ -1053,7 +1073,7 @@ msgstr "nu există"
 
 #: Controller/AdminController.class.php:35
 msgid "Webserver error"
-msgstr "Eroare server web"
+msgstr ""
 
 #: admin/index.php:22
 msgid "Admin login"
@@ -1065,7 +1085,7 @@ msgstr "Statisitici"
 
 #: admin/Template.class.php:67 Utils/Template.class.php:223
 msgid " seconds"
-msgstr " secunde"
+msgstr ""
 
 #: admin/Template.class.php:84
 msgid "Loading time"
@@ -1479,6 +1499,3 @@ msgstr ""
 
 #~ msgid "read full text"
 #~ msgstr "citește tot textul"
-
-#~ msgid "Login / Register"
-#~ msgstr "Autentificare"

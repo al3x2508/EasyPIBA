@@ -13,22 +13,27 @@ class AdminController {
 		return false;
 	}
 	public static function checkAuth($user, $pass) {
-		$bcrypt = new Bcrypt(15);
-		$admin = new Model('admins');
-		$admin = $admin->getOneResult('username', $user);
-		if($admin && property_exists($admin, 'id')) {
-			if($admin->status == 1) {
-				$id = $admin->id;
-				$isGood = $bcrypt->verify($pass, $admin->password);
-				if($isGood) {
-					$_SESSION['admin'] = $id;
-					return $id;
+		try {
+			$bcrypt = new Bcrypt(15);
+			$admin = new Model('admins');
+			$admin = $admin->getOneResult('username', $user);
+			if($admin && property_exists($admin, 'id')) {
+				if($admin->status == 1) {
+					$id = $admin->id;
+					$isGood = $bcrypt->verify($pass, $admin->password);
+					if($isGood) {
+						$_SESSION['admin'] = $id;
+						return $id;
+					}
+					else return array("message" => __('Incorrect password'));
 				}
-				else return array("message" => __('Incorrect password'));
+				else return array("message" => __('Username blocked'));
 			}
-			else return array("message" => __('Username blocked'));
+			else return array("message" => __('Username') . " " . $user . " " . __('does not exist'));
 		}
-		else return array("message" => __('Username') . " " . $user . " " . __('does not exist'));
+		catch (\Exception $e) {
+			return array("message" => __('Webserver error'));
+		}
 	}
 	public static function checkPermission($permissionName) {
 		$admin = self::getCurrentUser();

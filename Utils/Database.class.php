@@ -29,4 +29,9 @@ class Database extends mysqli
         }
         return self::$instance;
     }
+
+    public function close() {
+        parent::close();
+        self::$instance = null;
+    }
 }

@@ -23,7 +23,7 @@ $(function () {
             };
             $.ajax({
                 type: "POST",
-                url: "json",
+                url: "json/",
                 data: data,
                 dataType: "json",
                 success: function (data) {

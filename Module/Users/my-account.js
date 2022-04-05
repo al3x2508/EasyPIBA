@@ -1,8 +1,10 @@
-var delAction = 'delete_account',
-	_confirmDelete = $('<div></div>');
+var delAction = 'delete_account';
 $(function() {
 	var _edit = $("#edit"),
 		_changePwd = $("#editPassword");
+	$('.select2').select2({
+		theme: 'bootstrap4'
+	});
 	_edit.click(function () {
 		if ($(this).data('action') == 'edit') {
 			$(this).text(jsstrings.save).data('action', 'save');
@@ -10,6 +12,9 @@ $(function() {
 			$('.btn-delete').removeClass('d-none');
 			$("#viewinfo").toggle();
 			$("#editinfo").toggle();
+			$("input[data-bootstrap-switch]").each(function(){
+				$(this).bootstrapSwitch('state', $(this).prop('checked'));
+			});
 		}
 		else {
 			var form = $("#myaccount"),

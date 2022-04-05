@@ -16,11 +16,12 @@ class Media
         );
         $this->css = array(
             '../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css',
-            '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css'
+            '../vendor/drmonty/datatables-responsive/css/dataTables.responsive.min.css',
+            'Module/Media/Admin/media.css'
         );
-        $this->content = '<div class="box">
-	<div class="box-header"><h3 class="box-title">' . __('Media') . '</h3></div>
-	<div class="box-body">
+        $this->content = '<div class="card">
+	<div class="card-header"><h3 class="card-title">' . __('Media') . '</h3></div>
+	<div class="card-body">
 		<table id="data_table" class="table table-bordered table-hover">
 			<thead>
 				<tr><th>#<br /><input type="text" id="idf" class="tableFilter form-control" size="2"></th><th>' . __('Filename') . '</th><th>' . __('Preview') . '</th><th>' . __('Actions') . '</th></tr>
@@ -29,7 +30,11 @@ class Media
 			</tbody>
 		</table>
 	</div>
-	<button id="add" class="btn btn-primary">' . __('Add') . '</button>
+	<div class="card-footer">
+	    <div class="btn-toolbar">
+			<button id="add" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> ' . __('Add media') . '</button>
+		</div>
+	</div>
 </div>
 <div id="ppEdit" class="modal dialog">
 	<div class="modal-dialog">
@@ -37,7 +42,7 @@ class Media
 			<div class="modal-header">
 				<h4 class="modal-title">Media</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="' . __('Close') . '">
-					<span aria-hidden="true">×</span>
+					<i class="fa fa-times"></i>
 				</button>
 			</div>
 			<div class="modal-body" id="edtable">
@@ -47,7 +52,7 @@ class Media
 						<input type="file" class="form-control" id="edimage" name="edimage" placeholder="' . __('Image') . '" />
 					</div>
 				</form>
-				<img id="imagePreview" src="" />
+				<img id="imagePreview" src="" data-folder="" data-default="' . _LOGO_ . '" />
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">' . __('Close') . '</button>
@@ -55,6 +60,15 @@ class Media
 			</div>
 		</div>
 	</div>
+</div>
+<div id="preview" class="modal dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="imgPreview" src="" />
+            </div>
+        </div>
+    </div>
 </div>';
     }
 
