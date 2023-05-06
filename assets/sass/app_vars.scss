@@ -1,0 +1,30 @@
+$font-family-sans-serif: -apple-system, 'Proxima Nova', "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$primary: #ff8e00;
+$brand-primary: $primary;
+$secondary: #0085D3;
+$gray-100: #f5f5f5;
+$fa-font-path: "/fonts" !default;
+$input-height: 3.8em;
+$input-border-color: #EBEBEB !default;
+$input-focus-bg: #fff;
+$input-focus-border-color: $input-border-color;
+$input-focus-box-shadow: none;
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xl2: 1600px,
+        xxl: 1900px
+) !default;
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px,
+        xl2: 1340px,
+        xxl: 1640px
+) !default;

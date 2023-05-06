@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="{LANGUAGE}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{__Login}">
+    <meta name="author" content="Alex Glavan">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>{__Login}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="{ADMIN_FOLDER_URL}light.css" rel="stylesheet">
+</head>
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+<main class="d-flex w-100 h-100">
+    <div class="container d-flex flex-column">
+        <div class="row vh-100">
+            <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+                <div class="d-table-cell align-middle">
+
+                    <div class="text-center mt-4">
+                        <p class="lead">
+                            {message}
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="m-sm-4">
+                                <form action="" method="post">
+                                    <div class="mb-3">
+                                        <label class="form-label">{__Username}</label>
+                                        <input class="form-control form-control-lg" type="test" name="username"
+                                               placeholder="{__Enter your username}"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">{__Password}</label>
+                                        <input class="form-control form-control-lg" type="password" name="password"
+                                               placeholder="{__Enter your password}"/>
+                                    </div>
+                                    <div>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="remember-me"
+                                                   name="remember-me" checked>
+                                            <span class="form-check-label">
+													{__Remember me next time}
+												</span>
+                                        </label>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-lg btn-primary">{__Sign in}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="{FOLDER_URL}node_modules/@adminkit/core/dist/js/app.js"></script>
+</body>
+</html>

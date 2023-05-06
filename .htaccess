@@ -1,27 +1,34 @@
 <IfModule mod_rewrite.c>
 Options -Multiviews -Indexes +FollowSymLinks
 RewriteEngine On
-#Uncomment next 2 lines if you want to have always redirect with https
-#RewriteCond %{HTTPS} off
-#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-#Uncomment next 2 lines if you want to have always redirect with www subdomain
-#RewriteCond %{HTTP_HOST} !^www\.
-#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]RewriteRule ^js/login.js$ Module/Users/login.js [L]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
+RewriteRule ^js/lazysizes.min.js node_modules/lazysizes/lazysizes.min.js [L]
+RewriteRule ^js/jquery.min.js node_modules/jquery/dist/jquery.min.js [L]
+RewriteRule ^js/jquery-ui.min.js node_modules/jqueryui/jquery-ui.min.js [L]
+RewriteRule ^js/bootstrap.min.js node_modules/bootstrap/dist/js/bootstrap.bundle.min.js [L]
+RewriteRule ^js/fancybox.umd.js node_modules/@fancyapps/ui/dist/fancybox.umd.js [L]
+RewriteRule ^css/bootstrap.min.css node_modules/bootstrap/dist/js/bootstrap.min.css [L]
+RewriteRule ^css/fontawesome.min.css node_modules/@fortawesome/fontawesome-free/css/all.min.css [L]
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^css/main.css Utils/scripts.php [L]
-RewriteRule ^js/jquery.min.js vendor/components/jquery/jquery.min.js [L]
-RewriteRule ^js/jquery-ui.min.js vendor/components/jqueryui/jquery-ui.min.js [L]
-RewriteRule ^css/font-awesome.css vendor/components/font-awesome/css/all.min.css [L]
-RewriteRule ^fonts/fontawesome/(.*)$ vendor/components/font-awesome/webfonts/$1 [NC,L]
-RewriteRule ^webfonts/fa-(.*)$ vendor/components/font-awesome/webfonts/fa-$1 [NC,L]
+RewriteRule ^css/main.css cache/css/main.css [L]
+RewriteRule ^fonts/(fontawesome-.*)$ node_modules/@fortawesome/fontawesome-free/webfonts/$1 [NC,L]
+RewriteRule ^webfonts/(.*)$ node_modules/@fortawesome/fontawesome-free/webfonts/$1 [NC,L]
 RewriteRule ^css/(.*)$ assets/css/$1 [NC,L]
-RewriteRule ^scss/(.*)$ assets/scss/$1 [NC,L]
 RewriteRule ^js/(.*)$ assets/js/$1 [NC,L]
 RewriteRule ^fonts/(.*)$ assets/fonts/$1 [NC,L]
 RewriteRule ^img/(.*)$ assets/img/$1 [NC,L]
+RewriteRule ^videos/(.*)$ assets/videos/$1 [NC,L]
+RewriteRule ^uploads/protected/(.*)$ index.php [NC,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(json|act)/ admin/index.php [L]
+RewriteRule . index.php [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^logout$ index.php?logout=true [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -37,8 +44,12 @@ RewriteRule . index.php [L]
     </filesMatch>
 </IfModule>
 <IfModule mod_expires.c>
-	<Filesmatch "\.(jpg|jpeg|png|gif|js|css|swf|ico|woff|mp3|json)$">
+	<Filesmatch "\.(jpg|jpeg|png|gif|webp|js|css|woff2|swf|ico|woff|mp3|json|mp4)$">
 		ExpiresActive on
-		ExpiresDefault "access plus 30 days"
+		ExpiresDefault "access plus 1 year"
 	</Filesmatch>
 </IfModule>
+
+<FilesMatch ".(eot|ttf|otf|woff)$">
+	Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

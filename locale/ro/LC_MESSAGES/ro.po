@@ -7,594 +7,325 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-12 14:18+0200\n"
-"PO-Revision-Date: 2021-01-12 14:26+0200\n"
+"POT-Creation-Date: 2019-01-28 13:02+0200\n"
+"PO-Revision-Date: 2019-06-03 17:18+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
+"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: Module/Media/Admin/Media.class.php:8 Module/Media/Admin/Media.class.php:9
-#: Module/Media/Admin/Media.class.php:23 Module/Media/Page.class.php:13
-msgid "Media"
-msgstr "Media"
-
-#: Module/Media/Admin/Media.class.php:27
-msgid "Filename"
-msgstr "Nume fișier"
-
-#: Module/Media/Admin/Media.class.php:27
-msgid "Preview"
-msgstr "Previzualizare"
-
-#: Module/Media/Admin/Media.class.php:27
-#: Module/Users/Admin/AdminPage.class.php:33
-#: Module/Blog/Admin/AdminPage.class.php:29
-#: Module/Testimonials/Admin/AdminPage.class.php:27
-#: Module/News/Admin/AdminPage.class.php:39
-#: Module/ProductRanges/Admin/AdminPage.class.php:25
-#: Module/Administrators/Admin/Admins.class.php:48
-#: Module/Pages/Admin/Pages.class.php:41
-#: Module/Categories/Admin/AdminPage.class.php:25
-#: Module/Products/Admin/AdminPage.class.php:56
-msgid "Actions"
-msgstr "Acțiuni"
-
-#: Module/Media/Admin/Media.class.php:35
-msgid "Add media"
-msgstr "Adaugă fișier media"
-
-#: Module/Media/Admin/Media.class.php:44 Module/Media/Admin/Media.class.php:58
-#: Module/Users/Admin/AdminPage.class.php:54
-#: Module/Users/Admin/AdminPage.class.php:138
-#: Module/Blog/Admin/AdminPage.class.php:48
-#: Module/Blog/Admin/AdminPage.class.php:90
-#: Module/Testimonials/Admin/AdminPage.class.php:46
-#: Module/Testimonials/Admin/AdminPage.class.php:95
-#: Module/News/Admin/AdminPage.class.php:58
-#: Module/News/Admin/AdminPage.class.php:103
-#: Module/ProductRanges/Admin/AdminPage.class.php:46
-#: Module/ProductRanges/Admin/AdminPage.class.php:70
-#: Module/Administrators/Admin/Admins.class.php:67
-#: Module/Administrators/Admin/Admins.class.php:103
-#: Module/Pages/Admin/Pages.class.php:60 Module/Pages/Admin/Pages.class.php:128
-#: Module/Categories/Admin/AdminPage.class.php:46
-#: Module/Categories/Admin/AdminPage.class.php:74
-#: Module/Products/Admin/AdminPage.class.php:62
-msgid "Close"
-msgstr "Închide"
-
-#: Module/Media/Admin/Media.class.php:51 Module/Media/Admin/Media.class.php:52
-#: Module/Media/Page.class.php:40 Module/News/Admin/AdminPage.class.php:88
-#: Module/ProductRanges/Admin/AdminPage.class.php:62
-msgid "Image"
-msgstr "Imagine"
-
-#: Module/Media/Admin/Media.class.php:59
-#: Module/Users/Admin/AdminPage.class.php:139
-#: Module/Blog/Admin/AdminPage.class.php:91
-#: Module/Testimonials/Admin/AdminPage.class.php:96
-#: Module/News/Admin/AdminPage.class.php:104
-#: Module/ProductRanges/Admin/AdminPage.class.php:71
-#: Module/Administrators/Admin/Admins.class.php:104
-#: Module/Pages/Admin/Menu.class.php:49 Module/Pages/Admin/Pages.class.php:129
-#: Module/Categories/Admin/AdminPage.class.php:75
-#: Module/Products/Admin/AdminPage.class.php:61
-msgid "Save"
-msgstr "Salvează"
-
-#: Module/Media/Admin/Act.class.php:30 Module/Media/Admin/Act.class.php:38
-#: Module/Users/Admin/Act.class.php:20 Module/Users/Admin/Act.class.php:28
-#: Module/Blog/Admin/Act.class.php:35 Module/Blog/Admin/Act.class.php:42
-#: Module/Testimonials/Admin/Act.class.php:18
-#: Module/Testimonials/Admin/Act.class.php:24
-#: Module/News/Admin/Act.class.php:29 Module/News/Admin/Act.class.php:36
-#: Module/ProductRanges/Admin/Act.class.php:30
-#: Module/ProductRanges/Admin/Act.class.php:37
-#: Module/Administrators/Admin/Act.class.php:23
-#: Module/Pages/Admin/Act.class.php:22 Module/Pages/Admin/Act.class.php:28
-#: Module/Categories/Admin/Act.class.php:28
-#: Module/Products/Admin/Act.class.php:52
-#: Module/Products/Admin/Act.class.php:108
-#: Module/Attributes/Admin/Act.class.php:38 Controller/AdminAct.class.php:54
-#: Controller/AdminAct.class.php:64
-msgid "No ID set"
-msgstr "Niciun ID setat"
-
-#: Module/Media/Admin/Act.class.php:155
-msgid "You don't have permission to delete this file"
-msgstr "Nu ai permisiuni pentru ștergerea fișierului"
-
-#: Module/Media/Admin/Act.class.php:177 Module/Products/Admin/Act.class.php:78
-#: Module/Products/Admin/Act.class.php:82
-#: Module/Products/Admin/Act.class.php:95
-#: Module/Products/Admin/Act.class.php:99
-msgid "Nothing to delete"
-msgstr "Nimic de șters"
-
-#: Module/Media/Admin/Act.class.php:181
-msgid "No uploaded file"
-msgstr "Niciun fișier încărcat"
-
-#: Module/Media/Admin/Act.class.php:334 Module/Media/Admin/Act.class.php:345
-#: Module/Media/Admin/Act.class.php:353 Module/Media/Admin/Act.class.php:387
-msgid "Error uploading"
-msgstr "Eroare la încărcare"
-
-#: Module/Media/Admin/Act.class.php:337
-msgid "File is not an image"
-msgstr "Fișierul nu este o imagine"
-
-#: Module/Media/Admin/Act.class.php:356
-msgid "File is not a media > "
-msgstr "Nu este un fișier media > "
-
-#: Module/Media/Admin/Act.class.php:359 Module/Media/Admin/Act.class.php:390
-#, php-format
-msgid "Max upload %s"
-msgstr "Încărcare maximă de %s"
-
-#: Module/Media/Page.class.php:24 Module/Users/MyAccountPage.class.php:30
-#: Module/Users/MyAccountPage.class.php:33
-#: Module/Users/MyAccountPage.class.php:34
-#: Module/Users/MyAccountPage.class.php:137
-#: Module/Pages/Controller.class.php:49
-msgid "My account"
-msgstr "Contul meu"
-
-#: Module/Media/Page.class.php:25 Module/Users/MyAccountPage.class.php:31
-#: Module/Pages/Controller.class.php:50 admin/Template.class.php:83
-msgid "Logout"
-msgstr "Deconectare"
-
-#: Module/Media/Page.class.php:40 Module/Users/Admin/AdminPage.class.php:11
-#: Module/Users/Admin/AdminPage.class.php:16
-#: Module/Blog/Admin/AdminPage.class.php:9
-#: Module/Testimonials/Admin/AdminPage.class.php:12
-#: Module/News/Admin/AdminPage.class.php:17
-#: Module/News/Admin/AdminPage.class.php:22
-#: Module/Administrators/Admin/Admins.class.php:29
-#: Module/Pages/Admin/Menu.class.php:22 Module/Pages/Admin/Pages.class.php:20
-msgid "Any"
-msgstr "Oricare"
-
-#: Module/Media/Page.class.php:40
-msgid "Video"
-msgstr "Video"
-
-#: Module/Media/Page.class.php:40
-msgid "Audio"
-msgstr "Audio"
-
-#: Module/JSON/Admin.class.php:26
-msgid "You do not have permissions for this"
-msgstr "Nu ai permisiuni pentru această acțiune"
-
-#: Module/JSON/Admin.class.php:43
-msgid "This example should only be run from a Web Browser"
-msgstr "Acest exemplu trebuie rulat într-un browser web"
-
-#: Module/JSON/Admin.class.php:68
-msgid "Error processing"
-msgstr "Eroare la procesare"
-
-#: Module/JSON/Page.class.php:19
-msgid "Confirmation code was sent to your email address"
-msgstr "Codul de confirmare a fost trimis pe adresa de email"
-
-#: Module/JSON/Page.class.php:23
-msgid "Your account is already confirmed"
-msgstr "Contul tău este deja confirmat"
-
-#: Module/JSON/Page.class.php:26
-msgid "No account registered with this email address"
-msgstr "Niciun cont înregistrat cu această adresă de email"
-
-#: Module/Users/EmailConfirmPage.class.php:21
-#: Module/Users/EmailConfirmPage.class.php:22
-#: Module/Users/EmailConfirmPage.class.php:48
-msgid "Email confirm"
-msgstr "Confirmare email"
-
-#: Module/Users/EmailConfirmPage.class.php:25
-msgid "Enter the confirmation code"
-msgstr "Introdu codul de confirmare"
-
-#: Module/Users/EmailConfirmPage.class.php:30
-#: Module/Users/MyAccountPage.class.php:165
-#: Module/Users/Controller.class.php:57 Module/Users/Controller.class.php:78
-#: Module/Users/Controller.class.php:88
-#: Module/Users/PasswordResetPage.class.php:94
-#, php-format
-msgid "Enter at least %s characters"
-msgstr "Introdu cel puţin %s caractere"
-
-#: Module/Users/EmailConfirmPage.class.php:31
-msgid "32 characters code"
-msgstr "Cod de 32 caractere"
-
-#: Module/Users/EmailConfirmPage.class.php:32
-msgid "Confirmation code"
-msgstr "Cod de confirmare"
-
-#: Module/Users/EmailConfirmPage.class.php:40
-msgid "Confirm"
-msgstr "Confirmă"
-
-#: Module/Users/EmailConfirmPage.class.php:64
-msgid "Your email has been confirmed"
-msgstr "Emailul tău a fost confirmat"
-
-#: Module/Users/EmailConfirmPage.class.php:65
-#, php-format
-msgid "You can login now %s"
-msgstr "Te poți autentifica acum %s"
-
-#: Module/Users/EmailConfirmPage.class.php:65
-msgid "here"
-msgstr "aici"
-
-#: Module/Users/EmailConfirmPage.class.php:67
-msgid "Your account is blocked!"
-msgstr "Contul tău este blocat!"
-
-#: Module/Users/EmailConfirmPage.class.php:71
-msgid "Code is invalid or already confirmed"
-msgstr "Codul este invalid sau deja confirmat"
-
-#: Module/Users/MyAccountPage.class.php:67 Module/Users/LoginPage.class.php:104
-msgid "There is another user registered with this email address"
-msgstr "Există un utilizator înregistrat cu această adresă de email"
-
-#: Module/Users/MyAccountPage.class.php:94
-#: Module/Users/MyAccountPage.class.php:122
-#: Module/Users/LoginPage.class.php:149
-msgid "You did not filled the following inputs"
-msgstr "Nu ai completat următoarele câmpuri"
-
-#: Module/Users/MyAccountPage.class.php:110
-#: Module/Users/Controller.class.php:44
-#: Module/Users/PasswordResetPage.class.php:81
-msgid "Confirm the password"
-msgstr "Confirmă parola"
-
-#: Module/Users/MyAccountPage.class.php:144
-#: Module/Users/Controller.class.php:80 Module/Users/Admin/JSON.class.php:11
-#: Module/Users/Admin/AdminPage.class.php:33
-#: Module/Users/Admin/AdminPage.class.php:62
-msgid "Firstname"
-msgstr "Prenume"
-
-#: Module/Users/MyAccountPage.class.php:146
-#: Module/Users/Controller.class.php:90 Module/Users/Admin/JSON.class.php:12
-#: Module/Users/Admin/AdminPage.class.php:33
-#: Module/Users/Admin/AdminPage.class.php:69
-msgid "Lastname"
-msgstr "Nume"
-
-#: Module/Users/MyAccountPage.class.php:148
-#: Module/Users/Controller.class.php:38 Module/Users/Controller.class.php:49
-#: Module/Users/LoginPage.class.php:205 Module/Users/Admin/JSON.class.php:13
-#: Module/Users/Admin/AdminPage.class.php:33
-#: Module/Users/Admin/AdminPage.class.php:76
-#: Module/Users/PasswordResetPage.class.php:143
-msgid "Email"
-msgstr "Email"
-
-#: Module/Users/MyAccountPage.class.php:150
-#: Module/Users/Controller.class.php:23 Module/Users/Controller.class.php:102
-#: Module/Users/Admin/JSON.class.php:18
-#: Module/Users/Admin/AdminPage.class.php:33
-#: Module/Users/Admin/AdminPage.class.php:111 Utils/Template.class.php:564
-#: Utils/Template.class.php:565 Utils/Template.class.php:571
-msgid "Country"
-msgstr "Țara"
-
-#: Module/Users/MyAccountPage.class.php:167
-#: Module/Users/MyAccountPage.class.php:176
-#: Module/Users/Controller.class.php:58 Module/Users/Controller.class.php:68
-#: Module/Users/PasswordResetPage.class.php:95
-#: Module/Users/PasswordResetPage.class.php:105
-msgid "8 characters minimum"
-msgstr "minimum 8 caractere"
-
-#: Module/Users/MyAccountPage.class.php:168
-#: Module/Users/Controller.class.php:59 Module/Users/LoginPage.class.php:214
-#: Module/Users/Admin/AdminPage.class.php:125
-#: Module/Administrators/Admin/Admins.class.php:89 admin/index.php:184
-msgid "Password"
-msgstr "Parola"
-
-#: Module/Users/MyAccountPage.class.php:175
-#: Module/Users/MyAccountPage.class.php:177
-#: Module/Users/Controller.class.php:67 Module/Users/Controller.class.php:69
-#: Module/Users/Admin/AdminPage.class.php:132
-#: Module/Users/PasswordResetPage.class.php:104
-msgid "Confirm password"
-msgstr "Confirmă parola"
-
-#: Module/Users/MyAccountPage.class.php:189
-msgid "Edit"
-msgstr "Editează"
-
-#: Module/Users/MyAccountPage.class.php:192
-#: Module/Users/PasswordResetPage.class.php:115
-msgid "Change password"
-msgstr "Schimbă parola"
-
-#: Module/Users/MyAccountPage.class.php:193
-#: Module/Users/MyAccountPage.class.php:215
-msgid "Delete"
-msgstr "Șterge"
-
-#: Module/Users/MyAccountPage.class.php:206
-msgid "Confirm delete"
-msgstr "Confirmare ștergere"
-
-#: Module/Users/MyAccountPage.class.php:210
-msgid "You are about to delete your account."
-msgstr "Ești pe cale să-ți ștergi contul."
-
-#: Module/Users/MyAccountPage.class.php:211
-msgid "Do you want to proceed?"
-msgstr "Vrei să procedezi?"
-
-#: Module/Users/MyAccountPage.class.php:214
-#: Module/Products/Admin/AdminPage.class.php:70
-msgid "Cancel"
-msgstr "Renunță"
-
-#: Module/Users/Controller.class.php:31
-msgid "Enter your firstname"
-msgstr "Introduceți prenumele"
-
-#: Module/Users/Controller.class.php:32
-msgid "Enter your lastname"
-msgstr "Introduceti numele"
-
-#: Module/Users/Controller.class.php:33
-msgid "Select your country"
-msgstr "Selectează țara"
-
-#: Module/Users/Controller.class.php:42 Module/Users/Controller.class.php:47
-#: Module/Users/LoginPage.class.php:203
-#: Module/Users/PasswordResetPage.class.php:141
-msgid "Enter your email"
-msgstr "Introdu adresa de email"
-
-#: Module/Users/Controller.class.php:43
-#: Module/Users/PasswordResetPage.class.php:80
-msgid "Enter a password"
-msgstr "Introdu o parolă"
-
-#: Module/Users/Controller.class.php:110
-msgid "Subscribe to newsletter"
-msgstr "Abonează-te la newsletter"
-
-#: Module/Users/Controller.class.php:114
-msgid "You must accept our Terms and conditions"
-msgstr "Trebuie să fii de acord cu Termenii și condițiile"
-
-#: Module/Users/Controller.class.php:118
-#, php-format
-msgid "I have read and agree to the %s"
-msgstr "Am citit și sunt de acord cu %s"
-
-#: Module/Users/Controller.class.php:118
-msgid "Terms and Conditions"
-msgstr "Termeni și condiții"
-
-#: Module/Users/Controller.class.php:130
-msgid "Fields marked with"
-msgstr "Câmpurile marcate cu"
-
-#: Module/Users/Controller.class.php:130
-msgid "are required"
-msgstr "sunt necesare"
-
-#: Module/Users/Controller.class.php:219
-msgid "Welcome"
-msgstr "Bun venit"
-
-#: Module/Users/Controller.class.php:220
-msgid "Step"
-msgstr "Pas"
-
-#: Module/Users/Controller.class.php:220 Module/Users/Controller.class.php:221
-#: Module/Users/Controller.class.php:222
-msgid "Activate your account"
-msgstr "Activează contul"
-
-#: Module/Users/Controller.class.php:221
-msgid "by clicking this link"
-msgstr "apăsând acest link"
-
-#: Module/Users/LoginPage.class.php:42
-msgid "You did not confirmed your account"
-msgstr "Nu ți-ai confirmat contul"
-
-#: Module/Users/LoginPage.class.php:42
-msgid "Your account is blocked"
-msgstr "Contul tău este blocat"
-
-#: Module/Users/LoginPage.class.php:62 Controller/AdminController.class.php:28
+#: Controller/AdminController.class.php:27 Module/Users/LoginPage.class.php:52
 msgid "Incorrect password"
 msgstr "Parolă incorectă"
 
-#: Module/Users/LoginPage.class.php:67
-msgid "No user registered with these info"
-msgstr "Niciun utilizator înregistrat cu aceste date"
+#: Controller/AdminController.class.php:29
+msgid "Username blocked"
+msgstr "Nume utilizator blocat"
 
-#: Module/Users/LoginPage.class.php:71
-msgid "Invalid token"
-msgstr "Token invalid"
+#: Controller/AdminController.class.php:31 Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:64
+#: Module/Administrators/Admin/Admins.class.php:65 admin/index.php:101
+msgid "Username"
+msgstr "Nume utilizator"
 
-#: Module/Users/LoginPage.class.php:140
-msgid "You will be redirected to confirm your email in 1 second"
-msgstr "Vei fi redirecționat către confirmarea emailului într-o secundă"
+#: Controller/AdminController.class.php:31
+msgid "does not exist"
+msgstr "nu există"
 
-#: Module/Users/LoginPage.class.php:144
-msgid "Password not confirmed"
-msgstr "Parola nu este confirmată"
+#: Model/Model.class.php:601 Model/Model.class.php:678
+msgid "No where statement"
+msgstr "Niciun statement de where"
 
-#: Module/Users/LoginPage.class.php:153
-msgid "lastname"
-msgstr "nume"
+#: Module/Administrators/Admin/Cache.class.php:12
+#: Module/Administrators/Admin/Cache.class.php:13
+msgid "Cache"
+msgstr "Cache"
 
-#: Module/Users/LoginPage.class.php:156
-msgid "firstname"
-msgstr "prenume"
+#: Module/Administrators/Admin/Cache.class.php:20
+msgid "Modules reread"
+msgstr "Module recitite"
 
-#: Module/Users/LoginPage.class.php:159
-msgid "email address"
-msgstr "adresă email"
+#: Module/Administrators/Admin/Cache.class.php:22
+msgid "Reread modules"
+msgstr "Recitire module"
 
-#: Module/Users/LoginPage.class.php:162
-msgid "country"
-msgstr "țara"
+#: Module/Administrators/Admin/Admins.class.php:14
+#: Module/Administrators/Admin/Admins.class.php:15
+#: Module/Administrators/Admin/Admins.class.php:37
+msgid "Edit administrators"
+msgstr "Editare administratori"
 
-#: Module/Users/LoginPage.class.php:165
-msgid "password"
-msgstr "parola"
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:60
+#: Module/Administrators/Admin/Admins.class.php:61
+#: Module/Blog/Admin/PostComments.class.php:23
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Testimonials/Admin/AdminPage.class.php:35
+#: Module/Testimonials/Admin/AdminPage.class.php:36
+msgid "Name"
+msgstr "Nume"
 
-#: Module/Users/LoginPage.class.php:168
-msgid "password confirm"
-msgstr "confirmă parola"
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:72
+#: Module/Blog/Admin/PostComments.class.php:26 Module/Blog/Admin/Posts.class.php:26
+#: Module/Blog/Admin/Posts.class.php:66 Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:74 Module/News/Admin/AdminPage.class.php:25
+#: Module/News/Admin/AdminPage.class.php:63
+#: Module/Testimonials/Admin/AdminPage.class.php:62
+msgid "Status"
+msgstr "Status"
 
-#: Module/Users/LoginPage.class.php:171
-msgid "terms and conditions"
-msgstr "termeni și condiții"
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Blog/Admin/PostComments.class.php:26 Module/Blog/Admin/Posts.class.php:26
+#: Module/Users/Admin/AdminPage.class.php:21 Module/News/Admin/AdminPage.class.php:25
+#: Module/Testimonials/Admin/AdminPage.class.php:16 Module/Pages/Admin/Pages.class.php:31
+msgid "Any"
+msgstr "Oricare"
 
-#: Module/Users/LoginPage.class.php:185 Module/Pages/Controller.class.php:58
-#: admin/index.php:82 admin/index.php:190
-msgid "Login"
-msgstr "Autentificare"
-
-#: Module/Users/LoginPage.class.php:188 Module/Users/LoginPage.class.php:237
-msgid "Register"
-msgstr "Înregistrare"
-
-#: Module/Users/LoginPage.class.php:222
-msgid "Remember me"
-msgstr "Ține-mă minte"
-
-#: Module/Users/LoginPage.class.php:228
-msgid "Log in"
-msgstr "Autentificare"
-
-#: Module/Users/LoginPage.class.php:233
-msgid "Forgot Password?"
-msgstr "Ai uitat parola?"
-
-#: Module/Users/LoginPage.class.php:234
-msgid "Resend email confirmation"
-msgstr "Retrimite email confirmare"
-
-#: Module/Users/LoginPage.class.php:246 Module/Users/LoginPage.class.php:247
-msgid "Login | "
-msgstr "Autentificare | "
-
-#: Module/Users/Admin/JSON.class.php:14
-#: Module/Users/Admin/AdminPage.class.php:83
-msgid "Phone"
-msgstr "Telefon"
-
-#: Module/Users/Admin/JSON.class.php:15
-#: Module/Users/Admin/AdminPage.class.php:90
-msgid "Address"
-msgstr "Adresa"
-
-#: Module/Users/Admin/JSON.class.php:16
-#: Module/Users/Admin/AdminPage.class.php:97
-msgid "City"
-msgstr "Oraș"
-
-#: Module/Users/Admin/JSON.class.php:17
-#: Module/Users/Admin/AdminPage.class.php:104
-msgid "State"
-msgstr "Județ"
-
-#: Module/Users/Admin/JSON.class.php:19
-msgid "Status ID"
-msgstr "ID Status"
-
-#: Module/Users/Admin/JSON.class.php:21
-#: Module/Users/Admin/AdminPage.class.php:14
-#: Module/Users/Admin/AdminPage.class.php:22
-#: Module/Users/Admin/AdminPage.class.php:53
-msgid "Users"
-msgstr "Utilizatori"
-
-#: Module/Users/Admin/AdminPage.class.php:16
-msgid "Not confirmed"
-msgstr "Neconfirmat"
-
-#: Module/Users/Admin/AdminPage.class.php:16
-msgid "Confirmed"
-msgstr "Confirmat"
-
-#: Module/Users/Admin/AdminPage.class.php:16
-#: Module/Testimonials/Admin/AdminPage.class.php:88
-#: Module/Administrators/Admin/Admins.class.php:30
-#: Module/Administrators/Admin/Admins.class.php:95
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:73 Module/Blog/Admin/Posts.class.php:67
+#: Module/Users/Admin/AdminPage.class.php:21 Module/Users/Admin/AdminPage.class.php:75
+#: Module/News/Admin/AdminPage.class.php:64
+#: Module/Testimonials/Admin/AdminPage.class.php:63
 msgid "Blocked"
 msgstr "Blocat"
 
-#: Module/Users/Admin/AdminPage.class.php:24
-#: Module/Blog/Admin/AdminPage.class.php:20
-#: Module/Testimonials/Admin/AdminPage.class.php:18
-#: Module/News/Admin/AdminPage.class.php:30
-#: Module/ProductRanges/Admin/AdminPage.class.php:16
-#: Module/Administrators/Admin/Admins.class.php:39
-#: Module/Pages/Admin/Pages.class.php:32
-#: Module/Categories/Admin/AdminPage.class.php:16
-#: Module/Products/Admin/AdminPage.class.php:54
-msgid "Filters"
-msgstr "Filtre"
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Administrators/Admin/Admins.class.php:73 Module/Blog/Admin/Posts.class.php:67
+#: Module/Users/Admin/AdminPage.class.php:75 Module/News/Admin/AdminPage.class.php:64
+#: Module/Testimonials/Admin/AdminPage.class.php:63
+msgid "Active"
+msgstr "Activ"
 
-#: Module/Users/Admin/AdminPage.class.php:33
-#: Module/Users/Admin/AdminPage.class.php:118
-#: Module/Blog/Admin/AdminPage.class.php:29
-#: Module/Blog/Admin/AdminPage.class.php:84
-#: Module/Testimonials/Admin/AdminPage.class.php:89
-#: Module/News/Admin/AdminPage.class.php:39
-#: Module/News/Admin/AdminPage.class.php:97
-#: Module/Administrators/Admin/Admins.class.php:48
-#: Module/Administrators/Admin/Admins.class.php:96
-msgid "Status"
-msgstr "Stare"
+#: Module/Administrators/Admin/Admins.class.php:41
+#: Module/Blog/Admin/PostComments.class.php:27 Module/Blog/Admin/Posts.class.php:27
+#: Module/Media/Admin/Media.class.php:21 Module/Users/Admin/AdminPage.class.php:21
+#: Module/News/Admin/AdminPage.class.php:25
+#: Module/Testimonials/Admin/AdminPage.class.php:16 Module/Pages/Admin/Pages.class.php:31
+msgid "Actions"
+msgstr "Acțiuni"
 
-#: Module/Users/Admin/AdminPage.class.php:43
-msgid "Add user"
-msgstr "Adaugă utilizator"
+#: Module/Administrators/Admin/Admins.class.php:47 Module/Blog/Admin/Posts.class.php:34
+#: Module/Media/Admin/Media.class.php:27 Module/Users/Admin/AdminPage.class.php:27
+#: Module/News/Admin/AdminPage.class.php:31
+#: Module/Testimonials/Admin/AdminPage.class.php:22 Module/Pages/Admin/Pages.class.php:37
+msgid "Add"
+msgstr "Adăugare"
 
-#: Module/Users/Admin/AdminPage.class.php:44
-#: Module/ProductRanges/Admin/AdminPage.class.php:36
-#: Module/Categories/Admin/AdminPage.class.php:36
-msgid "Export to Excel"
-msgstr "Exportă la Excel"
+#: Module/Administrators/Admin/Admins.class.php:53
+#: Module/Administrators/Admin/Admins.class.php:78 Module/Blog/Admin/Posts.class.php:40
+#: Module/Blog/Admin/Posts.class.php:71 Module/Media/Admin/Media.class.php:33
+#: Module/Media/Admin/Media.class.php:48 Module/Users/Admin/AdminPage.class.php:35
+#: Module/Users/Admin/AdminPage.class.php:87 Module/News/Admin/AdminPage.class.php:37
+#: Module/News/Admin/AdminPage.class.php:68
+#: Module/Testimonials/Admin/AdminPage.class.php:28
+#: Module/Testimonials/Admin/AdminPage.class.php:67 Module/Pages/Admin/Pages.class.php:43
+#: Module/Pages/Admin/Pages.class.php:87
+msgid "Close"
+msgstr "Închide"
 
-#: Module/Users/Admin/AdminPage.class.php:45
-#: Module/ProductRanges/Admin/AdminPage.class.php:37
-#: Module/Categories/Admin/AdminPage.class.php:37
-msgid "Export to PDF"
-msgstr "Exportă la PDF"
+#: Module/Administrators/Admin/Admins.class.php:56
+msgid "Edit administrator"
+msgstr "Editează administrator"
 
-#: Module/Users/Admin/Act.class.php:32
-msgid "Wrong password confirm"
-msgstr "Parola confirmată greșit"
+#: Module/Administrators/Admin/Admins.class.php:68
+#: Module/Administrators/Admin/Admins.class.php:69 Module/Users/Controller.class.php:76
+#: Module/Users/Admin/AdminPage.class.php:78 Module/Users/Admin/AdminPage.class.php:79
+#: Module/Users/LoginPage.class.php:174 admin/index.php:105
+msgid "Password"
+msgstr "Parolă"
 
-#: Module/Users/PasswordResetPage.class.php:21
-#: Module/Users/PasswordResetPage.class.php:22
+#: Module/Administrators/Admin/Admins.class.php:79 Module/Blog/Admin/Posts.class.php:72
+#: Module/Media/Admin/Media.class.php:49 Module/Users/Admin/AdminPage.class.php:88
+#: Module/News/Admin/AdminPage.class.php:69
+#: Module/Testimonials/Admin/AdminPage.class.php:68 Module/Pages/Admin/Pages.class.php:88
+#: Module/Pages/Admin/Menu.class.php:46
+msgid "Save"
+msgstr "Salvează"
+
+#: Module/Blog/Admin/PostComments.class.php:10 Module/Blog/Admin/PostComments.class.php:11
+#: Module/Blog/Admin/PostComments.class.php:17
+#, fuzzy
+msgid "Edit post comments"
+msgstr "Editare posturi"
+
+#: Module/Blog/Admin/PostComments.class.php:22
+#, fuzzy
+msgid "Post"
+msgstr "Posturi blog"
+
+#: Module/Blog/Admin/PostComments.class.php:24 Module/Users/MyAccountPage.class.php:91
+#: Module/Users/PasswordResetPage.class.php:140 Module/Users/Controller.class.php:61
+#: Module/Users/Admin/JSON.class.php:13 Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:50 Module/Users/Admin/AdminPage.class.php:51
+#: Module/Users/LoginPage.class.php:166
+msgid "Email"
+msgstr "Email"
+
+#: Module/Blog/Admin/PostComments.class.php:25
+msgid "Comment"
+msgstr ""
+
+#: Module/Blog/Admin/PostComments.class.php:26
+#, fuzzy
+msgid "New"
+msgstr "Știri"
+
+#: Module/Blog/Admin/PostComments.class.php:26
+msgid "Aproved"
+msgstr ""
+
+#: Module/Blog/Admin/PostComments.class.php:26
+msgid "Rejected"
+msgstr ""
+
+#: Module/Blog/Admin/Posts.class.php:10 Module/Blog/Admin/Posts.class.php:11
+#: Module/Blog/Admin/Posts.class.php:17
+msgid "Edit posts"
+msgstr "Editare posturi"
+
+#: Module/Blog/Admin/Posts.class.php:23 Module/Blog/Admin/Posts.class.php:47
+#: Module/Blog/Admin/Posts.class.php:48 Module/News/Admin/AdminPage.class.php:25
+#: Module/News/Admin/AdminPage.class.php:48 Module/News/Admin/AdminPage.class.php:49
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:58
+#: Module/Pages/Admin/Pages.class.php:59
+msgid "Title"
+msgstr "Titlu"
+
+#: Module/Blog/Admin/Posts.class.php:24 Module/News/Admin/AdminPage.class.php:25
+msgid "Author"
+msgstr "Autor"
+
+#: Module/Blog/Admin/Posts.class.php:25
+msgid "Updated on"
+msgstr "Actualizat la"
+
+#: Module/Blog/Admin/Posts.class.php:26 Module/News/Admin/AdminPage.class.php:25
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+msgid "Hidden"
+msgstr "Ascuns"
+
+#: Module/Blog/Admin/Posts.class.php:26 Module/News/Admin/AdminPage.class.php:25
+msgid "Published"
+msgstr "Publicat"
+
+#: Module/Blog/Admin/Posts.class.php:43
+msgid "Edit post"
+msgstr "Editează post"
+
+#: Module/Blog/Admin/Posts.class.php:51 Module/Blog/Admin/Posts.class.php:52
+#: Module/News/Admin/AdminPage.class.php:52 Module/News/Admin/AdminPage.class.php:53
+#: Module/Testimonials/Admin/AdminPage.class.php:51
+#: Module/Testimonials/Admin/AdminPage.class.php:52 Module/Pages/Admin/Pages.class.php:82
+#: Module/Pages/Admin/Pages.class.php:83
+msgid "Content"
+msgstr "Conținut"
+
+#: Module/Blog/Admin/Posts.class.php:55 Module/Blog/Admin/Posts.class.php:56
+#: Module/Pages/Admin/Pages.class.php:62 Module/Pages/Admin/Pages.class.php:63
+msgid "Description"
+msgstr "Descriere"
+
+#: Module/Blog/Admin/Posts.class.php:60 Module/Blog/Admin/Posts.class.php:61
+#: Module/Media/Admin/Media.class.php:41 Module/Media/Admin/Media.class.php:42
+#: Module/News/Admin/AdminPage.class.php:57 Module/News/Admin/AdminPage.class.php:58
+#: Module/Testimonials/Admin/AdminPage.class.php:56
+#: Module/Testimonials/Admin/AdminPage.class.php:57
+msgid "Image"
+msgstr "Imagine"
+
+#: Module/Blog/Page.class.php:23 Module/Blog/Page.class.php:24
+#: Module/Blog/Page.class.php:25
+msgid "Blog"
+msgstr "Blog"
+
+#: Module/Blog/Page.class.php:91 Module/News/Page.class.php:76
+msgid "Newer"
+msgstr "Mai noi"
+
+#: Module/Blog/Page.class.php:93 Module/News/Page.class.php:77
+msgid "Older"
+msgstr "Mai vechi"
+
+#: Module/Media/Admin/Media.class.php:12 Module/Media/Admin/Media.class.php:13
+#: Module/Media/Admin/Media.class.php:17
+msgid "Media"
+msgstr "Media"
+
+#: Module/Media/Admin/Media.class.php:21
+msgid "Filename"
+msgstr "Fișier"
+
+#: Module/Media/Admin/Media.class.php:21
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: Module/Media/Admin/Act.class.php:89
+msgid "No uploaded file"
+msgstr "Niciun fișier încărcat"
+
+#: Module/Media/Admin/Act.class.php:121
+msgid "Error uploading"
+msgstr "Eroare la încărcare"
+
+#: Module/Media/Admin/Act.class.php:123 Module/Media/Admin/Act.class.php:125
+msgid "File is not an image"
+msgstr "Fișierul nu este o imagine"
+
+#: Module/Media/Admin/Act.class.php:127
+msgid "Max upload 5MB"
+msgstr "Max upload 5MB"
+
+#: Module/Users/MyAccountPage.class.php:22 Module/Users/MyAccountPage.class.php:23
+#: Module/Users/MyAccountPage.class.php:79
+msgid "My account"
+msgstr "Contul meu"
+
+#: Module/Users/MyAccountPage.class.php:66 Module/Users/PasswordResetPage.class.php:80
+#: Module/Users/Controller.class.php:36
+msgid "Confirm the password"
+msgstr "Confirmă parola"
+
+#: Module/Users/MyAccountPage.class.php:70 Module/Users/LoginPage.class.php:81
+msgid "There is another user registered with this email address"
+msgstr "Mai este înregistrat un utilizator cu acest email"
+
+#: Module/Users/MyAccountPage.class.php:72 Module/Users/LoginPage.class.php:114
+msgid "You did not filled the following inputs"
+msgstr "Nu ai completat următoarele câmpuri"
+
+#: Module/Users/MyAccountPage.class.php:87 Module/Users/Controller.class.php:43
+#: Module/Users/Admin/JSON.class.php:11 Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:42 Module/Users/Admin/AdminPage.class.php:43
+msgid "Firstname"
+msgstr "Prenume"
+
+#: Module/Users/MyAccountPage.class.php:89 Module/Users/Controller.class.php:52
+#: Module/Users/Admin/JSON.class.php:12 Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:46 Module/Users/Admin/AdminPage.class.php:47
+msgid "Lastname"
+msgstr "Nume"
+
+#: Module/Users/MyAccountPage.class.php:93 Module/Users/Controller.class.php:23
+#: Module/Users/Admin/JSON.class.php:18 Module/Users/Admin/AdminPage.class.php:21
+#: Module/Users/Admin/AdminPage.class.php:70 Utils/Template.class.php:438
+#: Utils/Template.class.php:439 Utils/Template.class.php:443
+msgid "Country"
+msgstr "Țara"
+
+#: Module/Users/MyAccountPage.class.php:108
+msgid "Edit"
+msgstr "Editează"
+
+#: Module/Users/PasswordResetPage.class.php:21 Module/Users/PasswordResetPage.class.php:22
 #: Module/Users/PasswordResetPage.class.php:49
-#: Module/Users/PasswordResetPage.class.php:134
+#: Module/Users/PasswordResetPage.class.php:131
 msgid "Password reset"
-msgstr "Resetare parola"
+msgstr "Resetare parolă"
 
 #: Module/Users/PasswordResetPage.class.php:27
 msgid "Enter a valid email address"
@@ -606,879 +337,525 @@ msgstr "Salut"
 
 #: Module/Users/PasswordResetPage.class.php:47
 msgid "To reset your password click the link below"
-msgstr "Pentru resetarea parolei apasă link-ul următor"
+msgstr "Pentru resetarea parolei fă click pe linkul următor"
 
 #: Module/Users/PasswordResetPage.class.php:50
 msgid "An email with password reset instructions have been sent to you."
-msgstr ""
-"Un email cu instrucțiuni pentru resetarea parolei a fost trimis către tine."
+msgstr "Un email cu instrucțiunile pentru resetarea parolei a fost trimis către tine."
 
 #: Module/Users/PasswordResetPage.class.php:52
 msgid "No user registered with this email address"
-msgstr "Niciun cont înregistrat cu această adresă de email"
+msgstr "Niciun utilizator înregistrat cu acest email"
 
-#: Module/Users/PasswordResetPage.class.php:75
+#: Module/Users/PasswordResetPage.class.php:74
 msgid "Your password has been updated"
-msgstr "Parola ta a fost schimbată"
+msgstr "Parola ta a fost actualizată"
 
-#: Module/Users/PasswordResetPage.class.php:77
+#: Module/Users/PasswordResetPage.class.php:76
 msgid "Code not found"
 msgstr "Codul nu a fost găsit"
 
-#: Module/Users/PasswordResetPage.class.php:86
-msgid "Change your password"
-msgstr "Schimbați-vă parola"
+#: Module/Users/PasswordResetPage.class.php:79 Module/Users/Controller.class.php:35
+msgid "Enter a password"
+msgstr "Introdu o parolă"
 
-#: Module/Users/PasswordResetPage.class.php:96
+#: Module/Users/PasswordResetPage.class.php:85
+msgid "Change your password"
+msgstr "Schimbă parola"
+
+#: Module/Users/PasswordResetPage.class.php:93 Module/Users/EmailConfirmPage.class.php:29
+#: Module/Users/Controller.class.php:41 Module/Users/Controller.class.php:50
+#: Module/Users/Controller.class.php:74
+#, php-format
+msgid "Enter at least %s characters"
+msgstr "Introdu cel puțin %s caractere"
+
+#: Module/Users/PasswordResetPage.class.php:94
+#: Module/Users/PasswordResetPage.class.php:103 Module/Users/Controller.class.php:75
+#: Module/Users/Controller.class.php:84
+msgid "8 characters minimum"
+msgstr "minimum 8 caractere"
+
+#: Module/Users/PasswordResetPage.class.php:95
 msgid "New password"
 msgstr "Parolă nouă"
 
-#: Module/Users/PasswordResetPage.class.php:106
+#: Module/Users/PasswordResetPage.class.php:102 Module/Users/Controller.class.php:83
+#: Module/Users/Controller.class.php:85 Module/Users/Admin/AdminPage.class.php:82
+#: Module/Users/Admin/AdminPage.class.php:83
+msgid "Confirm password"
+msgstr "Confirmă parola"
+
+#: Module/Users/PasswordResetPage.class.php:104
 msgid "Confirm new password"
-msgstr "Confirmă parola nouă"
+msgstr "Confirmă noua parolă"
 
-#: Module/Users/PasswordResetPage.class.php:152
+#: Module/Users/PasswordResetPage.class.php:112
+msgid "Change password"
+msgstr "Schimbă parola"
+
+#: Module/Users/PasswordResetPage.class.php:138 Module/Users/Controller.class.php:33
+#: Module/Users/Controller.class.php:59 Module/Users/LoginPage.class.php:164
+msgid "Enter your email"
+msgstr "Introdu emailul"
+
+#: Module/Users/PasswordResetPage.class.php:148
 msgid "Send code"
-msgstr "Trimite codul"
+msgstr "Trimite cod"
 
-#: Module/Blog/Admin/AdminPage.class.php:9
-#: Module/Testimonials/Admin/AdminPage.class.php:12
-#: Module/News/Admin/AdminPage.class.php:22
-msgid "Hidden"
-msgstr "Ascuns"
+#: Module/Users/EmailConfirmPage.class.php:20 Module/Users/EmailConfirmPage.class.php:21
+#: Module/Users/EmailConfirmPage.class.php:47
+msgid "Email confirm"
+msgstr "Confirmă email"
 
-#: Module/Blog/Admin/AdminPage.class.php:9
-#: Module/News/Admin/AdminPage.class.php:22
-msgid "Published"
-msgstr "Publicat"
+#: Module/Users/EmailConfirmPage.class.php:24
+msgid "Enter the confirmation code"
+msgstr "Introdu codul de confirmare"
 
-#: Module/Blog/Admin/AdminPage.class.php:11
-#: Module/Blog/Admin/AdminPage.class.php:12
-#: Module/Blog/Admin/AdminPage.class.php:18
-msgid "Edit posts"
-msgstr "Editează articole"
+#: Module/Users/EmailConfirmPage.class.php:30
+msgid "32 characters code"
+msgstr "cod de 32 de caractere"
 
-#: Module/Blog/Admin/AdminPage.class.php:29
-#: Module/Blog/Admin/AdminPage.class.php:56
-#: Module/News/Admin/AdminPage.class.php:39
-#: Module/News/Admin/AdminPage.class.php:73
-#: Module/Pages/Admin/Pages.class.php:41 Module/Pages/Admin/Pages.class.php:84
-#: Module/Products/Admin/AdminPage.class.php:55
-msgid "Title"
-msgstr "Titlu"
+#: Module/Users/EmailConfirmPage.class.php:31
+msgid "Confirmation code"
+msgstr "Cod confirmare"
 
-#: Module/Blog/Admin/AdminPage.class.php:29
-#: Module/News/Admin/AdminPage.class.php:39
-msgid "Author"
-msgstr "Autor"
+#: Module/Users/EmailConfirmPage.class.php:39
+msgid "Confirm"
+msgstr "Confirmă"
 
-#: Module/Blog/Admin/AdminPage.class.php:29
-msgid "Updated on"
-msgstr "Actualizat la"
+#: Module/Users/EmailConfirmPage.class.php:60
+msgid "Your email has been confirmed"
+msgstr "Emailul tău a fost confirmat"
 
-#: Module/Blog/Admin/AdminPage.class.php:39
-msgid "Add post"
-msgstr "Adaugă articol"
+#: Module/Users/EmailConfirmPage.class.php:61
+#, php-format
+msgid "You can login now %s"
+msgstr "Te poți autentifica acum %s"
 
-#: Module/Blog/Admin/AdminPage.class.php:47
-msgid "Edit post"
-msgstr "Editează articol"
+#: Module/Users/EmailConfirmPage.class.php:61
+msgid "here"
+msgstr "aici"
 
-#: Module/Blog/Admin/AdminPage.class.php:63
-#: Module/Testimonials/Admin/AdminPage.class.php:75
-#: Module/News/Admin/AdminPage.class.php:80
-#: Module/Pages/Admin/Pages.class.php:120
-#: Module/Products/Admin/AdminPage.class.php:65
-msgid "Content"
-msgstr "Conținut"
+#: Module/Users/EmailConfirmPage.class.php:63
+msgid "Your account is blocked!"
+msgstr "Contul tău este blocat!"
 
-#: Module/Blog/Admin/AdminPage.class.php:70
-#: Module/Pages/Admin/Pages.class.php:91
-#: Module/Products/Admin/JSON.class.php:17
-msgid "Description"
-msgstr "Descriere"
+#: Module/Users/EmailConfirmPage.class.php:67
+msgid "Code is invalid or already confirmed"
+msgstr "Codul este invalid sau a fost deja confirmat"
 
-#: Module/Blog/Page.class.php:27 Module/Blog/Page.class.php:28
-#: Module/Blog/Page.class.php:29
-msgid "Blog"
-msgstr "Blog"
+#: Module/Users/Controller.class.php:31
+msgid "Enter your firstname"
+msgstr "Introdu prenumele"
 
-#: Module/Blog/Page.class.php:143 Module/News/Page.class.php:93
-msgid "Newer"
-msgstr "Mai noi"
+#: Module/Users/Controller.class.php:32
+msgid "Enter your lastname"
+msgstr "Introdu numele"
 
-#: Module/Blog/Page.class.php:145 Module/News/Page.class.php:94
-msgid "Older"
-msgstr "Mai vechi"
+#: Module/Users/Controller.class.php:34
+msgid "Select your country"
+msgstr "Selectează țara"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:8
-#: Module/Testimonials/Admin/AdminPage.class.php:9
-#: Module/Testimonials/Admin/AdminPage.class.php:16
-#: Module/Testimonials/Admin/AdminPage.class.php:45
-#: Module/Testimonials/Page.class.php:11 Module/Testimonials/Page.class.php:12
-#: Module/Testimonials/Page.class.php:13
-msgid "Testimonials"
-msgstr "Păreri"
+#: Module/Users/Controller.class.php:90
+msgid "Fields marked with"
+msgstr "Câmpurile marcate cu"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:12
-#: Module/Pages/Admin/Pages.class.php:112
-msgid "Visible"
-msgstr "Vizibil"
+#: Module/Users/Controller.class.php:90
+msgid "are required"
+msgstr "sunt obligatorii"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:27
-#: Module/Testimonials/Admin/AdminPage.class.php:54
-#: Module/ProductRanges/Admin/AdminPage.class.php:25
-#: Module/Administrators/Admin/Admins.class.php:48
-#: Module/Administrators/Admin/Admins.class.php:75
-#: Module/Categories/Admin/AdminPage.class.php:25
-msgid "Name"
-msgstr "Nume"
+#: Module/Users/Controller.class.php:92
+msgid "You must accept our Terms and conditions"
+msgstr "Trebuie să fii de acord cu Termenii și condițiile noastre"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:27
-#: Module/Testimonials/Admin/AdminPage.class.php:61
-msgid "Company"
-msgstr "Companie"
+#: Module/Users/Controller.class.php:94
+#, php-format
+msgid "I have read and agree to the %s"
+msgstr "Am citit și sunt de acord cu %s"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:27
-#: Module/Testimonials/Admin/AdminPage.class.php:68
-msgid "Short text"
-msgstr "Text scurt"
+#: Module/Users/Controller.class.php:94
+msgid "Terms and Conditions"
+msgstr "Termeni și condiții"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:37
-msgid "Add testimonial"
-msgstr "Adaugă testimonial"
+#: Module/Users/Controller.class.php:193
+msgid "Welcome"
+msgstr "Salut"
 
-#: Module/Testimonials/Admin/AdminPage.class.php:88
-#: Module/Administrators/Admin/Admins.class.php:31
-#: Module/Administrators/Admin/Admins.class.php:95
-msgid "Active"
-msgstr "Activ"
+#: Module/Users/Controller.class.php:194
+msgid "Step"
+msgstr "Pas"
 
-#: Module/Testimonials/Page.class.php:31
-msgid "Read more"
-msgstr "Citește mai mult"
+#: Module/Users/Controller.class.php:194 Module/Users/Controller.class.php:195
+#: Module/Users/Controller.class.php:196
+msgid "Activate your account"
+msgstr "Activează-ți contul"
 
-#: Module/Testimonials/Page.class.php:42
-msgid "Testimonial"
-msgstr "Părere"
+#: Module/Users/Controller.class.php:195
+msgid "by clicking this link"
+msgstr "făcând click pe acest link"
 
-#: Module/News/Admin/AdminPage.class.php:12
-#: Module/News/Admin/AdminPage.class.php:13
-#: Module/News/Admin/AdminPage.class.php:28
-#: Module/News/Admin/AdminPage.class.php:57
+#: Module/Users/Admin/JSON.class.php:14 Module/Users/Admin/AdminPage.class.php:54
+#: Module/Users/Admin/AdminPage.class.php:55
+msgid "Phone"
+msgstr "Telefon"
+
+#: Module/Users/Admin/JSON.class.php:15 Module/Users/Admin/AdminPage.class.php:58
+#: Module/Users/Admin/AdminPage.class.php:59
+msgid "Address"
+msgstr "Adresa"
+
+#: Module/Users/Admin/JSON.class.php:16 Module/Users/Admin/AdminPage.class.php:62
+#: Module/Users/Admin/AdminPage.class.php:63
+msgid "City"
+msgstr "Oraș"
+
+#: Module/Users/Admin/JSON.class.php:17 Module/Users/Admin/AdminPage.class.php:66
+#: Module/Users/Admin/AdminPage.class.php:67
+msgid "State"
+msgstr "Județ"
+
+#: Module/Users/Admin/JSON.class.php:19
+msgid "Status ID"
+msgstr "ID Status"
+
+#: Module/Users/Admin/JSON.class.php:21 Module/Users/Admin/AdminPage.class.php:11
+#: Module/Users/Admin/AdminPage.class.php:12 Module/Users/Admin/AdminPage.class.php:17
+#: Module/Users/Admin/AdminPage.class.php:38 admin/index.php:50
+msgid "Users"
+msgstr "Utilizatori"
+
+#: Module/Users/Admin/AdminPage.class.php:21
+msgid "Not confirmed"
+msgstr "Neconfirmați"
+
+#: Module/Users/Admin/AdminPage.class.php:21
+msgid "Confirmed"
+msgstr "Confirmați"
+
+#: Module/Users/LoginPage.class.php:36
+msgid "You did not confirmed your account"
+msgstr "Nu ți-ai confirmat contul"
+
+#: Module/Users/LoginPage.class.php:36
+msgid "Your account is blocked"
+msgstr "Contul tău este blocat"
+
+#: Module/Users/LoginPage.class.php:58
+msgid "No user registered with these info"
+msgstr "Niciun utilizator înregistrat cu aceste informații"
+
+#: Module/Users/LoginPage.class.php:63
+msgid "Invalid token"
+msgstr "Token invalid"
+
+#: Module/Users/LoginPage.class.php:105
+msgid "You will be redirected to confirm your email in 1 second"
+msgstr "Vei fi redirecționat către pagina de confirmare într-o secundă"
+
+#: Module/Users/LoginPage.class.php:108
+msgid "Password not confirmed"
+msgstr "Parola nu este confirmată"
+
+#: Module/Users/LoginPage.class.php:118
+msgid "lastname"
+msgstr "nume"
+
+#: Module/Users/LoginPage.class.php:121
+msgid "firstname"
+msgstr "prenume"
+
+#: Module/Users/LoginPage.class.php:124
+msgid "email address"
+msgstr "adresă email"
+
+#: Module/Users/LoginPage.class.php:127
+msgid "country"
+msgstr "țara"
+
+#: Module/Users/LoginPage.class.php:130
+msgid "password"
+msgstr "parola"
+
+#: Module/Users/LoginPage.class.php:133
+msgid "password confirm"
+msgstr "confirmă parola"
+
+#: Module/Users/LoginPage.class.php:136
+msgid "terms and conditions"
+msgstr "termeni și condiții"
+
+#: Module/Users/LoginPage.class.php:149 admin/index.php:76 admin/index.php:111
+msgid "Login"
+msgstr "Autentificare"
+
+#: Module/Users/LoginPage.class.php:152 Module/Users/LoginPage.class.php:200
+msgid "Register"
+msgstr "Înregistrare"
+
+#: Module/Users/LoginPage.class.php:180
+msgid "Remember me"
+msgstr "Ține-mă minte"
+
+#: Module/Users/LoginPage.class.php:185
+msgid "Log in"
+msgstr "Autentificare"
+
+#: Module/Users/LoginPage.class.php:193
+msgid "Forgot Password?"
+msgstr "Am uitat parola"
+
+#: Module/Users/LoginPage.class.php:194
+msgid "Resend email confirmation"
+msgstr "Retrimite email de confirmare"
+
+#: Module/Users/LoginPage.class.php:207 Module/Users/LoginPage.class.php:208
+msgid "Login | "
+msgstr "Autentificare | "
+
+#: Module/Contact/Page.class.php:10
+msgid "Cum ne poti contacta - IFN Imprumut SA"
+msgstr "Cum ne poti contacta - IFN Imprumut SA"
+
+#: Module/Contact/Page.class.php:11
+msgid ""
+"Suntem aproape de tine pentru orice intrebare sau cerere, aici poti gasi programul de "
+"lucru, adresa de mail si telefoanele prin care ne poti contacta"
+msgstr ""
+"Suntem aproape de tine pentru orice intrebare sau cerere, aici poti gasi programul de "
+"lucru, adresa de mail si telefoanele prin care ne poti contacta"
+
+#: Module/Contact/Page.class.php:12
+msgid "Contact"
+msgstr "Contact"
+
+#: Module/News/Admin/AdminPage.class.php:8 Module/News/Admin/AdminPage.class.php:9
+#: Module/News/Admin/AdminPage.class.php:21 Module/News/Admin/AdminPage.class.php:40
 msgid "Edit news"
 msgstr "Editează știri"
 
-#: Module/News/Admin/AdminPage.class.php:39
-#: Module/News/Admin/AdminPage.class.php:66
-#: Module/Pages/Admin/Menu.class.php:31 Module/Pages/Admin/Pages.class.php:41
-#: Module/Pages/Admin/Pages.class.php:70
+#: Module/News/Admin/AdminPage.class.php:25 Module/News/Admin/AdminPage.class.php:44
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:50
+#: Module/Pages/Admin/Menu.class.php:33
 msgid "Language"
-msgstr "Limbă"
+msgstr "Limba"
 
-#: Module/News/Admin/AdminPage.class.php:39
+#: Module/News/Admin/AdminPage.class.php:25
 msgid "Date"
-msgstr "Dată"
+msgstr "Data"
 
-#: Module/News/Admin/AdminPage.class.php:49
-msgid "Add news"
-msgstr "Adaugă știri"
+#: Module/News/Page.class.php:11 Module/News/Page.class.php:12
+#: Module/News/Page.class.php:13
+msgid "news"
+msgstr "știri"
 
-#: Module/News/Page.class.php:16 Module/News/Page.class.php:17
-#: Module/News/Page.class.php:18
+#: Module/News/Page.class.php:29
 msgid "News"
 msgstr "Știri"
 
-#: Module/ProductRanges/Admin/JSON.class.php:14
-msgid "Products range name"
-msgstr "Nume gamă"
+#: Module/News/Page.class.php:70
+msgid "read more"
+msgstr "citește mai mult"
 
-#: Module/ProductRanges/Admin/JSON.class.php:15
-#: Module/Categories/Admin/JSON.class.php:17
-#: Module/Categories/Admin/AdminPage.class.php:25
-#: Module/Products/Admin/JSON.class.php:20
-msgid "Date created"
-msgstr "Data creării"
+#: Module/Testimonials/Admin/AdminPage.class.php:7
+#: Module/Testimonials/Admin/AdminPage.class.php:8
+#: Module/Testimonials/Admin/AdminPage.class.php:12
+#: Module/Testimonials/Admin/AdminPage.class.php:31 Module/Testimonials/Page.class.php:10
+msgid "Testimonials"
+msgstr "Testimoniale"
 
-#: Module/ProductRanges/Admin/JSON.class.php:16
-#: Module/Categories/Admin/JSON.class.php:18
-#: Module/Categories/Admin/AdminPage.class.php:25
-#: Module/Products/Admin/JSON.class.php:21
-msgid "Date updated"
-msgstr "Data actualizării"
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Testimonials/Admin/AdminPage.class.php:43
+#: Module/Testimonials/Admin/AdminPage.class.php:44
+msgid "Company"
+msgstr "Companie"
 
-#: Module/ProductRanges/Admin/JSON.class.php:19
-msgid "Products ranges"
-msgstr "Game produse"
+#: Module/Testimonials/Admin/AdminPage.class.php:16
+#: Module/Testimonials/Admin/AdminPage.class.php:47
+#: Module/Testimonials/Admin/AdminPage.class.php:48
+msgid "Short text"
+msgstr "Text scurt"
 
-#: Module/ProductRanges/Admin/AdminPage.class.php:7
-#: Module/ProductRanges/Admin/AdminPage.class.php:8
-#: Module/ProductRanges/Admin/AdminPage.class.php:14
-msgid "Edit ranges"
-msgstr "Editează game de produs"
+#: Module/Testimonials/Admin/AdminPage.class.php:16 Module/Pages/Admin/Pages.class.php:78
+msgid "Visible"
+msgstr "Vizibil"
 
-#: Module/ProductRanges/Admin/AdminPage.class.php:35
-msgid "Add products range"
-msgstr "Adaugă gamă de produse"
+#: Module/Testimonials/Admin/AdminPage.class.php:39
+#: Module/Testimonials/Admin/AdminPage.class.php:40
+msgid "Function"
+msgstr "Funcție"
 
-#: Module/ProductRanges/Admin/AdminPage.class.php:54
-msgid "Range name"
-msgstr "Nume gamă"
+#: Module/Testimonials/Page.class.php:11 Module/Testimonials/Page.class.php:12
+msgid "What clients say about Credit.ro"
+msgstr "Ce spun clienții despre Credit.ro"
 
-#: Module/Administrators/Admin/Cache.class.php:14
-#: Module/Administrators/Admin/Cache.class.php:15
-msgid "Cache"
-msgstr "Cache"
+#: Module/Testimonials/Page.class.php:34
+msgid "Read more"
+msgstr "Citește mai mult"
 
-#: Module/Administrators/Admin/Cache.class.php:23
-msgid "Modules reread"
-msgstr "Recitire module"
+#: Module/Testimonials/Page.class.php:45
+msgid "Testimonial"
+msgstr "Testimonial"
 
-#: Module/Administrators/Admin/Cache.class.php:35
-msgid "Remove JS and CSS from cache dir"
-msgstr "Șterge fișierele JS și CSS din directorul de cache"
+#: Module/JSON/Admin.class.php:16
+msgid "You do not have permissions for this"
+msgstr "Nu ai permisiuni pentru această acțiune"
 
-#: Module/Administrators/Admin/Cache.class.php:45
-msgid "Clear all cache data"
-msgstr "Șterge cache-ul"
+#: Module/JSON/Admin.class.php:27
+msgid "This example should only be run from a Web Browser"
+msgstr "Acest exemplu ar trebui rulat într-un browser Web"
 
-#: Module/Administrators/Admin/Cache.class.php:48
-msgid "Reread modules"
-msgstr "Recitire module"
+#: Module/JSON/Admin.class.php:52
+msgid "Error processing"
+msgstr "Eroare la procesare"
 
-#: Module/Administrators/Admin/Admins.class.php:14
-#: Module/Administrators/Admin/Admins.class.php:15
-#: Module/Administrators/Admin/Admins.class.php:37
-msgid "Edit administrators"
-msgstr "Editează administratori"
+#: Module/JSON/Page.class.php:14
+msgid "Confirmation code was sent to your email address"
+msgstr "Codul de confirmare a fost trimis către adresa ta de email"
 
-#: Module/Administrators/Admin/Admins.class.php:48
-#: Module/Administrators/Admin/Admins.class.php:82
-#: Controller/AdminController.class.php:32 admin/index.php:177
-msgid "Username"
-msgstr "Nume utilizator"
+#: Module/JSON/Page.class.php:15
+msgid "Your account is already confirmed"
+msgstr "Contul tău este deja confirmat"
 
-#: Module/Administrators/Admin/Admins.class.php:58
-msgid "Add admin"
-msgstr "Adaugă administrator"
+#: Module/JSON/Page.class.php:17
+msgid "No account registered with this email address"
+msgstr "Niciun cont înregistrat cu această adresă de email"
 
-#: Module/Administrators/Admin/Admins.class.php:66
-msgid "Edit administrator"
-msgstr "Editează administrator"
-
-#: Module/Pages/Controller.class.php:56
-msgid "Guest user"
-msgstr "Vizitator"
-
-#: Module/Pages/Controller.class.php:130 Module/Pages/Controller.class.php:136
-#: Module/Pages/Controller.class.php:137
+#: Module/Pages/Controller.class.php:103 Module/Pages/Controller.class.php:109
+#: Module/Pages/Controller.class.php:110
 msgid "Page not found"
 msgstr "Pagina nu a fost găsită"
 
-#: Module/Pages/Controller.class.php:130
+#: Module/Pages/Controller.class.php:103
 msgid "Error 404"
 msgstr "Eroare 404"
 
-#: Module/Pages/Controller.class.php:132
+#: Module/Pages/Controller.class.php:105
 msgid ""
-"The page you requested could not be found, either contact your webmaster or "
-"try again. Use your browsers <strong>Back</strong> button to navigate to the "
-"page you have previously come from."
+"The page you requested could not be found, either contact your webmaster or try again. "
+"Use your browsers <strong>Back</strong> button to navigate to the page you have "
+"previously come from."
 msgstr ""
-"Pagina accesată nu a fost găsită, poți contacta webmasterul sau să încerci "
-"din nou. Folosește butonul <strong>Înapoi</strong> al browserului pentru a "
-"naviga la pagina de unde ai venit."
+"Pagina pe care o cauți nu a fost găsită, contactează webmasterul sau încearcă din nou. "
+"Folosește butonul <strong>Înapoi</strong> al browserului tău pentru a naviga către "
+"pagina anterioară."
 
-#: Module/Pages/Controller.class.php:133
+#: Module/Pages/Controller.class.php:106
 msgid "Or you could just press this neat little button"
-msgstr "Sau poți apăsa acest mic buton"
+msgstr "Sau poți apăsa butonul ăsta mic"
 
-#: Module/Pages/Controller.class.php:134
+#: Module/Pages/Controller.class.php:107
 msgid "Take Me Home"
 msgstr "Du-mă acasă"
 
-#: Module/Pages/Controller.class.php:173
-msgid "App"
-msgstr "Aplicație"
-
-#: Module/Pages/Controller.class.php:174
-msgid "Dashboard"
-msgstr "Panou de bord"
-
-#: Module/Pages/Admin/Menu.class.php:15 Module/Pages/Admin/Menu.class.php:16
-msgid "Edit menu"
-msgstr "Editează meniu"
-
-#: Module/Pages/Admin/Pages.class.php:15 Module/Pages/Admin/Pages.class.php:16
-#: Module/Pages/Admin/Pages.class.php:30 Module/Pages/Admin/Pages.class.php:59
+#: Module/Pages/Admin/Pages.class.php:14 Module/Pages/Admin/Pages.class.php:15
+#: Module/Pages/Admin/Pages.class.php:27 Module/Pages/Admin/Pages.class.php:46
 msgid "Edit pages"
 msgstr "Editează pagini"
 
-#: Module/Pages/Admin/Pages.class.php:41 Module/Pages/Admin/Pages.class.php:77
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:54
+#: Module/Pages/Admin/Pages.class.php:55
 msgid "URL"
 msgstr "URL"
 
-#: Module/Pages/Admin/Pages.class.php:41 Module/Pages/Admin/Pages.class.php:98
+#: Module/Pages/Admin/Pages.class.php:31 Module/Pages/Admin/Pages.class.php:70
+#: Module/Pages/Admin/Pages.class.php:71
 msgid "Menu text"
 msgstr "Text meniu"
 
-#: Module/Pages/Admin/Pages.class.php:51
-msgid "Add page"
-msgstr "Adaugă pagină"
+#: Module/Pages/Admin/Pages.class.php:66 Module/Pages/Admin/Pages.class.php:67
+msgid "H1"
+msgstr "H1"
 
-#: Module/Pages/Admin/Pages.class.php:105
+#: Module/Pages/Admin/Pages.class.php:74 Module/Pages/Admin/Pages.class.php:75
 msgid "Submenu text"
 msgstr "Text submeniu"
 
-#: Module/Categories/Admin/JSON.class.php:14
-#: Module/Categories/Admin/AdminPage.class.php:25
-#: Module/Categories/Admin/AdminPage.class.php:54
-msgid "Products range"
-msgstr "Gamă de produse"
+#: Module/Pages/Admin/Menu.class.php:14 Module/Pages/Admin/Menu.class.php:15
+msgid "Edit menu"
+msgstr "Editează meniu"
 
-#: Module/Categories/Admin/JSON.class.php:15
-#: Module/Categories/Admin/AdminPage.class.php:25
-#: Module/Categories/Admin/AdminPage.class.php:61
-msgid "Parent category"
-msgstr "Categoria părinte"
-
-#: Module/Categories/Admin/JSON.class.php:16
-#: Module/Categories/Admin/AdminPage.class.php:68
-msgid "Category name"
-msgstr "Nume categorie"
-
-#: Module/Categories/Admin/JSON.class.php:21
-msgid "Categories"
-msgstr "Categorii"
-
-#: Module/Categories/Admin/AdminPage.class.php:7
-#: Module/Categories/Admin/AdminPage.class.php:8
-#: Module/Categories/Admin/AdminPage.class.php:14
-msgid "Edit categories"
-msgstr "Editează categorii"
-
-#: Module/Categories/Admin/AdminPage.class.php:35
-msgid "Add category"
-msgstr "Adaugă categorie"
-
-#: Module/Products/Admin/JSON.class.php:15
-msgid "Product name"
-msgstr "Nume produs"
-
-#: Module/Products/Admin/JSON.class.php:16
-msgid "SKU"
-msgstr "SKU"
-
-#: Module/Products/Admin/JSON.class.php:18
-msgid "Price"
-msgstr "Preț"
-
-#: Module/Products/Admin/JSON.class.php:19
-msgid "Stock"
-msgstr "Stoc"
-
-#: Module/Products/Admin/JSON.class.php:24
-msgid "Products"
-msgstr "Produse"
-
-#: Module/Products/Admin/AdminPage.class.php:12
-#: Module/Products/Admin/AdminPage.class.php:13
-#: Module/Products/Admin/AdminPage.class.php:53
-msgid "Edit products"
-msgstr "Editează produse"
-
-#: Module/Products/Admin/AdminPage.class.php:57
-msgid "Import EPUB"
-msgstr "Importă EPUB"
-
-#: Module/Products/Admin/AdminPage.class.php:58
-msgid "File"
-msgstr "Fișier"
-
-#: Module/Products/Admin/AdminPage.class.php:59
-msgid "Settings"
-msgstr "Setări"
-
-#: Module/Products/Admin/AdminPage.class.php:60
-msgid "Template"
-msgstr "Șablon"
-
-#: Module/Products/Admin/AdminPage.class.php:63
-msgid "Grid system"
-msgstr "Sistem gridual"
-
-#: Module/Products/Admin/AdminPage.class.php:64
-msgid "Boxes"
-msgstr "Cutii"
-
-#: Module/Products/Admin/AdminPage.class.php:66
-msgid "Save changes"
-msgstr "Salvează schimbări"
-
-#: Module/Products/Admin/AdminPage.class.php:68
-msgid "Do you want to save your changes?"
-msgstr "Vrei să salvezi schimbările?"
-
-#: Module/Products/Admin/AdminPage.class.php:69
-msgid "Don't Save"
-msgstr "Nu salva"
-
-#: Module/Products/Admin/AdminPage.class.php:71
-msgid "Container width (mm)"
-msgstr "Lățime container (mm)"
-
-#: Module/Products/Admin/AdminPage.class.php:72
-msgid "Set background"
-msgstr "Setează fundal"
-
-#: Controller/AdminAct.class.php:44
-msgid "Error creating the entity"
-msgstr "Eroare la crearea entității"
-
-#: Controller/AdminAct.class.php:52
-msgid "Error updating the entity"
-msgstr "Eroare la actualizarea entității"
-
-#: Controller/AdminAct.class.php:62
-msgid "Error deleting the entity"
-msgstr "Eroare la ștergerea entității"
-
-#: Controller/AdminController.class.php:30
-msgid "Username blocked"
-msgstr "Nume utilizator blocat"
-
-#: Controller/AdminController.class.php:32
-msgid "does not exist"
-msgstr "nu există"
-
-#: Controller/AdminController.class.php:35
-msgid "Webserver error"
-msgstr "Eroare server web"
-
-#: admin/index.php:22
-msgid "Admin login"
-msgstr "Autentificare administrator"
-
-#: admin/index.php:66 admin/index.php:67 admin/Template.class.php:130
-msgid "Statistics"
-msgstr "Statisitici"
-
-#: admin/Template.class.php:67 Utils/Template.class.php:223
-msgid " seconds"
-msgstr " secunde"
-
-#: admin/Template.class.php:84
-msgid "Loading time"
-msgstr "Timp încărcare"
-
-#: Model/Model.class.php:673 Model/Model.class.php:753
-msgid "No where statement"
-msgstr "Niciun statement where"
-
-#: Utils/Template.class.php:649
-msgid "Wizard"
-msgstr "Wizard"
-
-#: Utils/functions.php:559
+#: Utils/functions.php:351
 msgid "This site is currently down for maintenance and should be back soon."
-msgstr ""
-"Site-ul este oprit pentru mentenanță și va fi disponibil din nou curând."
-
-#~ msgid "Add"
-#~ msgstr "Adaugă"
-
-#~ msgid "Cannot find H5P content with slug: %s."
-#~ msgstr "Nu găsesc niciun conținut interactiv cu slug: %s."
-
-#~ msgid "Cannot find H5P content with id: %d."
-#~ msgstr "Nu găsesc niciun conținut interactiv cu id: %d."
-
-#~ msgid "Missing H5P identifier."
-#~ msgstr "Lipsește identificatorul interactivului."
-
-#~ msgid "Insert"
-#~ msgstr "Inserează"
-
-#~ msgid "%s ago"
-#~ msgstr "acum %s"
-
-#~ msgid "%s min"
-#~ msgid_plural "%s mins"
-#~ msgstr[0] "%s min"
-#~ msgstr[1] "%s minute"
-#~ msgstr[2] "%s minute"
-
-#~ msgid "%s hour"
-#~ msgid_plural "%s hours"
-#~ msgstr[0] "%s oră"
-#~ msgstr[1] "%s ore"
-#~ msgstr[2] "%s ore"
-
-#~ msgid "%s day"
-#~ msgid_plural "%s days"
-#~ msgstr[0] "%s zi"
-#~ msgstr[1] "%s zile"
-#~ msgstr[2] "%s zile"
-
-#~ msgid "%s week"
-#~ msgid_plural "%s weeks"
-#~ msgstr[0] "%s săptămână"
-#~ msgstr[1] "%s săptămâni"
-#~ msgstr[2] "%s săptămâni"
-
-#~ msgid "%s month"
-#~ msgid_plural "%s months"
-#~ msgstr[0] "%s lună"
-#~ msgstr[1] "%s luni"
-#~ msgstr[2] "%s luni"
-
-#~ msgid "%s year"
-#~ msgid_plural "%s years"
-#~ msgstr[0] "%s an"
-#~ msgstr[1] "%s ani"
-#~ msgstr[2] "%s ani"
-
-#~ msgid "Upload failed"
-#~ msgstr "Încărcare eșuată"
-
-#~ msgid "Invalid library."
-#~ msgstr "Librărie invalidă."
-
-#~ msgid "No such library."
-#~ msgstr "Nicio astfel de librărie."
-
-#~ msgid "Invalid parameters."
-#~ msgstr "Parametrii invalizi."
-
-#~ msgid "File is not a H5P file"
-#~ msgstr "Acesta nu este un fișier H5P"
-
-#~ msgid "Max upload 5MB"
-#~ msgstr "Încărcare maximă de 5MB"
-
-#~ msgid "Waiting for JavaScript."
-#~ msgstr "Se așteaptă JavaScriptul."
-
-#~ msgid ""
-#~ "Making sure the content type cache is up to date will ensure that you can "
-#~ "view, download and use the latest libraries. This is different from "
-#~ "updating the libraries themselves."
-#~ msgstr ""
-#~ "Asigurându-ne că cache-ul pentru tipul de conținut este actualizat ne "
-#~ "asigură că vei putea vizualiza, descărca și folosi ultimele librării. "
-#~ "Aceasta este diferită de actualizarea librăriilor în sine."
-
-#~ msgid "Upload Libraries"
-#~ msgstr "Încarcă librării"
-
-#~ msgid ""
-#~ "Here you can upload new libraries or upload updates to existing "
-#~ "libraries. Files uploaded here must be in the .h5p file format."
-#~ msgstr ""
-#~ "Aici poți încărca noi librării sau actualizări pentru librăriile "
-#~ "existente. Fișierele încărcate aici trebuie să fie în formatul de fișier ."
-#~ "h5p."
-
-#~ msgid "Only update existing libraries"
-#~ msgstr "Actualizează doar librăriile existente"
-
-#~ msgid "Disable file extension check"
-#~ msgstr "Dezactivează verificarea extensiei de fișier"
+msgstr "Site-ul este oprit momentan pentru mentenanță și va fi disponibil în curând."
 
-#~ msgid ""
-#~ "Warning! This may have security implications as it allows for uploading "
-#~ "php files. That in turn could make it possible for attackers to execute "
-#~ "malicious code on your site. Please make sure you know exactly what "
-#~ "you're uploading."
-#~ msgstr ""
-#~ "Atenție! Ar putea avea implicații de siguranță pentru că permite "
-#~ "încărcarea fișierelor php. Asta înseamnă că oferă posibilitatea "
-#~ "atacatorilor să execute cod rău intenționat pe site. Te rog să te asiguri "
-#~ "că știi exact ce încarci."
+#: Utils/Template.class.php:427
+msgid "read full text"
+msgstr "citește tot textul"
 
-#~ msgid "Upload"
-#~ msgstr "Încărcare"
+#: admin/index.php:17
+msgid "Admin login"
+msgstr "Login administrator"
 
-#~ msgid "Installed Libraries"
-#~ msgstr "Librării instalate"
+#: admin/index.php:52
+msgid "total users"
+msgstr "total utilizatori"
 
-#~ msgid "Waiting for javascript..."
-#~ msgstr "Se așteaptă JavaScriptul."
+#: admin/index.php:55
+msgid "confirmed users"
+msgstr "utilizatori confirmați"
 
-#~ msgid ""
-#~ "It looks like there are no content types installed. You can get the ones "
-#~ "you want by using the small 'Download' button in the lower left corner on "
-#~ "any example from the <a href=\"%s\" target=\"_blank\">Examples and "
-#~ "Downloads</a> page and then you upload the file here."
-#~ msgstr ""
-#~ "Se pare că nu sunt tipuri de conținut instalate. Le poți avea apasând "
-#~ "butonul 'Descarcă' din colțul stânga jos pe oricare exemplu de la pagina "
-#~ "<a href=\"%s\" target=\"_blank\">Exemple și descărcări</a> și apoi să le "
-#~ "încarci aici."
+#: admin/index.php:59 admin/index.php:60 admin/Template.class.php:98
+msgid "Statistics"
+msgstr "Statistici"
 
-#~ msgid ""
-#~ "If you need any help you can always file a <a href=\"%s\" target=\"_blank"
-#~ "\">Support Request</a>, check out our <a href=\"%s\" target=\"_blank"
-#~ "\">Forum</a> or join the conversation in the <a href=\"%s\" target="
-#~ "\"_blank\">H5P Community Chat</a>."
-#~ msgstr ""
-#~ "Dacă ai nevoie de ajutor poți <a href=\"%s\" target=\"_blank\">cere "
-#~ "asistență</a>, verifici <a href=\"%s\" target=\"_blank\">Forumul nostru </"
-#~ "a> sau să te alături conversației în <a href=\"%s\" target=\"_blank"
-#~ "\">Chat comunitate H5P</a>."
+#: admin/Template.class.php:58
+msgid "Logout"
+msgstr "Ieșire"
 
-#~ msgid "Create"
-#~ msgstr "Creare"
+#: Module\Users\EmailConfirmPage.class.php:112 Module\Users\EmailConfirmPage.class.php:119
+msgid "Account Confirmation"
+msgstr "Confirmare Cont"
 
-#~ msgid "Toggle panel"
-#~ msgstr "Comută panou"
+#: Module\Users\EmailConfirmPage.class.php:125
+msgid "Send SMS code"
+msgstr "Trimite cod SMS"
 
-#~ msgid "Display Options"
-#~ msgstr "Opțiuni afișare"
+#: Module\Users\EmailConfirmPage.class.php:68
+msgid "Your email and phone has been confirmed"
+msgstr "Email și telefon confirmat"
 
-#~ msgid "Display toolbar below content"
-#~ msgstr "Afișează bara de instrumente sub conținut"
+#: Utils\Template.class.php:244
+msgid "Dashboard"
+msgstr "Contul meu"
 
-#~ msgid "Display Download button"
-#~ msgstr "Afișează butonul de descărcare"
+#: Module\Users\EmailConfirmPage.class.php:55
+msgid "Wrong SMS code, try again!"
+msgstr "Cod SMS greșit, încercați din nou!"
 
-#~ msgid "Display Embed button"
-#~ msgstr "Afișează butonul de încorporare"
+#: Module\Users\EmailConfirmPage.class.php:45
+msgid "Your code number is"
+msgstr "Codul dumneavoastră este"
 
-#~ msgid "Display Copyright button"
-#~ msgstr "Afișează buton Copyright"
+#: Module\Users\EmailConfirmPage.class.php:127
+msgid "You are about to receive SMS code number to this phone number:"
+msgstr "Veți primi un SMS la acest număr de telefon:"
 
-#~ msgid "Tags"
-#~ msgstr "Etichete"
+#: Module\Users\EmailConfirmPage.class.php:135
+msgid "SMS code"
+msgstr "Cod SMS"
 
-#~ msgid "Separate tags with commas"
-#~ msgstr "Separă etichetele prin virgule"
+#: Module\Users\EmailConfirmPage.class.php:78
+msgid "Password length minim 8 characters!"
+msgstr "Parola necesită minim 8 caractere!"
 
-#~ msgid "No tags"
-#~ msgstr "Fără etichete"
+#: Module\Users\EmailConfirmPage.class.php:75
+msgid "Passwords not match!"
+msgstr "Parolele nu corespund!"
 
-#~ msgid "H5P"
-#~ msgstr "H5P"
+#: Module\Users\EmailConfirmPage.class.php:140
+msgid "Terms and conditions"
+msgstr "Termeni si conditii"
 
-#~ msgid "Cannot find library with id"
-#~ msgstr "Nu găsesc librăria cu idul"
+#: Module\Users\EmailConfirmPage.class.php:141
+msgid "Receive newsletters"
+msgstr "Accept sa primesc notificari"
 
-#~ msgid "N/A"
-#~ msgstr "Indisponibil"
+#~ msgid "Administrators"
+#~ msgstr "Administratori"
 
-#~ msgid "View library details"
-#~ msgstr "Vezi detalii librărie"
+#~ msgid "Pages"
+#~ msgstr "Pagini"
 
-#~ msgid "Delete library"
-#~ msgstr "Șterge librăria"
-
-#~ msgid "Upgrade library content"
-#~ msgstr "Actualizează conținut librărie"
-
-#~ msgid "Restricted"
-#~ msgstr "Restricționat"
-
-#~ msgid "Contents"
-#~ msgstr "Conținut"
-
-#~ msgid "Contents using it"
-#~ msgstr "Conținuturi care îl folosesc"
-
-#~ msgid "Libraries using it"
-#~ msgstr "Librării care îl folosesc"
-
-#~ msgid ""
-#~ "This Library is used by content or other libraries and can therefore not "
-#~ "be deleted."
-#~ msgstr ""
-#~ "Librăria este folosită de conținut sau alte librării și nu se poate "
-#~ "șterge."
-
-#~ msgid "No content is using this library"
-#~ msgstr "Niciun conținut nu folosește librăria"
-
-#~ msgid "Content using this library"
-#~ msgstr "Conținuturi care folosesc librăria"
-
-#~ msgid "Elements per page"
-#~ msgstr "Elemente per pagină"
-
-#~ msgid "Filter content"
-#~ msgstr "Filtrează conținut"
-
-#~ msgid "Page $x of $y"
-#~ msgstr "Pagina $x din $y"
-
-#~ msgid "Version"
-#~ msgstr "Versiune"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Ecran complet"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "No"
-#~ msgstr "Nu"
-
-#~ msgid "Content library"
-#~ msgstr "Librărie conținut"
-
-#~ msgid "Used by"
-#~ msgstr "Utilizat de"
-
-#~ msgid "There are no available upgrades for this library."
-#~ msgstr "Nu sunt disponibile actualizări pentru această librărie."
-
-#~ msgid "There's no content instances to upgrade."
-#~ msgstr "Nu există instanțe conținut pentru actualizare."
-
-#~ msgid "You are about to upgrade %s. Please select upgrade version."
-#~ msgstr ""
-#~ "Ești pe cale să actualizezi %s. Te rog selectează versiunea de "
-#~ "actualizare."
-
-#~ msgid "Upgrading to %ver..."
-#~ msgstr "Actualizare la %ver..."
-
-#~ msgid "An error occurred while processing parameters:"
-#~ msgstr "O eroare a apărut la procesarea parametrilor:"
-
-#~ msgid "Could not load data for library %lib."
-#~ msgstr "Nu pot încărca datele pentru librăria %lib."
-
-#~ msgid "Could not upgrade content %id:"
-#~ msgstr "Nu pot actualiza conținutul %id:"
-
-#~ msgid "Could not load upgrades script for %lib."
-#~ msgstr "Nu am putut încărca actualizările pentru %lib."
-
-#~ msgid "Parameters are broken."
-#~ msgstr "Parametrii sunt invalizi."
-
-#~ msgid "Missing required library %lib."
-#~ msgstr "Lipsește librăria necesară %lib."
-
-#~ msgid ""
-#~ "Parameters contain %used while only %supported or earlier are supported."
-#~ msgstr ""
-#~ "Parametrii conțin %used și doar %supported sau mai noi sunt suportați."
-
-#~ msgid "Parameters contain %used which is not supported."
-#~ msgstr "Parametrii conțin %used nu sunt suportați."
-
-#~ msgid "You have successfully upgraded %s."
-#~ msgstr "Ai actualizat cu succes %s."
-
-#~ msgid "Return"
-#~ msgstr "Revenire"
-
-#~ msgid "Upgrade"
-#~ msgstr "Actualizare"
-
-#~ msgid ""
-#~ "Not all content has gotten their cache rebuilt. This is required to be "
-#~ "able to delete libraries, and to display how many contents that uses the "
-#~ "library."
-#~ msgstr ""
-#~ "Nu toate conținuturile au avut cache-ul reconstruit. Acesta este necesar "
-#~ "pentru a putea șterge librăriile și pentru a afișa câte conținuturi "
-#~ "folosesc librăria."
-
-#~ msgid "Rebuild cache"
-#~ msgstr "Reconstruiește cache"
-
-#~ msgid "Error, invalid security token!"
-#~ msgstr "Eroare, token de securitate invalid!"
-
-#~ msgid "Error, missing library!"
-#~ msgstr "Eroare, lipsește librăria!"
-
-#~ msgid "Error, invalid library!"
-#~ msgstr "Eroare, librărie invalidă!"
-
-#~ msgid "Missing %s."
-#~ msgstr "Lipsește %s."
-
-#~ msgid "Are you sure you wish to delete this content?"
-#~ msgstr "Sigur doriți ștergerea acestui conținut?"
-
-#~ msgid "Content type"
-#~ msgstr "Tip conținut"
-
-#~ msgid "Last modified"
-#~ msgstr "Ultima modificare"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "No H5P content available. You must upload or create new content."
-#~ msgstr ""
-#~ "Niciun conținut interactiv disponibil. Trebuie să încarci sau să creezi "
-#~ "conținut nou."
-
-#~ msgid "Loading data."
-#~ msgstr "Se încarcă datele."
-
-#~ msgid "Failed to load data."
-#~ msgstr "Nu se pot încărca datele."
-
-#~ msgid "There's no data available that matches your criteria."
-#~ msgstr "Nu există date care să îndeplinească criteriile tale."
-
-#~ msgid "Page $current of $total"
-#~ msgstr "Pagina $current din $total"
-
-#~ msgid "Next page"
-#~ msgstr "Pagina următoare"
-
-#~ msgid "Previous page"
-#~ msgstr "Pagina anterioară"
-
-#~ msgid "Search"
-#~ msgstr "Căutare"
-
-#~ msgid "Remove"
-#~ msgstr "Elimină"
-
-#~ msgid "Edit books"
-#~ msgstr "Editează cărți"
-
-#~ msgid "H1"
-#~ msgstr "H1"
-
-#~ msgid "Books"
-#~ msgstr "Cărți"
-
-#~ msgid "Edit book"
-#~ msgstr "Editează cartea"
-
-#~ msgid "Page width (mm)"
-#~ msgstr "Lățime pagină (mm)"
-
-#~ msgid "Page height (mm)"
-#~ msgstr "Înălțime pagină (mm)"
-
-#~ msgid "Odd pages left margin (mm)"
-#~ msgstr "Margine stânga pagini impare (mm)"
-
-#~ msgid "Even pages left margin (mm)"
-#~ msgstr "Margine stânga pagini pare (mm)"
-
-#~ msgid "news"
-#~ msgstr "știri"
-
-#~ msgid "read more"
-#~ msgstr "citește mai mult"
-
-#~ msgid "total users"
-#~ msgstr "total utilizatori"
-
-#~ msgid "confirmed users"
-#~ msgstr "utilizatori confirmați"
-
-#~ msgid "read full text"
-#~ msgstr "citește tot textul"
-
-#~ msgid "Login / Register"
-#~ msgstr "Autentificare"
+#~ msgid "Menu"
+#~ msgstr "Meniu"

@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "bootstrap",
+        "libraryDirectory": "bootstrap"
+      }
+    ]
+  ]
+}

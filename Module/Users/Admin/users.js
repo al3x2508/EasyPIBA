@@ -8,11 +8,10 @@ var jsonPage = 'Users',
 		{ "mData": function (e) {
 			return $('#statusf option[value="' + e.status + '"]').text();
 		} },
-		{ "mData": function(e) {
-			return "<span class=\"actions btn btn-sm btn-outline-primary fa fa-edit\" title=\"" + jsstrings.edit + "\"></span><span class=\"actions btn btn-sm btn-outline-danger fa fa-trash\" title=\"" + jsstrings.delete + "\" data-actid=\"" + e.id + "\" data-toggle=\"modal\" data-target=\"#confirm_delete\"></span>";
+		{ "mData": function() {
+			return "<span class=\"actions btn fa fa-edit\"></span><span class=\"actions btn fa fa-trash-o\"></span>";
 		} }
-	],
-	delAction = 'delete_user';
+	];
 function loadData(aoData) {
 	var filters = {};
 	$(aoData).each(function(i, val) {

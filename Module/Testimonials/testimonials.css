@@ -1,0 +1,31 @@
+.principal {
+	-webkit-box-shadow: 0 0 .5rem rgba(0, 0, 0, .2) !important;
+	-moz-box-shadow: 0 0 .5rem rgba(0, 0, 0, .2) !important;
+	box-shadow: 0 0 .5rem rgba(0, 0, 0, .2) !important;
+	padding: 15px;
+}
+
+.text-ellipsis {
+	overflow: auto;
+	max-height: 20em;
+	-webkit-transition: height .5s;
+	-moz-transition: height .5s;
+	-ms-transition: height .5s;
+	-o-transition: height .5s;
+	transition: height .5s;
+}
+.company_logo {
+	max-height: 80px;
+}
+
+.principal .nume,
+.principal .company_function,
+.principal .company_name {
+	font-style: italic;
+}
+.principal .nume {
+	font-size: 1.5rem;
+}
+.principal .company_name {
+	font-size: 1.2rem;
+}

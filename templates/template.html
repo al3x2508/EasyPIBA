@@ -11,19 +11,15 @@
         <meta property="og:type" content="website"/>
         <meta property="og:url" content="{url}"/>
         <meta property="og:image" content="{ogimage}"/>
-        <link rel="stylesheet" href="{FOLDER_URL}css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-              rel="stylesheet">
         {FBAPPID}
-        {GOOGLE_ANALYTICS}
+        {GOOGLE_ANALYTICS_META}
     </head>
     <body id="page-top">
     <div class="vh-100 d-flex col justify-content-center{gradient}">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
                 <div class="container">
-                    <a class="navbar-brand js-scroll-trigger" href="{HOME_LINK}"><img src="{LOGO}" height="30"
+                    <a class="navbar-brand js-scroll-trigger" href="{FOLDER_URL}"><img src="{LOGO}" width="40" height="30"
                                                                                       alt="{APP_NAME}"/></a>
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -32,9 +28,6 @@
                         <ul class="navbar-nav ml-auto">
                             {menu}
                         </ul>
-                        <div class="nav navbar-nav navbar-right">
-                            {menu_right}
-                        </div>
                     </div>
                 </div>
             </nav>
@@ -43,7 +36,6 @@
 
                 </div>
                 <div class="row">
-                    {sidebar}
                     <div class="col-{colsize} bd-content">
                         {content}
                     </div>

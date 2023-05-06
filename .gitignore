@@ -1,0 +1,8 @@
+.htaccess
+.env
+.idea/
+.cache/
+.config/
+.local/
+
+/vendor/

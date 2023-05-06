@@ -1,147 +1,77 @@
 <!DOCTYPE html>
 <html lang="{LANGUAGE}">
-    <head>
-        <meta charset="UTF-8">
-        <title>{title}</title>
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/almasaeed2010/adminlte/dist/css/AdminLTE.min.css">
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="{FOLDER_URL}css/font-awesome.css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/Ionicons/css/ionicons.min.css">
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
-        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/excite-bike/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/almasaeed2010/adminlte/dist/css/skins/_all-skins.min.css">
-        <!-- Morris chart -->
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/morris.js/morris.css">
-        <!-- Date Picker -->
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-        <!-- Daterange picker -->
-        <link rel="stylesheet" href="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="{ADMIN_FOLDER_URL}style.css" rel="stylesheet" type="text/css"/>
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <!-- Google Font -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-    </head>
-    <body class="hold-transition skin-black-light">
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=862787527403455&autoLogAppEvents=1"></script>
-    <div class="wrapper">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="/" class="logo" title="{APP_NAME}">{APP_NAME}</a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <div class="mr-auto">
-                    <!-- Sidebar toggle button-->
-                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                    </a>
-                </div>
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="hidden-xs">{adminName}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <p>
-                                        {adminName}
-                                    </p>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="btn-toolbar">
-                                        {myaccountlink}
-                                        {logoutlink}
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel"><div class="pull-left info"><p>{adminName}</p></div></div>
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <nav id="mainMenu">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
-                </nav>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+    <title>{title}</title>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Main content -->
-            <section class="content">
-                {content}
-                <div id="chat" class="row"></div>
-            </section>
-            <!-- /.content -->
-            <div class="toast-wrapper"></div>
+    <link rel="stylesheet" href="{FOLDER_URL}css/fontawesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{FOLDER_URL}node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link href="{ADMIN_FOLDER_URL}light.css" rel="stylesheet" type="text/css"/>
+    <link href="{ADMIN_FOLDER_URL}style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="#">
+                <img src="{LOGO}" alt="{APP_NAME}" class="brand-image float-none" height="20" style="opacity: .8">{APP_NAME}
+            </a>
+            <ul class="sidebar-nav">
+                {mainMenu}
+            </ul>
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer fixed hidden-xs">
-            <div id="latest"></div>
-            <div class="float-right">
-                <b>{loading_time_string}</b> {loading_time}
-            </div>
-            <strong>{copyright}</strong>
-        </footer>
-    </div>
-    <!-- ./wrapper -->
+    </nav>
 
-    <script src="{FOLDER_URL}js/jquery.min.js" id="mainjs" data-appdir="{FOLDER_URL}" data-admindir="{ADMIN_FOLDER_URL}"></script>
-    <script src="{FOLDER_URL}js/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="{FOLDER_URL}js/tether.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="{FOLDER_URL}vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Morris.js charts -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/raphael/raphael.min.js"></script>
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/morris.js/morris.min.js"></script>
-    <!-- Sparkline -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/moment/min/moment.min.js"></script>
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <!-- Slimscroll -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="{FOLDER_URL}vendor/almasaeed2010/adminlte/dist/js/adminlte.min.js"></script>
-    </body>
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                            <i class="align-middle" data-feather="settings"></i>
+                        </a>
+
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                            <span class="text-dark">{adminName}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="{ADMIN_FOLDER_URL}logout">{logout}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="content">
+            <div class="container-fluid p-0">
+                {content}
+            </div>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+        </main>
+    </div>
+</div>
+
+<script src="{FOLDER_URL}js/jquery.min.js" id="mainjs" data-appdir="{FOLDER_URL}"
+        data-admindir="{ADMIN_FOLDER_URL}"></script>
+<script src="{FOLDER_URL}js/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="{FOLDER_URL}node_modules/moment/min/moment.min.js"></script>
+<!-- datepicker -->
+<script src="{FOLDER_URL}node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- AdminLTE App -->
+<script src="{FOLDER_URL}node_modules/@adminkit/core/dist/js/app.js"></script>
+</body>
 </html>
