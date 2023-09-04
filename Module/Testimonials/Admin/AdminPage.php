@@ -6,7 +6,7 @@ class AdminPage extends \Controller\AdminPage {
 		$page = new \stdClass();
 		$page->title = __('Testimonials');
 		$page->h1 = __('Testimonials');
-		$page->js = array('../node_modules/datatables.net/js/jquery.dataTables.min.js', '../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js', '../node_modules/datatables.net-responsive/js/dataTables.responsive.min.js', '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js' ,'../vendor/ckeditor/ckeditor/ckeditor.js','js/app.js','Module/Testimonials/Admin/testimonials.js');
+		$page->js = array('../node_modules/datatables.net/js/jquery.dataTables.min.js', '../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js', '../node_modules/datatables.net-responsive/js/dataTables.responsive.min.js', '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js' ,'../vendor/ckeditor/ckeditor/ckeditor.js','Module/Testimonials/Admin/testimonials.js');
 		$page->css = array('../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css', '../node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css');
 		$page->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Testimonials') . '</h3></div>

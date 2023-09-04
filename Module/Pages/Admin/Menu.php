@@ -22,7 +22,6 @@ class Menu
         $this->js = array(
             '../assets/js/jquery.nestedSortable.js',
             '../node_modules/select2/dist/js/select2.full.min.js',
-            'js/app.js',
             'Module/Pages/Admin/menu.js'
         );
         $this->css = array(

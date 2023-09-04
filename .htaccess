@@ -10,7 +10,7 @@ RewriteRule ^js/jquery.min.js node_modules/jquery/dist/jquery.min.js [L]
 RewriteRule ^js/jquery-ui.min.js node_modules/jqueryui/jquery-ui.min.js [L]
 RewriteRule ^js/bootstrap.min.js node_modules/bootstrap/dist/js/bootstrap.bundle.min.js [L]
 RewriteRule ^js/fancybox.umd.js node_modules/@fancyapps/ui/dist/fancybox.umd.js [L]
-RewriteRule ^css/bootstrap.min.css node_modules/bootstrap/dist/js/bootstrap.min.css [L]
+RewriteRule ^css/bootstrap.min.css node_modules/bootstrap/dist/css/bootstrap.min.css [L]
 RewriteRule ^css/fontawesome.min.css node_modules/@fortawesome/fontawesome-free/css/all.min.css [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^css/main.css Utils/scripts.php [L]
@@ -24,9 +24,6 @@ RewriteRule ^img/(.*)$ assets/img/$1 [NC,L]
 RewriteRule ^videos/(.*)$ assets/videos/$1 [NC,L]
 RewriteRule ^uploads/protected/(.*)$ index.php [NC,L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^logout$ index.php?logout=true [L]

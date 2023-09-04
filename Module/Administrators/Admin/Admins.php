@@ -28,7 +28,6 @@ class Admins
             '../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js',
             '../node_modules/datatables.net-responsive/js/dataTables.responsive.min.js',
             '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js',
-            'js/app.js',
             'Module/Administrators/Admin/administrators.js'
         );
         $this->css = array(

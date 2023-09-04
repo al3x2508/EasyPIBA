@@ -32,7 +32,6 @@ class Pages extends \Controller\AdminPage
             '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js',
             '../node_modules/select2/dist/js/select2.min.js',
             '../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js',
-            'js/app.js',
             'Module/Pages/Admin/bootstrap3-typeahead.min.js',
             'Module/Pages/Admin/bootstrap-tagsinput.min.js',
             'Module/Pages/Admin/pages.js'

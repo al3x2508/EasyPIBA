@@ -29,18 +29,15 @@ class AdminPage extends \Controller\AdminPage
         }
         $jsonCountriesOptions = self::jsonOptions($countriesOptionsArray);
         $jsonStatusesOptions = self::jsonOptions($statuses);
-        $page->js
-            = array(
+        $page->js = array(
             '../node_modules/datatables.net/js/jquery.dataTables.min.js',
             '../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js',
             '../node_modules/select2/dist/js/select2.min.js',
             '../node_modules/datatables.net-responsive/js/dataTables.responsive.min.js',
             '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js',
-            'js/app.js',
             'Module/Users/Admin/users.js'
         );
-        $page->css
-            = array(
+        $page->css = array(
             '../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css',
             '../node_modules/select2/dist/css/select2.min.css',
             '../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css',

@@ -10,11 +10,12 @@
     <title>{title}</title>
 
     <link rel="stylesheet" href="{FOLDER_URL}css/fontawesome.min.css">
+    <link rel="stylesheet" href="{FOLDER_URL}css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Date Picker -->
     <link rel="stylesheet" href="{FOLDER_URL}node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-    <link href="{ADMIN_FOLDER_URL}light.css" rel="stylesheet" type="text/css"/>
-    <link href="{ADMIN_FOLDER_URL}style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{FOLDER_URL}node_modules/@adminkit/core/dist/css/app.css">
+    <link rel="stylesheet" href="{ADMIN_FOLDER_URL}style.css">
 </head>
 <body>
 <div class="wrapper">
@@ -68,10 +69,12 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
+<script src="{FOLDER_URL}js/bootstrap.min.js"></script>
 <script src="{FOLDER_URL}node_modules/moment/min/moment.min.js"></script>
 <!-- datepicker -->
 <script src="{FOLDER_URL}node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{FOLDER_URL}node_modules/@adminkit/core/dist/js/app.js"></script>
+<script src="{ADMIN_FOLDER_URL}js/app.js"></script>
 </body>
 </html>

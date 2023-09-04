@@ -15,7 +15,7 @@ class AdminPage extends \Controller\AdminPage {
 			$selected = ($language->code == $_ENV['DEFAULT_LANGUAGE'])?' selected':'';
 			$languageOptions .= "<option value=\"{$language->code}\"{$selected}>" . $language->name . "</option>";
 		}
-		$page->js = array('js/combobox.js','../node_modules/datatables.net/js/jquery.dataTables.min.js', '../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js', '../node_modules/datatables.net-responsive/js/dataTables.responsive.min.js', '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js' ,'../vendor/ckeditor/ckeditor/ckeditor.js','../bower_components/select2/dist/js/select2.full.min.js','js/app.js','Module/News/Admin/news.js');
+		$page->js = array('js/combobox.js','../node_modules/datatables.net/js/jquery.dataTables.min.js', '../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js', '../node_modules/datatables.net-responsive/js/dataTables.responsive.min.js', '../node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js' ,'../vendor/ckeditor/ckeditor/ckeditor.js','../bower_components/select2/dist/js/select2.full.min.js','Module/News/Admin/news.js');
 		$page->css = array('../bower_components/select2/dist/css/select2.min.css','../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css','../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css', '../node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css');
 		$page->content = '<div class="box">
 	<div class="box-header"><h3 class="box-title">' . __('Edit news') . '</h3></div>
